@@ -7,8 +7,10 @@ import "~/styles/globals.css";
 const MyApp: AppType = ({ Component, pageProps }) => {
   return (
     <main className="flex h-screen flex-col justify-between">
-      <Header />
-      <Component {...pageProps} />
+      <div>
+        <Header />
+        <Component {...pageProps} />
+      </div>
       <Footer />
     </main>
   );
