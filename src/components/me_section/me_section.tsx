@@ -21,7 +21,7 @@ export default function MeSection() {
     "KivyMD",
   ];
   return (
-    <div className="mx-4 flex flex-col gap-4">
+    <div className="mx-4 flex flex-col items-center justify-center gap-4 md:flex-row lg:flex-col xl:flex-col">
       <Me
         fullName="Biplob Sutradhar"
         hText="I’m a software engineer"

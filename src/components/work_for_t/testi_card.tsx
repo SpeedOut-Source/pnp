@@ -1,0 +1,28 @@
+import Image from "next/image";
+export interface Testimonial {
+  imgUrl: string;
+  fullName: string;
+  position: string;
+  text: string;
+}
+export default function TestiCard(props: Testimonial) {
+  return (
+    <div className="btn-ghost btn h-fit w-56 cursor-default space-y-3 rounded-xl bg-slate-200 p-4 normal-case">
+      <div className="flex w-full items-center gap-2">
+        <div className="relative h-12 w-12 overflow-hidden rounded-full ring ring-slate-400/20">
+          <Image
+            src={props.imgUrl}
+            alt={props.fullName}
+            objectFit="cover"
+            layout="fill"
+          />
+        </div>
+        <div className="tracking-wider">
+          <p className="text-sm font-bold">{props.fullName}</p>
+          <p className="text-xs">{props.position}</p>
+        </div>
+      </div>
+      <p>{props.text}</p>
+    </div>
+  );
+}

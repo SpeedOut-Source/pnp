@@ -6,13 +6,13 @@ import "~/styles/globals.css";
 
 const MyApp: AppType = ({ Component, pageProps }) => {
   return (
-    <main className="flex h-screen flex-col justify-between">
-      <div>
+    <div className="flex h-screen flex-col justify-between">
+      <main>
         <Header />
         <Component {...pageProps} />
-      </div>
+      </main>
       <Footer />
-    </main>
+    </div>
   );
 };
 
