@@ -12,13 +12,13 @@ interface WorkForProps {
 export default function WorkFor(props: WorkForProps) {
   return (
     <div className="mx-auto h-fit w-full px-4 sm:mx-0 lg:max-w-2xl">
-      <p className="text-2xl uppercase text-slate-400">
+      <p className="text-2xl normal-case text-slate-400">
         {"I've done work for"}
       </p>
       <div className="mx-auto flex w-fit justify-center gap-6 py-4">
         {props.company.map((x) => (
           <div key={x.name} className="w-fit">
-            <div className="relative mx-auto h-20 w-20">
+            <div className="relative mx-auto h-20 w-20 overflow-hidden">
               <Image
                 alt=""
                 src="/images/logos/action-tokens.png"
@@ -26,7 +26,7 @@ export default function WorkFor(props: WorkForProps) {
                 layout="fill"
               />
             </div>
-            <span className="uppercase">{x.name}</span>
+            <span className="normal-case ">{x.name}</span>
           </div>
         ))}
       </div>

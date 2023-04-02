@@ -1,3 +1,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+  .p-card {
+    @apply btn-ghost btn cursor-default rounded-xl bg-slate-100 font-normal normal-case leading-relaxed tracking-wider;
+  }
+}

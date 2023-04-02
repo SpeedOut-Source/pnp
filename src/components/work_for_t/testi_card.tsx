@@ -7,7 +7,7 @@ export interface Testimonial {
 }
 export default function TestiCard(props: Testimonial) {
   return (
-    <div className="btn-ghost btn h-fit w-56 cursor-default space-y-3 rounded-xl bg-slate-200 p-4 normal-case">
+    <div className="p-card h-fit w-56 space-y-3 p-4">
       <div className="flex w-full items-center gap-2">
         <div className="relative h-12 w-12 overflow-hidden rounded-full ring ring-slate-400/20">
           <Image
