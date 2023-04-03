@@ -9,7 +9,7 @@ interface MeProps {
 
 export default function Me(props: MeProps) {
   return (
-    <div className="p-card h-fit w-full space-y-3 p-4 md:max-w-sm">
+    <div className="p-card h-fit w-full space-y-3 p-4 md:max-w-md">
       <div className="flex w-full flex-col items-center justify-center gap-2 md:flex-row md:justify-start md:gap-4">
         <div className="relative h-32 w-32 cursor-default overflow-hidden rounded-full ring-4 ring-slate-400/40">
           <Image
