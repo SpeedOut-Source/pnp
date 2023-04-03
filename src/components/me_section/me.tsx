@@ -1,6 +1,6 @@
 import Image from "next/image";
 
-interface MeProps {
+export interface MeProps {
   fullName: string;
   imgUrl: string;
   hText: string;

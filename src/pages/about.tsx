@@ -13,7 +13,6 @@ export default function About() {
       <Head>
         <title>About | Biplob Sutradhar</title>
         <meta name="description" content="About | Biplob Sutradhar" />
-        <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className="container mx-auto">
         <SAPage

@@ -1,4 +1,4 @@
-interface RXTProps {
+export interface RXTProps {
   techs: string[];
 }
 

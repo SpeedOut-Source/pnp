@@ -29,8 +29,6 @@ export default function Privacy(props: PrivacyProps) {
       <Head>
         <title>Privacy | Action Tokens</title>
         <meta name="description" content="Action Tokens Plot & sPlots" />
-        <link rel="icon" href="/favicon.ico" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
 
       <main className={styles.markdownBody}>
@@ -43,5 +41,5 @@ export default function Privacy(props: PrivacyProps) {
 }
 
 export async function getStaticProps() {
-  return await PrivacyServer();
+  return PrivacyServer();
 }

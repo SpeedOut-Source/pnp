@@ -1,17 +1,11 @@
-import { promises } from "fs";
+import { getData } from "../utils/utils";
 
-async function loadMonoCounter() {
-    const data = await promises.readFile("../portfolio_data/privacy-policy.md", "utf8");
-    return Buffer.from(data);
-}
+
 export async function PrivacyServer() {
-
-    const data = (await loadMonoCounter()).toString();
+    const data = (await getData('privacy-policy.md')).toString();
     return {
         props: {
             data,
-        },
-        revalidate: 60,
+        }
     };
-
 }

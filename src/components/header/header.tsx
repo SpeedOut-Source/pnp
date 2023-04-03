@@ -2,6 +2,7 @@ import Link from "next/link";
 import ConnectSection from "./connect_section";
 import Links from "./links";
 import { Bars3Icon } from "@heroicons/react/24/solid";
+import packageJson from "../../../package.json";
 
 export default function Header() {
   return (
@@ -12,7 +13,7 @@ export default function Header() {
             href="/"
             className="btn-ghost btn px-2 text-xl font-bold normal-case tracking-wider"
           >
-            Biplob Sutradhar
+            {packageJson.personName}
           </Link>
           <Links className="hidden items-center gap-4 md:flex lg:flex xl:flex" />
         </div>

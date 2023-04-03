@@ -1,4 +1,5 @@
 import Link from "next/link";
+import packageJson from "../../../package.json";
 
 export default function Footer() {
   return (
@@ -7,7 +8,7 @@ export default function Footer() {
         <div className="container">
           <div className="divider" />
           <div className="mb-4 mt-2 flex flex-col items-center justify-between space-y-2 sm:flex-row sm:space-y-0">
-            <span className="text-sm "> © 2023 Biplob Kumar Sutradhar </span>
+            <span className="text-sm "> © 2023 {packageJson.personName}</span>
             <ul className="flex flex-wrap space-x-4 text-sm ">
               <li>
                 <Link href="/about" className="link-hover link">
