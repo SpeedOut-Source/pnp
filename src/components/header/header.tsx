@@ -1,15 +1,19 @@
+import Link from "next/link";
 import ConnectSection from "./connect_section";
 import Links from "./links";
 import { Bars3Icon } from "@heroicons/react/24/solid";
 
 export default function Header() {
   return (
-    <header className="sticky top-0 z-50 backdrop-blur">
+    <header className="sticky top-0 z-50 backdrop-blur-2xl">
       <div className="container mx-auto flex h-14 items-center justify-between px-4 py-2">
         <div className="flex items-center gap-4">
-          <div className="text-xl font-bold tracking-wider">
+          <Link
+            href="/"
+            className="btn-ghost btn text-xl font-bold normal-case tracking-wider"
+          >
             Biplob Sutradhar
-          </div>
+          </Link>
           <Links className="hidden items-center gap-4 md:flex lg:flex xl:flex" />
         </div>
         <div>
