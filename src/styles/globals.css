@@ -2,6 +2,15 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+  h2 {
+    @apply mb-5 text-center text-3xl;
+  }
+  h3 {
+    @apply my-2 mt-4 text-2xl font-semibold tracking-wider;
+  }
+}
+
 @layer components {
   .p-card {
     @apply btn-ghost btn cursor-default overflow-hidden rounded-3xl bg-slate-100 font-normal normal-case leading-relaxed tracking-wider;
