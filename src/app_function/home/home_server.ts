@@ -4,6 +4,7 @@ import { type RXTProps } from "~/components/me_section/r_x_t";
 import { type MeSectionProps } from "~/components/me_section/me_section";
 import { type WorkForProps } from "~/components/work_for_t/work_for";
 import { type TestimonialsProps } from "~/components/work_for_t/testimonials";
+import { type ResentProjectsProps } from "~/components/projects/resent_projects";
 
 export interface Configs {
   appName: string;
@@ -15,6 +16,7 @@ export interface HomeProps {
   meSection: MeSectionProps;
   workFor: WorkForProps;
   testis: TestimonialsProps;
+  resentProjects: ResentProjectsProps;
 }
 
 export async function HomeServer() {
@@ -33,6 +35,9 @@ export async function HomeServer() {
   const dataTesti = (await getData("home/testimonials.json")).toString();
   const testis = JSON.parse(dataTesti) as TestimonialsProps;
 
+  const dataProjects = (await getData("db/projects.json")).toString();
+  const allPros = JSON.parse(dataProjects) as ResentProjectsProps;
+
   const homeProps: HomeProps = {
     configs,
     meSection: {
@@ -41,6 +46,9 @@ export async function HomeServer() {
     },
     workFor,
     testis: { ...testis, addUrl: configs.testimonialAddUrl },
+    resentProjects: {
+      projects: allPros.projects.slice(0, 3),
+    },
   };
 
   return {

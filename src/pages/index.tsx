@@ -22,7 +22,7 @@ const Home = (props: HomeProps) => {
           company={props.workFor}
           testis={props.testis}
         />
-        <ResentProjects />
+        <ResentProjects {...props.resentProjects} />
         <ResentBlogs />
       </div>
     </>

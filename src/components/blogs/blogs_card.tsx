@@ -21,12 +21,17 @@ export default function BlogCard(props: Blog) {
           alt={props.title}
         />
         <div className="flex h-full flex-col items-end justify-end">
-          <div className="relative m-1 max-h-[60%] overflow-hidden rounded-3xl bg-slate-100/80 backdrop-blur-md group-hover:bg-blue-100/90 group-hover:shadow-xl">
-            <div className="absolute bottom-0 h-10 w-full bg-gradient-to-t from-slate-100 group-hover:from-blue-100" />
+          <div className="relative m-1 max-h-[60%] overflow-hidden rounded-3xl bg-slate-100/80 backdrop-blur-md group-hover:max-h-full group-hover:bg-blue-100/90 group-hover:shadow-xl">
+            <div className="absolute bottom-0 h-10 w-full bg-gradient-to-t from-slate-100 group-hover:from-blue-100">
+              <div className="hidden w-full items-center justify-center pt-2 font-bold uppercase text-blue-700/70 group-hover:flex">
+                <span>Read more</span>
+                <ChevronRightIcon className="h-7 w-5" />
+              </div>
+            </div>
 
             <div className="w-full space-y-2 px-3 pb-2">
               <div>
-                <div className="mb-1 mt-2 text-lg font-semibold leading-tight">
+                <div className="text-md mb-1 mt-2 font-semibold leading-tight">
                   <span>{props.title}</span>
                 </div>
                 <div className="flex justify-between text-xs">
@@ -40,9 +45,10 @@ export default function BlogCard(props: Blog) {
                   <div>{props.readTime} min reads</div>
                 </div>
               </div>
-              <div className="leading-snug">
+              <div className="text-xs leading-snug">
                 <p className="">{props.text}</p>
               </div>
+              <div className="hidden h-5 group-hover:flex" />
             </div>
           </div>
         </div>
