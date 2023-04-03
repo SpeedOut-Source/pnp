@@ -1,8 +1,6 @@
 import { type NextPage } from "next";
 import Head from "next/head";
-import MeSection from "~/components/me_section/me_section";
-import Testimonials from "~/components/work_for_t/testimonials";
-import WorkFor from "~/components/work_for_t/work_for";
+import Hero from "~/components/hero/hero";
 
 const Home: NextPage = () => {
   return (
@@ -13,45 +11,7 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div className="container mx-auto md:mt-5">
-        <div className="justify-center gap-2 space-y-2 lg:flex xl:flex">
-          <MeSection />
-          <div className="md:space-y-4 ">
-            <WorkFor
-              company={[
-                {
-                  name: "Action Tokens",
-                  logoUrl: "/images/logos/action-tokens.png",
-                },
-                {
-                  name: "Action Tokens",
-                  logoUrl: "/images/logos/action-tokens.png",
-                },
-              ]}
-            />
-            <Testimonials
-              testis={[
-                {
-                  fullName: "A person",
-                  imgUrl: "/images/logos/action-tokens.png",
-                  position: "Director, x",
-                  text: "Nice Nice nice nice nice Nice Nice nice nice nice Nice Nice nice nice nice Nice Nice nice nice nice",
-                },
-                {
-                  fullName: "A person",
-                  imgUrl: "/images/logos/action-tokens.png",
-                  position: "Director, x",
-                  text: "Nice Nice nice nice nice Nice Nice nice nice nice Nice Nice nice nice nice Nice Nice nice nice nice",
-                },
-                {
-                  fullName: "A person",
-                  imgUrl: "/images/logos/action-tokens.png",
-                  position: "Director, x",
-                  text: "Nice Nice nice nice nice Nice Nice nice nice nice Nice Nice nice nice nice Nice Nice nice nice nice",
-                },
-              ]}
-            />
-          </div>
-        </div>
+        <Hero />
       </div>
     </>
   );
