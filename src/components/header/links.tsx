@@ -11,11 +11,11 @@ export default function Links(props: ILinksProps) {
       <Link href="/blogs" className="link-hover link">
         Blogs
       </Link>
+      <Link href="/projects" className="link-hover link">
+        Projects
+      </Link>
       <Link href="/resume" className="link-hover link">
         Resume
-      </Link>
-      <Link href="/contract" className="link-hover link">
-        Contract
       </Link>
     </div>
   );
