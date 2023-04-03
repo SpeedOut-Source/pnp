@@ -6,9 +6,10 @@ export interface Blog {
   url: string;
   title: string;
   imgUrl: string;
-  text: string;
+  desc: string;
   date: number;
   readTime: number;
+  fileName: string;
 }
 export default function BlogCard(props: Blog) {
   return (
@@ -46,7 +47,7 @@ export default function BlogCard(props: Blog) {
                 </div>
               </div>
               <div className="text-xs leading-snug">
-                <p className="">{props.text}</p>
+                <p className="">{props.desc}</p>
               </div>
               <div className="hidden h-5 group-hover:flex" />
             </div>

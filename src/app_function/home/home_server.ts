@@ -5,6 +5,7 @@ import { type MeSectionProps } from "~/components/me_section/me_section";
 import { type WorkForProps } from "~/components/work_for_t/work_for";
 import { type TestimonialsProps } from "~/components/work_for_t/testimonials";
 import { type ResentProjectsProps } from "~/components/projects/resent_projects";
+import { type ResentBlogsProps } from "~/components/blogs/resent_blogs";
 
 export interface Configs {
   appName: string;
@@ -17,6 +18,7 @@ export interface HomeProps {
   workFor: WorkForProps;
   testis: TestimonialsProps;
   resentProjects: ResentProjectsProps;
+  resentBlogs: ResentBlogsProps;
 }
 
 export async function HomeServer() {
@@ -38,6 +40,9 @@ export async function HomeServer() {
   const dataProjects = (await getData("db/projects.json")).toString();
   const allPros = JSON.parse(dataProjects) as ResentProjectsProps;
 
+  const dataBlogss = (await getData("db/blogs.json")).toString();
+  const allBlogs = JSON.parse(dataBlogss) as ResentBlogsProps;
+
   const homeProps: HomeProps = {
     configs,
     meSection: {
@@ -48,6 +53,9 @@ export async function HomeServer() {
     testis: { ...testis, addUrl: configs.testimonialAddUrl },
     resentProjects: {
       projects: allPros.projects.slice(0, 3),
+    },
+    resentBlogs: {
+      blogs: allBlogs.blogs.slice(0, 3),
     },
   };
 

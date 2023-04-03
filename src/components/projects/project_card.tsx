@@ -11,6 +11,7 @@ export interface Project {
   result: string;
   date: number;
   readTime: number;
+  fileName: string;
 }
 export default function ProjectCard(props: Project) {
   return (
