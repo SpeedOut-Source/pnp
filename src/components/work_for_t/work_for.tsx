@@ -11,7 +11,7 @@ interface WorkForProps {
 
 export default function WorkFor(props: WorkForProps) {
   return (
-    <div className="mx-auto h-fit w-full px-4 sm:mx-0 lg:max-w-2xl">
+    <div className="mx-auto h-fit w-full px-4 sm:mx-0 lg:max-w-2xl lg:px-0">
       <p className="text-2xl normal-case text-slate-400">
         {"I've done work for"}
       </p>

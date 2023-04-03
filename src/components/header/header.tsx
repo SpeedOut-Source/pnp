@@ -17,7 +17,7 @@ export default function Header() {
             <ConnectSection />
           </div>
           <div className="md:hidden lg:hidden xl:hidden">
-            <div className="dropdown dropdown-end dropdown-hover">
+            <div className="dropdown-end dropdown">
               <label tabIndex={0} className="btn-ghost btn-circle btn">
                 <Bars3Icon className="h-8 w-8" />
               </label>

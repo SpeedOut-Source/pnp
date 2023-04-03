@@ -4,9 +4,9 @@ import WorkFor from "../work_for_t/work_for";
 
 export default function Hero() {
   return (
-    <div className="justify-center gap-2 space-y-2 lg:flex xl:flex">
+    <div className="flex flex-col justify-center gap-4 lg:flex-row lg:gap-0">
       <MeSection />
-      <div className="md:space-y-4 ">
+      <div className="md:space-y-4">
         <WorkFor
           company={[
             {
