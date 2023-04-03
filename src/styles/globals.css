@@ -4,6 +4,6 @@
 
 @layer components {
   .p-card {
-    @apply btn-ghost btn cursor-default rounded-xl bg-slate-100 font-normal normal-case leading-relaxed tracking-wider;
+    @apply btn-ghost btn cursor-default rounded-3xl bg-slate-100 font-normal normal-case leading-relaxed tracking-wider;
   }
 }
