@@ -3,7 +3,6 @@ import Image from "next/image";
 import Link from "next/link";
 
 export interface Project {
-  url: string;
   imgUrl: string;
   app: { name: string; logoUrl: string };
   company: { name: string; logoUrl: string };
@@ -15,7 +14,7 @@ export interface Project {
 }
 export default function ProjectCard(props: Project) {
   return (
-    <Link href={props.url}>
+    <Link href={`/projects/view/${props.fileName}`}>
       <div className="p-card group relative h-80 cursor-pointer px-0 hover:shadow-xl hover:ring">
         <Image
           objectFit="cover"

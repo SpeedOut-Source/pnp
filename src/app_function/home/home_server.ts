@@ -1,5 +1,5 @@
 import { type MeProps } from "~/components/me_section/me";
-import { getData } from "../utils/utils";
+import { getBlogs, getConfigs, getData, getProjects } from "../utils/utils";
 import { type RXTProps } from "~/components/me_section/r_x_t";
 import { type MeSectionProps } from "~/components/me_section/me_section";
 import { type WorkForProps } from "~/components/work_for_t/work_for";
@@ -22,8 +22,7 @@ export interface HomeProps {
 }
 
 export async function HomeServer() {
-  const data = (await getData("configs.json")).toString();
-  const configs = JSON.parse(data) as Configs;
+  const configs = await getConfigs();
 
   const dataBio = (await getData("home/bio.json")).toString();
   const me = JSON.parse(dataBio) as MeProps;
@@ -37,11 +36,9 @@ export async function HomeServer() {
   const dataTesti = (await getData("home/testimonials.json")).toString();
   const testis = JSON.parse(dataTesti) as TestimonialsProps;
 
-  const dataProjects = (await getData("db/projects.json")).toString();
-  const allPros = JSON.parse(dataProjects) as ResentProjectsProps;
+  const allPros = await getProjects();
 
-  const dataBlogss = (await getData("db/blogs.json")).toString();
-  const allBlogs = JSON.parse(dataBlogss) as ResentBlogsProps;
+  const allBlogs = await getBlogs();
 
   const homeProps: HomeProps = {
     configs,

@@ -3,7 +3,6 @@ import Image from "next/image";
 import Link from "next/link";
 
 export interface Blog {
-  url: string;
   title: string;
   imgUrl: string;
   desc: string;
@@ -11,9 +10,10 @@ export interface Blog {
   readTime: number;
   fileName: string;
 }
+
 export default function BlogCard(props: Blog) {
   return (
-    <Link href={props.url}>
+    <Link href={`/blogs/view/${props.fileName}`}>
       <div className="p-card group relative h-80 cursor-pointer px-0 hover:shadow-xl hover:ring">
         <Image
           objectFit="cover"
