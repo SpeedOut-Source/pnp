@@ -7,10 +7,10 @@ export default function Header() {
   return (
     <header className="sticky top-0 z-50 backdrop-blur-2xl">
       <div className="container mx-auto flex h-14 items-center justify-between px-4 py-2">
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-2">
           <Link
             href="/"
-            className="btn-ghost btn text-xl font-bold normal-case tracking-wider"
+            className="btn-ghost btn px-2 text-xl font-bold normal-case tracking-wider"
           >
             Biplob Sutradhar
           </Link>
