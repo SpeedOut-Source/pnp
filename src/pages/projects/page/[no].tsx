@@ -2,13 +2,11 @@ import AllProjects from "..";
 import { type GetStaticProps } from "next";
 import projectsServer from "~/app_function/projects/projects_server";
 import { PAGE_SIZE } from "~/app_function/utils/constants";
-import { getProjects } from "~/app_function/utils/utils";
+import { getDBConfigs } from "~/app_function/utils/utils";
 
 export async function getStaticPaths() {
-  const allProjects = await getProjects();
-  console.log("AllProjects", allProjects);
-  //   const total = allProjects.projects.length;
-  const total = 50;
+  const dbConfig = await getDBConfigs();
+  const total = dbConfig.projectTotal;
 
   const paths: {
     params: {
@@ -22,7 +20,6 @@ export async function getStaticPaths() {
       },
     });
   }
-  console.log("getStaticPaths", paths);
 
   return {
     paths,
