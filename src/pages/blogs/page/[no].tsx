@@ -1,4 +1,4 @@
-import AllData from "..";
+import AllDataShowPage from "..";
 import { type GetStaticProps } from "next";
 import {
   projectBlogGetStaticProps,
@@ -13,4 +13,4 @@ export const getStaticProps: GetStaticProps = async (context) => {
   return projectBlogGetStaticProps({ context, isProject: false });
 };
 
-export default AllData;
+export default AllDataShowPage;

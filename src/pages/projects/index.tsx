@@ -27,7 +27,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
   return projectBlogGetStaticProps({ context, isProject: true });
 };
 
-export default function AllData(props: AllDataProps) {
+export default function AllDataShowPage(props: AllDataProps) {
   let pageName: string;
   if (props.isProject) {
     pageName = "Projects";
