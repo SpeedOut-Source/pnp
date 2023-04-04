@@ -4,7 +4,7 @@
 
 @layer base {
   h2 {
-    @apply mb-5 text-center text-3xl;
+    @apply mb-3 mt-5 text-3xl tracking-wider;
   }
   h3 {
     @apply my-2 mt-4 text-2xl font-semibold tracking-wider;
