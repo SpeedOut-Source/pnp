@@ -85,7 +85,7 @@ export default function BlogView(props: BlogViewProps) {
         <meta property="og:image" content={props.blog.imgUrl} />
       </Head>
 
-      <MDRender text={props.data} />
+      <MDRender data={props.data} />
     </>
   );
 }

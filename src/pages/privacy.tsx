@@ -20,7 +20,7 @@ export default function Privacy(props: PrivacyProps) {
         <meta name="description" content={title} />
       </Head>
 
-      <MDRender text={props.data} />
+      <MDRender data={props.data} />
     </>
   );
 }

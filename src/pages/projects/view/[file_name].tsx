@@ -88,8 +88,7 @@ export default function ProjectView(props: ProjectViewProps) {
         />
         <meta property="og:image" content={props.project.imgUrl} />
       </Head>
-
-      <MDRender text={props.data} />
+      <MDRender data={props.data} />
     </>
   );
 }

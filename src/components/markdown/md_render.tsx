@@ -12,13 +12,17 @@ const ReactMarkdown: ReactMarkdownOptions | any = dynamic(() =>
 );
 
 interface MDRender {
-  text: string;
+  data: string;
 }
 export default function MDRender(props: MDRender) {
   return (
-    <div className={styles.markdownBody}>
+    // <article
+    //       className=""
+    //       dangerouslySetInnerHTML={{ __html: md().render(props.data) }}
+    //     />
+    <div className=" container prose prose-stone mx-auto max-w-3xl prose-headings:my-1 prose-a:my-1 prose-a:text-blue-600 prose-li:my-0 prose-img:my-2 prose-img:inline-block prose-img:rounded-xl">
       <ReactMarkdown rehypePlugins={[rehypeRaw]} remarkPlugins={[remarkGfm]}>
-        {props.text}
+        {props.data}
       </ReactMarkdown>
     </div>
   );
