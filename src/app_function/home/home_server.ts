@@ -49,7 +49,7 @@ export async function HomeServer() {
     workFor,
     testis: { ...testis, addUrl: configs.testimonialAddUrl },
     resentProjects: {
-      projects: allPros.projects.slice(0, 3),
+      data: allPros.projects.slice(0, 3),
     },
     resentBlogs: {
       blogs: allBlogs.blogs.slice(0, 3),

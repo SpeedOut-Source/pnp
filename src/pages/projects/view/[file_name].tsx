@@ -6,7 +6,7 @@ import MDRender from "~/components/markdown/md_render";
 
 export async function getStaticPaths() {
   const allProjects = await getProjects();
-  console.log("AllProjects", allProjects);
+
   const paths = allProjects.projects.map((x) => {
     return {
       params: {

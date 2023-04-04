@@ -1,15 +1,14 @@
 /* eslint-disable @typescript-eslint/no-misused-promises */
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/solid";
 import Head from "next/head";
-import Link from "next/link";
-import { useRouter } from "next/router";
 import { type GetStaticProps } from "next/types";
 import { useEffect, useState } from "react";
 import { type Configs } from "~/app_function/home/home_server";
-import projectsServer from "~/app_function/projects/projects_server";
+import { projectBlogGetStaticProps } from "~/app_function/project_blog/project_blog_server";
+import { type Blog } from "~/components/blogs/blogs_card";
 import { LinkWrapper } from "~/components/link_wrapper";
-import ProjectLayout from "~/components/projects/project_layout";
-import { type ProjectsProps } from "~/components/projects/resent_projects";
+import { type Project } from "~/components/projects/project_card";
+import ProjectBlogLayout from "~/components/projects/project_layout";
 
 export interface pageInfo {
   no: number;
@@ -17,18 +16,25 @@ export interface pageInfo {
   total: number;
 }
 
-export interface AllProjectsProps {
+export interface AllDataProps {
   configs: Configs;
-  projects: ProjectsProps;
+  data: Project[] | Blog[];
   pageInfo: pageInfo;
+  isProject: boolean;
 }
 
 export const getStaticProps: GetStaticProps = async (context) => {
-  return projectsServer(context);
+  return projectBlogGetStaticProps({ context, isProject: true });
 };
 
-export default function AllProjects(props: AllProjectsProps) {
-  const title = `Projects | ${props.configs.appName}`;
+export default function AllData(props: AllDataProps) {
+  let pageName: string;
+  if (props.isProject) {
+    pageName = "Projects";
+  } else {
+    pageName = "Blogs";
+  }
+  const title = `${pageName} | ${props.configs.appName}`;
   const [leftDisable, setLeftDisable] = useState(false);
   const [rightDisable, setRightDisable] = useState(false);
 
@@ -47,19 +53,25 @@ export default function AllProjects(props: AllProjectsProps) {
       </Head>
 
       <div className="container mx-auto">
-        <p className="text-center text-3xl uppercase">Projects</p>
-        <ProjectLayout {...props.projects} />
+        <p className="text-center text-3xl uppercase">{pageName}</p>
+        <ProjectBlogLayout data={props.data} isProject={props.isProject} />
         <div className="flex w-full items-center justify-center gap-2">
           <LinkWrapper
             disabled={leftDisable}
-            href={leftDisable ? "#" : `/projects/page/${props.pageInfo.no - 1}`}
+            href={
+              leftDisable
+                ? "#"
+                : `/${pageName.toLowerCase()}/page/${props.pageInfo.no - 1}`
+            }
             className="p-card h-fit w-fit cursor-pointer"
           >
             <ChevronLeftIcon className="h-5 w-5" />
           </LinkWrapper>
           <LinkWrapper
             href={
-              rightDisable ? "#" : `/projects/page/${props.pageInfo.no + 1}`
+              rightDisable
+                ? "#"
+                : `/${pageName.toLowerCase()}/page/${props.pageInfo.no + 1}`
             }
             disabled={rightDisable}
             className="p-card h-fit w-fit cursor-pointer"

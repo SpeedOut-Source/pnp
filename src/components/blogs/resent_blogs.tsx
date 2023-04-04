@@ -16,7 +16,7 @@ export default function ResentBlogs(props: ResentBlogsProps) {
       </div>
       <div className="flex justify-center">
         <Link
-          href="#"
+          href="/blogs"
           className="p-card cursor-pointer font-semibold uppercase"
         >
           view more

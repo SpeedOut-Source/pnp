@@ -2,9 +2,14 @@ import { promises } from "fs";
 import { type Configs } from "../home/home_server";
 import { type ProjectsProps } from "~/components/projects/resent_projects";
 import { type ResentBlogsProps } from "~/components/blogs/resent_blogs";
+import { type Project } from "~/components/projects/project_card";
 export interface DBConfigs {
   projectTotal: number;
   blogTotal: number;
+}
+
+export interface RawProjectsProps {
+  projects: Project[];
 }
 
 export async function getData(path: string) {
@@ -26,7 +31,7 @@ export async function getDBConfigs() {
 
 export async function getProjects() {
   const dataProjects = (await getData("db/projects.json")).toString();
-  const allPros = JSON.parse(dataProjects) as ProjectsProps;
+  const allPros = JSON.parse(dataProjects) as RawProjectsProps;
   return allPros;
 }
 
