@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { type ReactNode } from "react";
 
-export const LinkWrapper = ({
+const LinkWrapper = ({
   href,
   children,
   disabled,
@@ -25,3 +25,5 @@ export const LinkWrapper = ({
     </Link>
   );
 };
+
+export default LinkWrapper;

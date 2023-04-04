@@ -66,8 +66,6 @@ export async function projectBlogGetStaticProps(
     data = (await getBlogs()).blogs;
   }
 
-  console.log("props", props, "data", data);
-
   const limitShow = PAGE_SIZE * pageNo;
   const dataArray = data.slice(limitShow - PAGE_SIZE, limitShow);
 

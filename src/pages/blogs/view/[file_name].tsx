@@ -1,8 +1,10 @@
 import { type GetStaticProps } from "next";
+import dynamic from "next/dynamic";
 import Head from "next/head";
 import { type Configs } from "~/app_function/home/home_server";
 import { getBlogs, getConfigs, getData } from "~/app_function/utils/utils";
-import MDRender from "~/components/markdown/md_render";
+
+const MDRender = dynamic(() => import("~/components/markdown/md_render"));
 
 export async function getStaticPaths() {
   const allBlogs = await getBlogs();

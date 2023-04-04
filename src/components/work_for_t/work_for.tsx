@@ -1,15 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-
-interface Company {
-  name: string;
-  logoUrl: string;
-  homePage: string;
-}
-
-export interface WorkForProps {
-  company: Company[];
-}
+import { type WorkForProps } from "~/app_function/utils/interfaces";
 
 export default function WorkFor(props: WorkForProps) {
   return (

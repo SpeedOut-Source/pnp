@@ -1,10 +1,10 @@
 import { type AppType } from "next/dist/shared/lib/utils";
 import dynamic from "next/dynamic";
-import Footer from "~/components/footer/footer";
-import Header from "~/components/header/header";
-const NextNProgress = dynamic(() => import("nextjs-progressbar"));
-
 import "~/styles/globals.css";
+
+const NextNProgress = dynamic(() => import("nextjs-progressbar"));
+const Header = dynamic(() => import("~/components/header/header"));
+const Footer = dynamic(() => import("~/components/footer/footer"));
 
 const MyApp: AppType = ({ Component, pageProps }) => {
   return (

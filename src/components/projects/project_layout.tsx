@@ -1,5 +1,9 @@
-import BlogCard, { type Blog } from "../blogs/blogs_card";
-import ProjectCard, { type Project } from "./project_card";
+import dynamic from "next/dynamic";
+import { type Blog } from "../blogs/blogs_card";
+import { type Project } from "./project_card";
+
+const ProjectCard = dynamic(() => import("./project_card"));
+const BlogCard = dynamic(() => import("../blogs/blogs_card"));
 
 interface ProjectBlogLayout {
   data: Project[] | Blog[];

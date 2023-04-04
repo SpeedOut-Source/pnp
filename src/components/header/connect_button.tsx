@@ -13,7 +13,7 @@ export default function ConnectButton(props: IConnectButtonProps) {
         <Image
           layout="fill"
           objectFit="fill"
-          src={`/images/logos/${props.text}.png`}
+          src={`/images/logos/${props.text.toLowerCase()}.png`}
           alt={props.text}
         />
       </div>

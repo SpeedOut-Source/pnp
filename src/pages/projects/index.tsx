@@ -1,14 +1,18 @@
 /* eslint-disable @typescript-eslint/no-misused-promises */
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/solid";
+import dynamic from "next/dynamic";
 import Head from "next/head";
 import { type GetStaticProps } from "next/types";
 import { useEffect, useState } from "react";
 import { type Configs } from "~/app_function/home/home_server";
 import { projectBlogGetStaticProps } from "~/app_function/project_blog/project_blog_server";
 import { type Blog } from "~/components/blogs/blogs_card";
-import { LinkWrapper } from "~/components/link_wrapper";
 import { type Project } from "~/components/projects/project_card";
-import ProjectBlogLayout from "~/components/projects/project_layout";
+
+const ProjectBlogLayout = dynamic(
+  () => import("~/components/projects/project_layout")
+);
+const LinkWrapper = dynamic(() => import("~/components/link_wrapper"));
 
 export interface pageInfo {
   no: number;

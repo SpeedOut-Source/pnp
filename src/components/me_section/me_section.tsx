@@ -1,10 +1,14 @@
-import Me, { type MeProps } from "./me";
-import RXT, { type RXTProps } from "./r_x_t";
+import dynamic from "next/dynamic";
+import { type MeProps } from "./me";
+import { type RXTProps } from "./r_x_t";
 
 export interface MeSectionProps {
   techs: RXTProps;
   me: MeProps;
 }
+
+const Me = dynamic(() => import("./me"));
+const RXT = dynamic(() => import("./r_x_t"));
 
 export default function MeSection(props: MeSectionProps) {
   return (

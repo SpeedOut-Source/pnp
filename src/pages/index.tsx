@@ -1,8 +1,12 @@
 import Head from "next/head";
-import ResentBlogs from "~/components/blogs/resent_blogs";
-import Hero from "~/components/hero/hero";
-import ResentProjects from "~/components/projects/resent_projects";
 import { HomeServer, type HomeProps } from "~/app_function/home/home_server";
+import dynamic from "next/dynamic";
+
+const ResentProjects = dynamic(
+  () => import("~/components/projects/resent_projects")
+);
+const Hero = dynamic(() => import("~/components/hero/hero"));
+const ResentBlogs = dynamic(() => import("~/components/blogs/resent_blogs"));
 
 export async function getStaticProps() {
   return HomeServer();

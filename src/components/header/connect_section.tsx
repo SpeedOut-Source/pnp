@@ -1,4 +1,5 @@
-import ConnectButton from "./connect_button";
+import dynamic from "next/dynamic";
+const ConnectButton = dynamic(() => import("./connect_button"));
 
 export default function ConnectSection() {
   return (

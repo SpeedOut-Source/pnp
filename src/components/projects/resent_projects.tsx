@@ -1,6 +1,8 @@
 import Link from "next/link";
 import { type Project } from "./project_card";
-import ProjectBlogLayout from "./project_layout";
+import dynamic from "next/dynamic";
+
+const ProjectBlogLayout = dynamic(() => import("./project_layout"));
 
 export interface ProjectsProps {
   data: Project[];

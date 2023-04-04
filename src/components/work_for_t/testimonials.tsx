@@ -1,9 +1,12 @@
-import TestiCard, { type Testimonial } from "./testi_card";
+import dynamic from "next/dynamic";
+import { type Testimonial } from "./testi_card";
 
 export interface TestimonialsProps {
   testis: Testimonial[];
   addUrl: string;
 }
+
+const TestiCard = dynamic(() => import("./testi_card"));
 
 export default function Testimonials(props: TestimonialsProps) {
   return (

@@ -1,8 +1,10 @@
 import Link from "next/link";
-import ConnectSection from "./connect_section";
-import Links from "./links";
 import { Bars3Icon } from "@heroicons/react/24/solid";
 import packageJson from "../../../package.json";
+import dynamic from "next/dynamic";
+
+const ConnectSection = dynamic(() => import("./connect_section"));
+const Links = dynamic(() => import("./links"));
 
 export default function Header() {
   return (
