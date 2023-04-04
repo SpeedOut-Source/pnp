@@ -15,8 +15,9 @@ export interface Project {
 export default function ProjectCard(props: Project) {
   return (
     <Link href={`/projects/view/${props.fileName}`}>
-      <div className="p-card group relative h-80 cursor-pointer px-0 text-justify hover:shadow-xl hover:ring">
+      <div className="p-card group relative h-80 cursor-pointer overflow-hidden px-0 text-justify ring ring-blue-100 hover:shadow-xl hover:ring hover:ring-blue-200">
         <Image
+          loading="lazy"
           objectFit="cover"
           layout="fill"
           src={props.imgUrl}

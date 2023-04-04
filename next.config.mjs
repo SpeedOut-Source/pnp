@@ -8,8 +8,12 @@
 const config = {
   reactStrictMode: true,
   images: {
-    unoptimized: false,
-    domains: ["avatars.githubusercontent.com"],
+    unoptimized: true,
+    domains: [
+      "avatars.githubusercontent.com",
+      "user-images.githubusercontent.com",
+      "camo.githubusercontent.com",
+    ],
   },
 
   /**
