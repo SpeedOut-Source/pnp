@@ -20,7 +20,7 @@ export default function About() {
             title: "Portfolio Next.js Project",
             codeName: packageJson.name,
             logo: {
-              logoUrl: "/images/me/propic.png",
+              logoUrl: "/images/logos/app-logo.png",
               alt: packageJson.name,
             },
             version: packageJson.version,
