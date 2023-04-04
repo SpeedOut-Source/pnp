@@ -6,6 +6,9 @@ const NextNProgress = dynamic(() => import("nextjs-progressbar"));
 const Header = dynamic(() => import("~/components/header/header"));
 const Footer = dynamic(() => import("~/components/footer/footer"));
 
+import { Titillium_Web } from "next/font/google";
+const inter = Titillium_Web({ subsets: ["latin"], weight: "400" });
+
 const MyApp: AppType = ({ Component, pageProps }) => {
   return (
     <>
@@ -15,7 +18,7 @@ const MyApp: AppType = ({ Component, pageProps }) => {
         options={{ showSpinner: false }}
       />
       <div className="flex h-screen flex-col justify-between">
-        <main>
+        <main className={inter.className}>
           <Header />
           <Component {...pageProps} />
         </main>
