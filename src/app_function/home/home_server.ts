@@ -4,7 +4,7 @@ import { type RXTProps } from "~/components/me_section/r_x_t";
 import { type MeSectionProps } from "~/components/me_section/me_section";
 import { type WorkForProps } from "~/components/work_for_t/work_for";
 import { type TestimonialsProps } from "~/components/work_for_t/testimonials";
-import { type ResentProjectsProps } from "~/components/projects/resent_projects";
+import { type ProjectsProps } from "~/components/projects/resent_projects";
 import { type ResentBlogsProps } from "~/components/blogs/resent_blogs";
 
 export interface Configs {
@@ -17,7 +17,7 @@ export interface HomeProps {
   meSection: MeSectionProps;
   workFor: WorkForProps;
   testis: TestimonialsProps;
-  resentProjects: ResentProjectsProps;
+  resentProjects: ProjectsProps;
   resentBlogs: ResentBlogsProps;
 }
 
