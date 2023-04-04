@@ -11,7 +11,7 @@ export interface Testimonial {
 }
 export default function TestiCard(props: Testimonial) {
   return (
-    <div className="p-card group relative h-fit w-full space-y-3 p-3">
+    <div className="p-card group relative h-fit w-full space-y-3 p-3 text-justify">
       {props.blank && (
         <Link
           href={props.addUrl!}

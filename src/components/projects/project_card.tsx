@@ -15,7 +15,7 @@ export interface Project {
 export default function ProjectCard(props: Project) {
   return (
     <Link href={`/projects/view/${props.fileName}`}>
-      <div className="p-card group relative h-80 cursor-pointer px-0 hover:shadow-xl hover:ring">
+      <div className="p-card group relative h-80 cursor-pointer px-0 text-justify hover:shadow-xl hover:ring">
         <Image
           objectFit="cover"
           layout="fill"
@@ -31,7 +31,7 @@ export default function ProjectCard(props: Project) {
               </div>
             </div>
 
-            <div className="w-full space-y-2 px-2 py-2">
+            <div className="w-full space-y-2 px-2 py-2 ">
               <div className="mx-2 flex items-center justify-between text-sm">
                 <div>
                   <div className="flex w-full items-center gap-2 font-bold">

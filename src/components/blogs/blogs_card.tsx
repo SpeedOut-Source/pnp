@@ -32,7 +32,7 @@ export default function BlogCard(props: Blog) {
 
             <div className="w-full space-y-2 px-3 pb-2">
               <div>
-                <div className="text-md mb-1 mt-2 font-semibold leading-tight">
+                <div className="text-md mb-1 mt-2 text-justify font-semibold leading-tight">
                   <span>{props.title}</span>
                 </div>
                 <div className="flex justify-between text-xs">
@@ -46,7 +46,7 @@ export default function BlogCard(props: Blog) {
                   <div>{props.readTime} min reads</div>
                 </div>
               </div>
-              <div className="text-xs leading-snug">
+              <div className="text-justify text-xs leading-snug">
                 <p className="">{props.desc}</p>
               </div>
               <div className="hidden h-5 group-hover:flex" />
