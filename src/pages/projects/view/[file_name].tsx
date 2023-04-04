@@ -2,7 +2,13 @@ import { type GetStaticProps } from "next";
 import dynamic from "next/dynamic";
 import Head from "next/head";
 import { type Configs } from "~/app_function/home/home_server";
-import { getConfigs, getData, getProjects } from "~/app_function/utils/utils";
+import {
+  getConfigs,
+  getData,
+  getProjects,
+  parseProject,
+} from "~/app_function/utils/utils";
+import { type Project } from "~/components/projects/project_card";
 
 const MDRender = dynamic(() => import("~/components/markdown/md_render"));
 
@@ -40,13 +46,21 @@ export const getStaticProps: GetStaticProps = async (context) => {
       await getData(`projects/${context.params.file_name}`)
     ).toString();
 
+    const project = parseProject(dataRaw, context.params.file_name);
+
     const end = dataRaw.lastIndexOf("\n---") + 5;
     const data = dataRaw.slice(end);
 
     const configs = await getConfigs();
 
+    const pvp: ProjectViewProps = {
+      data,
+      configs,
+      project,
+    };
+
     return {
-      props: { data, configs },
+      props: pvp,
     };
   } catch (e) {
     return {
@@ -58,16 +72,21 @@ export const getStaticProps: GetStaticProps = async (context) => {
 export interface ProjectViewProps {
   data: string;
   configs: Configs;
+  project: Project;
 }
 
 export default function ProjectView(props: ProjectViewProps) {
-  const title = `${props.data.slice(0, 100)} | ${props.configs.appName}`;
+  const title = `${props.project.whatText} | ${props.configs.appName}`;
 
   return (
     <>
       <Head>
         <title>{title}</title>
-        <meta name="description" content={title} />
+        <meta
+          name="description"
+          content={`${props.project.result} | ${props.project.app.name} | ${props.project.company.name}`}
+        />
+        <meta property="og:image" content={props.project.imgUrl} />
       </Head>
 
       <MDRender text={props.data} />

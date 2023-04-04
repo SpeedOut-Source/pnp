@@ -18,7 +18,11 @@ const Home = (props: HomeProps) => {
     <>
       <Head>
         <title>{title}</title>
-        <meta name="description" content={title} />
+        <meta
+          name="description"
+          content={`${props.meSection.me.hText} ${props.meSection.me.text}`}
+        />
+        <meta property="og:image" content={props.meSection.me.imgUrl} />
       </Head>
       <div className="container mx-auto space-y-1 md:mt-5">
         <Hero
