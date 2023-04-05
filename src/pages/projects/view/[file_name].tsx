@@ -101,7 +101,7 @@ export default function ProjectView(props: ProjectViewProps) {
           / {props.project.fileName}
         </div>
         <div className="my-2 flex justify-center">
-          <div className="p-card flex h-fit flex-col items-start py-2">
+          <div className="p-card flex h-fit flex-col items-start py-2 text-xs text-slate-500">
             <div className="flex items-center gap-1">
               App Name:{" "}
               <div>

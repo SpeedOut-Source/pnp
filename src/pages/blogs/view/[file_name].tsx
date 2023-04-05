@@ -95,7 +95,7 @@ export default function BlogView(props: BlogViewProps) {
           / {props.blog.fileName}
         </div>
         <div className="my-2 flex justify-center">
-          <div className="p-card flex h-fit flex-col items-start py-2">
+          <div className="p-card flex h-fit flex-col items-start py-2 text-xs text-slate-500">
             <div className="flex items-center gap-1">
               Title: <span>{props.blog.title}</span>
             </div>
@@ -112,7 +112,7 @@ export default function BlogView(props: BlogViewProps) {
               </span>
             </div>
             <div className="flex items-center gap-1">
-              Read time: <span>{props.blog.readTime} min</span>
+              Read time <span>{props.blog.readTime} min</span>
             </div>
           </div>
         </div>
