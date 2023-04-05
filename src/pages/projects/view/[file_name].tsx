@@ -1,6 +1,8 @@
 import { type GetStaticProps } from "next";
 import dynamic from "next/dynamic";
 import Head from "next/head";
+import Image from "next/image";
+import Link from "next/link";
 import { type Configs } from "~/app_function/home/home_server";
 import {
   getConfigs,
@@ -88,6 +90,61 @@ export default function ProjectView(props: ProjectViewProps) {
         />
         <meta property="og:image" content={props.project.imgUrl} />
       </Head>
+      <div className=" container mx-auto max-w-3xl px-2">
+        <div className="">
+          <Link className="link-hover link-primary link" href="/projects">
+            Projects
+          </Link>{" "}
+          / {props.project.fileName}
+        </div>
+        <div className="my-2 flex justify-center">
+          <div className="p-card flex h-fit flex-col items-start py-2">
+            <div className="flex items-center gap-1">
+              App Name:{" "}
+              <div>
+                <div className="flex items-center gap-1">
+                  <Image
+                    width={20}
+                    height={20}
+                    src={props.project.app.logoUrl}
+                    alt={props.project.app.name}
+                  />
+                  <span>{props.project.app.name}</span>
+                </div>
+              </div>
+            </div>
+            <div className="flex items-center gap-1">
+              Company Name:{" "}
+              <div>
+                <div className="flex items-center gap-1">
+                  <Image
+                    width={20}
+                    height={20}
+                    src={props.project.company.logoUrl}
+                    alt={props.project.company.name}
+                  />
+                  <span>{props.project.company.name}</span>
+                </div>
+              </div>
+            </div>
+            <div className="flex items-center gap-1">
+              Date:{" "}
+              <span>
+                {new Date(props.project.date).toLocaleString("en-US", {
+                  month: "short",
+                  day: "numeric",
+                  year: "numeric",
+                  hour: "2-digit",
+                  minute: "2-digit",
+                })}
+              </span>
+            </div>
+            <div className="flex items-center gap-1">
+              Read time: <span>{props.project.readTime} min</span>
+            </div>
+          </div>
+        </div>
+      </div>
       <MDRender data={props.data} />
     </>
   );

@@ -19,7 +19,7 @@ export default function ProjectBlogLayout(props: ProjectBlogLayout) {
     );
   }
   return (
-    <div className="xs:grid-cols-2 mx-auto grid w-full justify-center gap-2 p-4 sm:grid-cols-2 md:mx-2 md:grid-cols-3 md:gap-4">
+    <div className="xs:grid-cols-2 mx-auto grid w-full justify-center gap-4 p-4 sm:grid-cols-2 md:mx-2 md:grid-cols-3">
       {props.data.map((x) =>
         props.isProject ? (
           <ProjectCard key={x.imgUrl} {...(x as Project)} />

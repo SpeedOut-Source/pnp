@@ -38,7 +38,7 @@ export default function About() {
               url: "https://github.com/biplobsd",
             },
           ]}
-          reportUrl="https://github.com/actionaac/issues"
+          reportUrl="https://github.com/biplobsd/biplobsd.github.io/issues"
           poweredBy={{
             companyName: "Biplob Sutradhar",
             url: "https://biplobsd.github.io",
