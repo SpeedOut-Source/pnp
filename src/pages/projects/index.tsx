@@ -83,8 +83,10 @@ export default function AllDataShowPage(props: AllDataProps) {
             <ChevronRightIcon className="h-5 w-5" />
           </LinkWrapper>
         </div>
-        <div className="text-center tracking-wider">
-          Total: {props.pageInfo.total} | Page no: {props.pageInfo.no}
+        <div className="my-2 text-center text-xs font-thin tracking-wider text-slate-500">
+          Total {props.pageInfo.total}{" "}
+          <span className="text-slate-400"> | </span>
+          Page no {props.pageInfo.no}
         </div>
       </div>
     </>
