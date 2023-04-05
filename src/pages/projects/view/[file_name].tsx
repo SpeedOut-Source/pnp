@@ -12,6 +12,7 @@ import {
 } from "~/app_function/utils/utils";
 import Loading from "~/components/markdown/loading";
 import { type Project } from "~/components/projects/project_card";
+import ShareWith from "~/components/share_with";
 
 const MDRender = dynamic(() => import("~/components/markdown/md_render"), {
   loading: () => <Loading />,
@@ -100,8 +101,8 @@ export default function ProjectView(props: ProjectViewProps) {
           </Link>{" "}
           / {props.project.fileName}
         </div>
-        <div className="my-2 flex justify-center">
-          <div className="p-card flex h-fit flex-col items-start py-2 text-xs text-slate-500">
+        <div className="my-2 flex flex-col items-center justify-between gap-2 sm:flex-row sm:items-end">
+          <div className="p-card flex h-fit w-full flex-col items-start py-2 text-xs text-slate-500 sm:w-fit">
             <div className="flex items-center gap-1">
               App Name:{" "}
               <div>
@@ -146,6 +147,9 @@ export default function ProjectView(props: ProjectViewProps) {
               Read time: <span>{props.project.readTime} min</span>
             </div>
           </div>
+          <ShareWith
+            text={`${props.project.whatText} ${props.project.result}`}
+          />
         </div>
       </div>
       <MDRender data={props.data} />

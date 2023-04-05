@@ -11,6 +11,7 @@ import {
 } from "~/app_function/utils/utils";
 import { type Blog } from "~/components/blogs/blogs_card";
 import Loading from "~/components/markdown/loading";
+import ShareWith from "~/components/share_with";
 
 const MDRender = dynamic(() => import("~/components/markdown/md_render"), {
   loading: () => <Loading />,
@@ -94,8 +95,8 @@ export default function BlogView(props: BlogViewProps) {
           </Link>{" "}
           / {props.blog.fileName}
         </div>
-        <div className="my-2 flex justify-center">
-          <div className="p-card flex h-fit flex-col items-start py-2 text-xs text-slate-500">
+        <div className="my-2 flex flex-col items-center justify-between gap-2 sm:flex-row sm:items-end">
+          <div className="p-card flex h-fit w-full flex-col items-start py-2 text-xs text-slate-500 sm:w-fit">
             <div className="flex items-center gap-1">
               Title: <span>{props.blog.title}</span>
             </div>
@@ -115,6 +116,7 @@ export default function BlogView(props: BlogViewProps) {
               Read time <span>{props.blog.readTime} min</span>
             </div>
           </div>
+          <ShareWith text={`${props.blog.desc}`} />
         </div>
       </div>
       <MDRender data={props.data} />
