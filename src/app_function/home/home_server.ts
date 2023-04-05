@@ -1,5 +1,10 @@
 import { type MeProps } from "~/components/me_section/me";
-import { getBlogs, getConfigs, getData, getProjects } from "../utils/utils";
+import {
+  getBlogs,
+  getConfigs,
+  getData,
+  getProjects,
+} from "../utils/utils-server";
 import { type RXTProps } from "~/components/me_section/r_x_t";
 import { type MeSectionProps } from "~/components/me_section/me_section";
 import { type TestimonialsProps } from "~/components/work_for_t/testimonials";

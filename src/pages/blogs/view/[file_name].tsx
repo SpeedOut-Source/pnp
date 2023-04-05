@@ -8,7 +8,7 @@ import {
   getConfigs,
   getData,
   parseBlog,
-} from "~/app_function/utils/utils";
+} from "~/app_function/utils/utils-server";
 import { type Blog } from "~/components/blogs/blogs_card";
 import Loading from "~/components/markdown/loading";
 import ShareWith from "~/components/share_with";

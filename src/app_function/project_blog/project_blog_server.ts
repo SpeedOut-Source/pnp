@@ -4,7 +4,7 @@ import {
   getConfigs,
   getDBConfigs,
   getProjects,
-} from "../utils/utils";
+} from "../utils/utils-server";
 import { type GetStaticPropsContext, type PreviewData } from "next";
 import { PAGE_SIZE } from "../utils/constants";
 import { type ParsedUrlQuery } from "querystring";

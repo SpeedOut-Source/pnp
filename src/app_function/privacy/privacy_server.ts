@@ -1,5 +1,5 @@
 import { type PrivacyProps } from "~/pages/privacy";
-import { getConfigs, getData } from "../utils/utils";
+import { getConfigs, getData } from "../utils/utils-server";
 
 export async function PrivacyServer() {
   const configs = await getConfigs();

@@ -4,12 +4,13 @@ import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
 import { type Configs } from "~/app_function/home/home_server";
+
 import {
   getConfigs,
   getData,
   getProjects,
   parseProject,
-} from "~/app_function/utils/utils";
+} from "~/app_function/utils/utils-server";
 import Loading from "~/components/markdown/loading";
 import { type Project } from "~/components/projects/project_card";
 import ShareWith from "~/components/share_with";
