@@ -2,13 +2,41 @@ import Link from "next/link";
 import { Bars3Icon } from "@heroicons/react/24/solid";
 import packageJson from "../../../package.json";
 import dynamic from "next/dynamic";
+import { useEffect, useState } from "react";
 
 const ConnectSection = dynamic(() => import("./connect_section"));
 const Links = dynamic(() => import("./links"));
 
 export default function Header() {
+  const [bgChange, setBgChange] = useState(false);
+  const [loaded, setLoaded] = useState(false);
+
+  useEffect(() => {
+    setLoaded(true);
+    const handleScroll = () => {
+      const sY = window.scrollY >= 16;
+      if (sY) {
+        setBgChange(true);
+      } else {
+        setBgChange(false);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
   return (
-    <header className="sticky top-0 z-50 backdrop-blur-2xl">
+    <header
+      className={`${loaded ? "transition-all delay-300 ease-in-out" : ""} ${
+        bgChange
+          ? "bg-slate-50/70 shadow-2xl lg:xl:translate-y-1 lg:xl:rounded-xl lg:xl:ring-slate-400/10 lg:xl:ring-1 lg:xl:mx-1"
+          : "shadow-none"
+      } h-18 supports-backdrop-blur:bg-white/60 sticky top-0 z-50  backdrop-blur-sm`}
+    >
       <div className="container mx-auto flex h-14 items-center justify-between px-4 py-2">
         <div className="flex items-center gap-2">
           <span className="tooltip tooltip-bottom" data-tip="Go home">
