@@ -1,4 +1,14 @@
 {
+  "1.0.1-alpha": {
+    "date": 1680720484129,
+    "changes": [
+      "share section",
+      "header bg change when scrolling",
+      "loading markdown render",
+      "card gap and total n page no adjust",
+      "view all blogs projects card size adjust"
+    ]
+  },
   "1.0.0-alpha": {
     "date": 1680518082804,
     "changes": ["About page"]
