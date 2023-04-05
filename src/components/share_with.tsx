@@ -22,6 +22,7 @@ export default function ShareWith(props: ShareWith) {
         <span className="tooltip" data-tip={copyTip}>
           <CopyToClipboard
             text={fullUrl}
+            // eslint-disable-next-line @typescript-eslint/no-misused-promises
             onCopy={async () => {
               setCopyTip("Copied");
               await delay(500);
