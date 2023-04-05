@@ -10,9 +10,12 @@ import {
   getProjects,
   parseProject,
 } from "~/app_function/utils/utils";
+import Loading from "~/components/markdown/loading";
 import { type Project } from "~/components/projects/project_card";
 
-const MDRender = dynamic(() => import("~/components/markdown/md_render"));
+const MDRender = dynamic(() => import("~/components/markdown/md_render"), {
+  loading: () => <Loading />,
+});
 
 export async function getStaticPaths() {
   const allProjects = await getProjects();

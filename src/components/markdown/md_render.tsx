@@ -4,10 +4,15 @@ import dynamic from "next/dynamic";
 import { type ReactMarkdownOptions } from "react-markdown/lib/react-markdown";
 import rehypeRaw from "rehype-raw";
 import remarkGfm from "remark-gfm";
+import Loading from "./loading";
 
-const ReactMarkdown: ReactMarkdownOptions | any = dynamic(() =>
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-return
-  import("react-markdown").then((e: any) => e.default)
+const ReactMarkdown: ReactMarkdownOptions | any = dynamic(
+  () =>
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-return
+    import("react-markdown").then((e: any) => e.default),
+  {
+    loading: () => <Loading />,
+  }
 );
 
 interface MDRender {

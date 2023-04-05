@@ -8,11 +8,13 @@ import {
   getConfigs,
   getData,
   parseBlog,
-  parseProject,
 } from "~/app_function/utils/utils";
-import { Blog } from "~/components/blogs/blogs_card";
+import { type Blog } from "~/components/blogs/blogs_card";
+import Loading from "~/components/markdown/loading";
 
-const MDRender = dynamic(() => import("~/components/markdown/md_render"));
+const MDRender = dynamic(() => import("~/components/markdown/md_render"), {
+  loading: () => <Loading />,
+});
 
 export async function getStaticPaths() {
   const allBlogs = await getBlogs();
