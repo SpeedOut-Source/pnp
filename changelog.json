@@ -1,4 +1,8 @@
 {
+  "1.0.3-alpha": {
+    "date": 1680804435887,
+    "changes": ["dark theme", "tooltip", "dynamic card load", "previous next"]
+  },
   "1.0.2-alpha": {
     "date": 1680770024414,
     "changes": [
