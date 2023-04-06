@@ -14,7 +14,7 @@ export interface Blog {
 export default function BlogCard(props: Blog) {
   return (
     <Link href={`/blogs/view/${props.fileName}`}>
-      <div className="p-card group relative h-80 cursor-pointer overflow-hidden px-0 ring ring-blue-100 hover:shadow-xl hover:ring hover:ring-blue-200">
+      <div className="p-card group relative h-80 cursor-pointer overflow-hidden px-0 ring ring-base-300 hover:shadow-xl hover:ring hover:ring-blue-200">
         <Image
           loading="lazy"
           objectFit="cover"
@@ -23,8 +23,8 @@ export default function BlogCard(props: Blog) {
           alt={props.title}
         />
         <div className="flex h-full flex-col items-end justify-end">
-          <div className="relative m-1 max-h-[60%] overflow-hidden rounded-3xl bg-slate-100/80 backdrop-blur-md group-hover:max-h-full group-hover:bg-blue-100/90 group-hover:shadow-xl">
-            <div className="absolute bottom-0 h-10 w-full bg-gradient-to-t from-slate-100 group-hover:from-blue-100">
+          <div className="relative m-1 max-h-[60%] overflow-hidden rounded-3xl bg-base-100/70 backdrop-blur-md group-hover:max-h-full group-hover:bg-base-100/80 group-hover:shadow-xl">
+            <div className="absolute bottom-0 h-10 w-full bg-gradient-to-t from-base-100 group-hover:from-base-100">
               <div className="hidden w-full items-center justify-center pt-2 font-bold uppercase text-blue-700/70 group-hover:flex">
                 <span>Read more</span>
                 <ChevronRightIcon className="h-7 w-5" />

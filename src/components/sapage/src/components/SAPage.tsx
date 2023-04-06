@@ -57,7 +57,7 @@ const SAPage = (props: SAPageProps) => {
                 .map((x) => (
                   <div
                     key={x}
-                    className="mx-3 my-2 h-fit rounded-xl bg-slate-400/10 p-3 ring-1 ring-blue-300/40 hover:bg-blue-200/10"
+                    className="mx-3 my-2 h-fit rounded-xl bg-base-300/10 p-3 ring-1 ring-blue-300/40 hover:bg-blue-200/10"
                   >
                     <div className="text-sm font-semibold tracking-wider">
                       v{x}

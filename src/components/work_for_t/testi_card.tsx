@@ -16,7 +16,7 @@ export default function TestiCard(props: Testimonial) {
         <Link
           href={props.addUrl!}
           target="_blank"
-          className="absolute z-40 h-full w-full bg-slate-100/20 backdrop-blur-sm"
+          className="absolute z-40 h-full w-full bg-base-100/20 backdrop-blur-sm"
         >
           <div className="flex h-full cursor-pointer flex-col items-center justify-center group-hover:font-semibold">
             <PlusIcon className="h-8 w-8" />

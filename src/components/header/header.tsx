@@ -33,9 +33,9 @@ export default function Header() {
     <header
       className={`${loaded ? "transition-all delay-300 ease-in-out" : ""} ${
         bgChange
-          ? "bg-slate-50/70 shadow-2xl lg:xl:translate-y-1 lg:xl:rounded-xl lg:xl:ring-slate-400/10 lg:xl:ring-1 lg:xl:mx-1"
+          ? "bg-base-200/70 shadow-2xl lg:xl:translate-y-1 lg:xl:rounded-xl lg:xl:ring-base-300/40 lg:xl:ring-1 lg:xl:mx-1"
           : "shadow-none"
-      } h-18 supports-backdrop-blur:bg-white/60 sticky top-0 z-50  backdrop-blur-sm`}
+      } h-18 supports-backdrop-blur:bg-white/60 sticky top-0 z-50 backdrop-blur-sm`}
     >
       <div className="container mx-auto flex h-14 items-center justify-between px-4 py-2">
         <div className="flex items-center gap-2">
