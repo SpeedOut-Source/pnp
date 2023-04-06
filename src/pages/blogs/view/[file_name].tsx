@@ -1,3 +1,4 @@
+import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/solid";
 import matter from "gray-matter";
 import { type GetStaticProps } from "next";
 import dynamic from "next/dynamic";
@@ -9,7 +10,7 @@ import {
   getConfigs,
   getData,
 } from "~/app_function/utils/utils-server";
-import { type Blog } from "~/components/blogs/blogs_card";
+import BlogCard, { type Blog } from "~/components/blogs/blogs_card";
 import Loading from "~/components/markdown/loading";
 import SEO from "~/components/seo";
 import ShareWith from "~/components/share_with";
@@ -55,10 +56,12 @@ export const getStaticProps: GetStaticProps = async (context) => {
 
     const blog = getBlog(data, context.params.file_name);
 
-    // const blog = parseBlog(dataRaw, context.params.file_name);
-
-    // const end = dataRaw.lastIndexOf("\n---") + 5;
-    // const data = dataRaw.slice(end);
+    const allBlogs = await getBlogs();
+    const currentIndex = allBlogs.blogs.findIndex(
+      (p) => p.fileName === context.params?.file_name
+    );
+    const previous = allBlogs.blogs[currentIndex - 1] ?? null;
+    const next = allBlogs.blogs[currentIndex + 1] ?? null;
 
     const configs = await getConfigs();
 
@@ -66,6 +69,8 @@ export const getStaticProps: GetStaticProps = async (context) => {
       data: content,
       configs,
       blog,
+      previous,
+      next,
     };
     return {
       props: bvp,
@@ -81,6 +86,8 @@ export interface BlogViewProps {
   data: string;
   configs: Configs;
   blog: Blog;
+  previous: Blog | null;
+  next: Blog | null;
 }
 
 export default function BlogView(props: BlogViewProps) {
@@ -127,6 +134,30 @@ export default function BlogView(props: BlogViewProps) {
         </div>
       </div>
       <MDRender data={props.data} />
+      <div className="container divider mx-auto max-w-3xl px-2" />
+      {(props.previous || props.next) && (
+        <div className="container mx-auto max-w-3xl px-2">
+          <div className="flex items-center justify-between gap-4 ">
+            {props.previous && (
+              <div className="h-fit w-fit">
+                <div className="mb-2 flex items-center text-2xl normal-case text-slate-400">
+                  <ChevronLeftIcon className="h-6 w-6"></ChevronLeftIcon>
+                  Previous{" "}
+                </div>
+                <BlogCard {...props.previous} />
+              </div>
+            )}
+            {props.next && (
+              <div className="h-fit w-fit">
+                <div className="mb-2 flex items-center justify-end text-2xl normal-case text-slate-400">
+                  Next <ChevronRightIcon className="h-6 w-6"></ChevronRightIcon>
+                </div>
+                <BlogCard {...props.next} />
+              </div>
+            )}
+          </div>
+        </div>
+      )}
     </>
   );
 }
