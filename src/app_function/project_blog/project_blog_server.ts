@@ -11,7 +11,7 @@ import { type ParsedUrlQuery } from "querystring";
 import { type Project } from "~/components/projects/project_card";
 import { type Blog } from "~/components/blogs/blogs_card";
 
-interface ProjectBlogGetStaticServer {
+export interface ProjectBlogGetStaticServer {
   context: GetStaticPropsContext<ParsedUrlQuery, PreviewData>;
   isProject: boolean;
 }

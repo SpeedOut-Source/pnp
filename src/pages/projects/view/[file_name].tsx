@@ -1,150 +1,126 @@
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/solid";
-import matter from "gray-matter";
-import { type GetStaticProps } from "next";
 import dynamic from "next/dynamic";
 import Image from "next/image";
+import { type GetStaticPropsContext } from "next";
 import Link from "next/link";
 import { type Configs } from "~/app_function/home/home_server";
-
 import {
-  getConfigs,
-  getData,
-  getProject,
-  getProjects,
-} from "~/app_function/utils/utils-server";
+  getStaticPathItemView,
+  getStaticPropsItemView,
+} from "~/app_function/project_blog/item_view_server";
 import Loading from "~/components/markdown/loading";
 import ProjectCard, { type Project } from "~/components/projects/project_card";
 import SEO from "~/components/seo";
 import ShareWith from "~/components/share_with";
-
+import BlogCard, { type Blog } from "~/components/blogs/blogs_card";
+import { type ParsedUrlQuery } from "querystring";
 const MDRender = dynamic(() => import("~/components/markdown/md_render"), {
   loading: () => <Loading />,
 });
 
 export async function getStaticPaths() {
-  const allProjects = await getProjects();
-
-  const paths = allProjects.projects.map((x) => {
-    return {
-      params: {
-        file_name: x.fileName,
-      },
-    };
-  });
-
-  return {
-    paths,
-    fallback: false, // can also be true or 'blocking'
-  };
+  return await getStaticPathItemView({ isProject: true });
 }
 
-// `getStaticPaths` requires using `getStaticProps`
+export async function getStaticProps(
+  context: GetStaticPropsContext<ParsedUrlQuery, ProjectBlogViewProps>
+) {
+  return await getStaticPropsItemView({ context, isProject: true });
+}
 
-export const getStaticProps: GetStaticProps = async (context) => {
-  if (
-    !context.params ||
-    !context.params.file_name ||
-    typeof context.params.file_name !== "string"
-  ) {
-    return {
-      notFound: true,
-    };
-  }
-  try {
-    const dataRaw = (
-      await getData(`projects/${context.params.file_name}`)
-    ).toString();
-
-    const { content, data } = matter(dataRaw);
-    const project = getProject(data, context.params.file_name);
-
-    const allProjects = await getProjects();
-    const currentProjectIndex = allProjects.projects.findIndex(
-      (p) => p.fileName === context.params?.file_name
-    );
-    const previous = allProjects.projects[currentProjectIndex - 1] ?? null;
-    const next = allProjects.projects[currentProjectIndex + 1] ?? null;
-
-    const configs = await getConfigs();
-
-    const pvp: ProjectViewProps = {
-      data: content,
-      configs,
-      project,
-      previous,
-      next,
-    };
-
-    return {
-      props: pvp,
-    };
-  } catch (e) {
-    return {
-      notFound: true,
-    };
-  }
-};
-
-export interface ProjectViewProps {
+export interface ProjectBlogViewProps {
   data: string;
   configs: Configs;
-  project: Project;
-  previous: Project | null;
-  next: Project | null;
+  itemView: Project | Blog;
+  previous: Project | Blog | null;
+  next: Project | Blog | null;
+  isProject: boolean;
 }
 
-export default function ProjectView(props: ProjectViewProps) {
-  const title = `${props.project.whatText} | ${props.configs.appName}`;
+export default function ProjectBlogView(props: ProjectBlogViewProps) {
+  let title: string;
+  let desc: string;
+  let shareTxt: string;
+  let project: Project | undefined = undefined;
+
+  if (props.isProject) {
+    const itemView: Project = props.itemView as Project;
+    title = `${itemView.whatText} | ${props.configs.appName}`;
+
+    desc = `${itemView.result} | ${itemView.app.name} | ${itemView.company.name}`;
+    shareTxt = `${itemView.whatText} ${itemView.result}`;
+
+    project = itemView;
+  } else {
+    const itemView: Blog = props.itemView as Blog;
+    title = `${props.itemView.fileName} | ${props.configs.appName}`;
+
+    desc = itemView.desc;
+    shareTxt = itemView.desc;
+  }
 
   return (
     <>
       <SEO
         configs={props.configs}
-        description={`${props.project.result} | ${props.project.app.name} | ${props.project.company.name}`}
+        description={desc}
         title={title}
-        imgUrl={props.project.imgUrl}
+        imgUrl={props.itemView.imgUrl}
       />
       <div className=" container mx-auto max-w-3xl px-2">
         <div className="">
-          <Link className="link-hover link-primary link" href="/projects">
-            Projects
+          <Link
+            className="link-hover link-primary link"
+            href={props.isProject ? "/projects" : "/blogs"}
+          >
+            {props.isProject ? "Projects" : "Blogs"}
           </Link>{" "}
-          / {props.project.fileName}
+          / {props.itemView.fileName}
         </div>
         <div className="my-2 flex flex-col items-center justify-between gap-2 sm:flex-row sm:items-end">
           <div className="p-card flex h-fit w-full flex-col items-start py-2 text-xs text-slate-500 sm:w-fit">
             <div className="flex items-center gap-1">
-              App Name:{" "}
-              <div>
-                <div className="flex items-center gap-1">
-                  <Image
-                    width={20}
-                    height={20}
-                    src={props.project.app.logoUrl}
-                    alt={props.project.app.name}
-                  />
-                  <span>{props.project.app.name}</span>
+              {props.isProject && project ? (
+                <>
+                  App Name:{" "}
+                  <div>
+                    <div className="flex items-center gap-1">
+                      <Image
+                        width={20}
+                        height={20}
+                        src={project.app.logoUrl}
+                        alt={project.app.name}
+                      />
+                      <span>{project.app.name}</span>
+                    </div>
+                  </div>
+                </>
+              ) : (
+                <>
+                  Title: <span>{(props.itemView as Blog).title}</span>
+                </>
+              )}
+            </div>
+            {props.isProject && project && (
+              <div className="flex items-center gap-1">
+                Company Name:{" "}
+                <div>
+                  <div className="flex items-center gap-1">
+                    <Image
+                      width={20}
+                      height={20}
+                      src={project.company.logoUrl}
+                      alt={project.company.name}
+                    />
+                    <span>{project.company.name}</span>
+                  </div>
                 </div>
               </div>
-            </div>
-            <div className="flex items-center gap-1">
-              Company Name:{" "}
-              <div>
-                <div className="flex items-center gap-1">
-                  <Image
-                    width={20}
-                    height={20}
-                    src={props.project.company.logoUrl}
-                    alt={props.project.company.name}
-                  />
-                  <span>{props.project.company.name}</span>
-                </div>
-              </div>
-            </div>
+            )}
             <div className="flex items-center gap-1">
               Date:{" "}
               <span>
-                {new Date(props.project.date).toLocaleString("en-US", {
+                {new Date(props.itemView.date).toLocaleString("en-US", {
                   month: "short",
                   day: "numeric",
                   year: "numeric",
@@ -154,12 +130,10 @@ export default function ProjectView(props: ProjectViewProps) {
               </span>
             </div>
             <div className="flex items-center gap-1">
-              Read time: <span>{props.project.readTime} min</span>
+              Read time: <span>{props.itemView.readTime} min</span>
             </div>
           </div>
-          <ShareWith
-            text={`${props.project.whatText} ${props.project.result}`}
-          />
+          <ShareWith text={shareTxt} />
         </div>
       </div>
       <MDRender data={props.data} />
@@ -173,7 +147,11 @@ export default function ProjectView(props: ProjectViewProps) {
                   <ChevronLeftIcon className="h-6 w-6"></ChevronLeftIcon>
                   Previous{" "}
                 </div>
-                <ProjectCard {...props.previous} />
+                {props.isProject ? (
+                  <ProjectCard {...(props.previous as Project)} />
+                ) : (
+                  <BlogCard {...(props.previous as Blog)} />
+                )}
               </div>
             )}
             {props.next && (
@@ -181,7 +159,11 @@ export default function ProjectView(props: ProjectViewProps) {
                 <div className="mb-2 flex items-center justify-end text-2xl normal-case text-slate-400">
                   Next <ChevronRightIcon className="h-6 w-6"></ChevronRightIcon>
                 </div>
-                <ProjectCard {...props.next} />
+                {props.isProject ? (
+                  <ProjectCard {...(props.next as Project)} />
+                ) : (
+                  <BlogCard {...(props.next as Blog)} />
+                )}
               </div>
             )}
           </div>
