@@ -144,7 +144,7 @@ export default function ProjectBlogView(props: ProjectBlogViewProps) {
       <div className="container divider mx-auto max-w-3xl px-2" />
       {(props.previous || props.next) && (
         <div className="container mx-auto max-w-3xl px-2">
-          <div className="flex items-center justify-between gap-4 ">
+          <div className="flex w-full items-center justify-between gap-4">
             {props.previous && (
               <div className="h-fit w-fit">
                 <div className="mb-2 flex items-center text-2xl normal-case text-slate-400">

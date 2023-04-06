@@ -1,18 +1,15 @@
 import { type Project } from "~/components/projects/project_card";
 import {
-  getBlog,
   getBlogs,
   getConfigs,
   getData,
-  getProject,
   getProjects,
 } from "../utils/utils-server";
 import { type Blog } from "~/components/blogs/blogs_card";
 import matter from "gray-matter";
-import { type Configs } from "../home/home_server";
 import { type GetStaticPropsContext, type PreviewData } from "next";
 import { type ParsedUrlQuery } from "querystring";
-import { ProjectBlogViewProps } from "~/pages/projects/view/[file_name]";
+import { type ProjectBlogViewProps } from "~/pages/projects/view/[file_name]";
 
 export async function getStaticPathItemView({
   isProject,
@@ -65,7 +62,7 @@ export async function getStaticPropsItemView({
       )
     ).toString();
 
-    const { content, data } = matter(dataRaw);
+    const { content } = matter(dataRaw);
 
     const allData: Project[] | Blog[] = isProject
       ? (await getProjects()).projects
@@ -79,9 +76,12 @@ export async function getStaticPropsItemView({
 
     const configs = await getConfigs();
 
-    const itemView: Project | Blog = isProject
-      ? getProject(data, context.params.file_name)
-      : getBlog(data, context.params.file_name);
+    const itemView = allData[currentProjectIndex];
+    if (!itemView) {
+      return {
+        notFound: true,
+      };
+    }
 
     const pvp: ProjectBlogViewProps = {
       data: content,
