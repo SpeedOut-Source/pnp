@@ -1,3 +1,4 @@
+import matter from "gray-matter";
 import { type GetStaticProps } from "next";
 import dynamic from "next/dynamic";
 import Head from "next/head";
@@ -8,8 +9,8 @@ import { type Configs } from "~/app_function/home/home_server";
 import {
   getConfigs,
   getData,
+  getProject,
   getProjects,
-  parseProject,
 } from "~/app_function/utils/utils-server";
 import Loading from "~/components/markdown/loading";
 import { type Project } from "~/components/projects/project_card";
@@ -53,15 +54,18 @@ export const getStaticProps: GetStaticProps = async (context) => {
       await getData(`projects/${context.params.file_name}`)
     ).toString();
 
-    const project = parseProject(dataRaw, context.params.file_name);
+    const { content, data } = matter(dataRaw);
+    const project = getProject(data, context.params.file_name);
 
-    const end = dataRaw.lastIndexOf("\n---") + 5;
-    const data = dataRaw.slice(end);
+    // const project = parseProject(dataRaw, context.params.file_name);
+
+    // const end = dataRaw.lastIndexOf("\n---") + 5;
+    // const data = dataRaw.slice(end);
 
     const configs = await getConfigs();
 
     const pvp: ProjectViewProps = {
-      data,
+      data: content,
       configs,
       project,
     };

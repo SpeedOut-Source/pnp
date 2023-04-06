@@ -67,6 +67,66 @@ export function parseProject(md_text: string, fileName: string) {
   return project;
 }
 
+export function getProject(
+  data:
+    | {
+        appName: string;
+        appLogo: string;
+        companyName: string;
+        companyLogo: string;
+        date: number;
+        readTime: number;
+        imgUrl: string;
+        whatText: string;
+        result: string;
+      }
+    | {
+        [key: string]: string;
+      },
+  fileName: string
+): Project {
+  return {
+    imgUrl: data.imgUrl,
+    app: {
+      name: data.appName,
+      logoUrl: data.appLogo,
+    },
+    company: {
+      name: data.companyName,
+      logoUrl: data.companyLogo,
+    },
+    whatText: data.whatText,
+    result: data.result,
+    date: data.date as number,
+    readTime: data.readTime as number,
+    fileName: fileName,
+  };
+}
+
+export function getBlog(
+  data:
+    | {
+        title: string;
+        imgUrl: string;
+        desc: string;
+        date: number;
+        readTime: number;
+      }
+    | {
+        [key: string]: string | number;
+      },
+  fileName: string
+): Blog {
+  return {
+    title: data.title as string,
+    imgUrl: data.imgUrl as string,
+    desc: data.desc as string,
+    date: data.date as number,
+    readTime: data.readTime as number,
+    fileName: fileName,
+  };
+}
+
 export function parseBlog(md_text: string, filename: string): Blog {
   const title = md_text.split("title: ")[1]?.split("\n")[0] ?? "";
   const desc = md_text.split("desc: ")[1]?.split("\n")[0] ?? "";

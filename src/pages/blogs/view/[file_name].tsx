@@ -1,13 +1,14 @@
+import matter from "gray-matter";
 import { type GetStaticProps } from "next";
 import dynamic from "next/dynamic";
 import Head from "next/head";
 import Link from "next/link";
 import { type Configs } from "~/app_function/home/home_server";
 import {
+  getBlog,
   getBlogs,
   getConfigs,
   getData,
-  parseBlog,
 } from "~/app_function/utils/utils-server";
 import { type Blog } from "~/components/blogs/blogs_card";
 import Loading from "~/components/markdown/loading";
@@ -50,15 +51,19 @@ export const getStaticProps: GetStaticProps = async (context) => {
       await getData(`blogs/${context.params.file_name}`)
     ).toString();
 
-    const blog = parseBlog(dataRaw, context.params.file_name);
+    const { content, data } = matter(dataRaw);
 
-    const end = dataRaw.lastIndexOf("\n---") + 5;
-    const data = dataRaw.slice(end);
+    const blog = getBlog(data, context.params.file_name);
+
+    // const blog = parseBlog(dataRaw, context.params.file_name);
+
+    // const end = dataRaw.lastIndexOf("\n---") + 5;
+    // const data = dataRaw.slice(end);
 
     const configs = await getConfigs();
 
     const bvp: BlogViewProps = {
-      data,
+      data: content,
       configs,
       blog,
     };
