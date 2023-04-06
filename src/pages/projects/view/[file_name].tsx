@@ -9,14 +9,18 @@ import {
   getStaticPropsItemView,
 } from "~/app_function/project_blog/item_view_server";
 import Loading from "~/components/markdown/loading";
-import ProjectCard, { type Project } from "~/components/projects/project_card";
+import { type Project } from "~/components/projects/project_card";
 import SEO from "~/components/seo";
 import ShareWith from "~/components/share_with";
-import BlogCard, { type Blog } from "~/components/blogs/blogs_card";
+import { type Blog } from "~/components/blogs/blogs_card";
 import { type ParsedUrlQuery } from "querystring";
+
 const MDRender = dynamic(() => import("~/components/markdown/md_render"), {
   loading: () => <Loading />,
 });
+
+const ProjectCard = dynamic(() => import("~/components/projects/project_card"));
+const BlogCard = dynamic(() => import("~/components/blogs/blogs_card"));
 
 export async function getStaticPaths() {
   return await getStaticPathItemView({ isProject: true });
