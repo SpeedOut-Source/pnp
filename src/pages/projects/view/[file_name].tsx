@@ -1,7 +1,6 @@
 import matter from "gray-matter";
 import { type GetStaticProps } from "next";
 import dynamic from "next/dynamic";
-import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
 import { type Configs } from "~/app_function/home/home_server";
@@ -14,6 +13,7 @@ import {
 } from "~/app_function/utils/utils-server";
 import Loading from "~/components/markdown/loading";
 import { type Project } from "~/components/projects/project_card";
+import SEO from "~/components/seo";
 import ShareWith from "~/components/share_with";
 
 const MDRender = dynamic(() => import("~/components/markdown/md_render"), {
@@ -91,14 +91,12 @@ export default function ProjectView(props: ProjectViewProps) {
 
   return (
     <>
-      <Head>
-        <title>{title}</title>
-        <meta
-          name="description"
-          content={`${props.project.result} | ${props.project.app.name} | ${props.project.company.name}`}
-        />
-        <meta property="og:image" content={props.project.imgUrl} />
-      </Head>
+      <SEO
+        configs={props.configs}
+        description={`${props.project.result} | ${props.project.app.name} | ${props.project.company.name}`}
+        title={title}
+        imgUrl={props.project.imgUrl}
+      />
       <div className=" container mx-auto max-w-3xl px-2">
         <div className="">
           <Link className="link-hover link-primary link" href="/projects">

@@ -1,7 +1,6 @@
 import matter from "gray-matter";
 import { type GetStaticProps } from "next";
 import dynamic from "next/dynamic";
-import Head from "next/head";
 import Link from "next/link";
 import { type Configs } from "~/app_function/home/home_server";
 import {
@@ -12,6 +11,7 @@ import {
 } from "~/app_function/utils/utils-server";
 import { type Blog } from "~/components/blogs/blogs_card";
 import Loading from "~/components/markdown/loading";
+import SEO from "~/components/seo";
 import ShareWith from "~/components/share_with";
 
 const MDRender = dynamic(() => import("~/components/markdown/md_render"), {
@@ -88,11 +88,13 @@ export default function BlogView(props: BlogViewProps) {
 
   return (
     <>
-      <Head>
-        <title>{title}</title>
-        <meta name="description" content={props.blog.desc} />
-        <meta property="og:image" content={props.blog.imgUrl} />
-      </Head>
+      <SEO
+        configs={props.configs}
+        description={props.blog.desc}
+        title={title}
+        imgUrl={props.blog.imgUrl}
+      />
+
       <div className=" container mx-auto max-w-3xl px-2">
         <div className="">
           <Link className="link-hover link-primary link" href="/blogs">

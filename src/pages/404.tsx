@@ -1,12 +1,31 @@
-import Head from "next/head";
+import { type Configs } from "~/app_function/home/home_server";
+import { getConfigs } from "~/app_function/utils/utils-server";
+import SEO from "~/components/seo";
 
-export default function Custom404() {
+export async function getStaticProps() {
+  const configs = await getConfigs();
+
+  const props: AboutProps = {
+    configs,
+  };
+
+  return {
+    props: props,
+  };
+}
+
+interface AboutProps {
+  configs: Configs;
+}
+
+export default function Custom404(props: AboutProps) {
   return (
     <>
-      <Head>
-        <title>404 | Biplob Sutradhar</title>
-        <meta name="description" content="404 | Biplob Sutradhar" />
-      </Head>
+      <SEO
+        configs={props.configs}
+        description={`404 | ${props.configs.appName}`}
+        title={`404 | ${props.configs.appName}`}
+      />
 
       <main className="errorSplash container mx-auto">
         <div>

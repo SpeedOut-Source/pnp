@@ -1,20 +1,39 @@
-import Head from "next/head";
 import changeLogJson from "../../changelog.json";
 import packageJson from "../../package.json";
 import dynamic from "next/dynamic";
+import { type Configs } from "~/app_function/home/home_server";
+import { getConfigs } from "~/app_function/utils/utils-server";
+import SEO from "~/components/seo";
 
 const SAPage = dynamic(
   () => import("../components/sapage/src/components/SAPage")
 );
 
-export default function About() {
+export async function getStaticProps() {
+  const configs = await getConfigs();
+
+  const props: AboutProps = {
+    configs,
+  };
+
+  return {
+    props: props,
+  };
+}
+
+interface AboutProps {
+  configs: Configs;
+}
+
+export default function About(props: AboutProps) {
   return (
     <div>
-      <Head>
-        <title>About | Biplob Sutradhar</title>
-        <meta name="description" content="About | Biplob Sutradhar" />
-      </Head>
-      <main className="container mx-auto">
+      <SEO
+        configs={props.configs}
+        description={`About | ${props.configs.appName}`}
+        title={`About | ${props.configs.appName}`}
+      />
+      <div className="container mx-auto">
         <SAPage
           app={{
             title: "Portfolio Next.js Project",
@@ -45,7 +64,7 @@ export default function About() {
           }}
           changeLogs={changeLogJson}
         />
-      </main>
+      </div>
     </div>
   );
 }

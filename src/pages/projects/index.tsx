@@ -1,13 +1,13 @@
 /* eslint-disable @typescript-eslint/no-misused-promises */
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/solid";
 import dynamic from "next/dynamic";
-import Head from "next/head";
 import { type GetStaticProps } from "next/types";
 import { useEffect, useState } from "react";
 import { type Configs } from "~/app_function/home/home_server";
 import { projectBlogGetStaticProps } from "~/app_function/project_blog/project_blog_server";
 import { type Blog } from "~/components/blogs/blogs_card";
 import { type Project } from "~/components/projects/project_card";
+import SEO from "~/components/seo";
 
 const ProjectBlogLayout = dynamic(
   () => import("~/components/projects/project_layout")
@@ -51,11 +51,7 @@ export default function AllDataShowPage(props: AllDataProps) {
 
   return (
     <>
-      <Head>
-        <title>{title}</title>
-        <meta name="description" content={title} />
-      </Head>
-
+      <SEO configs={props.configs} description={title} title={title} />
       <div className="container mx-auto">
         <p className="text-center text-3xl uppercase">{pageName}</p>
         <ProjectBlogLayout data={props.data} isProject={props.isProject} />

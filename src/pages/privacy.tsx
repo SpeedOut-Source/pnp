@@ -1,7 +1,7 @@
 import dynamic from "next/dynamic";
-import Head from "next/head";
 import { type Configs } from "~/app_function/home/home_server";
 import { PrivacyServer } from "~/app_function/privacy/privacy_server";
+import SEO from "~/components/seo";
 
 const MDRender = dynamic(() => import("~/components/markdown/md_render"));
 
@@ -15,11 +15,7 @@ export default function Privacy(props: PrivacyProps) {
 
   return (
     <>
-      <Head>
-        <title>{title}</title>
-        <meta name="description" content={title} />
-      </Head>
-
+      <SEO configs={props.configs} description={title} title={title} />
       <MDRender data={props.data} />
     </>
   );

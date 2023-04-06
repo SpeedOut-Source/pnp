@@ -1,19 +1,20 @@
 import { DocumentDuplicateIcon } from "@heroicons/react/24/outline";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { delay } from "./sapage/src/components/app/helper";
+import { useRouter } from "next/router";
+import { DEFAULT_BASE_URL } from "~/app_function/utils/constants";
 interface ShareWith {
   text: string;
 }
 
 export default function ShareWith(props: ShareWith) {
   const [copyTip, setCopyTip] = useState("Copy link");
-  const [fullUrl, setFullUrl] = useState("/");
-  useEffect(() => {
-    setFullUrl(window.location.href);
-  }, []);
-  // const fullUrl = `${process.env.NEXT_PUBLIC_BASE_URL ?? "/"}${router.asPath}`;
+  const router = useRouter();
+  const fullUrl = `${process.env.NEXT_PUBLIC_BASE_URL ?? DEFAULT_BASE_URL}${
+    router.asPath
+  }`;
 
   return (
     <div className="p-card flex h-fit w-full flex-col space-y-2 overflow-visible py-2 text-xs sm:w-fit">

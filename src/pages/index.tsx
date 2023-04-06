@@ -1,6 +1,7 @@
-import Head from "next/head";
 import { HomeServer, type HomeProps } from "~/app_function/home/home_server";
 import dynamic from "next/dynamic";
+import SEO from "~/components/seo";
+import { DEFAULT_BASE_URL } from "~/app_function/utils/constants";
 
 const ResentProjects = dynamic(
   () => import("~/components/projects/resent_projects")
@@ -13,17 +14,18 @@ export async function getStaticProps() {
 }
 
 const Home = (props: HomeProps) => {
-  const title = `Home | ${props.configs.appName}`;
+  const title = `${props.configs.appName}`;
   return (
     <>
-      <Head>
-        <title>{title}</title>
-        <meta
-          name="description"
-          content={`${props.meSection.me.hText} ${props.meSection.me.text}`}
-        />
-        <meta property="og:image" content={props.meSection.me.imgUrl} />
-      </Head>
+      <SEO
+        configs={props.configs}
+        description={`${props.meSection.techs.techs.join(", ")}`}
+        imgUrl={
+          (process.env.NEXT_PUBLIC_BASE_URL ?? DEFAULT_BASE_URL) +
+          props.meSection.me.imgUrl
+        }
+        title={title}
+      />
       <div className="container mx-auto space-y-1 md:mt-5">
         <Hero
           me={props.meSection}

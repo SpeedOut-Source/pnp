@@ -15,6 +15,7 @@ import { type WorkForProps } from "../utils/interfaces";
 export interface Configs {
   appName: string;
   testimonialAddUrl: string;
+  twitterHandle: string;
 }
 
 export interface HomeProps {
