@@ -1,4 +1,13 @@
 {
+  "1.0.2-alpha": {
+    "date": 1680770024414,
+    "changes": [
+      "next seo",
+      "gray-matter parse md file",
+      "force eng language",
+      "cname"
+    ]
+  },
   "1.0.1-alpha": {
     "date": 1680720484129,
     "changes": [
