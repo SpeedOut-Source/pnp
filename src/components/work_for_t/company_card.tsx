@@ -2,11 +2,11 @@ import Link from "next/link";
 import Image from "next/image";
 import { type Company } from "~/app_function/utils/interfaces";
 import { useState, useEffect } from "react";
-import { useThemeStore } from "~/app_state/theme_mode";
+import { DEFAULT_IS_LIGHT, useThemeStore } from "~/app_state/theme_mode";
 
 export default function CompanyCard(x: Company) {
   const utm = useThemeStore();
-  const [isLight, setIsLight] = useState(true);
+  const [isLight, setIsLight] = useState(DEFAULT_IS_LIGHT);
   const [color, setColor] = useState(false);
 
   useEffect(() => {

@@ -1,13 +1,13 @@
 import { MoonIcon, SunIcon } from "@heroicons/react/24/outline";
 import dynamic from "next/dynamic";
 import { useEffect, useState } from "react";
-import { useThemeStore } from "~/app_state/theme_mode";
+import { DEFAULT_IS_LIGHT, useThemeStore } from "~/app_state/theme_mode";
 
 const ConnectButton = dynamic(() => import("./connect_button"));
 
 export default function ConnectSection() {
   const utm = useThemeStore();
-  const [isLight, setIsLight] = useState(true);
+  const [isLight, setIsLight] = useState(DEFAULT_IS_LIGHT);
 
   useEffect(() => {
     setIsLight(utm.themeName === "winter");

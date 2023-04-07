@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import { useThemeStore } from "~/app_state/theme_mode";
+import { DEFAULT_IS_LIGHT, useThemeStore } from "~/app_state/theme_mode";
 import { useState, useEffect } from "react";
 
 export interface IConnectButtonProps {
@@ -10,7 +10,7 @@ export interface IConnectButtonProps {
 
 export default function ConnectButton(props: IConnectButtonProps) {
   const utm = useThemeStore();
-  const [isLight, setIsLight] = useState(true);
+  const [isLight, setIsLight] = useState(DEFAULT_IS_LIGHT);
 
   useEffect(() => {
     setIsLight(utm.themeName === "winter");

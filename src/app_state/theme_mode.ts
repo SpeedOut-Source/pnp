@@ -1,5 +1,6 @@
 import { create } from "zustand";
 import { devtools, persist, subscribeWithSelector } from "zustand/middleware";
+export const DEFAULT_IS_LIGHT = false;
 
 type ThemeName = "winter" | "dark";
 
@@ -14,7 +15,7 @@ export const useThemeStore = create(
     devtools(
       persist<ThemeModeModel>(
         (set, get) => ({
-          themeName: "winter",
+          themeName: "dark",
           setThemeName: (themeName) => set({ themeName }),
           toggleTheme: () => {
             const currentTheme = get().themeName;
