@@ -20,7 +20,7 @@ export default function Footer() {
                   href="mailto:biplobsd11@gmail.com"
                   className="link-hover link"
                 >
-                  Contact Us
+                  Contact me
                 </Link>
               </li>
               <li>
