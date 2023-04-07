@@ -7,7 +7,7 @@ const BlogCard = dynamic(() => import("../blogs/blogs_card"));
 
 interface ProjectBlogLayout {
   data: Project[] | Blog[];
-  isProject: boolean;
+  isProject?: boolean;
 }
 
 export default function ProjectBlogLayout(props: ProjectBlogLayout) {
@@ -19,7 +19,7 @@ export default function ProjectBlogLayout(props: ProjectBlogLayout) {
     );
   }
   return (
-    <div className="xs:grid-cols-2 mx-auto grid w-fit justify-center gap-4 p-4 sm:grid-cols-2 md:mx-2 md:grid-cols-3">
+    <div className="xs:grid-cols-2 mx-auto grid w-fit justify-center gap-4 sm:grid-cols-2 md:grid-cols-3">
       {props.data.map((x) =>
         props.isProject ? (
           <ProjectCard key={x.imgUrl} {...(x as Project)} />

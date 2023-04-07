@@ -14,7 +14,7 @@ export interface Blog {
 export default function BlogCard(props: Blog) {
   return (
     <Link href={`/blogs/view/${props.fileName}`}>
-      <div className="p-card group relative h-80 cursor-pointer overflow-hidden px-0 ring ring-base-300 hover:shadow-xl hover:ring hover:ring-blue-200">
+      <div className="p-card group relative h-80 cursor-pointer overflow-hidden px-0 ring ring-base-300 hover:shadow-xl hover:ring hover:ring-blue-200/70">
         <Image
           loading="lazy"
           objectFit="cover"

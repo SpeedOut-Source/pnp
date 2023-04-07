@@ -25,7 +25,7 @@ export default function TestiCard(props: Testimonial) {
         </Link>
       )}
       <div className="flex w-full items-center gap-2">
-        <div className="relative h-12 w-12 overflow-hidden rounded-full ring ring-slate-400/20">
+        <div className="relative h-12 w-12 overflow-hidden rounded-full ring ring-base-300">
           <Image
             src={props.imgUrl}
             alt={props.fullName}

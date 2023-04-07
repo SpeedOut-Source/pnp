@@ -10,7 +10,7 @@ import { type Project } from "~/components/projects/project_card";
 import SEO from "~/components/seo";
 
 const ProjectBlogLayout = dynamic(
-  () => import("~/components/projects/project_layout")
+  () => import("~/components/projects/project_blog_layout")
 );
 const LinkWrapper = dynamic(() => import("~/components/link_wrapper"));
 
@@ -54,7 +54,9 @@ export default function AllDataShowPage(props: AllDataProps) {
       <SEO configs={props.configs} description={title} title={title} />
       <div className="container mx-auto">
         <p className="text-center text-3xl uppercase">{pageName}</p>
-        <ProjectBlogLayout data={props.data} isProject={props.isProject} />
+        <div className="mx-2 my-4">
+          <ProjectBlogLayout data={props.data} isProject={props.isProject} />
+        </div>
         <div className="flex w-full items-center justify-center gap-2">
           <LinkWrapper
             disabled={leftDisable}
@@ -81,7 +83,7 @@ export default function AllDataShowPage(props: AllDataProps) {
         </div>
         <div className="my-2 text-center text-xs font-thin tracking-wider text-slate-500">
           Total {props.pageInfo.total}{" "}
-          <span className="text-slate-400"> | </span>
+          <span className="text-base-content/40"> | </span>
           Page no {props.pageInfo.no}
         </div>
       </div>

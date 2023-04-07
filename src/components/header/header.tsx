@@ -60,7 +60,7 @@ export default function Header() {
               </label>
               <ul
                 tabIndex={0}
-                className="dropdown-content menu rounded-box mt-2 w-fit bg-base-100/80 p-2 shadow-2xl ring ring-slate-200 backdrop-blur-3xl"
+                className="dropdown-content menu rounded-box mt-2 w-fit bg-base-100/80 p-2 shadow-2xl ring ring-base-300 backdrop-blur-3xl"
               >
                 <Links className="mb-2 flex justify-center space-x-4 rounded-lg bg-base-100/80 py-3" />
                 <ConnectSection />

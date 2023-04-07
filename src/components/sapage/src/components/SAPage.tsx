@@ -23,7 +23,7 @@ const SAPage = (props: SAPageProps) => {
 
   return (
     <div className="mx-2 mt-2 flex flex-col items-center tracking-wider sm:mx-5 lg:mx-10 xl:mx-10">
-      <div className="btn-ghost btn relative h-32 w-32 overflow-hidden rounded-full ring-4 ring-slate-400/40">
+      <div className="btn-ghost btn relative h-32 w-32 overflow-hidden rounded-full ring-4 ring-base-300">
         <Image
           // eslint-disable-next-line @typescript-eslint/no-misused-promises
           onClick={tapToOpen}

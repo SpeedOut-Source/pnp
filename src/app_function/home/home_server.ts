@@ -58,7 +58,7 @@ export async function HomeServer() {
       data: allPros.projects.slice(0, 3),
     },
     resentBlogs: {
-      blogs: allBlogs.blogs.slice(0, 3),
+      data: allBlogs.blogs.slice(0, 3),
     },
   };
 
