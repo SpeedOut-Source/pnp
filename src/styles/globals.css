@@ -11,3 +11,9 @@
     @apply flex h-full animate-pulse items-center justify-center bg-gray-300/50 text-xl tracking-widest;
   }
 }
+
+.invert-colors {
+  -webkit-filter: grayscale(100%) invert(1);
+  filter: grayscale(100%) invert(1);
+  opacity: 0.6;
+}
