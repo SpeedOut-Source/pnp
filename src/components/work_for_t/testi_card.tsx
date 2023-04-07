@@ -14,7 +14,7 @@ export default function TestiCard(props: Testimonial) {
     <div className="p-card group relative h-fit w-full space-y-3 p-3 text-justify">
       {props.blank && (
         <Link
-          href={props.addUrl!}
+          href={props.addUrl ?? "#"}
           target="_blank"
           className="absolute z-40 h-full w-full bg-base-100/20 backdrop-blur-sm"
         >

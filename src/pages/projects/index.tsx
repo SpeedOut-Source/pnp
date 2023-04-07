@@ -54,7 +54,7 @@ export default function AllDataShowPage(props: AllDataProps) {
       <SEO configs={props.configs} description={title} title={title} />
       <div className="container mx-auto">
         <p className="text-center text-3xl uppercase">{pageName}</p>
-        <div className="mx-2 my-4">
+        <div className="m-4">
           <ProjectBlogLayout data={props.data} isProject={props.isProject} />
         </div>
         <div className="flex w-full items-center justify-center gap-2">
