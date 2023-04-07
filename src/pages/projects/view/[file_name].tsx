@@ -9,18 +9,16 @@ import {
   getStaticPropsItemView,
 } from "~/app_function/project_blog/item_view_server";
 import Loading from "~/components/markdown/loading";
-import { type Project } from "~/components/projects/project_card";
 import SEO from "~/components/seo";
 import ShareWith from "~/components/share_with";
-import { type Blog } from "~/components/blogs/blogs_card";
 import { type ParsedUrlQuery } from "querystring";
+import { type Project, type Blog } from "~/app_function/utils/interfaces";
 
 const MDRender = dynamic(() => import("~/components/markdown/md_render"), {
   loading: () => <Loading />,
 });
 
-const ProjectCard = dynamic(() => import("~/components/projects/project_card"));
-const BlogCard = dynamic(() => import("~/components/blogs/blogs_card"));
+const LayoutCard = dynamic(() => import("~/components/layout_card"));
 
 export async function getStaticPaths() {
   return await getStaticPathItemView({ isProject: true });
@@ -151,11 +149,7 @@ export default function ProjectBlogView(props: ProjectBlogViewProps) {
                   <ChevronLeftIcon className="h-6 w-6"></ChevronLeftIcon>
                   Previous{" "}
                 </div>
-                {props.isProject ? (
-                  <ProjectCard {...(props.previous as Project)} />
-                ) : (
-                  <BlogCard {...(props.previous as Blog)} />
-                )}
+                <LayoutCard data={props.previous} />
               </div>
             )}
             {props.next && (
@@ -163,11 +157,7 @@ export default function ProjectBlogView(props: ProjectBlogViewProps) {
                 <div className="mb-2 flex items-center justify-end text-2xl normal-case text-slate-400">
                   Next <ChevronRightIcon className="h-6 w-6"></ChevronRightIcon>
                 </div>
-                {props.isProject ? (
-                  <ProjectCard {...(props.next as Project)} />
-                ) : (
-                  <BlogCard {...(props.next as Blog)} />
-                )}
+                <LayoutCard data={props.next} />
               </div>
             )}
           </div>

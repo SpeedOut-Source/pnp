@@ -1,3 +1,5 @@
+import { type Project } from "./interfaces";
+
 export function stringToReadableUrl(str: string, reverse?: boolean): string {
   if (reverse) {
     // Convert readable URL back to original string
@@ -11,4 +13,8 @@ export function stringToReadableUrl(str: string, reverse?: boolean): string {
       .filter(Boolean)
       .join("-");
   }
+}
+
+export function isPro(object: any): object is Project {
+  return "whatText" in object;
 }

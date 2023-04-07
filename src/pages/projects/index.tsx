@@ -5,8 +5,7 @@ import { type GetStaticProps } from "next/types";
 import { useEffect, useState } from "react";
 import { type Configs } from "~/app_function/home/home_server";
 import { projectBlogGetStaticProps } from "~/app_function/project_blog/project_blog_server";
-import { type Blog } from "~/components/blogs/blogs_card";
-import { type Project } from "~/components/projects/project_card";
+import { type Project, type Blog } from "~/app_function/utils/interfaces";
 import SEO from "~/components/seo";
 
 const ProjectBlogLayout = dynamic(

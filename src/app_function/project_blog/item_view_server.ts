@@ -1,15 +1,14 @@
-import { type Project } from "~/components/projects/project_card";
 import {
   getBlogs,
   getConfigs,
   getData,
   getProjects,
 } from "../utils/utils-server";
-import { type Blog } from "~/components/blogs/blogs_card";
 import matter from "gray-matter";
 import { type GetStaticPropsContext, type PreviewData } from "next";
 import { type ParsedUrlQuery } from "querystring";
 import { type ProjectBlogViewProps } from "~/pages/projects/view/[file_name]";
+import { type Blog, type Project } from "../utils/interfaces";
 
 export async function getStaticPathItemView({
   isProject,

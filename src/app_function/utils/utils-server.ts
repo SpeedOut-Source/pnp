@@ -1,7 +1,7 @@
 import { promises } from "fs";
 import { type Configs } from "../home/home_server";
-import { type Project } from "~/components/projects/project_card";
-import { type Blog } from "~/components/blogs/blogs_card";
+import { type Blog, type Project } from "./interfaces";
+
 export interface DBConfigs {
   projectTotal: number;
   blogTotal: number;

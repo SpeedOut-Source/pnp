@@ -8,8 +8,7 @@ import {
 import { type GetStaticPropsContext, type PreviewData } from "next";
 import { PAGE_SIZE } from "../utils/constants";
 import { type ParsedUrlQuery } from "querystring";
-import { type Project } from "~/components/projects/project_card";
-import { type Blog } from "~/components/blogs/blogs_card";
+import { type Blog, type Project } from "../utils/interfaces";
 
 export interface ProjectBlogGetStaticServer {
   context: GetStaticPropsContext<ParsedUrlQuery, PreviewData>;

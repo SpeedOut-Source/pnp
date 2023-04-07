@@ -1,6 +1,6 @@
 import Link from "next/link";
-import { type Blog } from "./blogs_card";
 import ProjectBlogLayout from "../projects/project_blog_layout";
+import { type Blog } from "~/app_function/utils/interfaces";
 
 export interface ResentBlogsProps {
   data: Blog[];
