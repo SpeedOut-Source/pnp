@@ -1,11 +1,11 @@
 import dynamic from "next/dynamic";
 import packageJson from "../../../package.json";
 
-const Link = dynamic(() => import('next/link'));
+const Link = dynamic(() => import("next/link"));
 
 export default function Footer() {
   return (
-    <footer className="z-50 supports-backdrop-blur:bg-white/60 backdrop-blur-sm" >
+    <footer className="supports-backdrop-blur:bg-white/60 z-50 backdrop-blur-sm">
       <div className="mx-5 mt-auto flex items-center justify-center">
         <div className="container">
           <div className="divider" />
@@ -18,10 +18,7 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
-                <Link
-                  href="mailto:biplobsd11@gmail.com"
-                  className="link-hover link"
-                >
+                <Link href="/contact" className="link-hover link">
                   Contact me
                 </Link>
               </li>

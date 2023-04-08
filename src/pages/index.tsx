@@ -8,6 +8,7 @@ const ResentProjects = dynamic(
 );
 const Hero = dynamic(() => import("~/components/hero/hero"));
 const ResentBlogs = dynamic(() => import("~/components/blogs/resent_blogs"));
+const ContactSection = dynamic(() => import("~/components/contact_section"));
 
 export async function getStaticProps() {
   return HomeServer();
@@ -34,6 +35,7 @@ const Home = (props: HomeProps) => {
         />
         <ResentProjects {...props.resentProjects} />
         <ResentBlogs {...props.resentBlogs} />
+        <ContactSection />
       </div>
     </>
   );
