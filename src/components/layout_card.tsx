@@ -17,7 +17,7 @@ export default function LayoutCard({ data }: LayoutCard) {
   const isProject = isPro(data);
   return (
     <Link href={`/${isProject ? "projects" : "blogs"}/view/${data.fileName}`}>
-      <div className="p-card group relative h-80 cursor-pointer overflow-hidden px-0 text-justify ring ring-base-300 hover:shadow-xl hover:ring hover:ring-blue-200">
+      <div className="p-card group relative h-80 w-full cursor-pointer overflow-hidden px-0 text-justify ring ring-base-300 hover:shadow-xl hover:ring hover:ring-blue-200">
         {data.imgUrl ? (
           <Image
             loading="lazy"
@@ -32,9 +32,9 @@ export default function LayoutCard({ data }: LayoutCard) {
             <div>No image</div>
           </div>
         )}
-        <div className="flex h-full flex-col items-end justify-end">
-          <div className="relative m-1 max-h-[60%] overflow-hidden rounded-3xl bg-base-100/70 backdrop-blur-md group-hover:max-h-full group-hover:bg-base-100/80 group-hover:shadow-xl">
-            <div className="absolute bottom-0 h-10 w-full bg-gradient-to-t from-base-100 group-hover:from-base-100">
+        <div className="mx-1 flex h-full w-full flex-col items-end justify-end">
+          <div className="relative mb-1 max-h-[60%] w-full overflow-hidden rounded-3xl bg-base-100/70 backdrop-blur-md group-hover:max-h-full group-hover:bg-base-100/80 group-hover:shadow-xl">
+            <div className="absolute bottom-0 mb-1 h-10 w-full bg-gradient-to-t from-base-100 group-hover:from-base-100">
               <div className="hidden w-full items-center justify-center pt-2 font-bold uppercase text-blue-700/70 group-hover:flex">
                 <span>{isProject ? "Full case study" : "Read more"}</span>
                 <ChevronRightIcon className="h-7 w-5" />
