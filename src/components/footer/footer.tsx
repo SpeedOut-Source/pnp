@@ -3,7 +3,7 @@ import packageJson from "../../../package.json";
 
 export default function Footer() {
   return (
-    <footer className="z-50">
+    <footer className="z-50 supports-backdrop-blur:bg-white/60 backdrop-blur-sm" >
       <div className="mx-5 mt-auto flex items-center justify-center">
         <div className="container">
           <div className="divider" />
