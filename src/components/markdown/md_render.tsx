@@ -31,7 +31,7 @@ export default function MDRender(props: MDRender) {
       setRehypeRaw([m]);
     };
     void t();
-    
+
     const t1 = async () => {
       const m = (await import("remark-gfm")).default;
       setRemarkGfm([m]);
@@ -42,8 +42,12 @@ export default function MDRender(props: MDRender) {
   }, []);
 
   return (
-    <article className="container prose prose-stone mx-auto max-w-3xl px-2 prose-headings:my-1 prose-a:my-1 prose-a:text-blue-600 prose-li:my-0 prose-img:my-2 prose-img:inline-block prose-img:rounded-xl">
-      {(!rehypeRaw || !remarkGfm) && <Loading />}
+    <article className="container prose prose-stone relative mx-auto max-w-3xl px-2 prose-headings:my-1 prose-a:my-1 prose-a:text-blue-600 prose-li:my-0 prose-img:my-2 prose-img:inline-block prose-img:rounded-xl">
+      {(!rehypeRaw || !remarkGfm) && (
+        <span className="absolute mx-auto w-full">
+          <Loading />
+        </span>
+      )}
       <ReactMarkdown
         components={{
           a: ({ children, ...props }) => {

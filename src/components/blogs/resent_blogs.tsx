@@ -1,6 +1,8 @@
-import Link from "next/link";
 import ProjectBlogLayout from "../projects/project_blog_layout";
 import { type Blog } from "~/app_function/utils/interfaces";
+import dynamic from "next/dynamic";
+
+const Link = dynamic(() => import('next/link'));
 
 export interface ResentBlogsProps {
   data: Blog[];

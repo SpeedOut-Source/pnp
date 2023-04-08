@@ -1,5 +1,7 @@
+import dynamic from "next/dynamic";
 import { type WorkForProps } from "~/app_function/utils/interfaces";
-import CompanyCard from "./company_card";
+
+const CompanyCard = dynamic(() => import("./company_card"));
 
 export default function WorkFor(props: WorkForProps) {
   return (

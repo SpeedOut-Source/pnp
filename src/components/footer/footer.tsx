@@ -1,5 +1,7 @@
-import Link from "next/link";
+import dynamic from "next/dynamic";
 import packageJson from "../../../package.json";
+
+const Link = dynamic(() => import('next/link'));
 
 export default function Footer() {
   return (

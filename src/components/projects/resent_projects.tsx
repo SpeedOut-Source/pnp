@@ -1,6 +1,7 @@
-import Link from "next/link";
 import dynamic from "next/dynamic";
 import { type Project } from "~/app_function/utils/interfaces";
+
+const Link = dynamic(() => import("next/link"));
 
 const ProjectBlogLayout = dynamic(() => import("./project_blog_layout"));
 

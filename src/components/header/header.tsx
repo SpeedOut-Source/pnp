@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { Bars3Icon } from "@heroicons/react/24/solid";
 import packageJson from "../../../package.json";
 import dynamic from "next/dynamic";
@@ -6,6 +5,8 @@ import { useEffect, useState } from "react";
 
 const ConnectSection = dynamic(() => import("./connect_section"));
 const Links = dynamic(() => import("./links"));
+const Link = dynamic(() => import('next/link'));
+
 
 export default function Header() {
   const [bgChange, setBgChange] = useState(false);

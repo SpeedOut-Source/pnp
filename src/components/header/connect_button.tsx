@@ -1,7 +1,9 @@
-import Link from "next/link";
-import Image from "next/image";
 import { DEFAULT_IS_LIGHT, useThemeStore } from "~/app_state/theme_mode";
 import { useState, useEffect } from "react";
+import dynamic from "next/dynamic";
+
+const Link = dynamic(() => import('next/link'));
+const Image = dynamic(() => import('next/image'));
 
 export interface IConnectButtonProps {
   text: string;

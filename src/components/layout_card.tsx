@@ -1,9 +1,11 @@
-import Link from "next/link";
-import Image from "next/image";
 import { ChevronRightIcon } from "@heroicons/react/24/outline";
 import { isPro } from "~/app_function/utils/utils";
 import { type Blog, type Project } from "~/app_function/utils/interfaces";
 import { PhotoIcon } from "@heroicons/react/24/outline";
+import dynamic from "next/dynamic";
+
+const Link = dynamic(() => import("next/link"));
+const Image = dynamic(() => import("next/image"));
 
 type Data = Blog | Project;
 

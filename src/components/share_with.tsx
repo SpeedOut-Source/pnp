@@ -1,10 +1,13 @@
 import { DocumentDuplicateIcon } from "@heroicons/react/24/outline";
-import { CopyToClipboard } from "react-copy-to-clipboard";
-import Link from "next/link";
 import { useState } from "react";
 import { delay } from "./sapage/src/components/app/helper";
 import { useRouter } from "next/router";
 import { DEFAULT_BASE_URL } from "~/app_function/utils/constants";
+import dynamic from "next/dynamic";
+
+const Link = dynamic(() => import("next/link"));
+const CopyToClipboard = dynamic(() => import("react-copy-to-clipboard"));
+
 interface ShareWith {
   text: string;
 }

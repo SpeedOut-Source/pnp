@@ -1,7 +1,8 @@
-import React from "react";
 import { type DevPlateProps } from "./app/interfaces";
-import Image from "next/image";
-import Link from "next/link";
+import dynamic from "next/dynamic";
+
+const Link = dynamic(() => import("next/link"));
+const Image = dynamic(() => import("next/image"));
 
 export default function DevPlate(props: DevPlateProps) {
   return (

@@ -2,9 +2,11 @@ import React, { useState } from "react";
 import { delay } from "./app/helper";
 import { BugAntIcon } from "@heroicons/react/24/solid";
 import { type SAPageProps } from "./app/interfaces";
-import DevPlate from "./Dev_plate";
-import Image from "next/image";
-import Link from "next/link";
+import dynamic from "next/dynamic";
+
+const Link = dynamic(() => import("next/link"));
+const Image = dynamic(() => import("next/image"));
+const DevPlate = dynamic(() => import("./Dev_plate"));
 
 const SAPage = (props: SAPageProps) => {
   const [mainDev, setMainDev] = useState(false);

@@ -1,5 +1,7 @@
-import Link from "next/link";
+import dynamic from "next/dynamic";
 import { type ReactNode } from "react";
+
+const Link = dynamic(() => import("next/link"));
 
 const LinkWrapper = ({
   href,

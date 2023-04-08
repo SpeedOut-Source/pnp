@@ -1,5 +1,6 @@
-import Link from "next/link";
-import * as React from "react";
+import dynamic from "next/dynamic";
+
+const Link = dynamic(() => import("next/link"));
 
 export interface ILinksProps {
   className: string;

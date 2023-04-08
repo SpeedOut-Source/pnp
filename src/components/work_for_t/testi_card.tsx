@@ -1,6 +1,9 @@
 import { PlusIcon } from "@heroicons/react/24/solid";
-import Image from "next/image";
-import Link from "next/link";
+import dynamic from "next/dynamic";
+
+const Link = dynamic(() => import("next/link"));
+const Image = dynamic(() => import("next/image"));
+
 export interface Testimonial {
   imgUrl: string;
   fullName: string;

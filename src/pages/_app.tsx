@@ -5,9 +5,9 @@ import "~/styles/globals.css";
 const NextNProgress = dynamic(() => import("nextjs-progressbar"));
 const Header = dynamic(() => import("~/components/header/header"));
 const Footer = dynamic(() => import("~/components/footer/footer"));
+const ThemeProvider = dynamic(() => import("~/components/theme_provider"));
 
 import { Titillium_Web } from "next/font/google";
-import ThemeProvider from "~/components/theme_provider";
 import { DEFAULT_IS_LIGHT, useThemeStore } from "~/app_state/theme_mode";
 import { useEffect, useState } from "react";
 const inter = Titillium_Web({ subsets: ["latin"], weight: "400" });

@@ -1,8 +1,6 @@
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/solid";
 import dynamic from "next/dynamic";
-import Image from "next/image";
 import { type GetStaticPropsContext } from "next";
-import Link from "next/link";
 import { type Configs } from "~/app_function/home/home_server";
 import {
   getStaticPathItemView,
@@ -10,9 +8,12 @@ import {
 } from "~/app_function/project_blog/item_view_server";
 import Loading from "~/components/markdown/loading";
 import SEO from "~/components/seo";
-import ShareWith from "~/components/share_with";
 import { type ParsedUrlQuery } from "querystring";
 import { type Project, type Blog } from "~/app_function/utils/interfaces";
+
+const Link = dynamic(() => import("next/link"));
+const Image = dynamic(() => import("next/image"));
+const ShareWith = dynamic(() => import("~/components/share_with"));
 
 const MDRender = dynamic(() => import("~/components/markdown/md_render"), {
   loading: () => <Loading />,
