@@ -68,7 +68,7 @@ function Map() {
       </div>
       <div className="mx-4 overflow-hidden rounded-xl">
         <GoogleMap
-          zoom={10}
+          zoom={3}
           center={center}
           mapContainerClassName="h-96 w-full"
           options={mapOptions}
