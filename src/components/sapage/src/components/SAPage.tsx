@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { delay } from "./app/helper";
-import { BugAntIcon } from "@heroicons/react/24/solid";
+import BugAntIcon from "@heroicons/react/24/solid/BugAntIcon";
 import { type SAPageProps } from "./app/interfaces";
 import dynamic from "next/dynamic";
 

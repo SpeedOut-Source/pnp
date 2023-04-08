@@ -1,4 +1,5 @@
-import { MoonIcon, SunIcon } from "@heroicons/react/24/outline";
+import SunIcon from "@heroicons/react/24/outline/SunIcon";
+import MoonIcon from "@heroicons/react/24/outline/MoonIcon";
 import dynamic from "next/dynamic";
 import { useEffect, useState } from "react";
 import { DEFAULT_IS_LIGHT, useThemeStore } from "~/app_state/theme_mode";

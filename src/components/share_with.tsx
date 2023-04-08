@@ -1,4 +1,4 @@
-import { DocumentDuplicateIcon } from "@heroicons/react/24/outline";
+import DocumentDuplicateIcon from "@heroicons/react/24/outline/DocumentDuplicateIcon";
 import { useState } from "react";
 import { delay } from "./sapage/src/components/app/helper";
 import { useRouter } from "next/router";

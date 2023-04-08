@@ -1,4 +1,4 @@
-import { PlusIcon } from "@heroicons/react/24/solid";
+import PlusIcon from "@heroicons/react/24/solid/PlusIcon";
 import dynamic from "next/dynamic";
 
 const Link = dynamic(() => import("next/link"));

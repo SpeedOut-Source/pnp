@@ -1,7 +1,7 @@
-import { ChevronRightIcon } from "@heroicons/react/24/outline";
+import ChevronRightIcon from "@heroicons/react/24/outline/ChevronRightIcon";
 import { isPro } from "~/app_function/utils/utils";
 import { type Blog, type Project } from "~/app_function/utils/interfaces";
-import { PhotoIcon } from "@heroicons/react/24/outline";
+import PhotoIcon from "@heroicons/react/24/outline/PhotoIcon";
 import dynamic from "next/dynamic";
 
 const Link = dynamic(() => import("next/link"));
