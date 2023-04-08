@@ -3,6 +3,8 @@ import MoonIcon from "@heroicons/react/24/outline/MoonIcon";
 import dynamic from "next/dynamic";
 import { useEffect, useState } from "react";
 import { DEFAULT_IS_LIGHT, useThemeStore } from "~/app_state/theme_mode";
+import { CONNECT_OPTIONS } from "../contact/connect_data";
+import Link from "next/link";
 
 const ConnectButton = dynamic(() => import("./connect_button"));
 
@@ -34,13 +36,11 @@ export default function ConnectSection() {
       <div className="w-fit items-center gap-3 rounded-xl bg-base-300 px-4 md:flex lg:flex xl:flex">
         <div className="font-semibold tracking-wider">Connect on</div>
         <div className="flex items-center">
-          <ConnectButton text="Github" url="https://github.com/biplobsd" />
-          <ConnectButton
-            text="Linkedin"
-            url="https://www.linkedin.com/in/biplob-sutradhar/"
-          />
-          <ConnectButton text="Twitter" url="https://twitter.com/_biplobsd" />
-          <ConnectButton text="Gmail" url="mailto:biplobsd11@gamil.com" />
+          {CONNECT_OPTIONS.map((x) => (
+            <Link target="_blank" key={x.url} href={x.url}>
+              {x.icon}
+            </Link>
+          ))}
         </div>
       </div>
     </div>

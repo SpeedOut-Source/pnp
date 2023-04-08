@@ -6,15 +6,15 @@ import {
   type PluggableList,
   type ReactMarkdownOptions,
 } from "react-markdown/lib/react-markdown";
-import Loading from "./loading";
 import { useEffect, useState } from "react";
+import AbsoluteLoading from "./absolute_loading";
 
 const ReactMarkdown = dynamic<ReactMarkdownOptions>(
   () =>
     // eslint-disable-next-line @typescript-eslint/no-unsafe-return
     import("react-markdown").then((e: any) => e.default),
   {
-    loading: () => <Loading />,
+    loading: () => <AbsoluteLoading />,
   }
 );
 
@@ -43,11 +43,7 @@ export default function MDRender(props: MDRender) {
 
   return (
     <article className="container prose prose-stone relative mx-auto max-w-3xl px-2 prose-headings:my-1 prose-a:my-1 prose-a:text-blue-600 prose-li:my-0 prose-img:my-2 prose-img:inline-block prose-img:rounded-xl">
-      {(!rehypeRaw || !remarkGfm) && (
-        <span className="absolute mx-auto w-full">
-          <Loading />
-        </span>
-      )}
+      {(!rehypeRaw || !remarkGfm) && <AbsoluteLoading />}
       <ReactMarkdown
         components={{
           a: ({ children, ...props }) => {

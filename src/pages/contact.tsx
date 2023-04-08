@@ -1,7 +1,10 @@
+import dynamic from "next/dynamic";
 import { type Configs } from "~/app_function/home/home_server";
 import { getConfigs } from "~/app_function/utils/utils-server";
-import ContactSection from "~/components/contact_section";
+import ContactSection from "~/components/contact/contact_section";
 import SEO from "~/components/seo";
+
+const MapOn = dynamic(() => import("~/components/contact/map_on"));
 
 export async function getStaticProps() {
   const configs = await getConfigs();
@@ -29,6 +32,8 @@ export default function Custom404(props: AboutProps) {
       />
 
       <ContactSection />
+
+      <MapOn />
     </>
   );
 }

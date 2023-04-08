@@ -5,7 +5,7 @@ const Link = dynamic(() => import("next/link"));
 
 export default function Footer() {
   return (
-    <footer className="supports-backdrop-blur:bg-white/60 z-50 backdrop-blur-sm">
+    <footer className="supports-backdrop-blur:bg-white/60 backdrop-blur-sm">
       <div className="mx-5 mt-auto flex items-center justify-center">
         <div className="container">
           <div className="divider" />
