@@ -1,10 +1,16 @@
-import { SpecialZoomLevel, Viewer, Worker } from "@react-pdf-viewer/core";
+import {
+  type Plugin,
+  SpecialZoomLevel,
+  Viewer,
+  Worker,
+} from "@react-pdf-viewer/core";
 import "@react-pdf-viewer/core/lib/styles/index.css";
 
 import AbsoluteLoading from "./markdown/absolute_loading";
 import { useState } from "react";
 import { delay } from "./sapage/src/components/app/helper";
 import ExclamationCircleIcon from "@heroicons/react/24/outline/ExclamationCircleIcon";
+import findLinksPlugin from "~/app_function/utils/find_link_plugin";
 
 export default function PdfReader({ resumeUrl }: { resumeUrl: string }) {
   const [zoomCount, setZoomCount] = useState(0);
@@ -22,6 +28,7 @@ export default function PdfReader({ resumeUrl }: { resumeUrl: string }) {
     }
     setIsLoading(false);
   };
+  const findLinksPluginInstance = findLinksPlugin() as unknown as Plugin;
 
   return (
     <div className="relative">
@@ -54,6 +61,7 @@ export default function PdfReader({ resumeUrl }: { resumeUrl: string }) {
               defaultScale={SpecialZoomLevel.PageFit}
               theme={"dark"}
               fileUrl={resumeUrl}
+              plugins={[findLinksPluginInstance]}
             />
           </div>
         </div>

@@ -28,7 +28,8 @@
     "**/*.tsx",
     "**/*.cjs",
     "**/*.mjs",
-    "src/components/markdown/md_render.tsx"
+    "src/components/markdown/md_render.tsx",
+    "src/app_function/utils/find_link_plugin.ts"
   ],
   "exclude": ["node_modules"]
 }
