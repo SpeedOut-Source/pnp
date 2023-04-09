@@ -1,4 +1,18 @@
 {
+  "1.0.4-alpha": {
+    "date": 1681016239501,
+    "changes": [
+      "tooltip hide when switching theme",
+      "typo resent",
+      "contract page with google map",
+      "footer bg blur",
+      "link open tab",
+      "dark theme default",
+      "dark theme sync",
+      "metadeta read from json",
+      "tooltip theme change"
+    ]
+  },
   "1.0.3-alpha": {
     "date": 1680804435887,
     "changes": ["dark theme", "tooltip", "dynamic card load", "previous next"]
