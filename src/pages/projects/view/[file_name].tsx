@@ -62,6 +62,8 @@ export default function ProjectBlogView(props: ProjectBlogViewProps) {
     shareTxt = itemView.desc;
   }
 
+  const slashName = props.isProject ? "projects" : "blogs";
+
   return (
     <>
       <SEO
@@ -73,10 +75,10 @@ export default function ProjectBlogView(props: ProjectBlogViewProps) {
       <div className=" container mx-auto max-w-3xl px-2">
         <div className="">
           <Link
-            className="link-hover link-primary link"
-            href={props.isProject ? "/projects" : "/blogs"}
+            className="title link-hover link-primary link capitalize"
+            href={"/" + slashName}
           >
-            {props.isProject ? "Projects" : "Blogs"}
+            {slashName}
           </Link>{" "}
           / {props.itemView.fileName}
         </div>
@@ -145,19 +147,25 @@ export default function ProjectBlogView(props: ProjectBlogViewProps) {
         <div className="container mx-auto max-w-3xl px-2">
           <div className="flex w-full items-center justify-center gap-4">
             {props.previous && (
-              <div className="h-fit w-fit">
-                <div className="mb-2 flex items-center text-2xl normal-case text-slate-400">
+              <div className="h-fit w-full">
+                <Link
+                  href={`/${slashName}/view/${props.previous.fileName}`}
+                  className="link-hover link mb-2 flex items-center text-2xl normal-case text-slate-400"
+                >
                   <ChevronLeftIcon className="h-6 w-6"></ChevronLeftIcon>
                   Previous{" "}
-                </div>
+                </Link>
                 <LayoutCard data={props.previous} />
               </div>
             )}
             {props.next && (
-              <div className="h-fit w-fit">
-                <div className="mb-2 flex items-center justify-end text-2xl normal-case text-slate-400">
-                  Next <ChevronRightIcon className="h-6 w-6"></ChevronRightIcon>
-                </div>
+              <div className="h-fit w-full">
+                <Link
+                  href={`/${slashName}/view/${props.next.fileName}`}
+                  className="link-hover link mb-2 flex items-center justify-end text-2xl normal-case text-slate-400"
+                >
+                  Next <ChevronRightIcon className="h-6 w-6" />
+                </Link>
                 <LayoutCard data={props.next} />
               </div>
             )}

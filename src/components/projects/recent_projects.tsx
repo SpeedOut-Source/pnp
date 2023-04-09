@@ -9,10 +9,10 @@ export interface ProjectsProps {
   data: Project[];
 }
 
-export default function ResentProjects(props: ProjectsProps) {
+export default function RecentProjects(props: ProjectsProps) {
   return (
     <div className="mx-auto h-fit max-w-6xl px-4 sm:pl-4 sm:pr-0">
-      <p className="text-2xl normal-case text-slate-400">Resent projects</p>
+      <p className="text-2xl normal-case text-slate-400">Recent projects</p>
       <div className="py-3">
         <ProjectBlogLayout {...props} isProject />
       </div>

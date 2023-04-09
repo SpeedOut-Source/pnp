@@ -9,8 +9,8 @@ export const CONNECT_OPTIONS: ContactItemProps[] = [
     url: "mailto:biplobsd11@gmail.com",
   },
   {
-    icon: <ConnectButton text="Github" />,
-    name: "Github",
+    icon: <ConnectButton text="GitHub" />,
+    name: "GitHub",
     text: "/biplobsd",
     copyUrl: true,
     url: "https://github.com/biplobsd",
@@ -24,8 +24,8 @@ export const CONNECT_OPTIONS: ContactItemProps[] = [
     url: "https://twitter.com/biplobsd11",
   },
   {
-    icon: <ConnectButton text="Linkedin" />,
-    name: "Linkedin",
+    icon: <ConnectButton text="LinkedIn" />,
+    name: "LinkedIn",
     text: "/biplob-sutradhar",
     copyUrl: true,
     url: "https://www.linkedin.com/in/biplob-sutradhar/",

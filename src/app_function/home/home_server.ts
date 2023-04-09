@@ -8,8 +8,8 @@ import {
 import { type RXTProps } from "~/components/me_section/r_x_t";
 import { type MeSectionProps } from "~/components/me_section/me_section";
 import { type TestimonialsProps } from "~/components/work_for_t/testimonials";
-import { type ProjectsProps } from "~/components/projects/resent_projects";
-import { type ResentBlogsProps } from "~/components/blogs/resent_blogs";
+import { type ProjectsProps } from "~/components/projects/recent_projects";
+import { type RecentBlogsProps } from "~/components/blogs/recent_blogs";
 import { type WorkForProps } from "../utils/interfaces";
 
 export interface Configs {
@@ -23,8 +23,8 @@ export interface HomeProps {
   meSection: MeSectionProps;
   workFor: WorkForProps;
   testis: TestimonialsProps;
-  resentProjects: ProjectsProps;
-  resentBlogs: ResentBlogsProps;
+  recentProjects: ProjectsProps;
+  recentBlogs: RecentBlogsProps;
 }
 
 export async function HomeServer() {
@@ -54,10 +54,10 @@ export async function HomeServer() {
     },
     workFor,
     testis: { ...testis, addUrl: configs.testimonialAddUrl },
-    resentProjects: {
+    recentProjects: {
       data: allPros.projects.slice(0, 3),
     },
-    resentBlogs: {
+    recentBlogs: {
       data: allBlogs.blogs.slice(0, 3),
     },
   };

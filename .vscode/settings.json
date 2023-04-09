@@ -1,3 +1,10 @@
 {
-  "cSpell.words": ["Biplob", "propic", "Sutradhar"]
+  "cSpell.words": ["Biplob", "biplobsd", "propic", "Sutradhar"],
+  "spellright.language": ["en"],
+  "spellright.documentTypes": [
+    "markdown",
+    "latex",
+    "plaintext",
+    "typescriptreact"
+  ]
 }
