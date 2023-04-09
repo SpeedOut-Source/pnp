@@ -1,36 +1,48 @@
+/* eslint-disable @typescript-eslint/no-misused-promises */
 import SunIcon from "@heroicons/react/24/outline/SunIcon";
 import MoonIcon from "@heroicons/react/24/outline/MoonIcon";
-import dynamic from "next/dynamic";
 import { useEffect, useState } from "react";
 import { DEFAULT_IS_LIGHT, useThemeStore } from "~/app_state/theme_mode";
 import { CONNECT_OPTIONS } from "../contact/connect_data";
 import Link from "next/link";
-
-const ConnectButton = dynamic(() => import("./connect_button"));
+import { delay } from "../sapage/src/components/app/helper";
 
 export default function ConnectSection() {
   const utm = useThemeStore();
   const [isLight, setIsLight] = useState(DEFAULT_IS_LIGHT);
+  const [isHideTooltip, setIsHideTooltip] = useState(false);
 
   useEffect(() => {
     setIsLight(utm.themeName === "winter");
   }, [utm]);
+
+  async function toggleTheme() {
+    setIsHideTooltip(true);
+    await delay(100);
+    utm.toggleTheme();
+    await delay(100);
+    setIsHideTooltip(false);
+  }
 
   return (
     <div className="flex flex-col items-center gap-2 md:flex-row">
       <label className="swap-rotate swap h-fit w-fit text-neutral-500">
         <input type="checkbox" defaultChecked={isLight} />
         <span
-          className={`${isLight ? "z-50" : ""} swap-on tooltip tooltip-bottom`}
+          className={`${isLight ? "z-50" : ""} swap-on ${
+            isHideTooltip ? "" : "tooltip"
+          } tooltip-bottom`}
           data-tip="Switch Dark"
         >
-          <SunIcon onClick={utm.toggleTheme} className="h-6 w-6" />
+          <SunIcon onClick={toggleTheme} className="h-6 w-6" />
         </span>
         <span
-          className="swap-off tooltip tooltip-bottom"
+          className={`swap-off ${
+            isHideTooltip ? "" : "tooltip"
+          } tooltip-bottom`}
           data-tip="Switch Light"
         >
-          <MoonIcon onClick={utm.toggleTheme} className="h-6 w-6" />
+          <MoonIcon onClick={toggleTheme} className="h-6 w-6" />
         </span>
       </label>
       <div className="w-fit items-center gap-3 rounded-xl bg-base-300 px-4 md:flex lg:flex xl:flex">
