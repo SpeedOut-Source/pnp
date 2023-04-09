@@ -20,11 +20,7 @@ export default function Links(props: ILinksProps) {
         </Link>
       </span>
       <span className="tooltip tooltip-bottom" data-tip="View">
-        <Link
-          target="_blank"
-          href="https://drive.google.com/file/d/1-btObZRvgGQ5-_oP5rDnPVXkekxZOOzM/view?usp=sharing"
-          className="link-hover link"
-        >
+        <Link href="/resume" className="link-hover link">
           Resume
         </Link>
       </span>

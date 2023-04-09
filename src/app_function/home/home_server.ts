@@ -16,6 +16,7 @@ export interface Configs {
   appName: string;
   testimonialAddUrl: string;
   twitterHandle: string;
+  resumeUrl: string;
 }
 
 export interface HomeProps {
