@@ -41,7 +41,7 @@ export default function LayoutCard({ data }: LayoutCard) {
               </div>
             </div>
 
-            <div className="w-full space-y-2 px-2 py-2 ">
+            <div className="w-full px-2 py-2 ">
               <div className="mx-2 flex items-center justify-between text-sm">
                 {isProject ? (
                   <div>
@@ -69,23 +69,23 @@ export default function LayoutCard({ data }: LayoutCard) {
                     </div>
                   </div>
                 ) : (
-                  <div className="text-md mb-1 mt-2 text-justify font-semibold leading-tight">
+                  <div className="text-md mt-2 text-justify font-semibold leading-tight">
                     <span>{data.title}</span>
                   </div>
                 )}
-                <div className={`text-right text-xs`}>
-                  <div>
-                    {new Date(data.date).toLocaleString("en-US", {
-                      month: "short",
-                      day: "numeric",
-                      year: "numeric",
-                    })}
-                  </div>
-                  <div>{data.readTime} min</div>
+              </div>
+              <div className={`mx-2 mb-1 flex justify-start text-xs`}>
+                <div>
+                  {new Date(data.date).toLocaleString("en-US", {
+                    month: "short",
+                    day: "numeric",
+                    year: "numeric",
+                  })}
                 </div>
+                <div>{data.readTime} min</div>
               </div>
 
-              <div className="text-xs leading-snug">
+              <div className="mb-2 text-xs leading-snug">
                 {isProject ? (
                   <>
                     <span className="font-semibold">{data.whatText}</span>
@@ -95,7 +95,7 @@ export default function LayoutCard({ data }: LayoutCard) {
                   <p className="">{data.desc}</p>
                 )}
               </div>
-              <div className="hidden h-5 group-hover:flex" />
+              <div className=" h-0 transition-all duration-100 ease-in-out group-hover:h-5" />
             </div>
           </div>
         </div>
