@@ -30,7 +30,7 @@ export interface Project {
 
 interface Listing {
   name: string;
-  url: string;
+  link: string;
 }
 
 export interface App {

@@ -48,6 +48,41 @@ export interface ProjectBlogViewProps {
   type: Card;
 }
 
+export function getLogoListing(name: string, appLogo?: string) {
+  switch (name.toLowerCase()) {
+    case "windows":
+    case "microsoft":
+    case "microsoft edge":
+      return (
+        <Image
+          src={"/images/listing/microsoftstore.svg"}
+          alt={name}
+          height={10}
+          width={135}
+        />
+      );
+    case "android":
+      return (
+        <Image
+          src={"/images/listing/playstore.svg"}
+          alt={name}
+          height={10}
+          width={200}
+        />
+      );
+
+    default:
+      return (
+        <Image
+          src={appLogo ?? "/images/logos/app-logo.png"}
+          alt={name}
+          height={10}
+          width={50}
+        />
+      );
+  }
+}
+
 export default function ProjectBlogView(props: ProjectBlogViewProps) {
   let title: string;
   let desc: string;
@@ -116,6 +151,8 @@ export default function ProjectBlogView(props: ProjectBlogViewProps) {
     }
   }
 
+  console.log(props);
+
   return (
     <>
       <SEO
@@ -172,6 +209,41 @@ export default function ProjectBlogView(props: ProjectBlogViewProps) {
           <ShareWith text={shareTxt} />
         </div>
       </div>
+      {props.type === "apps" && (
+        <div className="container mx-auto mb-4 max-w-3xl space-y-4 px-2">
+          <div className="flex w-full flex-col items-center justify-center">
+            <Image
+              src={props.itemView.imgUrl}
+              alt={(props.itemView as App).title}
+              width={100}
+              height={100}
+            />
+            <p className="text-center text-4xl font-semibold tracking-wider">
+              {(props.itemView as App).title}
+            </p>
+          </div>
+
+          <div className="flex flex-wrap justify-center gap-3">
+            {(props.itemView as App).platforms.map((x) => (
+              <Link
+                href={x.link}
+                target="_blank"
+                className="p-card flex h-fit w-fit cursor-pointer flex-col py-2"
+                key={x.link}
+              >
+                {
+                  <div className="h-24 space-y-2 py-2">
+                    <p className="text-center">{x.name}</p>
+                    <div className="flex h-fit w-40 justify-center overflow-hidden">
+                      {getLogoListing(x.name, props.itemView.imgUrl)}
+                    </div>
+                  </div>
+                }
+              </Link>
+            ))}
+          </div>
+        </div>
+      )}
       <MDRender data={props.data} />
       <div className="container divider mx-auto max-w-3xl px-2" />
       {(props.previous || props.next) && (
