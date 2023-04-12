@@ -30,7 +30,7 @@ const Home = (props: HomeProps) => {
         }
         title={title}
       />
-      <div className="container mx-auto space-y-1 md:mt-5">
+      <div className="container mx-auto space-y-2 md:mt-5">
         <Hero
           me={props.meSection}
           company={props.workFor}
