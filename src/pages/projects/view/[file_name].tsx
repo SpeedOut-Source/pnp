@@ -17,6 +17,9 @@ import {
   type App,
 } from "~/app_function/utils/interfaces";
 import LayoutCardApp from "~/components/apps/layout_card";
+import { useEffect } from "react";
+import { useLocation } from "react-router-dom";
+import { useRouter } from "next/router";
 
 const Link = dynamic(() => import("next/link"));
 const Image = dynamic(() => import("next/image"));
@@ -151,8 +154,6 @@ export default function ProjectBlogView(props: ProjectBlogViewProps) {
     }
   }
 
-  console.log(props);
-
   return (
     <>
       <SEO
@@ -202,9 +203,12 @@ export default function ProjectBlogView(props: ProjectBlogViewProps) {
                 })}
               </span>
             </div>
-            <div className="flex items-center gap-1">
-              Read time: <span>{(props.itemView as Project).readTime} min</span>
-            </div>
+            {props.type !== "apps" && (
+              <div className="flex items-center gap-1">
+                Read time:{" "}
+                <span>{(props.itemView as Project).readTime} min</span>
+              </div>
+            )}
           </div>
           <ShareWith text={shareTxt} />
         </div>
@@ -241,6 +245,39 @@ export default function ProjectBlogView(props: ProjectBlogViewProps) {
                 }
               </Link>
             ))}
+          </div>
+          <div>
+            <div className="carousel-center carousel rounded-box my-0 space-x-4 bg-base-300/40 p-4">
+              {(props.itemView as App).imgs.map((x, i) => (
+                <div
+                  id={`item${i + 1}`}
+                  key={x}
+                  className="carousel-item relative h-72 w-[98%] xs:h-72 sm:h-80 md:h-[30rem]"
+                >
+                  <Image
+                    alt={i.toString()}
+                    layout="fill"
+                    objectFit="scale-down"
+                    src={x}
+                    className="rounded-box"
+                  />
+                </div>
+              ))}
+            </div>
+            {(props.itemView as App).imgs.length > 1 && (
+              <div className="my-2 flex w-full justify-center gap-2">
+                {(props.itemView as App).imgs.map((x, i) => (
+                  <Link
+                    scroll={false}
+                    key={i}
+                    href={`#item${i + 1}`}
+                    className="btn-xs btn my-0 py-0"
+                  >
+                    {i + 1}
+                  </Link>
+                ))}
+              </div>
+            )}
           </div>
         </div>
       )}
@@ -283,7 +320,7 @@ export default function ProjectBlogView(props: ProjectBlogViewProps) {
         <div className="mx-auto grid max-w-3xl grid-cols-4 gap-2 px-2 xs:grid-cols-2 sm:grid-cols-3 lg:grid-cols-4">
           {props.more4.map((x) => {
             const m = x as App;
-            return <LayoutCardApp {...m} key={x.imgUrl} />;
+            return <LayoutCardApp {...m} key={x.date} />;
           })}
         </div>
       )}

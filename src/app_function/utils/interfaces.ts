@@ -40,6 +40,7 @@ export interface App {
   category: string;
   platforms: Listing[];
   fileName: string;
+  imgs: string[];
 }
 
 export type Card = "blogs" | "projects" | "apps";

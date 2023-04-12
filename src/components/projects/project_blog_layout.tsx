@@ -19,18 +19,18 @@ export default function ProjectBlogLayout(props: ProjectBlogLayout) {
   }
   if (props.type && props.type === "apps") {
     return (
-      <div className="xs:grid-cols-2 mx-auto grid w-fit justify-center gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6">
+      <div className="mx-auto grid w-fit justify-center gap-4 xs:grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6">
         {props.data.map((x) => (
-          <LayoutCardApp {...(x as App)} key={x.imgUrl} />
+          <LayoutCardApp {...(x as App)} key={x.date} />
         ))}
       </div>
     );
   }
 
   return (
-    <div className="xs:grid-cols-2 mx-auto grid w-fit justify-center gap-4 sm:grid-cols-2 md:grid-cols-3">
+    <div className="mx-auto grid w-fit justify-center gap-4 xs:grid-cols-2 sm:grid-cols-2 md:grid-cols-3">
       {props.data.map((x) => (
-        <LayoutCard data={x} key={x.imgUrl} />
+        <LayoutCard data={x} key={x.date} />
       ))}
     </div>
   );
