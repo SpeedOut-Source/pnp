@@ -76,7 +76,7 @@ export default function LayoutCard({ data }: LayoutCard) {
                   </div>
                 )}
               </div>
-              <div className={`mx-2 mb-1 flex justify-start text-xs`}>
+              <div className={`mx-2 mb-1 flex justify-between gap-2 text-xs`}>
                 <div>
                   {new Date(data.date).toLocaleString("en-US", {
                     month: "short",
