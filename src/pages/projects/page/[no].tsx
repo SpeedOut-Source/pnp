@@ -6,11 +6,11 @@ import {
 } from "~/app_function/project_blog/project_blog_server";
 
 export async function getStaticPaths() {
-  return projectBlogGetStaticPaths({ isProject: true });
+  return projectBlogGetStaticPaths("projects");
 }
 
 export const getStaticProps: GetStaticProps = async (context) => {
-  return projectBlogGetStaticProps({ context, isProject: true });
+  return projectBlogGetStaticProps({ context, type: "projects" });
 };
 
 export default AllDataShowPage;

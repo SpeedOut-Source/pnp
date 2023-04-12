@@ -1,21 +1,32 @@
 import dynamic from "next/dynamic";
-import { type Project, type Blog } from "~/app_function/utils/interfaces";
+import {
+  type App,
+  type Card,
+  type CardData,
+} from "~/app_function/utils/interfaces";
+import LayoutCardApp from "../apps/layout_card";
 
 const LayoutCard = dynamic(() => import("../layout_card"));
 
 interface ProjectBlogLayout {
-  data: Project[] | Blog[];
-  isProject?: boolean;
+  data: CardData;
+  type?: Card;
 }
 
 export default function ProjectBlogLayout(props: ProjectBlogLayout) {
   if (!props.data || props.data.length < 0) {
+    return <div className="text-center">No {props.type}</div>;
+  }
+  if (props.type && props.type === "apps") {
     return (
-      <div className="text-center">
-        No {props.isProject ? "projects" : "blogs"}
+      <div className="xs:grid-cols-2 mx-auto grid w-fit justify-center gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6">
+        {props.data.map((x) => (
+          <LayoutCardApp {...(x as App)} key={x.imgUrl} />
+        ))}
       </div>
     );
   }
+
   return (
     <div className="xs:grid-cols-2 mx-auto grid w-fit justify-center gap-4 sm:grid-cols-2 md:grid-cols-3">
       {props.data.map((x) => (

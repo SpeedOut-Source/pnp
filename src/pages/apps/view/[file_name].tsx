@@ -9,13 +9,13 @@ import ProjectBlogView, {
 } from "~/pages/projects/view/[file_name]";
 
 export async function getStaticPaths() {
-  return await getStaticPathItemView("blogs");
+  return await getStaticPathItemView("apps");
 }
 
 export async function getStaticProps(
   context: GetStaticPropsContext<ParsedUrlQuery, ProjectBlogViewProps>
 ) {
-  return await getStaticPropsItemView({ context, type: "blogs" });
+  return await getStaticPropsItemView({ context, type: "apps" });
 }
 
 export default ProjectBlogView;

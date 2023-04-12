@@ -3,6 +3,7 @@ import dynamic from "next/dynamic";
 import SEO from "~/components/seo";
 import { DEFAULT_BASE_URL } from "~/app_function/utils/constants";
 
+const RecentApps = dynamic(() => import("~/components/apps/recent_apps"));
 const RecentProjects = dynamic(
   () => import("~/components/projects/recent_projects")
 );
@@ -35,8 +36,15 @@ const Home = (props: HomeProps) => {
           company={props.workFor}
           testis={props.testis}
         />
-        <RecentProjects {...props.recentProjects} />
-        <RecentBlogs {...props.recentBlogs} />
+        {props.recentApps.data.length > 0 && (
+          <RecentApps {...props.recentApps} />
+        )}
+        {props.recentProjects.data.length > 0 && (
+          <RecentProjects {...props.recentProjects} />
+        )}
+        {props.recentBlogs.data.length > 0 && (
+          <RecentBlogs {...props.recentBlogs} />
+        )}
         <ContactSection />
       </div>
     </>

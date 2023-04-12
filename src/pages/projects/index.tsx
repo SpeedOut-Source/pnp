@@ -5,7 +5,8 @@ import { type GetStaticProps } from "next/types";
 import { useEffect, useState } from "react";
 import { type Configs } from "~/app_function/home/home_server";
 import { projectBlogGetStaticProps } from "~/app_function/project_blog/project_blog_server";
-import { type Project, type Blog } from "~/app_function/utils/interfaces";
+import { type Card, type CardData } from "~/app_function/utils/interfaces";
+import { toTitleCase } from "~/app_function/utils/utils";
 import SEO from "~/components/seo";
 
 const ProjectBlogLayout = dynamic(
@@ -21,22 +22,18 @@ export interface pageInfo {
 
 export interface AllDataProps {
   configs: Configs;
-  data: Project[] | Blog[];
+  data: CardData;
   pageInfo: pageInfo;
-  isProject: boolean;
+  type: Card;
 }
 
 export const getStaticProps: GetStaticProps = async (context) => {
-  return projectBlogGetStaticProps({ context, isProject: true });
+  return projectBlogGetStaticProps({ context, type: "projects" });
 };
 
 export default function AllDataShowPage(props: AllDataProps) {
-  let pageName: string;
-  if (props.isProject) {
-    pageName = "Projects";
-  } else {
-    pageName = "Blogs";
-  }
+  const pageName: string = toTitleCase(props.type);
+
   const title = `${pageName} | ${props.configs.appName}`;
   const [leftDisable, setLeftDisable] = useState(false);
   const [rightDisable, setRightDisable] = useState(false);
@@ -55,7 +52,7 @@ export default function AllDataShowPage(props: AllDataProps) {
         <p className="text-center text-3xl uppercase">{pageName}</p>
         <div className="mx-auto w-full max-w-6xl">
           <div className="m-2">
-            <ProjectBlogLayout data={props.data} isProject={props.isProject} />
+            <ProjectBlogLayout data={props.data} type={props.type} />
           </div>
         </div>
         <div className="flex w-full items-center justify-center gap-2 pt-2">

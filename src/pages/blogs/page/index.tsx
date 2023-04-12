@@ -3,7 +3,7 @@ import { projectBlogGetStaticProps } from "~/app_function/project_blog/project_b
 import AllDataShowPage from "..";
 
 export const getStaticProps: GetStaticProps = async (context) => {
-  return projectBlogGetStaticProps({ context, isProject: true });
+  return projectBlogGetStaticProps({ context, type: "blogs" });
 };
 
 export default AllDataShowPage;

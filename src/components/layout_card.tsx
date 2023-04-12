@@ -1,16 +1,18 @@
 import ChevronRightIcon from "@heroicons/react/24/outline/ChevronRightIcon";
 import { isPro } from "~/app_function/utils/utils";
-import { type Blog, type Project } from "~/app_function/utils/interfaces";
+import {
+  type Project,
+  type CardItem,
+  type Blog,
+} from "~/app_function/utils/interfaces";
 import PhotoIcon from "@heroicons/react/24/outline/PhotoIcon";
 import dynamic from "next/dynamic";
 
 const Link = dynamic(() => import("next/link"));
 const Image = dynamic(() => import("next/image"));
 
-type Data = Blog | Project;
-
 interface LayoutCard {
-  data: Data;
+  data: CardItem;
 }
 
 export default function LayoutCard({ data }: LayoutCard) {
@@ -35,7 +37,7 @@ export default function LayoutCard({ data }: LayoutCard) {
         <div className="mx-1 flex h-full w-full flex-col items-end justify-end">
           <div className="relative mb-1 max-h-[60%] w-full overflow-hidden rounded-3xl bg-base-100/70 backdrop-blur-md group-hover:max-h-full group-hover:bg-base-100/80 group-hover:shadow-xl">
             <div className="absolute bottom-0 mb-1 h-10 w-full bg-gradient-to-t from-base-100 group-hover:from-base-100">
-              <div className="hidden w-full items-center justify-center pt-2 font-bold uppercase text-blue-700/70 group-hover:flex">
+              <div className="hidden w-full items-center justify-center pt-2 font-bold uppercase text-blue-500/70 group-hover:flex">
                 <span>{isProject ? "Full case study" : "Read more"}</span>
                 <ChevronRightIcon className="h-7 w-5" />
               </div>
@@ -82,7 +84,7 @@ export default function LayoutCard({ data }: LayoutCard) {
                     year: "numeric",
                   })}
                 </div>
-                <div>{data.readTime} min</div>
+                <div>{(data as Project | Blog).readTime} min</div>
               </div>
 
               <div className="mb-2 text-xs leading-snug">
@@ -92,7 +94,7 @@ export default function LayoutCard({ data }: LayoutCard) {
                     <span className="">{data.result}</span>
                   </>
                 ) : (
-                  <p className="">{data.desc}</p>
+                  <p className="">{(data as Blog).desc}</p>
                 )}
               </div>
               <div className=" h-0 transition-all duration-100 ease-in-out group-hover:h-5" />

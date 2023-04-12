@@ -1,5 +1,6 @@
 import { type MeProps } from "~/components/me_section/me";
 import {
+  getApps,
   getBlogs,
   getConfigs,
   getData,
@@ -11,6 +12,7 @@ import { type TestimonialsProps } from "~/components/work_for_t/testimonials";
 import { type ProjectsProps } from "~/components/projects/recent_projects";
 import { type RecentBlogsProps } from "~/components/blogs/recent_blogs";
 import { type WorkForProps } from "../utils/interfaces";
+import { type AppsProps } from "~/components/apps/recent_apps";
 
 export interface Configs {
   appName: string;
@@ -24,6 +26,7 @@ export interface HomeProps {
   meSection: MeSectionProps;
   workFor: WorkForProps;
   testis: TestimonialsProps;
+  recentApps: AppsProps;
   recentProjects: ProjectsProps;
   recentBlogs: RecentBlogsProps;
 }
@@ -45,6 +48,8 @@ export async function HomeServer() {
 
   const allPros = await getProjects();
 
+  const allApps = await getApps();
+
   const allBlogs = await getBlogs();
 
   const homeProps: HomeProps = {
@@ -55,6 +60,9 @@ export async function HomeServer() {
     },
     workFor,
     testis: { ...testis, addUrl: configs.testimonialAddUrl },
+    recentApps: {
+      data: allApps.apps.slice(0, 6),
+    },
     recentProjects: {
       data: allPros.projects.slice(0, 3),
     },

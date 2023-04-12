@@ -1,26 +1,13 @@
-import {
-  getBlogs,
-  getConfigs,
-  getData,
-  getProjects,
-} from "../utils/utils-server";
+import { getCard, getConfigs, getData } from "../utils/utils-server";
 import matter from "gray-matter";
 import { type GetStaticPropsContext, type PreviewData } from "next";
 import { type ParsedUrlQuery } from "querystring";
 import { type ProjectBlogViewProps } from "~/pages/projects/view/[file_name]";
-import { type Blog, type Project } from "../utils/interfaces";
+import { type Card, type CardData } from "../utils/interfaces";
+import { RingBuffer } from "../utils/ring_buffer";
 
-export async function getStaticPathItemView({
-  isProject,
-}: {
-  isProject: boolean;
-}) {
-  let allData: Project[] | Blog[];
-  if (isProject) {
-    allData = (await getProjects()).projects;
-  } else {
-    allData = (await getBlogs()).blogs;
-  }
+export async function getStaticPathItemView(type: Card) {
+  const allData: CardData = await getCard(type);
 
   const paths = allData.map((x) => {
     return {
@@ -38,12 +25,12 @@ export async function getStaticPathItemView({
 
 export interface ProjectBlogGetStaticServer {
   context: GetStaticPropsContext<ParsedUrlQuery, PreviewData>;
-  isProject: boolean;
+  type: Card;
 }
 
 export async function getStaticPropsItemView({
   context,
-  isProject,
+  type,
 }: ProjectBlogGetStaticServer) {
   if (
     !context.params ||
@@ -56,16 +43,12 @@ export async function getStaticPropsItemView({
   }
   try {
     const dataRaw = (
-      await getData(
-        `${isProject ? "projects" : "blogs"}/${context.params.file_name}`
-      )
+      await getData(`${type}/${context.params.file_name}`)
     ).toString();
 
     const { content } = matter(dataRaw);
 
-    const allData: Project[] | Blog[] = isProject
-      ? (await getProjects()).projects
-      : (await getBlogs()).blogs;
+    const allData = await getCard(type);
 
     const currentProjectIndex = allData.findIndex(
       (p) => p.fileName === context.params?.file_name
@@ -81,6 +64,16 @@ export async function getStaticPropsItemView({
         notFound: true,
       };
     }
+    let more4: unknown[] | null = null;
+    if (type === "apps") {
+      const ringBuffer = RingBuffer.fromArray(
+        allData as unknown[],
+        allData.length
+      );
+      ringBuffer.setPos(currentProjectIndex - 1);
+      more4 = ringBuffer.toArray().slice(0, 5);
+      more4.splice(1, 1);
+    }
 
     const pvp: ProjectBlogViewProps = {
       data: content,
@@ -88,7 +81,8 @@ export async function getStaticPropsItemView({
       itemView,
       previous,
       next,
-      isProject,
+      type: type,
+      more4: more4 as CardData | null,
     };
 
     return {

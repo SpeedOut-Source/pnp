@@ -9,7 +9,14 @@ import {
 import Loading from "~/components/markdown/loading";
 import SEO from "~/components/seo";
 import { type ParsedUrlQuery } from "querystring";
-import { type Project, type Blog } from "~/app_function/utils/interfaces";
+import {
+  type Project,
+  type Blog,
+  type CardItem,
+  type Card,
+  type App,
+} from "~/app_function/utils/interfaces";
+import LayoutCardApp from "~/components/apps/layout_card";
 
 const Link = dynamic(() => import("next/link"));
 const Image = dynamic(() => import("next/image"));
@@ -22,22 +29,23 @@ const MDRender = dynamic(() => import("~/components/markdown/md_render"), {
 const LayoutCard = dynamic(() => import("~/components/layout_card"));
 
 export async function getStaticPaths() {
-  return await getStaticPathItemView({ isProject: true });
+  return await getStaticPathItemView("projects");
 }
 
 export async function getStaticProps(
   context: GetStaticPropsContext<ParsedUrlQuery, ProjectBlogViewProps>
 ) {
-  return await getStaticPropsItemView({ context, isProject: true });
+  return await getStaticPropsItemView({ context, type: "projects" });
 }
 
 export interface ProjectBlogViewProps {
   data: string;
   configs: Configs;
-  itemView: Project | Blog;
-  previous: Project | Blog | null;
-  next: Project | Blog | null;
-  isProject: boolean;
+  itemView: CardItem;
+  previous: CardItem | null;
+  next: CardItem | null;
+  more4: CardItem[] | null;
+  type: Card;
 }
 
 export default function ProjectBlogView(props: ProjectBlogViewProps) {
@@ -46,23 +54,67 @@ export default function ProjectBlogView(props: ProjectBlogViewProps) {
   let shareTxt: string;
   let project: Project | undefined = undefined;
 
-  if (props.isProject) {
-    const itemView: Project = props.itemView as Project;
-    title = `${itemView.whatText} | ${props.configs.appName}`;
+  switch (props.type) {
+    case "projects":
+      const itemView: Project = props.itemView as Project;
+      title = `${itemView.whatText} | ${props.configs.appName}`;
 
-    desc = `${itemView.result} | ${itemView.app.name} | ${itemView.company.name}`;
-    shareTxt = `${itemView.whatText} ${itemView.result}`;
+      desc = `${itemView.result} | ${itemView.app.name} | ${itemView.company.name}`;
+      shareTxt = `${itemView.whatText} ${itemView.result}`;
 
-    project = itemView;
-  } else {
-    const itemView: Blog = props.itemView as Blog;
-    title = `${props.itemView.fileName} | ${props.configs.appName}`;
-
-    desc = itemView.desc;
-    shareTxt = itemView.desc;
+      project = itemView;
+      break;
+    case "blogs":
+      const b: Blog = props.itemView as Blog;
+      title = `${props.itemView.fileName} | ${props.configs.appName}`;
+      desc = b.desc;
+      shareTxt = b.desc;
+    default:
+      title = `${(props.itemView as App).title} | ${props.configs.appName}`;
+      desc = title;
+      shareTxt = title;
+      break;
   }
 
-  const slashName = props.isProject ? "projects" : "blogs";
+  function headerCard() {
+    switch (props.type) {
+      case "projects":
+        if (!project) {
+          return <></>;
+        }
+        return (
+          <>
+            App Name:{" "}
+            <div>
+              <div className="flex items-center gap-1">
+                <Image
+                  width={20}
+                  height={20}
+                  src={project.app.logoUrl}
+                  alt={project.app.name}
+                />
+                <span>{project.app.name}</span>
+              </div>
+            </div>
+          </>
+        );
+
+      case "blogs":
+        return (
+          <>
+            Title: <span>{(props.itemView as Blog).title}</span>
+          </>
+        );
+      case "apps":
+        return (
+          <>
+            App name: <span>{(props.itemView as App).title}</span>
+          </>
+        );
+      default:
+        break;
+    }
+  }
 
   return (
     <>
@@ -76,37 +128,16 @@ export default function ProjectBlogView(props: ProjectBlogViewProps) {
         <div className="">
           <Link
             className="title link-hover link-primary link capitalize"
-            href={"/" + slashName}
+            href={"/" + props.type}
           >
-            {slashName}
+            {props.type}
           </Link>{" "}
           / {props.itemView.fileName}
         </div>
         <div className="my-2 flex flex-col items-center justify-between gap-2 sm:flex-row sm:items-end">
           <div className="p-card flex h-fit w-full flex-col items-start py-2 text-xs text-slate-500 sm:w-fit">
-            <div className="flex items-center gap-1">
-              {props.isProject && project ? (
-                <>
-                  App Name:{" "}
-                  <div>
-                    <div className="flex items-center gap-1">
-                      <Image
-                        width={20}
-                        height={20}
-                        src={project.app.logoUrl}
-                        alt={project.app.name}
-                      />
-                      <span>{project.app.name}</span>
-                    </div>
-                  </div>
-                </>
-              ) : (
-                <>
-                  Title: <span>{(props.itemView as Blog).title}</span>
-                </>
-              )}
-            </div>
-            {props.isProject && project && (
+            <div className="flex items-center gap-1">{headerCard()}</div>
+            {props.type === "projects" && project && (
               <div className="flex items-center gap-1">
                 Company Name:{" "}
                 <div>
@@ -135,7 +166,7 @@ export default function ProjectBlogView(props: ProjectBlogViewProps) {
               </span>
             </div>
             <div className="flex items-center gap-1">
-              Read time: <span>{props.itemView.readTime} min</span>
+              Read time: <span>{(props.itemView as Project).readTime} min</span>
             </div>
           </div>
           <ShareWith text={shareTxt} />
@@ -148,28 +179,40 @@ export default function ProjectBlogView(props: ProjectBlogViewProps) {
           <div className="flex w-full items-center justify-center gap-4">
             {props.previous && (
               <div className="h-fit w-full">
-                <Link
-                  href={`/${slashName}/view/${props.previous.fileName}`}
-                  className="link-hover link mb-2 flex items-center text-2xl normal-case text-slate-400"
-                >
-                  <ChevronLeftIcon className="h-6 w-6"></ChevronLeftIcon>
-                  Previous{" "}
-                </Link>
-                <LayoutCard data={props.previous} />
+                <div className=" mb-2 flex items-center text-2xl normal-case text-slate-400">
+                  <Link
+                    href={`/${props.type}/view/${props.previous.fileName}`}
+                    className="link-hover link flex items-center "
+                  >
+                    <ChevronLeftIcon className="h-6 w-6"></ChevronLeftIcon>
+                    Previous{" "}
+                  </Link>
+                </div>
+                {props.type !== "apps" && <LayoutCard data={props.previous} />}
               </div>
             )}
             {props.next && (
               <div className="h-fit w-full">
-                <Link
-                  href={`/${slashName}/view/${props.next.fileName}`}
-                  className="link-hover link mb-2 flex items-center justify-end text-2xl normal-case text-slate-400"
-                >
-                  Next <ChevronRightIcon className="h-6 w-6" />
-                </Link>
-                <LayoutCard data={props.next} />
+                <div className="mb-2 flex items-center justify-end text-2xl normal-case text-slate-400">
+                  <Link
+                    href={`/${props.type}/view/${props.next.fileName}`}
+                    className="link-hover link flex items-center"
+                  >
+                    Next <ChevronRightIcon className="h-6 w-6" />
+                  </Link>
+                </div>
+                {props.type !== "apps" && <LayoutCard data={props.next} />}
               </div>
             )}
           </div>
+        </div>
+      )}
+      {props.type === "apps" && props.more4 && (
+        <div className="mx-auto grid max-w-3xl grid-cols-4 gap-2 px-2 xs:grid-cols-2 sm:grid-cols-3 lg:grid-cols-4">
+          {props.more4.map((x) => {
+            const m = x as App;
+            return <LayoutCardApp {...m} key={x.imgUrl} />;
+          })}
         </div>
       )}
     </>

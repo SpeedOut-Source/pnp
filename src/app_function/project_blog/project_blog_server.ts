@@ -1,35 +1,57 @@
 import { type AllDataProps } from "~/pages/projects";
 import {
+  getApps,
   getBlogs,
   getConfigs,
   getDBConfigs,
   getProjects,
 } from "../utils/utils-server";
 import { type GetStaticPropsContext, type PreviewData } from "next";
-import { PAGE_SIZE } from "../utils/constants";
+import { PAGE_SIZE, PAGE_SIZE_APP } from "../utils/constants";
 import { type ParsedUrlQuery } from "querystring";
-import { type Blog, type Project } from "../utils/interfaces";
+import {
+  type Card,
+  type Blog,
+  type Project,
+  type App,
+} from "../utils/interfaces";
 
 export interface ProjectBlogGetStaticServer {
   context: GetStaticPropsContext<ParsedUrlQuery, PreviewData>;
-  isProject: boolean;
+  type: Card;
 }
 
-export async function projectBlogGetStaticPaths({
-  isProject,
-}: {
-  isProject: boolean;
-}) {
+export function getPageSize(type: Card) {
+  switch (type) {
+    case "apps":
+      return PAGE_SIZE_APP;
+    default:
+      return PAGE_SIZE;
+  }
+}
+
+export async function projectBlogGetStaticPaths(type: Card) {
   const dbConfig = await getDBConfigs();
 
-  const total = isProject ? dbConfig.projectTotal : dbConfig.blogTotal;
+  let total = 0;
+  switch (type) {
+    case "apps":
+      total = dbConfig.appTotal;
+      break;
+    case "blogs":
+      total = dbConfig.blogTotal;
+      break;
+    default:
+      total = dbConfig.projectTotal;
+      break;
+  }
 
   const paths: {
     params: {
       no: string;
     };
   }[] = [];
-  for (let index = 1; index <= Math.ceil(total / PAGE_SIZE); index++) {
+  for (let index = 1; index <= Math.ceil(total / getPageSize(type)); index++) {
     paths.push({
       params: {
         no: index.toString(),
@@ -57,26 +79,32 @@ export async function projectBlogGetStaticProps(
 
   const configs = await getConfigs();
 
-  let data: Project[] | Blog[];
+  let data: Project[] | Blog[] | App[];
 
-  if (props.isProject) {
-    data = (await getProjects()).projects;
-  } else {
-    data = (await getBlogs()).blogs;
+  switch (props.type) {
+    case "projects":
+      data = (await getProjects()).projects;
+      break;
+    case "blogs":
+      data = (await getBlogs()).blogs;
+      break;
+    default:
+      data = (await getApps()).apps;
+      break;
   }
-
-  const limitShow = PAGE_SIZE * pageNo;
-  const dataArray = data.slice(limitShow - PAGE_SIZE, limitShow);
+  const pageSize = getPageSize(props.type);
+  const limitShow = pageSize * pageNo;
+  const dataArray = data.slice(limitShow - pageSize, limitShow);
 
   const projectsProps: AllDataProps = {
     configs,
     data: dataArray,
     pageInfo: {
-      size: PAGE_SIZE,
+      size: pageSize,
       no: pageNo,
       total: data.length,
     },
-    isProject: props.isProject,
+    type: props.type,
   };
 
   return {

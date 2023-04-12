@@ -1,14 +1,25 @@
 import { promises } from "fs";
 import { type Configs } from "../home/home_server";
-import { type Blog, type Project } from "./interfaces";
+import {
+  type Card,
+  type Blog,
+  type Project,
+  type CardData,
+} from "./interfaces";
+import { type App } from "./interfaces";
 
 export interface DBConfigs {
   projectTotal: number;
   blogTotal: number;
+  appTotal: number;
 }
 
 export interface RawProjectsProps {
   projects: Project[];
+}
+
+export interface RawAppsProps {
+  apps: App[];
 }
 
 export interface RawBlogsProps {
@@ -32,16 +43,34 @@ export async function getDBConfigs() {
   return configs;
 }
 
-export async function getProjects() {
-  const dataProjects = (await getData("db/projects.json")).toString();
-  const allPros = JSON.parse(dataProjects) as RawProjectsProps;
-  return allPros;
+export async function getProjects(): Promise<RawProjectsProps> {
+  try {
+    const dataProjects = (await getData("db/projects.json")).toString();
+    const allPros = JSON.parse(dataProjects) as RawProjectsProps;
+    return allPros;
+  } catch (e) {
+    return { projects: [] };
+  }
 }
 
-export async function getBlogs() {
-  const dataBlogs = (await getData("db/blogs.json")).toString();
-  const allBlogs = JSON.parse(dataBlogs) as RawBlogsProps;
-  return allBlogs;
+export async function getApps(): Promise<RawAppsProps> {
+  try {
+    const dataApps = (await getData("db/apps.json")).toString();
+    const allApps = JSON.parse(dataApps) as RawAppsProps;
+    return allApps;
+  } catch (e) {
+    return { apps: [] };
+  }
+}
+
+export async function getBlogs(): Promise<RawBlogsProps> {
+  try {
+    const dataBlogs = (await getData("db/blogs.json")).toString();
+    const allBlogs = JSON.parse(dataBlogs) as RawBlogsProps;
+    return allBlogs;
+  } catch (e) {
+    return { blogs: [] };
+  }
 }
 
 export function parseProject(md_text: string, fileName: string) {
@@ -149,4 +178,20 @@ export function parseBlog(md_text: string, filename: string): Blog {
   };
 
   return blog;
+}
+
+export async function getCard(type: Card) {
+  let allData: CardData;
+  switch (type) {
+    case "apps":
+      allData = (await getApps()).apps;
+      break;
+    case "blogs":
+      allData = (await getBlogs()).blogs;
+      break;
+    default:
+      allData = (await getProjects()).projects;
+      break;
+  }
+  return allData;
 }

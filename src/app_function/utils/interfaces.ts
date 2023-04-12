@@ -27,3 +27,21 @@ export interface Project {
   readTime: number;
   fileName: string;
 }
+
+interface Listing {
+  name: string;
+  url: string;
+}
+
+export interface App {
+  imgUrl: string;
+  date: number;
+  title: string;
+  category: string;
+  platforms: Listing[];
+  fileName: string;
+}
+
+export type Card = "blogs" | "projects" | "apps";
+export type CardData = Project[] | Blog[] | App[];
+export type CardItem = Project | Blog | App;
