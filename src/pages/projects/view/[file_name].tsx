@@ -278,7 +278,7 @@ export default function ProjectBlogView(props: ProjectBlogViewProps) {
           </div>
         </div>
       )}
-      <MDRender data={props.data} />
+      <MDRender key={props.itemView.date} data={props.data} />
       <div className="container divider mx-auto max-w-3xl px-2" />
       {(props.previous || props.next) && (
         <div className="container mx-auto max-w-3xl px-2">

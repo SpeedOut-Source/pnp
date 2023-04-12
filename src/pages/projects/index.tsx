@@ -52,7 +52,11 @@ export default function AllDataShowPage(props: AllDataProps) {
         <p className="text-center text-3xl uppercase">{pageName}</p>
         <div className="mx-auto w-full max-w-6xl">
           <div className="m-2">
-            <ProjectBlogLayout data={props.data} type={props.type} />
+            <ProjectBlogLayout
+              key={`${props.type}-${props.pageInfo.no}`}
+              data={props.data}
+              type={props.type}
+            />
           </div>
         </div>
         <div className="flex w-full items-center justify-center gap-2 pt-2">
