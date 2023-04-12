@@ -314,7 +314,10 @@ export default function ProjectBlogView(props: ProjectBlogViewProps) {
         </div>
       )}
       {props.type === "apps" && props.more4 && (
-        <div className="mx-auto grid max-w-3xl gap-2 px-2 xs:grid-cols-2 sm:grid-cols-3 lg:grid-cols-4">
+        <div
+          key={`${props.itemView.fileName}`}
+          className="mx-auto grid max-w-3xl gap-2 px-2 xs:grid-cols-2 sm:grid-cols-3 lg:grid-cols-4"
+        >
           {props.more4.map((x) => {
             const m = x as App;
             return <LayoutCardApp {...m} key={x.date} />;
