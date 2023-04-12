@@ -17,9 +17,6 @@ import {
   type App,
 } from "~/app_function/utils/interfaces";
 import LayoutCardApp from "~/components/apps/layout_card";
-import { useEffect } from "react";
-import { useLocation } from "react-router-dom";
-import { useRouter } from "next/router";
 
 const Link = dynamic(() => import("next/link"));
 const Image = dynamic(() => import("next/image"));
