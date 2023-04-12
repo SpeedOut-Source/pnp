@@ -2,6 +2,7 @@ import Bars3Icon from "@heroicons/react/24/solid/Bars3Icon";
 import packageJson from "../../../package.json";
 import dynamic from "next/dynamic";
 import { useEffect, useState } from "react";
+import Image from "next/image";
 
 const ConnectSection = dynamic(() => import("./connect_section"));
 const Links = dynamic(() => import("./links"));
@@ -44,7 +45,16 @@ export default function Header() {
               href="/"
               className="btn-ghost btn px-2 text-xl font-bold normal-case tracking-wider"
             >
-              {packageJson.personName}
+              <Image
+                className=" "
+                src="/images/logos/app-logo.png"
+                width="32"
+                height="32"
+                alt={packageJson.personName}
+              />
+              <div className="ml-2 hidden lg:flex">
+                {packageJson.personName}
+              </div>
             </Link>
           </span>
           <Links className="hidden items-center gap-4 md:flex lg:flex xl:flex" />
@@ -62,7 +72,7 @@ export default function Header() {
                 tabIndex={0}
                 className="dropdown-content menu rounded-box mt-2 w-fit bg-base-100/80 p-2 shadow-2xl ring ring-base-300 backdrop-blur-3xl"
               >
-                <Links className="mb-2 flex justify-center space-x-4 rounded-lg bg-base-100/80 py-3" />
+                <Links className="mb-2 flex justify-center space-x-4 rounded-lg bg-base-100/80 px-2 py-3" />
                 <ConnectSection />
               </ul>
             </div>
