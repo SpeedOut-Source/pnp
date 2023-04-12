@@ -1,4 +1,15 @@
 {
+  "1.0.5-alpha": {
+    "date": 1681329353406,
+    "changes": [
+      "apps section",
+      "app listing",
+      "icons",
+      "layout size adjust",
+      "open in new tab link resume",
+      "resume viewer"
+    ]
+  },
   "1.0.4-alpha": {
     "date": 1681016239501,
     "changes": [
