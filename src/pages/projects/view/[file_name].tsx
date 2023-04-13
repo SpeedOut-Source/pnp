@@ -247,7 +247,7 @@ export default function ProjectBlogView(props: ProjectBlogViewProps) {
             <div className="carousel-center carousel rounded-box my-0 space-x-4 bg-base-300/40 p-4">
               {(props.itemView as App).imgs.map((x, i) => (
                 <div
-                  id={`item${i + 1}`}
+                  id={`image${i + 1}`}
                   key={x}
                   className="carousel-item relative h-72 w-[98%] xs:h-72 sm:h-80 md:h-[30rem]"
                 >
@@ -265,9 +265,10 @@ export default function ProjectBlogView(props: ProjectBlogViewProps) {
               <div className="my-2 flex w-full justify-center gap-2">
                 {(props.itemView as App).imgs.map((x, i) => (
                   <Link
+                    autoFocus={false}
                     scroll={false}
                     key={i}
-                    href={`#item${i + 1}`}
+                    href={`#image${i + 1}`}
                     className="btn-xs btn my-0 py-0"
                   >
                     {i + 1}
