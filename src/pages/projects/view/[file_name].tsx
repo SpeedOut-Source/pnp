@@ -17,6 +17,8 @@ import {
   type App,
 } from "~/app_function/utils/interfaces";
 import LayoutCardApp from "~/components/apps/layout_card";
+import { DEFAULT_IS_LIGHT, useThemeStore } from "~/app_state/theme_mode";
+import { useState, useEffect } from "react";
 
 const Link = dynamic(() => import("next/link"));
 const Image = dynamic(() => import("next/image"));
@@ -48,46 +50,64 @@ export interface ProjectBlogViewProps {
   type: Card;
 }
 
-export function getLogoListing(name: string, appLogo?: string) {
-  switch (name.toLowerCase()) {
-    case "windows":
-    case "microsoft":
-    case "microsoft edge":
-      return (
-        <Image
-          src={"/images/listing/microsoftstore.svg"}
-          alt={name}
-          height={10}
-          width={135}
-        />
-      );
-    case "android":
-      return (
-        <Image
-          src={"/images/listing/playstore.svg"}
-          alt={name}
-          height={10}
-          width={200}
-        />
-      );
-
-    default:
-      return (
-        <Image
-          src={appLogo ?? "/images/logos/app-logo.png"}
-          alt={name}
-          height={10}
-          width={50}
-        />
-      );
-  }
-}
-
 export default function ProjectBlogView(props: ProjectBlogViewProps) {
+  const utm = useThemeStore();
+  const [isLight, setIsLight] = useState(DEFAULT_IS_LIGHT);
+
   let title: string;
   let desc: string;
   let shareTxt: string;
   let project: Project | undefined = undefined;
+
+  useEffect(() => {
+    setIsLight(utm.themeName === "winter");
+  }, [utm]);
+
+  function getLogoListing(name: string, appLogo?: string) {
+    switch (name.toLowerCase()) {
+      case "windows":
+      case "microsoft":
+      case "microsoft edge":
+        return (
+          <Image
+            src={"/images/listing/microsoftstore.svg"}
+            alt={name}
+            height={10}
+            width={135}
+          />
+        );
+      case "android":
+        return (
+          <Image
+            src={"/images/listing/playstore.svg"}
+            alt={name}
+            height={10}
+            width={200}
+          />
+        );
+
+      case "github release":
+        return (
+          <Image
+            className=""
+            src={`/images/listing/github-mark${isLight ? "" : "-white"}.svg`}
+            alt={name}
+            height={10}
+            width={50}
+          />
+        );
+
+      default:
+        return (
+          <Image
+            src={appLogo ?? "/images/logos/app-logo.png"}
+            alt={name}
+            height={10}
+            width={50}
+          />
+        );
+    }
+  }
 
   switch (props.type) {
     case "projects":
