@@ -28,7 +28,8 @@
     "remark-gfm": "^3.0.1",
     "sharp": "^0.32.0",
     "zod": "^3.21.4",
-    "zustand": "^4.3.7"
+    "zustand": "^4.3.7",
+    "thousands-counter": "^2.1.1"
   },
   "devDependencies": {
     "@heroicons/react": "^2.0.17",

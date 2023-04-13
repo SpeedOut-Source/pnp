@@ -26,7 +26,7 @@ export default function ConnectSection() {
 
   return (
     <div className="flex flex-col items-center gap-2 md:flex-row">
-      <label className="swap-rotate swap h-fit w-fit text-neutral-500">
+      <label className="swap swap-rotate h-fit w-fit text-neutral-500">
         <input type="checkbox" defaultChecked={isLight} />
         <span
           className={`${isLight ? "z-50" : ""} swap-on ${

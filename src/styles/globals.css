@@ -10,6 +10,10 @@
   .errorSplash {
     @apply flex h-full animate-pulse items-center justify-center bg-gray-300/50 text-xl tracking-widest;
   }
+
+  .indicator-new {
+    @apply indicator-item badge border-0 bg-base-300/70 text-xs text-base-content backdrop-blur;
+  }
 }
 
 .invert-colors {

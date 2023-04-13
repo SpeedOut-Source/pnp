@@ -159,7 +159,7 @@ export default function ProjectBlogView(props: ProjectBlogViewProps) {
         title={title}
         imgUrl={props.itemView.imgUrl}
       />
-      <div className=" container mx-auto max-w-3xl px-2">
+      <div className="container mx-auto max-w-3xl px-2">
         <div className="">
           <Link
             className="title link-hover link-primary link capitalize"

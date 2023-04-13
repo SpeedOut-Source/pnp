@@ -1,13 +1,13 @@
 import { CpuChipIcon } from "@heroicons/react/24/outline";
 import dynamic from "next/dynamic";
 import { type App } from "~/app_function/utils/interfaces";
-
-const Link = dynamic(() => import("next/link"));
+import ViewMore from "../view_more";
 
 const Layout = dynamic(() => import("./layout"));
 
 export interface AppsProps {
   data: App[];
+  total: number;
 }
 
 export default function RecentApps(props: AppsProps) {
@@ -21,12 +21,7 @@ export default function RecentApps(props: AppsProps) {
         <Layout {...props} />
       </div>
       <div className="flex justify-center">
-        <Link
-          href="/apps"
-          className="p-card cursor-pointer font-semibold uppercase"
-        >
-          view more
-        </Link>
+        <ViewMore url="/apps" counts={props.total} name="apps" />
       </div>
     </div>
   );

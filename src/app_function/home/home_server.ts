@@ -3,6 +3,7 @@ import {
   getApps,
   getBlogs,
   getConfigs,
+  getDBConfigs,
   getData,
   getProjects,
 } from "../utils/utils-server";
@@ -33,6 +34,7 @@ export interface HomeProps {
 
 export async function HomeServer() {
   const configs = await getConfigs();
+  const dbConfig = await getDBConfigs();
 
   const dataBio = (await getData("home/bio.json")).toString();
   const me = JSON.parse(dataBio) as MeProps;
@@ -62,12 +64,15 @@ export async function HomeServer() {
     testis: { ...testis, addUrl: configs.testimonialAddUrl },
     recentApps: {
       data: allApps.apps.slice(0, 6),
+      total: dbConfig.appTotal,
     },
     recentProjects: {
       data: allPros.projects.slice(0, 3),
+      total: dbConfig.projectTotal,
     },
     recentBlogs: {
       data: allBlogs.blogs.slice(0, 3),
+      total: dbConfig.blogTotal,
     },
   };
 

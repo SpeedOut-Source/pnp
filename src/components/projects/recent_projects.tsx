@@ -1,13 +1,13 @@
 import { CogIcon } from "@heroicons/react/24/outline";
 import dynamic from "next/dynamic";
 import { type Project } from "~/app_function/utils/interfaces";
-
-const Link = dynamic(() => import("next/link"));
+import ViewMore from "../view_more";
 
 const ProjectBlogLayout = dynamic(() => import("./project_blog_layout"));
 
 export interface ProjectsProps {
   data: Project[];
+  total: number;
 }
 
 export default function RecentProjects(props: ProjectsProps) {
@@ -21,12 +21,7 @@ export default function RecentProjects(props: ProjectsProps) {
         <ProjectBlogLayout {...props} />
       </div>
       <div className="flex justify-center">
-        <Link
-          href="/projects"
-          className="p-card cursor-pointer font-semibold uppercase"
-        >
-          view more
-        </Link>
+        <ViewMore url="/projects" counts={props.total} name="projects" />
       </div>
     </div>
   );

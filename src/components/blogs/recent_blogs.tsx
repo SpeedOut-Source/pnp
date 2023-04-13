@@ -1,12 +1,11 @@
 import ProjectBlogLayout from "../projects/project_blog_layout";
 import { type Blog } from "~/app_function/utils/interfaces";
-import dynamic from "next/dynamic";
 import { PencilSquareIcon } from "@heroicons/react/24/outline";
-
-const Link = dynamic(() => import("next/link"));
+import ViewMore from "../view_more";
 
 export interface RecentBlogsProps {
   data: Blog[];
+  total: number;
 }
 
 export default function RecentBlogs(props: RecentBlogsProps) {
@@ -20,12 +19,7 @@ export default function RecentBlogs(props: RecentBlogsProps) {
         <ProjectBlogLayout {...props} />
       </div>
       <div className="flex justify-center">
-        <Link
-          href="/blogs"
-          className="p-card cursor-pointer font-semibold uppercase"
-        >
-          view more
-        </Link>
+        <ViewMore url="/blogs" counts={props.total} name="blogs" />
       </div>
     </div>
   );

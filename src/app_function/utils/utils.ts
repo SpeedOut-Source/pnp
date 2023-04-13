@@ -1,4 +1,5 @@
 import { type Project } from "./interfaces";
+import tc from "thousands-counter";
 
 export function stringToReadableUrl(str: string, reverse?: boolean): string {
   if (reverse) {
@@ -24,4 +25,9 @@ export function toTitleCase(str: string): string {
     /\b\w+/g,
     (txt) => txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase()
   );
+}
+
+export function showCountHuman(count: number): number {
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-return, @typescript-eslint/no-unsafe-call
+  return tc(count, { digits: 2, uppercase: false });
 }
