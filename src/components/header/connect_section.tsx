@@ -16,17 +16,19 @@ export default function ConnectSection() {
     setIsLight(utm.themeName === "winter");
   }, [utm]);
 
-  async function toggleTheme() {
+  async function toggleTheme(e: any) {
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-call
+    e.preventDefault();
     setIsHideTooltip(true);
-    await delay(100);
+    await delay(400);
     utm.toggleTheme();
-    await delay(100);
+    await delay(400);
     setIsHideTooltip(false);
   }
 
   return (
     <div className="flex flex-col items-center gap-2 md:flex-row">
-      <label className="swap swap-rotate h-fit w-fit text-neutral-500">
+      <label className="swap-rotate swap h-fit w-fit text-neutral-500">
         <input type="checkbox" defaultChecked={isLight} />
         <span
           className={`${isLight ? "z-50" : ""} swap-on ${

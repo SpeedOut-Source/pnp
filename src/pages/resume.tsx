@@ -36,7 +36,6 @@ export default function Resume(props: ResumeProps) {
           <Link
             href={props.configs.resumeUrl}
             download={true}
-            target="_blank"
             className="p-card cursor-pointer gap-2"
           >
             <ArrowDownTrayIcon className="h-5 w-5" />

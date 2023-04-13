@@ -12,7 +12,7 @@
   }
 
   .indicator-new {
-    @apply indicator-item badge border-0 bg-base-300/70 text-xs text-base-content backdrop-blur;
+    @apply badge indicator-item border-0 bg-base-300/70 text-xs text-base-content backdrop-blur;
   }
 }
 
