@@ -5,25 +5,19 @@ import { useEffect, useState } from "react";
 import { DEFAULT_IS_LIGHT, useThemeStore } from "~/app_state/theme_mode";
 import { CONNECT_OPTIONS } from "../contact/connect_data";
 import Link from "next/link";
-import { delay } from "../sapage/src/components/app/helper";
 
 export default function ConnectSection() {
   const utm = useThemeStore();
   const [isLight, setIsLight] = useState(DEFAULT_IS_LIGHT);
-  const [isHideTooltip, setIsHideTooltip] = useState(false);
 
   useEffect(() => {
     setIsLight(utm.themeName === "winter");
   }, [utm]);
 
-  async function toggleTheme(e: any) {
+    function toggleTheme(e: any) {
     // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-call
     e.preventDefault();
-    setIsHideTooltip(true);
-    await delay(400);
     utm.toggleTheme();
-    await delay(400);
-    setIsHideTooltip(false);
   }
 
   return (
@@ -31,18 +25,12 @@ export default function ConnectSection() {
       <label className="swap-rotate swap h-fit w-fit text-neutral-500">
         <input type="checkbox" defaultChecked={isLight} />
         <span
-          className={`${isLight ? "z-50" : ""} swap-on ${
-            isHideTooltip ? "" : "tooltip"
-          } tooltip-bottom`}
-          data-tip="Switch Dark"
+          className={`${isLight ? "z-50" : ""} swap-on`}
         >
           <SunIcon onClick={toggleTheme} className="h-6 w-6" />
         </span>
         <span
-          className={`swap-off ${
-            isHideTooltip ? "" : "tooltip"
-          } tooltip-bottom`}
-          data-tip="Switch Light"
+          className={`swap-off`}
         >
           <MoonIcon onClick={toggleTheme} className="h-6 w-6" />
         </span>
