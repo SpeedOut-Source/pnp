@@ -1,4 +1,4 @@
-import { DocumentDuplicateIcon } from "@heroicons/react/24/outline";
+import DocumentDuplicateIcon from "@heroicons/react/24/outline/DocumentDuplicateIcon";
 import { useState } from "react";
 import CopyToClipboard from "react-copy-to-clipboard";
 import { delay } from "../sapage/src/components/app/helper";

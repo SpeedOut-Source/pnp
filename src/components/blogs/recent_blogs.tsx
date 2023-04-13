@@ -1,6 +1,6 @@
 import ProjectBlogLayout from "../projects/project_blog_layout";
 import { type Blog } from "~/app_function/utils/interfaces";
-import { PencilSquareIcon } from "@heroicons/react/24/outline";
+import PencilSquareIcon from "@heroicons/react/24/outline/PencilSquareIcon";
 import ViewMore from "../view_more";
 
 export interface RecentBlogsProps {

@@ -1,4 +1,4 @@
-import { CpuChipIcon } from "@heroicons/react/24/outline";
+import CpuChipIcon from "@heroicons/react/24/outline/CpuChipIcon";
 import dynamic from "next/dynamic";
 import { type App } from "~/app_function/utils/interfaces";
 import ViewMore from "../view_more";
