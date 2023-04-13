@@ -1,7 +1,7 @@
 {
   "personName": "Biplob Sutradhar",
   "name": "pnp",
-  "version": "1.0.5-alpha",
+  "version": "1.0.6-alpha",
   "private": true,
   "scripts": {
     "build": "next build",

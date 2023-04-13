@@ -1,4 +1,14 @@
 {
+  "1.0.6-alpha": {
+    "date": 1681395821014,
+    "changes": [
+      "dark mode tooltip remove",
+      "nav unexpected scroll disable",
+      "total show",
+      "scroll padding",
+      "key fix"
+    ]
+  },
   "1.0.5-alpha": {
     "date": 1681329353406,
     "changes": [
