@@ -1,5 +1,6 @@
 import { type MeProps } from "~/components/me_section/me";
 import {
+  addBlur,
   getApps,
   getBlogs,
   getConfigs,
@@ -12,7 +13,12 @@ import { type MeSectionProps } from "~/components/me_section/me_section";
 import { type TestimonialsProps } from "~/components/work_for_t/testimonials";
 import { type ProjectsProps } from "~/components/projects/recent_projects";
 import { type RecentBlogsProps } from "~/components/blogs/recent_blogs";
-import { type WorkForProps } from "../utils/interfaces";
+import {
+  type App,
+  type Blog,
+  type Project,
+  type WorkForProps,
+} from "../utils/interfaces";
 import { type AppsProps } from "~/components/apps/recent_apps";
 
 export interface Configs {
@@ -48,11 +54,15 @@ export async function HomeServer() {
   const dataTesti = (await getData("home/testimonials.json")).toString();
   const testis = JSON.parse(dataTesti) as TestimonialsProps;
 
-  const allPros = await getProjects();
+  const allProsRaw = await getProjects();
 
-  const allApps = await getApps();
+  const allAppsRaw = await getApps();
 
-  const allBlogs = await getBlogs();
+  const allBlogsRaw = await getBlogs();
+
+  const allPros: Project[] = await addBlur(allProsRaw.projects);
+  const allApps: App[] = await addBlur(allAppsRaw.apps, 6);
+  const allBlogs: Blog[] = await addBlur(allBlogsRaw.blogs);
 
   const homeProps: HomeProps = {
     configs,
@@ -63,15 +73,15 @@ export async function HomeServer() {
     workFor,
     testis: { ...testis, addUrl: configs.testimonialAddUrl },
     recentApps: {
-      data: allApps.apps.slice(0, 6),
+      data: allApps,
       total: dbConfig.appTotal,
     },
     recentProjects: {
-      data: allPros.projects.slice(0, 3),
+      data: allPros,
       total: dbConfig.projectTotal,
     },
     recentBlogs: {
-      data: allBlogs.blogs.slice(0, 3),
+      data: allBlogs,
       total: dbConfig.blogTotal,
     },
   };

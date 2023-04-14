@@ -1,19 +1,14 @@
 import { type AllDataProps } from "~/pages/projects";
 import {
-  getApps,
-  getBlogs,
+  getCard,
   getConfigs,
   getDBConfigs,
-  getProjects,
 } from "../utils/utils-server";
 import { type GetStaticPropsContext, type PreviewData } from "next";
 import { PAGE_SIZE, PAGE_SIZE_APP } from "../utils/constants";
 import { type ParsedUrlQuery } from "querystring";
 import {
   type Card,
-  type Blog,
-  type Project,
-  type App,
 } from "../utils/interfaces";
 
 export interface ProjectBlogGetStaticServer {
@@ -79,19 +74,7 @@ export async function projectBlogGetStaticProps(
 
   const configs = await getConfigs();
 
-  let data: Project[] | Blog[] | App[];
-
-  switch (props.type) {
-    case "projects":
-      data = (await getProjects()).projects;
-      break;
-    case "blogs":
-      data = (await getBlogs()).blogs;
-      break;
-    default:
-      data = (await getApps()).apps;
-      break;
-  }
+  const data = await getCard(props.type);
   const pageSize = getPageSize(props.type);
   const limitShow = pageSize * pageNo;
   const dataArray = data.slice(limitShow - pageSize, limitShow);

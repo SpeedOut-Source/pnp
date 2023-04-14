@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-unsafe-call */
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
 import { promises } from "fs";
 import { type Configs } from "../home/home_server";
 import {
@@ -7,6 +9,9 @@ import {
   type CardData,
 } from "./interfaces";
 import { type App } from "./interfaces";
+import { getPlaiceholder } from "plaiceholder";
+import log from "../logger/logger";
+import { parse } from "path";
 
 export interface DBConfigs {
   projectTotal: number;
@@ -183,15 +188,57 @@ export function parseBlog(md_text: string, filename: string): Blog {
 export async function getCard(type: Card) {
   let allData: CardData;
   switch (type) {
-    case "apps":
-      allData = (await getApps()).apps;
+    case "projects":
+      const projects = (await getProjects()).projects;
+      allData = await addBlur(projects, projects.length);
       break;
     case "blogs":
-      allData = (await getBlogs()).blogs;
+      const blogs = (await getBlogs()).blogs;
+      allData = await addBlur(blogs, blogs.length);
       break;
     default:
-      allData = (await getProjects()).projects;
+      const apps = (await getApps()).apps;
+      allData = await addBlur(apps, apps.length);
       break;
   }
   return allData;
+}
+
+export async function getBlurData(imgUrl: string, isUrl = true) {
+  if (isUrl && getFileExtSSR(imgUrl) === "gif") {
+    return undefined;
+  }
+
+  try {
+    const { base64 } = await getPlaiceholder(imgUrl);
+    return base64;
+  } catch (e) {
+    log.error(e);
+    return undefined;
+  }
+}
+
+export function getFileExtSSR(urlinput: string) {
+  const url = new URL(urlinput);
+  if (!url.pathname) {
+    return "";
+  }
+  const { ext } = parse(url.pathname);
+  const woExt = ext.replace(".", "");
+  return woExt;
+}
+
+export async function addBlur<T>(data: T[], limit = 3) {
+  const rData: T[] = [];
+  for (let index = 0; index < limit; index++) {
+    const element = data[index];
+    if (!element) continue;
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
+    const imgBlurData = await getBlurData(
+      (element as unknown as { imgUrl: string }).imgUrl,
+      false
+    );
+    if (imgBlurData) rData.push({ ...element, imgBlurData });
+  }
+  return rData;
 }

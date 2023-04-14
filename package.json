@@ -20,6 +20,9 @@
     "next-seo": "^6.0.0",
     "nextjs-progressbar": "^0.0.16",
     "pdfjs-dist": "^3.5.141",
+    "pino": "^8.11.0",
+    "pino-pretty": "^10.0.0",
+    "plaiceholder": "^2.5.0",
     "react": "18.2.0",
     "react-copy-to-clipboard": "^5.1.0",
     "react-dom": "18.2.0",
@@ -27,9 +30,9 @@
     "rehype-raw": "^6.1.1",
     "remark-gfm": "^3.0.1",
     "sharp": "^0.32.0",
+    "thousands-counter": "^2.1.1",
     "zod": "^3.21.4",
-    "zustand": "^4.3.7",
-    "thousands-counter": "^2.1.1"
+    "zustand": "^4.3.7"
   },
   "devDependencies": {
     "@heroicons/react": "^2.0.17",

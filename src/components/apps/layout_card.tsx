@@ -11,9 +11,11 @@ export default function LayoutCardApp(props: App) {
       className="p-card h-48 cursor-pointer flex-row items-center justify-start px-0 py-3 hover:-translate-y-1 hover:shadow-lg"
       href={`/apps/view/${props.fileName}`}
     >
-      <div className="relative mx-auto h-24 w-24 overflow-hidden rounded-b-3xl px-0 text-justify">
+      <div className="relative mx-auto h-24 w-24 overflow-hidden rounded-3xl px-0 text-justify">
         {props.imgUrl ? (
           <Image
+            blurDataURL={props.imgBlurData}
+            placeholder={props.imgBlurData ? "blur" : "empty"}
             loading="lazy"
             objectFit="cover"
             layout="fill"

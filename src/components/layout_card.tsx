@@ -21,13 +21,27 @@ export default function LayoutCard({ data }: LayoutCard) {
     <Link href={`/${isProject ? "projects" : "blogs"}/view/${data.fileName}`}>
       <div className="p-card group relative h-80 w-full cursor-pointer overflow-hidden px-0 text-justify ring ring-base-300 hover:shadow-xl hover:ring hover:ring-blue-200">
         {data.imgUrl ? (
-          <Image
-            loading="lazy"
-            objectFit="cover"
-            layout="fill"
-            src={data.imgUrl}
-            alt={isProject ? data.app.name : data.title}
-          />
+          <div>
+            {data.imgBlurData && (
+              <Image
+                loading="lazy"
+                objectFit="cover"
+                layout="fill"
+                src={data.imgBlurData}
+                alt={"Blur preview"}
+              />
+            )}
+            <Image
+              blurDataURL={isProject ? data.imgBlurData : undefined}
+              placeholder={isProject ? "blur" : undefined}
+              loading="lazy"
+              objectFit="contain"
+              objectPosition="50% 0"
+              layout="fill"
+              src={data.imgUrl}
+              alt={isProject ? data.app.name : data.title}
+            />
+          </div>
         ) : (
           <div className="absolute">
             <PhotoIcon className="mx-auto h-10 w-10" />
@@ -36,7 +50,7 @@ export default function LayoutCard({ data }: LayoutCard) {
         )}
         <div className="mx-1 flex h-full w-full flex-col items-end justify-end">
           <div className="relative mb-1 max-h-[60%] w-full overflow-hidden rounded-3xl bg-base-100/70 backdrop-blur-md group-hover:max-h-full group-hover:bg-base-100/80 group-hover:shadow-xl">
-            <div className="absolute bottom-0 mb-1 h-10 w-full bg-gradient-to-t from-base-100 group-hover:from-base-100">
+            <div className="absolute bottom-0 h-10 w-full bg-gradient-to-t from-base-100 group-hover:from-transparent">
               <div className="hidden w-full items-center justify-center pt-2 font-bold uppercase text-blue-500/70 group-hover:flex">
                 <span>{isProject ? "Full case study" : "Read more"}</span>
                 <ChevronRightIcon className="h-7 w-5" />

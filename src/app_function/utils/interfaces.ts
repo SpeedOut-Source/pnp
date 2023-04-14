@@ -11,6 +11,7 @@ export interface WorkForProps {
 export interface Blog {
   title: string;
   imgUrl: string;
+  imgBlurData?: string;
   desc: string;
   date: number;
   readTime: number;
@@ -19,6 +20,7 @@ export interface Blog {
 
 export interface Project {
   imgUrl: string;
+  imgBlurData?: string;
   app: { name: string; logoUrl: string };
   company: { name: string; logoUrl: string };
   whatText: string;
@@ -35,6 +37,7 @@ interface Listing {
 
 export interface App {
   imgUrl: string;
+  imgBlurData?: string;
   date: number;
   title: string;
   category: string;
