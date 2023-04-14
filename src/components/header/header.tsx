@@ -3,12 +3,20 @@ import packageJson from "../../../package.json";
 import dynamic from "next/dynamic";
 import { useEffect, useState } from "react";
 import Image from "next/image";
+import { DEFAULT_IS_LIGHT, useThemeStore } from "~/app_state/theme_mode";
 
 const ConnectSection = dynamic(() => import("./connect_section"));
 const Links = dynamic(() => import("./links"));
 const Link = dynamic(() => import("next/link"));
 
 export default function Header() {
+  const utm = useThemeStore();
+  const [isLight, setIsLight] = useState(DEFAULT_IS_LIGHT);
+
+  useEffect(() => {
+    setIsLight(utm.themeName === "winter");
+  }, [utm]);
+
   const [bgChange, setBgChange] = useState(false);
   const [loaded, setLoaded] = useState(false);
 
@@ -46,8 +54,9 @@ export default function Header() {
               className="btn-ghost btn px-2 text-xl font-bold normal-case tracking-wider"
             >
               <Image
-                className=" "
-                src="/images/logos/app-logo.png"
+                src={`/images/logos/github-profile-dark${
+                  isLight ? "-light" : ""
+                }.png`}
                 width="32"
                 height="32"
                 alt={packageJson.personName}

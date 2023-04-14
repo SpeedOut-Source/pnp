@@ -1,8 +1,10 @@
 import changeLogJson from "../../changelog.json";
 import packageJson from "../../package.json";
 import dynamic from "next/dynamic";
+import { useState, useEffect } from "react";
 import { type Configs } from "~/app_function/home/home_server";
 import { getConfigs } from "~/app_function/utils/utils-server";
+import { useThemeStore, DEFAULT_IS_LIGHT } from "~/app_state/theme_mode";
 import SEO from "~/components/seo";
 
 const SAPage = dynamic(
@@ -26,6 +28,13 @@ interface AboutProps {
 }
 
 export default function About(props: AboutProps) {
+  const utm = useThemeStore();
+  const [isLight, setIsLight] = useState(DEFAULT_IS_LIGHT);
+
+  useEffect(() => {
+    setIsLight(utm.themeName === "winter");
+  }, [utm]);
+
   return (
     <div>
       <SEO
@@ -39,7 +48,9 @@ export default function About(props: AboutProps) {
             title: "Portfolio Next.js Project",
             codeName: packageJson.name,
             logo: {
-              logoUrl: "/images/logos/app-logo.png",
+              logoUrl: `/images/logos/github-profile-dark${
+                isLight ? "-light" : ""
+              }.png`,
               alt: packageJson.name,
             },
             version: packageJson.version,
