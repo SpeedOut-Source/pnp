@@ -206,15 +206,15 @@ export async function getCard(type: Card) {
 
 export async function getBlurData(imgUrl: string, isUrl = true) {
   if (isUrl && getFileExtSSR(imgUrl) === "gif") {
-    return undefined;
+    return null;
   }
 
   try {
     const { base64 } = await getPlaiceholder(imgUrl);
     return base64;
   } catch (e) {
-    log.error(e);
-    return undefined;
+    // log.error( e);
+    return null;
   }
 }
 
@@ -238,7 +238,7 @@ export async function addBlur<T>(data: T[], limit = 3) {
       (element as unknown as { imgUrl: string }).imgUrl,
       false
     );
-    if (imgBlurData) rData.push({ ...element, imgBlurData });
+    rData.push({ ...element, imgBlurData });
   }
   return rData;
 }

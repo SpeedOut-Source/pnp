@@ -1,15 +1,9 @@
 import { type AllDataProps } from "~/pages/projects";
-import {
-  getCard,
-  getConfigs,
-  getDBConfigs,
-} from "../utils/utils-server";
+import { getCard, getConfigs, getDBConfigs } from "../utils/utils-server";
 import { type GetStaticPropsContext, type PreviewData } from "next";
 import { PAGE_SIZE, PAGE_SIZE_APP } from "../utils/constants";
 import { type ParsedUrlQuery } from "querystring";
-import {
-  type Card,
-} from "../utils/interfaces";
+import { type Card } from "../utils/interfaces";
 
 export interface ProjectBlogGetStaticServer {
   context: GetStaticPropsContext<ParsedUrlQuery, PreviewData>;

@@ -100,9 +100,10 @@ export default function ProjectBlogView(props: ProjectBlogViewProps) {
       default:
         return (
           <Image
-            src={appLogo ?? `/images/logos/github-profile-dark${
-              isLight ? "-light" : ""
-            }.png`}
+            src={
+              appLogo ??
+              `/images/logos/github-profile-dark${isLight ? "-light" : ""}.png`
+            }
             alt={name}
             height={10}
             width={50}

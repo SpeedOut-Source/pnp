@@ -32,8 +32,8 @@ export default function LayoutCard({ data }: LayoutCard) {
               />
             )}
             <Image
-              blurDataURL={isProject ? data.imgBlurData : undefined}
-              placeholder={isProject ? "blur" : undefined}
+              blurDataURL={data.imgBlurData ? data.imgBlurData : undefined}
+              placeholder={data.imgBlurData ? "blur" : undefined}
               loading="lazy"
               objectFit="contain"
               objectPosition="50% 0"
@@ -58,9 +58,9 @@ export default function LayoutCard({ data }: LayoutCard) {
             </div>
 
             <div className="w-full px-2 py-2 ">
-              <div className="mx-2 flex items-center justify-between text-sm">
+              <div className="mx-2 mb-1 flex items-center justify-between text-sm">
                 {isProject ? (
-                  <div>
+                  <div className="space-y-[0.2rem]">
                     <div className="flex w-full items-center gap-2 font-bold">
                       <div className="relative h-5 w-5">
                         <Image
@@ -103,12 +103,12 @@ export default function LayoutCard({ data }: LayoutCard) {
 
               <div className="mb-2 text-xs leading-snug">
                 {isProject ? (
-                  <>
+                  <div className="space-x-1">
                     <span className="font-semibold">{data.whatText}</span>
-                    <span className="">{data.result}</span>
-                  </>
+                    <span>{data.result}</span>
+                  </div>
                 ) : (
-                  <p className="">{(data as Blog).desc}</p>
+                  <p>{(data as Blog).desc}</p>
                 )}
               </div>
               <div className=" h-0 transition-all duration-100 ease-in-out group-hover:h-5" />
