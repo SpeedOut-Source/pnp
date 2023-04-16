@@ -10,7 +10,6 @@ import {
 } from "./interfaces";
 import { type App } from "./interfaces";
 import { getPlaiceholder } from "plaiceholder";
-import log from "../logger/logger";
 import { parse } from "path";
 
 export interface DBConfigs {
