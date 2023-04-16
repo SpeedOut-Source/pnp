@@ -1,3 +1,5 @@
+/* eslint-disable jsx-a11y/alt-text */
+/* eslint-disable @next/next/no-img-element */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 
@@ -56,6 +58,11 @@ export default function MDRender(props: MDRender) {
             }
             return <a {...props}>{children}</a>;
           },
+          img: ({ ...props }) => (
+            <span className="flex justify-center">
+              <img {...props} />
+            </span>
+          ),
         }}
         rehypePlugins={[rehypeRaw]}
         remarkPlugins={[remarkGfm]}

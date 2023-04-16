@@ -19,6 +19,7 @@ import {
 import LayoutCardApp from "~/components/apps/layout_card";
 import { DEFAULT_IS_LIGHT, useThemeStore } from "~/app_state/theme_mode";
 import { useState, useEffect } from "react";
+import { PencilSquareIcon } from "@heroicons/react/24/outline";
 
 const Link = dynamic(() => import("next/link"));
 const Image = dynamic(() => import("next/image"));
@@ -185,7 +186,7 @@ export default function ProjectBlogView(props: ProjectBlogViewProps) {
         itemView={props.itemView}
       />
       <div className="container mx-auto max-w-3xl px-2">
-        <div className="">
+        <div className="flex flex-wrap items-center gap-1">
           <Link
             className="title link-hover link-primary link capitalize"
             href={"/" + props.type}
@@ -193,6 +194,26 @@ export default function ProjectBlogView(props: ProjectBlogViewProps) {
             {props.type}
           </Link>{" "}
           / {props.itemView.fileName}
+          <div
+            className="tooltip tooltip-bottom"
+            data-tip="Edit this on Github"
+          >
+            <Link
+              href={
+                "https://github.com" +
+                props.configs.repoPath +
+                "/blob/data/" +
+                props.type +
+                "/" +
+                props.itemView.fileName +
+                "?plain=1"
+              }
+              target="_blank"
+              rel=""
+            >
+              <PencilSquareIcon className="link-hover link h-4 w-4" />
+            </Link>
+          </div>
         </div>
         <div className="my-2 flex flex-col items-center justify-between gap-2 sm:flex-row sm:items-end">
           <div className="p-card flex h-fit w-full flex-col items-start py-2 text-xs text-slate-500 sm:w-fit">

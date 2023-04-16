@@ -24,6 +24,8 @@ interface ResumeProps {
 }
 
 export default function Resume(props: ResumeProps) {
+  const resumePdfUrl =
+    props.configs.baseUrl + props.configs.repoPath + props.configs.resumePath;
   return (
     <>
       <SEO
@@ -34,7 +36,7 @@ export default function Resume(props: ResumeProps) {
       <div>
         <div className="mb-5 flex justify-center">
           <Link
-            href={props.configs.resumeUrl}
+            href={resumePdfUrl}
             download={true}
             className="p-card cursor-pointer gap-2"
           >
@@ -42,7 +44,7 @@ export default function Resume(props: ResumeProps) {
             Download resume
           </Link>
         </div>
-        <PdfReader resumeUrl={props.configs.resumeUrl} />
+        <PdfReader resumeUrl={resumePdfUrl} />
       </div>
     </>
   );
