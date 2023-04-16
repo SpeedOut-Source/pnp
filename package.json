@@ -5,10 +5,12 @@
   "private": true,
   "scripts": {
     "build": "next build",
-    "export": "next build && next export",
+    "export": "next build && next export && next-sitemap",
     "dev": "next dev",
     "lint": "next lint",
-    "start": "next start"
+    "start": "next start",
+    "sitemap": "next-sitemap",
+    "protest": "npm run export && npx serve out"
   },
   "dependencies": {
     "@react-google-maps/api": "^2.18.1",
@@ -53,7 +55,8 @@
     "prettier": "^2.8.7",
     "prettier-plugin-tailwindcss": "^0.2.6",
     "tailwindcss": "^3.3.0",
-    "typescript": "^5.0.2"
+    "typescript": "^5.0.2",
+    "next-sitemap": "^4.0.7"
   },
   "ct3aMetadata": {
     "initVersion": "7.10.1"
