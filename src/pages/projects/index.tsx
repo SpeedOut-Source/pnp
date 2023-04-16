@@ -47,7 +47,11 @@ export default function AllDataShowPage(props: AllDataProps) {
 
   return (
     <>
-      <SEO configs={props.configs} description={title} title={title} />
+      <SEO
+        configs={props.configs}
+        description={`See all ${title}`}
+        title={title}
+      />
       <div className="container mx-auto">
         <p className="text-center text-3xl uppercase">{pageName}</p>
         <div className="mx-auto w-full max-w-6xl">
