@@ -181,6 +181,8 @@ export default function ProjectBlogView(props: ProjectBlogViewProps) {
         description={desc}
         title={title}
         imgUrl={props.itemView.imgUrl}
+        ogType="article"
+        itemView={props.itemView}
       />
       <div className="container mx-auto max-w-3xl px-2">
         <div className="">
