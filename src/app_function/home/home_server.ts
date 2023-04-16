@@ -23,9 +23,11 @@ import { type AppsProps } from "~/components/apps/recent_apps";
 
 export interface Configs {
   appName: string;
-  testimonialAddUrl: string;
   twitterHandle: string;
-  resumeUrl: string;
+  repoPath: string;
+  resumePath: string;
+  baseUrl: string;
+  baseImgPath: string;
 }
 
 export interface HomeProps {
@@ -64,6 +66,8 @@ export async function HomeServer() {
   const allApps: App[] = await addBlur(allAppsRaw.apps, 6);
   const allBlogs: Blog[] = await addBlur(allBlogsRaw.blogs);
 
+  const testimonialAddUrl = configs.baseUrl + "/home/testimonials.json";
+
   const homeProps: HomeProps = {
     configs,
     meSection: {
@@ -71,7 +75,7 @@ export async function HomeServer() {
       techs,
     },
     workFor,
-    testis: { ...testis, addUrl: configs.testimonialAddUrl },
+    testis: { ...testis, addUrl: testimonialAddUrl },
     recentApps: {
       data: allApps,
       total: dbConfig.appTotal,

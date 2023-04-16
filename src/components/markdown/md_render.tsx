@@ -59,9 +59,9 @@ export default function MDRender(props: MDRender) {
             return <a {...props}>{children}</a>;
           },
           img: ({ ...props }) => (
-            <div className="flex justify-center">
+            <span className="flex justify-center">
               <img {...props} />
-            </div>
+            </span>
           ),
         }}
         rehypePlugins={[rehypeRaw]}
