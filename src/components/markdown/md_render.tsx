@@ -58,11 +58,11 @@ export default function MDRender(props: MDRender) {
             }
             return <a {...props}>{children}</a>;
           },
-          img: ({ ...props }) => (
-            <span className="flex justify-center">
-              <img {...props} />
-            </span>
-          ),
+          // img: ({ ...props }) => (
+          //   <span className="flex justify-center">
+          //     <img {...props} />
+          //   </span>
+          // ),
         }}
         rehypePlugins={[rehypeRaw]}
         remarkPlugins={[remarkGfm]}

@@ -1,6 +1,7 @@
+import dynamic from "next/dynamic";
 import { type Configs } from "~/app_function/home/home_server";
 import { getConfigs } from "~/app_function/utils/utils-server";
-import SEO from "~/components/seo";
+const SEO = dynamic(() => import("~/components/seo"));
 
 export async function getStaticProps() {
   const configs = await getConfigs();

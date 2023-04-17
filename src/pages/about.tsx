@@ -5,7 +5,8 @@ import { useState, useEffect } from "react";
 import { type Configs } from "~/app_function/home/home_server";
 import { getConfigs } from "~/app_function/utils/utils-server";
 import { useThemeStore, DEFAULT_IS_LIGHT } from "~/app_state/theme_mode";
-import SEO from "~/components/seo";
+
+const SEO = dynamic(() => import("~/components/seo"));
 
 const SAPage = dynamic(
   () => import("../components/sapage/src/components/SAPage")

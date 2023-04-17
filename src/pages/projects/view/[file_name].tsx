@@ -7,7 +7,6 @@ import {
   getStaticPropsItemView,
 } from "~/app_function/project_blog/item_view_server";
 import Loading from "~/components/markdown/loading";
-import SEO from "~/components/seo";
 import { type ParsedUrlQuery } from "querystring";
 import {
   type Project,
@@ -21,6 +20,8 @@ import { DEFAULT_IS_LIGHT, useThemeStore } from "~/app_state/theme_mode";
 import { useState, useEffect } from "react";
 import { PencilSquareIcon } from "@heroicons/react/24/outline";
 import { toTitleCase } from "~/app_function/utils/utils";
+
+const SEO = dynamic(() => import("~/components/seo"));
 
 const Link = dynamic(() => import("next/link"));
 const Image = dynamic(() => import("next/image"));

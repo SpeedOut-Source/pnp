@@ -1,8 +1,7 @@
 import { HomeServer, type HomeProps } from "~/app_function/home/home_server";
 import dynamic from "next/dynamic";
-import SEO from "~/components/seo";
-// import { DEFAULT_BASE_URL } from "~/app_function/utils/constants";
 
+const SEO = dynamic(() => import("~/components/seo"));
 const RecentApps = dynamic(() => import("~/components/apps/recent_apps"));
 const RecentProjects = dynamic(
   () => import("~/components/projects/recent_projects")

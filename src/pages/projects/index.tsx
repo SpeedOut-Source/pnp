@@ -7,7 +7,8 @@ import { type Configs } from "~/app_function/home/home_server";
 import { projectBlogGetStaticProps } from "~/app_function/project_blog/project_blog_server";
 import { type Card, type CardData } from "~/app_function/utils/interfaces";
 import { toTitleCase } from "~/app_function/utils/utils";
-import SEO from "~/components/seo";
+
+const SEO = dynamic(() => import("~/components/seo"));
 
 const ProjectBlogLayout = dynamic(
   () => import("~/components/projects/project_blog_layout")

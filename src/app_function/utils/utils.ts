@@ -33,11 +33,16 @@ export function showCountHuman(count: number): number {
 }
 
 export function sliceText(text: string, maxLength = 160): string {
-  let slicedText = text.slice(0, maxLength);
-  if (slicedText.charAt(slicedText.length - 1) !== " ") {
-    slicedText = slicedText
-      .substring(0, slicedText.lastIndexOf(" "))
-      .replace(/[^\w\s]|_/g, "");
+  if (text.length > maxLength) {
+    let slicedText = text.slice(0, maxLength);
+    const lastChar = slicedText.charAt(slicedText.length - 1);
+    if (lastChar !== " ") {
+      slicedText = slicedText.substring(0, slicedText.lastIndexOf(" "));
+      if (/[^\w\s]/.test(lastChar)) {
+        slicedText = slicedText.substring(0, slicedText.length - 1);
+      }
+    }
+    return slicedText;
   }
-  return slicedText;
+  return text;
 }

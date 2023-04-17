@@ -1,3 +1,4 @@
+import keyword_extractor from "keyword-extractor";
 import { NextSeo } from "next-seo";
 import { useRouter } from "next/router";
 import { type Configs } from "~/app_function/home/home_server";
@@ -17,18 +18,28 @@ interface SEOProps {
 function SEO({
   imgUrl: img,
   title,
-  description,
+  description: rawDesc,
   configs,
   itemView,
   ogType = "website",
 }: SEOProps) {
   const router = useRouter();
-  const baseUrl = `${process.env.NEXT_PUBLIC_BASE_URL ?? DEFAULT_BASE_URL};`;
-  description = sliceText(description);
+  const baseUrl = `${process.env.NEXT_PUBLIC_BASE_URL ?? DEFAULT_BASE_URL}`;
+  const description = sliceText(rawDesc);
+  const pageUrl = `${baseUrl}${router.asPath}`;
+  const keywords = keyword_extractor
+    .extract((itemView ? itemView.fileName : "") + " " + rawDesc, {
+      language: "english",
+      remove_digits: true,
+      return_changed_case: true,
+      remove_duplicates: true,
+    })
+    .filter((x) => !/[^\w\s]/.test(x));
   return (
     <NextSeo
       title={title}
       description={description}
+      canonical={pageUrl}
       additionalLinkTags={[
         {
           rel: "icon",
@@ -36,7 +47,7 @@ function SEO({
         },
       ]}
       openGraph={{
-        url: `${baseUrl}${router.asPath}`,
+        url: pageUrl,
         title,
         description,
         images: img
@@ -52,13 +63,7 @@ function SEO({
         article: itemView && {
           publishedTime: new Date(itemView.date).toISOString(),
           authors: [baseUrl],
-          tags: Array.from(
-            new Set(
-              [...itemView.fileName.split("-"), ...description.split(" ")]
-                .map((x) => x.trim().toLowerCase().split(".").join(""))
-                .filter((x) => x !== "|")
-            )
-          ),
+          tags: keywords,
         },
       }}
       facebook={{ appId: "732825215185793" }}
