@@ -1,7 +1,7 @@
 import { HomeServer, type HomeProps } from "~/app_function/home/home_server";
 import dynamic from "next/dynamic";
 import SEO from "~/components/seo";
-import { DEFAULT_BASE_URL } from "~/app_function/utils/constants";
+// import { DEFAULT_BASE_URL } from "~/app_function/utils/constants";
 
 const RecentApps = dynamic(() => import("~/components/apps/recent_apps"));
 const RecentProjects = dynamic(
@@ -25,8 +25,7 @@ const Home = (props: HomeProps) => {
         configs={props.configs}
         description={`${props.meSection.techs.techs.join(", ")}`}
         imgUrl={
-          (process.env.NEXT_PUBLIC_BASE_URL ?? DEFAULT_BASE_URL) +
-          props.meSection.me.imgUrl
+          props.recentApps.data[0] ? props.recentApps.data[0].imgUrl : undefined
         }
         title={title}
       />

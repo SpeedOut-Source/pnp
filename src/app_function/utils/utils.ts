@@ -31,3 +31,13 @@ export function showCountHuman(count: number): number {
   // eslint-disable-next-line @typescript-eslint/no-unsafe-return, @typescript-eslint/no-unsafe-call
   return tc(count, { digits: 2, uppercase: false });
 }
+
+export function sliceText(text: string, maxLength = 160): string {
+  let slicedText = text.slice(0, maxLength);
+  if (slicedText.charAt(slicedText.length - 1) !== " ") {
+    slicedText = slicedText
+      .substring(0, slicedText.lastIndexOf(" "))
+      .replace(/[^\w\s]|_/g, "");
+  }
+  return slicedText;
+}

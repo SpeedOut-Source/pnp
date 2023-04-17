@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-misused-promises */
 import SunIcon from "@heroicons/react/24/outline/SunIcon";
 import MoonIcon from "@heroicons/react/24/outline/MoonIcon";
@@ -14,26 +15,16 @@ export default function ConnectSection() {
     setIsLight(utm.themeName === "winter");
   }, [utm]);
 
-    function toggleTheme(e: any) {
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-call
-    e.preventDefault();
-    utm.toggleTheme();
-  }
-
   return (
     <div className="flex flex-col items-center gap-2 md:flex-row">
-      <label className="swap-rotate swap h-fit w-fit text-neutral-500">
-        <input type="checkbox" defaultChecked={isLight} />
-        <span
-          className={`${isLight ? "z-50" : ""} swap-on`}
-        >
-          <SunIcon onClick={toggleTheme} className="h-6 w-6" />
-        </span>
-        <span
-          className={`swap-off`}
-        >
-          <MoonIcon onClick={toggleTheme} className="h-6 w-6" />
-        </span>
+      <label
+        onClick={utm.toggleTheme}
+        className={`${
+          isLight ? "swap-active" : ""
+        } swap-rotate swap h-fit w-fit text-neutral-500`}
+      >
+        <SunIcon className="swap-on h-6 w-6" />
+        <MoonIcon className="swap-off h-6 w-6" />
       </label>
       <div className="w-fit items-center gap-3 rounded-xl bg-base-300 px-4 md:flex lg:flex xl:flex">
         <div className="font-semibold tracking-wider">Connect on</div>

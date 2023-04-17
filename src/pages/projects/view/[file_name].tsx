@@ -20,6 +20,7 @@ import LayoutCardApp from "~/components/apps/layout_card";
 import { DEFAULT_IS_LIGHT, useThemeStore } from "~/app_state/theme_mode";
 import { useState, useEffect } from "react";
 import { PencilSquareIcon } from "@heroicons/react/24/outline";
+import { toTitleCase } from "~/app_function/utils/utils";
 
 const Link = dynamic(() => import("next/link"));
 const Image = dynamic(() => import("next/image"));
@@ -116,21 +117,27 @@ export default function ProjectBlogView(props: ProjectBlogViewProps) {
   switch (props.type) {
     case "projects":
       const itemView: Project = props.itemView as Project;
-      title = `${itemView.whatText} | ${props.configs.appName}`;
-
-      desc = `${itemView.result} | ${itemView.app.name} | ${itemView.company.name}`;
+      title = `${itemView.whatText}`;
+      desc = `${itemView.result} | ${toTitleCase(props.type)} | ${
+        itemView.company.name
+      } | ${itemView.app.name}`;
       shareTxt = `${itemView.whatText} ${itemView.result}`;
-
       project = itemView;
       break;
     case "blogs":
       const b: Blog = props.itemView as Blog;
-      title = `${props.itemView.fileName} | ${props.configs.appName}`;
-      desc = b.desc;
+      title = b.title;
+      desc = `${b.desc} | ${toTitleCase(props.type)} | ${
+        props.configs.appName
+      }`;
       shareTxt = b.desc;
+      break;
     default:
-      title = `${(props.itemView as App).title} | ${props.configs.appName}`;
-      desc = title;
+      const a: App = props.itemView as App;
+      title = a.title;
+      desc = `${a.category} | ${toTitleCase(props.type)} | ${a.platforms
+        .map((x) => x.name)
+        .join(" | ")} | ${props.configs.appName}`;
       shareTxt = title;
       break;
   }
@@ -182,6 +189,8 @@ export default function ProjectBlogView(props: ProjectBlogViewProps) {
         description={desc}
         title={title}
         imgUrl={props.itemView.imgUrl}
+        ogType="article"
+        itemView={props.itemView}
       />
       <div className="container mx-auto max-w-3xl px-2">
         <div className="flex flex-wrap items-center gap-1">
