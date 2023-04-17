@@ -13,6 +13,7 @@ interface SEOProps {
 function SEO({ imgUrl: img, title, description, configs }: SEOProps) {
   const router = useRouter();
   const baseUrl = `${process.env.NEXT_PUBLIC_BASE_URL ?? DEFAULT_BASE_URL};`;
+  description = description.slice(0, 160);
   return (
     <NextSeo
       title={title}

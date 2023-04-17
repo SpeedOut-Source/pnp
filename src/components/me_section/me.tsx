@@ -21,7 +21,7 @@ export default function Me(props: MeProps) {
             alt={props.fullName}
           />
         </div>
-        <span className="w-fit text-xl md:w-0">{props.fullName}</span>
+        <h1 className="w-fit text-xl md:w-0">{props.fullName}</h1>
       </div>
       <div>
         <span className="font-bold">{props.hText}</span>
