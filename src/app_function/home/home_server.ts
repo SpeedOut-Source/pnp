@@ -20,6 +20,7 @@ import {
   type WorkForProps,
 } from "../utils/interfaces";
 import { type AppsProps } from "~/components/apps/recent_apps";
+import { getDataUrl } from "../utils/utils";
 
 export interface Configs {
   appName: string;
@@ -66,7 +67,8 @@ export async function HomeServer() {
   const allApps: App[] = await addBlur(allAppsRaw.apps, 6);
   const allBlogs: Blog[] = await addBlur(allBlogsRaw.blogs);
 
-  const testimonialAddUrl = configs.baseUrl + "/home/testimonials.json";
+  const testimonialAddUrl =
+    getDataUrl(configs.repoPath) + "/home/testimonials.json";
 
   const homeProps: HomeProps = {
     configs,

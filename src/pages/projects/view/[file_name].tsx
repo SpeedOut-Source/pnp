@@ -19,7 +19,7 @@ import LayoutCardApp from "~/components/apps/layout_card";
 import { DEFAULT_IS_LIGHT, useThemeStore } from "~/app_state/theme_mode";
 import { useState, useEffect } from "react";
 import { PencilSquareIcon } from "@heroicons/react/24/outline";
-import { toTitleCase } from "~/app_function/utils/utils";
+import { getDataUrl, toTitleCase } from "~/app_function/utils/utils";
 
 const SEO = dynamic(() => import("~/components/seo"));
 
@@ -208,9 +208,7 @@ export default function ProjectBlogView(props: ProjectBlogViewProps) {
           >
             <Link
               href={
-                "https://github.com" +
-                props.configs.repoPath +
-                "/blob/data/" +
+                getDataUrl(props.configs.repoPath) +
                 props.type +
                 "/" +
                 props.itemView.fileName +

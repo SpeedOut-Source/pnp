@@ -46,3 +46,7 @@ export function sliceText(text: string, maxLength = 160): string {
   }
   return text;
 }
+
+export function getDataUrl(repoPath: string) {
+  return "https://github.com" + repoPath + "/blob/data/";
+}
