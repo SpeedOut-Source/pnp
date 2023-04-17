@@ -209,6 +209,7 @@ export default function ProjectBlogView(props: ProjectBlogViewProps) {
             <Link
               href={
                 getDataUrl(props.configs.repoPath) +
+                "/" +
                 props.type +
                 "/" +
                 props.itemView.fileName +

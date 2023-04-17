@@ -48,5 +48,5 @@ export function sliceText(text: string, maxLength = 160): string {
 }
 
 export function getDataUrl(repoPath: string) {
-  return "https://github.com" + repoPath + "/blob/data/";
+  return "https://github.com" + repoPath + "/blob/data";
 }
