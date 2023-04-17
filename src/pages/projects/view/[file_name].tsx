@@ -21,6 +21,7 @@ import { useState, useEffect } from "react";
 import { PencilSquareIcon } from "@heroicons/react/24/outline";
 import { getDataUrl, toTitleCase } from "~/app_function/utils/utils";
 
+const Giscus = dynamic(() => import("@giscus/react"));
 const SEO = dynamic(() => import("~/components/seo"));
 
 const Link = dynamic(() => import("next/link"));
@@ -183,6 +184,17 @@ export default function ProjectBlogView(props: ProjectBlogViewProps) {
     }
   }
 
+  const sp = props.configs.repoPath.split("/");
+  const githubUserName = sp[1] ?? "";
+  const githubRepo = sp[2] ?? "";
+  const githubEditUrl =
+    getDataUrl(props.configs.repoPath) +
+    "/" +
+    props.type +
+    "/" +
+    props.itemView.fileName +
+    "?plain=1";
+
   return (
     <>
       <SEO
@@ -206,18 +218,7 @@ export default function ProjectBlogView(props: ProjectBlogViewProps) {
             className="tooltip tooltip-bottom"
             data-tip="Edit this on Github"
           >
-            <Link
-              href={
-                getDataUrl(props.configs.repoPath) +
-                "/" +
-                props.type +
-                "/" +
-                props.itemView.fileName +
-                "?plain=1"
-              }
-              target="_blank"
-              rel=""
-            >
+            <Link href={githubEditUrl} target="_blank" rel="">
               <PencilSquareIcon className="link-hover link h-4 w-4" />
             </Link>
           </div>
@@ -378,6 +379,25 @@ export default function ProjectBlogView(props: ProjectBlogViewProps) {
           })}
         </div>
       )}
+      <div className="container divider mx-auto max-w-3xl px-2" />
+      <div className="container mx-auto max-w-3xl px-2">
+        <Giscus
+          key={githubEditUrl}
+          id="comments"
+          repo={`${githubUserName}/${githubRepo}`}
+          repoId="MDEwOlJlcG9zaXRvcnkyMTk3OTcwOTY="
+          category="Announcements"
+          categoryId="DIC_kwDODRnWaM4CV1eQ"
+          mapping="pathname"
+          term="Welcome to @giscus/react component!"
+          reactionsEnabled="1"
+          emitMetadata="0"
+          inputPosition="top"
+          theme={isLight ? "light" : "dark_dimmed"}
+          lang="en"
+          loading="lazy"
+        />
+      </div>
     </>
   );
 }
