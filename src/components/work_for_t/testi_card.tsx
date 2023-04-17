@@ -11,10 +11,11 @@ export interface Testimonial {
   text: string;
   blank?: boolean;
   addUrl?: string;
+  link?: string;
 }
 export default function TestiCard(props: Testimonial) {
   return (
-    <div className="p-card group relative mx-0 h-fit w-full space-y-3 px-0 py-3 text-justify hover:bg-base-200">
+    <div className="p-card group relative mx-0 h-fit w-full space-y-3 overflow-visible px-0 py-3 text-justify hover:bg-base-200">
       {props.blank && (
         <Link
           href={props.addUrl ?? "#"}
@@ -28,7 +29,12 @@ export default function TestiCard(props: Testimonial) {
         </Link>
       )}
       <div className="w-full px-3">
-        <div className="flex w-full items-center gap-2">
+        <Link
+          data-tip="Visit website"
+          target="_blank"
+          href={props.link ?? props.addUrl ?? "#"}
+          className="tooltip flex w-full items-center gap-2"
+        >
           <div>
             <div className="relative h-12 w-12 overflow-hidden rounded-full ring ring-base-300">
               <Image
@@ -43,7 +49,7 @@ export default function TestiCard(props: Testimonial) {
             <p className="text-sm font-bold">{props.fullName}</p>
             <p className="text-xs">{props.position}</p>
           </div>
-        </div>
+        </Link>
       </div>
       <div className="mx-1 max-h-36 overflow-auto scrollbar-thin scrollbar-track-base-content/5 scrollbar-thumb-base-content/5 scrollbar-track-rounded-xl scrollbar-thumb-rounded-xl">
         <p className="ml-3 mr-4 text-xs leading-normal">{props.text}</p>
