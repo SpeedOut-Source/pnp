@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unsafe-call */
 /* eslint-disable @typescript-eslint/no-var-requires */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
@@ -14,7 +15,11 @@ export default {
     },
     extend: {},
   },
-  plugins: [require("daisyui"), require("@tailwindcss/typography")],
+  plugins: [
+    require("daisyui"),
+    require("@tailwindcss/typography"),
+    require("tailwind-scrollbar")({ nocompatible: true }),
+  ],
   daisyui: {
     themes: [
       {
