@@ -50,3 +50,14 @@ export function sliceText(text: string, maxLength = 160): string {
 export function getDataUrl(repoPath: string) {
   return "https://github.com" + repoPath + "/blob/data";
 }
+
+export function getUserNRepo(repoPath: string): {
+  userName: string;
+  repo: string;
+} {
+  const sp = repoPath.split("/");
+  return {
+    userName: sp[1] ?? "",
+    repo: sp[2] ?? "",
+  };
+}

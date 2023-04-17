@@ -19,7 +19,11 @@ import LayoutCardApp from "~/components/apps/layout_card";
 import { DEFAULT_IS_LIGHT, useThemeStore } from "~/app_state/theme_mode";
 import { useState, useEffect } from "react";
 import { PencilSquareIcon } from "@heroicons/react/24/outline";
-import { getDataUrl, toTitleCase } from "~/app_function/utils/utils";
+import {
+  getDataUrl,
+  getUserNRepo,
+  toTitleCase,
+} from "~/app_function/utils/utils";
 
 const Giscus = dynamic(() => import("@giscus/react"));
 const SEO = dynamic(() => import("~/components/seo"));
@@ -184,9 +188,7 @@ export default function ProjectBlogView(props: ProjectBlogViewProps) {
     }
   }
 
-  const sp = props.configs.repoPath.split("/");
-  const githubUserName = sp[1] ?? "";
-  const githubRepo = sp[2] ?? "";
+  const sp = getUserNRepo(props.configs.repoPath);
   const githubEditUrl =
     getDataUrl(props.configs.repoPath) +
     "/" +
@@ -384,7 +386,7 @@ export default function ProjectBlogView(props: ProjectBlogViewProps) {
         <Giscus
           key={githubEditUrl}
           id="comments"
-          repo={`${githubUserName}/${githubRepo}`}
+          repo={`${sp.userName}/${sp.repo}`}
           repoId="MDEwOlJlcG9zaXRvcnkyMTk3OTcwOTY="
           category="Announcements"
           categoryId="DIC_kwDODRnWaM4CV1eQ"

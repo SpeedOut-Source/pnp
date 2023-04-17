@@ -1,5 +1,8 @@
 import { HomeServer, type HomeProps } from "~/app_function/home/home_server";
 import dynamic from "next/dynamic";
+import { getUserNRepo } from "~/app_function/utils/utils";
+import { DEFAULT_IS_LIGHT, useThemeStore } from "~/app_state/theme_mode";
+import { useEffect, useState } from "react";
 
 const SEO = dynamic(() => import("~/components/seo"));
 const RecentApps = dynamic(() => import("~/components/apps/recent_apps"));
@@ -11,6 +14,7 @@ const RecentBlogs = dynamic(() => import("~/components/blogs/recent_blogs"));
 const ContactSection = dynamic(
   () => import("~/components/contact/contact_section")
 );
+const Giscus = dynamic(() => import("@giscus/react"));
 
 export async function getStaticProps() {
   return HomeServer();
@@ -18,6 +22,14 @@ export async function getStaticProps() {
 
 const Home = (props: HomeProps) => {
   const title = `${props.configs.appName}`;
+  const sp = getUserNRepo(props.configs.repoPath);
+  const utm = useThemeStore();
+  const [isLight, setIsLight] = useState(DEFAULT_IS_LIGHT);
+
+  useEffect(() => {
+    setIsLight(utm.themeName === "winter");
+  }, [utm]);
+
   return (
     <>
       <SEO
@@ -44,6 +56,27 @@ const Home = (props: HomeProps) => {
           <RecentBlogs {...props.recentBlogs} />
         )}
         <ContactSection />
+
+        <div className="divider mx-auto max-w-6xl px-2" />
+
+        <div className="mx-auto max-w-6xl px-2">
+          <Giscus
+            key={title}
+            id="comments"
+            repo={`${sp.userName}/${sp.repo}`}
+            repoId="MDEwOlJlcG9zaXRvcnkyMTk3OTcwOTY="
+            category="Announcements"
+            categoryId="DIC_kwDODRnWaM4CV1eQ"
+            mapping="pathname"
+            term="Welcome to @giscus/react component!"
+            reactionsEnabled="1"
+            emitMetadata="0"
+            inputPosition="top"
+            theme={isLight ? "light" : "dark_dimmed"}
+            lang="en"
+            loading="lazy"
+          />
+        </div>
       </div>
     </>
   );
