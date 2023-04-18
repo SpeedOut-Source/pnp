@@ -104,7 +104,7 @@ export default function Testimonials(props: TestimonialsProps) {
         <div
           ref={inViewRef}
           className={`${
-            expanded ? "" : " max-h-80 overflow-hidden"
+            expanded ? "" : " max-h-[33rem] overflow-hidden md:max-h-80"
           }   mx-auto grid w-full items-start justify-center gap-2 rounded-b-3xl py-4 sm:grid-cols-2 md:grid-cols-3`}
         >
           <ul className="space-y-2 ">
@@ -145,7 +145,7 @@ export default function Testimonials(props: TestimonialsProps) {
               : "absolute"
           } ${transition ? "transition-opacity duration-300" : ""} ${
             expanded ? (showCollapseButton ? "visible" : "invisible") : ""
-          } inset-x-0 bottom-0 z-50 flex justify-center overflow-hidden rounded-3xl bg-gradient-to-t from-base-300 pb-8 pt-32 `}
+          } inset-x-0 bottom-0 z-40 flex justify-center overflow-hidden rounded-3xl bg-gradient-to-t from-base-300 pb-8 pt-32 `}
         >
           <button
             onClick={() => setExpanded((x) => !x)}
