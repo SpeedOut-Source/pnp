@@ -8,7 +8,7 @@ const Image = dynamic(() => import("next/image"));
 export default function LayoutCardApp(props: App) {
   return (
     <Link
-      className="p-card h-48 cursor-pointer flex-row items-center justify-start px-0 py-3 hover:-translate-y-1 hover:shadow-lg"
+      className="p-card h-48 cursor-pointer flex-row items-center justify-start py-3 hover:-translate-y-1 hover:shadow-lg"
       href={`/apps/view/${props.fileName}`}
     >
       <div className="relative mx-auto h-24 w-24 overflow-hidden rounded-3xl px-0 text-justify">
