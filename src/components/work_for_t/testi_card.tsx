@@ -15,7 +15,7 @@ export interface Testimonial {
 }
 export default function TestiCard(props: Testimonial) {
   return (
-    <div className="p-card group relative mx-0 h-fit w-full space-y-3 overflow-visible px-0 py-3 text-justify hover:bg-base-200">
+    <div className="p-card group relative mx-0 h-fit w-full space-y-3 overflow-visible px-0 py-4 text-justify hover:bg-base-200">
       {props.blank && (
         <Link
           href={props.addUrl ?? "#"}
@@ -51,9 +51,7 @@ export default function TestiCard(props: Testimonial) {
           </div>
         </Link>
       </div>
-      <div className="mx-1 max-h-36 overflow-auto scrollbar-thin scrollbar-track-base-content/5 scrollbar-thumb-base-content/5 scrollbar-track-rounded-xl scrollbar-thumb-rounded-xl">
-        <p className="ml-3 mr-4 text-xs leading-normal">{props.text}</p>
-      </div>
+      <p className="mx-4 text-xs leading-relaxed md:mx-3">{props.text}</p>
     </div>
   );
 }
