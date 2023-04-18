@@ -1,4 +1,22 @@
 {
+  "1.0.7-alpha": {
+    "date": 1681805408912,
+    "changes": [
+      "app size adjust",
+      "mobile screen two testi",
+      "see more testi tailwindcss Style",
+      "testi linkable",
+      "home page giscus",
+      "giscus comment system",
+      "seo fixs",
+      "sitemap",
+      "key fix",
+      "fixed theme switcher icon",
+      "blurdata null",
+      "logo change",
+      "github release logo"
+    ]
+  },
   "1.0.6-alpha": {
     "date": 1681395821014,
     "changes": [
