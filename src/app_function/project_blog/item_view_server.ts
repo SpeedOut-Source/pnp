@@ -65,7 +65,7 @@ export async function getStaticPropsItemView({
       };
     }
     let more4: unknown[] | null = null;
-    if (type === "apps") {
+    if (type === "apps" || type === "company") {
       const ringBuffer = RingBuffer.fromArray(
         allData as unknown[],
         allData.length

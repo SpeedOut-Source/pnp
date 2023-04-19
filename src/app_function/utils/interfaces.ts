@@ -1,11 +1,18 @@
 export interface Company {
-  name: string;
-  logoUrl: string;
+  title: string;
+  imgUrl: string;
+  imgBlurData?: string;
   homePage: string;
+  date: number;
+  start: number;
+  end: number;
+  fileName: string;
+  readTime: string;
 }
 
 export interface WorkForProps {
-  company: Company[];
+  data: Company[];
+  total: number;
 }
 
 export interface Blog {
@@ -46,6 +53,6 @@ export interface App {
   imgs: string[];
 }
 
-export type Card = "blogs" | "projects" | "apps";
-export type CardData = Project[] | Blog[] | App[];
-export type CardItem = Project | Blog | App;
+export type Card = "blogs" | "projects" | "apps" | "company";
+export type CardData = Project[] | Blog[] | App[] | Company[];
+export type CardItem = Project | Blog | App | Company;

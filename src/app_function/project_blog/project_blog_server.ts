@@ -13,6 +13,7 @@ export interface ProjectBlogGetStaticServer {
 export function getPageSize(type: Card) {
   switch (type) {
     case "apps":
+    case "company":
       return PAGE_SIZE_APP;
     default:
       return PAGE_SIZE;
@@ -30,8 +31,11 @@ export async function projectBlogGetStaticPaths(type: Card) {
     case "blogs":
       total = dbConfig.blogTotal;
       break;
-    default:
+    case "projects":
       total = dbConfig.projectTotal;
+      break;
+    case "company":
+      total = dbConfig.companyTotal;
       break;
   }
 
@@ -73,7 +77,7 @@ export async function projectBlogGetStaticProps(
   const limitShow = pageSize * pageNo;
   const dataArray = data.slice(limitShow - pageSize, limitShow);
 
-  const projectsProps: AllDataProps = {
+  const allProps: AllDataProps = {
     configs,
     data: dataArray,
     pageInfo: {
@@ -85,6 +89,6 @@ export async function projectBlogGetStaticProps(
   };
 
   return {
-    props: projectsProps,
+    props: allProps,
   };
 }

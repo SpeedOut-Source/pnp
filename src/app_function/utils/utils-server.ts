@@ -7,6 +7,7 @@ import {
   type Blog,
   type Project,
   type CardData,
+  type Company,
 } from "./interfaces";
 import { type App } from "./interfaces";
 import { getPlaiceholder } from "plaiceholder";
@@ -16,6 +17,7 @@ export interface DBConfigs {
   projectTotal: number;
   blogTotal: number;
   appTotal: number;
+  companyTotal: number;
 }
 
 export interface RawProjectsProps {
@@ -28,6 +30,10 @@ export interface RawAppsProps {
 
 export interface RawBlogsProps {
   blogs: Blog[];
+}
+
+export interface RawCompanyProps {
+  company: Company[];
 }
 
 export async function getData(path: string) {
@@ -74,6 +80,16 @@ export async function getBlogs(): Promise<RawBlogsProps> {
     return allBlogs;
   } catch (e) {
     return { blogs: [] };
+  }
+}
+
+export async function getCompany(): Promise<RawCompanyProps> {
+  try {
+    const dataCompany = (await getData("db/workInfo.json")).toString();
+    const allCompany = JSON.parse(dataCompany) as RawCompanyProps;
+    return allCompany;
+  } catch (e) {
+    return { company: [] };
   }
 }
 
@@ -195,9 +211,13 @@ export async function getCard(type: Card) {
       const blogs = (await getBlogs()).blogs;
       allData = await addBlur(blogs, blogs.length);
       break;
-    default:
+    case "apps":
       const apps = (await getApps()).apps;
       allData = await addBlur(apps, apps.length);
+      break;
+    case "company":
+      const company = (await getCompany()).company;
+      allData = await addBlur(company, company.length);
       break;
   }
   return allData;

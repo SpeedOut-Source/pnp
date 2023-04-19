@@ -14,6 +14,7 @@ import {
   type CardItem,
   type Card,
   type App,
+  type Company,
 } from "~/app_function/utils/interfaces";
 import LayoutCardApp from "~/components/apps/layout_card";
 import { DEFAULT_IS_LIGHT, useThemeStore } from "~/app_state/theme_mode";
@@ -24,6 +25,7 @@ import {
   getUserNRepo,
   toTitleCase,
 } from "~/app_function/utils/utils";
+import LayoutCardCompany from "~/components/company/layout_card";
 
 const Giscus = dynamic(() => import("@giscus/react"));
 const SEO = dynamic(() => import("~/components/seo"));
@@ -122,7 +124,7 @@ export default function ProjectBlogView(props: ProjectBlogViewProps) {
 
   switch (props.type) {
     case "projects":
-      const itemView: Project = props.itemView as Project;
+      const itemView = props.itemView as Project;
       title = `${itemView.whatText}`;
       desc = `${itemView.result} | ${toTitleCase(props.type)} | ${
         itemView.company.name
@@ -131,19 +133,25 @@ export default function ProjectBlogView(props: ProjectBlogViewProps) {
       project = itemView;
       break;
     case "blogs":
-      const b: Blog = props.itemView as Blog;
+      const b = props.itemView as Blog;
       title = b.title;
       desc = `${b.desc} | ${toTitleCase(props.type)} | ${
         props.configs.appName
       }`;
       shareTxt = b.desc;
       break;
-    default:
-      const a: App = props.itemView as App;
+    case "apps":
+      const a = props.itemView as App;
       title = a.title;
       desc = `${a.category} | ${toTitleCase(props.type)} | ${a.platforms
         .map((x) => x.name)
         .join(" | ")} | ${props.configs.appName}`;
+      shareTxt = a.title;
+      break;
+    case "company":
+      const c = props.itemView as Company;
+      title = c.title;
+      desc = `${title} | ${toTitleCase(props.type)}`;
       shareTxt = title;
       break;
   }
@@ -182,6 +190,38 @@ export default function ProjectBlogView(props: ProjectBlogViewProps) {
           <>
             App name: <span>{(props.itemView as App).title}</span>
           </>
+        );
+      case "company":
+        const data = props.itemView as Company;
+        return (
+          <div className="text-left">
+            <p>
+              Start:{" "}
+              <span>
+                {new Date(data.start).toLocaleString("en-US", {
+                  month: "short",
+                  day: "numeric",
+                  year: "numeric",
+                  hour: "2-digit",
+                  minute: "2-digit",
+                })}
+              </span>
+            </p>
+            <p>
+              End:{" "}
+              <span>
+                {data.end > 0
+                  ? new Date(data.end).toLocaleString("en-US", {
+                      month: "short",
+                      day: "numeric",
+                      year: "numeric",
+                      hour: "2-digit",
+                      minute: "2-digit",
+                    })
+                  : "Present"}
+              </span>
+            </p>
+          </div>
         );
       default:
         break;
@@ -227,8 +267,7 @@ export default function ProjectBlogView(props: ProjectBlogViewProps) {
         </div>
         <div className="my-2 flex flex-col items-center justify-between gap-2 sm:flex-row sm:items-end">
           <div className="p-card flex h-fit w-full flex-col items-start py-2 text-xs text-slate-500 sm:w-fit">
-            <div className="flex items-center gap-1">{headerCard()}</div>
-            {props.type === "projects" && project && (
+            {(props.type === "projects" || props.type === "company") && (
               <div className="flex items-center gap-1">
                 Company Name:{" "}
                 <div>
@@ -236,16 +275,29 @@ export default function ProjectBlogView(props: ProjectBlogViewProps) {
                     <Image
                       width={20}
                       height={20}
-                      src={project.company.logoUrl}
-                      alt={project.company.name}
+                      src={
+                        project
+                          ? project.company.logoUrl
+                          : props.itemView.imgUrl
+                      }
+                      alt={
+                        project
+                          ? project.company.name
+                          : (props.itemView as Company).title
+                      }
                     />
-                    <span>{project.company.name}</span>
+                    <span>
+                      {project
+                        ? project.company.name
+                        : (props.itemView as Company).title}
+                    </span>
                   </div>
                 </div>
               </div>
             )}
+            <div className="flex items-center gap-1">{headerCard()}</div>
             <div className="flex items-center gap-1">
-              Date:{" "}
+              Post date:{" "}
               <span>
                 {new Date(props.itemView.date).toLocaleString("en-US", {
                   month: "short",
@@ -335,6 +387,29 @@ export default function ProjectBlogView(props: ProjectBlogViewProps) {
           </div>
         </div>
       )}
+      {props.type === "company" && (
+        <div className="container mx-auto mb-4 max-w-3xl space-y-4 px-2">
+          <div className="flex w-full flex-col items-center justify-center">
+            <Image
+              src={props.itemView.imgUrl}
+              alt={(props.itemView as Company).title}
+              width={100}
+              height={100}
+            />
+            <p className="text-center text-4xl font-semibold tracking-wider">
+              {(props.itemView as Company).title}
+            </p>
+
+            <Link
+              href={(props.itemView as Company).homePage}
+              target="_blank"
+              className="p-card mt-3 cursor-pointer"
+            >
+              Goto website
+            </Link>
+          </div>
+        </div>
+      )}
       <MDRender key={props.itemView.date} data={props.data} />
       <div className="container divider mx-auto max-w-3xl px-2" />
       {(props.previous || props.next) && (
@@ -351,7 +426,9 @@ export default function ProjectBlogView(props: ProjectBlogViewProps) {
                     Previous{" "}
                   </Link>
                 </div>
-                {props.type !== "apps" && <LayoutCard data={props.previous} />}
+                {props.type !== "apps" && props.type !== "company" && (
+                  <LayoutCard data={props.previous} />
+                )}
               </div>
             )}
             {props.next && (
@@ -364,20 +441,27 @@ export default function ProjectBlogView(props: ProjectBlogViewProps) {
                     Next <ChevronRightIcon className="h-6 w-6" />
                   </Link>
                 </div>
-                {props.type !== "apps" && <LayoutCard data={props.next} />}
+                {props.type !== "apps" && props.type !== "company" && (
+                  <LayoutCard data={props.next} />
+                )}
               </div>
             )}
           </div>
         </div>
       )}
-      {props.type === "apps" && props.more4 && (
+      {(props.type === "apps" || props.type === "company") && props.more4 && (
         <div
           key={`${props.itemView.fileName}`}
           className="mx-auto grid max-w-3xl gap-2 px-2 xs:grid-cols-2 sm:grid-cols-3 lg:grid-cols-4"
         >
           {props.more4.map((x) => {
-            const m = x as App;
-            return <LayoutCardApp {...m} key={x.date} />;
+            if (props.type === "apps") {
+              const m = x as App;
+              return <LayoutCardApp {...m} key={x.date} />;
+            } else {
+              const m = x as Company;
+              return <LayoutCardCompany {...m} key={x.date} />;
+            }
           })}
         </div>
       )}

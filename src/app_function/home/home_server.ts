@@ -3,6 +3,7 @@ import {
   addBlur,
   getApps,
   getBlogs,
+  getCompany,
   getConfigs,
   getDBConfigs,
   getData,
@@ -14,6 +15,7 @@ import { type TestimonialsProps } from "~/components/work_for_t/testimonials";
 import { type ProjectsProps } from "~/components/projects/recent_projects";
 import { type RecentBlogsProps } from "~/components/blogs/recent_blogs";
 import {
+  type Company,
   type App,
   type Blog,
   type Project,
@@ -51,9 +53,6 @@ export async function HomeServer() {
   const dataExpertise = (await getData("home/expertise.json")).toString();
   const techs = JSON.parse(dataExpertise) as RXTProps;
 
-  const dataWorkFor = (await getData("home/workInfo.json")).toString();
-  const workFor = JSON.parse(dataWorkFor) as WorkForProps;
-
   const dataTesti = (await getData("home/testimonials.json")).toString();
   const testis = JSON.parse(dataTesti) as TestimonialsProps;
 
@@ -63,9 +62,12 @@ export async function HomeServer() {
 
   const allBlogsRaw = await getBlogs();
 
-  const allPros: Project[] = await addBlur(allProsRaw.projects);
-  const allApps: App[] = await addBlur(allAppsRaw.apps, 6);
-  const allBlogs: Blog[] = await addBlur(allBlogsRaw.blogs);
+  const allCompanyRaw = await getCompany();
+
+  const RPros: Project[] = await addBlur(allProsRaw.projects);
+  const RApps: App[] = await addBlur(allAppsRaw.apps, 6);
+  const RBlogs: Blog[] = await addBlur(allBlogsRaw.blogs);
+  const RCompany: Company[] = await addBlur(allCompanyRaw.company);
 
   const testimonialAddUrl =
     getDataUrl(configs.repoPath) + "/home/testimonials.json";
@@ -76,18 +78,18 @@ export async function HomeServer() {
       me,
       techs,
     },
-    workFor,
+    workFor: { data: RCompany, total: dbConfig.companyTotal },
     testis: { ...testis, addUrl: testimonialAddUrl },
     recentApps: {
-      data: allApps,
+      data: RApps,
       total: dbConfig.appTotal,
     },
     recentProjects: {
-      data: allPros,
+      data: RPros,
       total: dbConfig.projectTotal,
     },
     recentBlogs: {
-      data: allBlogs,
+      data: RBlogs,
       total: dbConfig.blogTotal,
     },
   };
