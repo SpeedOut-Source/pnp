@@ -33,6 +33,9 @@ const SEO = dynamic(() => import("~/components/seo"));
 const Link = dynamic(() => import("next/link"));
 const Image = dynamic(() => import("next/image"));
 const ShareWith = dynamic(() => import("~/components/share_with"));
+const DateTimePost = dynamic(() => import("~/components/date_time_post"), {
+  ssr: false,
+});
 
 const MDRender = dynamic(() => import("~/components/markdown/md_render"), {
   loading: () => <Loading />,
@@ -196,29 +199,12 @@ export default function ProjectBlogView(props: ProjectBlogViewProps) {
         return (
           <div className="text-left">
             <p>
-              Start:{" "}
-              <span>
-                {new Date(data.start).toLocaleString("en-US", {
-                  month: "short",
-                  day: "numeric",
-                  year: "numeric",
-                  hour: "2-digit",
-                  minute: "2-digit",
-                })}
-              </span>
+              Start: <DateTimePost date={data.start} />
             </p>
             <p>
               End:{" "}
               <span>
-                {data.end > 0
-                  ? new Date(data.end).toLocaleString("en-US", {
-                      month: "short",
-                      day: "numeric",
-                      year: "numeric",
-                      hour: "2-digit",
-                      minute: "2-digit",
-                    })
-                  : "Present"}
+                {data.end > 0 ? <DateTimePost date={data.end} /> : "Present"}
               </span>
             </p>
           </div>
@@ -297,16 +283,7 @@ export default function ProjectBlogView(props: ProjectBlogViewProps) {
             )}
             <div className="flex items-center gap-1">{headerCard()}</div>
             <div className="flex items-center gap-1">
-              Post date:{" "}
-              <span>
-                {new Date(props.itemView.date).toLocaleString("en-US", {
-                  month: "short",
-                  day: "numeric",
-                  year: "numeric",
-                  hour: "2-digit",
-                  minute: "2-digit",
-                })}
-              </span>
+              Post date: <DateTimePost date={props.itemView.date} />
             </div>
             {props.type !== "apps" && (
               <div className="flex items-center gap-1">

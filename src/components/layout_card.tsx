@@ -10,6 +10,7 @@ import dynamic from "next/dynamic";
 
 const Link = dynamic(() => import("next/link"));
 const Image = dynamic(() => import("next/image"));
+const ThumTime = dynamic(() => import("./thum_time"), { ssr: false });
 
 interface LayoutCard {
   data: CardItem;
@@ -91,13 +92,7 @@ export default function LayoutCard({ data }: LayoutCard) {
                 )}
               </div>
               <div className={`mx-2 mb-1 flex justify-between gap-2 text-xs`}>
-                <div>
-                  {new Date(data.date).toLocaleString("en-US", {
-                    month: "short",
-                    day: "numeric",
-                    year: "numeric",
-                  })}
-                </div>
+                <ThumTime date={data.date} />
                 <div>{(data as Project | Blog).readTime} min</div>
               </div>
 

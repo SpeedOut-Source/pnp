@@ -5,6 +5,7 @@ import { useThemeStore, DEFAULT_IS_LIGHT } from "~/app_state/theme_mode";
 
 const Link = dynamic(() => import("next/link"));
 const Image = dynamic(() => import("next/image"));
+const TimeLine = dynamic(() => import("./time_line"), { ssr: false });
 
 export default function LayoutCardCompany(x: Company) {
   const utm = useThemeStore();
@@ -38,21 +39,7 @@ export default function LayoutCardCompany(x: Company) {
           <span className="text-sm font-semibold tracking-widest">
             {x.title}
           </span>
-          <span className="text-xs ">
-            {new Date(x.start).toLocaleString("en-US", {
-              month: "short",
-
-              year: "numeric",
-            })}
-            -{" "}
-            {x.end > 0
-              ? new Date(x.end).toLocaleString("en-US", {
-                  month: "short",
-
-                  year: "numeric",
-                })
-              : "Present"}{" "}
-          </span>
+          <TimeLine start={x.start} end={x.end} />
         </div>
       </Link>
     </span>
