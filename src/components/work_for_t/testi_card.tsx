@@ -33,7 +33,7 @@ export default function TestiCard(props: Testimonial) {
           data-tip="Visit website"
           target="_blank"
           href={props.link ?? props.addUrl ?? "#"}
-          className="tooltip flex w-full items-center gap-2"
+          className="tooltip flex w-full items-center gap-2 lg:items-start"
         >
           <div>
             <div className="relative h-12 w-12 overflow-hidden rounded-full ring ring-base-300">
@@ -46,12 +46,21 @@ export default function TestiCard(props: Testimonial) {
             </div>
           </div>
           <div className="text-left tracking-wider">
-            <p className="text-sm font-bold">{props.fullName}</p>
-            <p className="text-xs">{props.position}</p>
+            <p style={{ whiteSpace: "pre-line" }} className="text-sm font-bold">
+              {props.fullName}
+            </p>
+            <p style={{ whiteSpace: "pre-line" }} className="text-xs">
+              {props.position}
+            </p>
           </div>
         </Link>
       </div>
-      <p className="mx-4 text-xs leading-relaxed md:mx-3">{props.text}</p>
+      <p
+        style={{ whiteSpace: "pre-line" }}
+        className="mx-4 text-xs leading-relaxed md:mx-3"
+      >
+        {props.text}
+      </p>
     </div>
   );
 }
