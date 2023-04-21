@@ -3,7 +3,7 @@ import PhotoIcon from "@heroicons/react/24/outline/PhotoIcon";
 import dynamic from "next/dynamic";
 
 const Link = dynamic(() => import("next/link"));
-const Image = dynamic(() => import("next/image"));
+const Image = dynamic(() => import("next/legacy/image"));
 
 export default function LayoutCardApp(props: App) {
   return (

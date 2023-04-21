@@ -5,7 +5,7 @@ import { type SAPageProps } from "./app/interfaces";
 import dynamic from "next/dynamic";
 
 const Link = dynamic(() => import("next/link"));
-const Image = dynamic(() => import("next/image"));
+const Image = dynamic(() => import("next/legacy/image"));
 const DevPlate = dynamic(() => import("./Dev_plate"));
 
 const SAPage = (props: SAPageProps) => {

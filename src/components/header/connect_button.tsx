@@ -2,7 +2,7 @@ import { DEFAULT_IS_LIGHT, useThemeStore } from "~/app_state/theme_mode";
 import { useState, useEffect } from "react";
 import dynamic from "next/dynamic";
 
-const Image = dynamic(() => import("next/image"));
+const Image = dynamic(() => import("next/legacy/image"));
 
 export interface IConnectButtonProps {
   text: string;

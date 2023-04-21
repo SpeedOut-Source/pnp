@@ -31,7 +31,7 @@ const Giscus = dynamic(() => import("@giscus/react"));
 const SEO = dynamic(() => import("~/components/seo"));
 
 const Link = dynamic(() => import("next/link"));
-const Image = dynamic(() => import("next/image"));
+const Image = dynamic(() => import("next/legacy/image"));
 const ShareWith = dynamic(() => import("~/components/share_with"));
 const DateTimePost = dynamic(() => import("~/components/date_time_post"), {
   ssr: false,
@@ -448,9 +448,10 @@ export default function ProjectBlogView(props: ProjectBlogViewProps) {
           key={githubEditUrl}
           id="comments"
           repo={`${sp.userName}/${sp.repo}`}
-          repoId="MDEwOlJlcG9zaXRvcnkyMTk3OTcwOTY="
-          category="Announcements"
-          categoryId="DIC_kwDODRnWaM4CV1eQ"
+          // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+          repoId={process.env.NEXT_PUBLIC_REPO_ID!}
+          category={process.env.NEXT_PUBLIC_CATEGORY}
+          categoryId={process.env.NEXT_PUBLIC_CATEGORY_ID}
           mapping="pathname"
           term="Welcome to @giscus/react component!"
           reactionsEnabled="1"

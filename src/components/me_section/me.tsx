@@ -1,6 +1,6 @@
 import dynamic from "next/dynamic";
 
-const Image = dynamic(() => import("next/image"));
+const Image = dynamic(() => import("next/legacy/image"));
 
 export interface MeProps {
   fullName: string;

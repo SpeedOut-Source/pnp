@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { useThemeStore, DEFAULT_IS_LIGHT } from "~/app_state/theme_mode";
 
 const Link = dynamic(() => import("next/link"));
-const Image = dynamic(() => import("next/image"));
+const Image = dynamic(() => import("next/legacy/image"));
 const TimeLine = dynamic(() => import("./time_line"), { ssr: false });
 
 export default function LayoutCardCompany(x: Company) {
