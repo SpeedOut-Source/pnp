@@ -31,7 +31,8 @@ const Giscus = dynamic(() => import("@giscus/react"));
 const SEO = dynamic(() => import("~/components/seo"));
 
 const Link = dynamic(() => import("next/link"));
-const Image = dynamic(() => import("next/legacy/image"));
+const Image = dynamic(() => import("next/image"));
+const ImageLegacy = dynamic(() => import("next/legacy/image"));
 const ShareWith = dynamic(() => import("~/components/share_with"));
 const DateTimePost = dynamic(() => import("~/components/date_time_post"), {
   ssr: false,
@@ -336,7 +337,7 @@ export default function ProjectBlogView(props: ProjectBlogViewProps) {
                   key={x}
                   className="carousel-item relative h-72 w-[98%] xs:h-72 sm:h-80 md:h-[30rem]"
                 >
-                  <Image
+                  <ImageLegacy
                     alt={i.toString()}
                     layout="fill"
                     objectFit="scale-down"
