@@ -1,4 +1,3 @@
-import PlusIcon from "@heroicons/react/24/solid/PlusIcon";
 import dynamic from "next/dynamic";
 
 const Link = dynamic(() => import("next/link"));
@@ -16,18 +15,6 @@ export interface Testimonial {
 export default function TestiCard(props: Testimonial) {
   return (
     <div className="p-card group relative mx-0 h-fit w-full space-y-3 overflow-visible px-0 py-4 text-justify hover:bg-base-200">
-      {props.blank && (
-        <Link
-          href={props.addUrl ?? "#"}
-          target="_blank"
-          className="absolute z-40 h-full w-full bg-base-100/20 backdrop-blur-sm"
-        >
-          <div className="flex h-full cursor-pointer flex-col items-center justify-center group-hover:font-semibold">
-            <PlusIcon className="h-8 w-8" />
-            <span>Give Testimonial</span>
-          </div>
-        </Link>
-      )}
       <div className="w-full px-3">
         <Link
           data-tip="Visit website"

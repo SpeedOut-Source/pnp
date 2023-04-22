@@ -1,11 +1,10 @@
 import dynamic from "next/dynamic";
 import { type Testimonial } from "./testi_card";
-import { ChatBubbleLeftRightIcon } from "@heroicons/react/24/outline";
+import { ChatBubbleLeftRightIcon, PlusIcon } from "@heroicons/react/24/outline";
 import { useEffect, useRef, useState } from "react";
 import { useIsomorphicLayoutEffect } from "~/app_function/utils/useIsomorphicLayoutEffect";
 import { useInView } from "react-intersection-observer";
-import { TESTI_BLANK } from "~/app_function/utils/values";
-
+import Link from "next/link";
 export interface TestimonialsProps {
   testis: Testimonial[];
   addUrl: string;
@@ -99,14 +98,26 @@ export default function Testimonials(props: TestimonialsProps) {
       className="relative mx-auto h-fit w-full px-3 sm:mx-0 lg:max-w-2xl lg:px-0"
     >
       <p className="flex items-center gap-2 text-2xl normal-case text-slate-400">
-        <ChatBubbleLeftRightIcon className="h-5 w-5" /> Testimonials
+        <ChatBubbleLeftRightIcon className="h-5 w-5" /> Testimonials{" "}
+        <Link
+          href={props.addUrl}
+          className="tooltip"
+          data-tip="Give Testimonial"
+          target="_blank"
+        >
+          <PlusIcon className="h-5 w-5" />
+        </Link>
       </p>
       <div className="relative md:mx-2">
         <div
           ref={inViewRef}
           className={`${
-            expanded ? "" : "max-h-[33rem] overflow-hidden md:max-h-80"
-          } mx-auto  mb-28 grid w-full items-start justify-center gap-2 rounded-b-3xl py-4 sm:grid-cols-2 md:grid-cols-3`}
+            expanded
+              ? showCollapseButton
+                ? "mb-16"
+                : ""
+              : "max-h-[33rem] overflow-hidden md:max-h-80"
+          } mx-auto grid w-full items-start justify-center gap-2 rounded-b-3xl py-4 transition-all duration-500 ease-in-out sm:grid-cols-2 md:grid-cols-3`}
         >
           <ul className="space-y-2 ">
             {l1.map((x) => {
@@ -137,7 +148,6 @@ export default function Testimonials(props: TestimonialsProps) {
                   </li>
                 );
             })}
-            <TestiCard key={"blank"} {...TESTI_BLANK} />
           </ul>
         </div>
 
