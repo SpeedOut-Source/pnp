@@ -4,6 +4,7 @@ import { ChatBubbleLeftRightIcon } from "@heroicons/react/24/outline";
 import { useEffect, useRef, useState } from "react";
 import { useIsomorphicLayoutEffect } from "~/app_function/utils/useIsomorphicLayoutEffect";
 import { useInView } from "react-intersection-observer";
+import { TESTI_BLANK } from "~/app_function/utils/values";
 
 export interface TestimonialsProps {
   testis: Testimonial[];
@@ -104,8 +105,8 @@ export default function Testimonials(props: TestimonialsProps) {
         <div
           ref={inViewRef}
           className={`${
-            expanded ? "" : " max-h-[33rem] overflow-hidden md:max-h-80"
-          }   mx-auto grid w-full items-start justify-center gap-2 rounded-b-3xl py-4 sm:grid-cols-2 md:grid-cols-3`}
+            expanded ? "" : "max-h-[33rem] overflow-hidden md:max-h-80"
+          } mx-auto  mb-28 grid w-full items-start justify-center gap-2 rounded-b-3xl py-4 sm:grid-cols-2 md:grid-cols-3`}
         >
           <ul className="space-y-2 ">
             {l1.map((x) => {
@@ -136,8 +137,10 @@ export default function Testimonials(props: TestimonialsProps) {
                   </li>
                 );
             })}
+            <TestiCard key={"blank"} {...TESTI_BLANK} />
           </ul>
         </div>
+
         <div
           className={`${
             expanded
