@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import { DEFAULT_IS_LIGHT, useThemeStore } from "~/app_state/theme_mode";
 import { CONNECT_OPTIONS } from "../contact/connect_data";
 import Link from "next/link";
+import Image from "next/legacy/image";
 
 export default function ConnectSection() {
   const utm = useThemeStore();
@@ -26,6 +27,24 @@ export default function ConnectSection() {
         <SunIcon className="swap-on h-6 w-6" />
         <MoonIcon className="swap-off h-6 w-6" />
       </label>
+      <Link
+        className="relative h-16 w-56 md:hidden xl:inline"
+        target="_blank"
+        href="https://www.buymeacoffee.com/biplobsd"
+      >
+        <Image
+          alt="Buymeacoffee"
+          layout="fill"
+          objectFit="fill"
+          src={`https://img.buymeacoffee.com/button-api/?text=Buy me a coffee&emoji=&slug=biplobsd&button_colour=${
+            isLight ? "e3e9f4" : "20252e"
+          }&font_colour=${
+            isLight ? "394e6a" : "a6adbb"
+          }&font_family=Cookie&outline_colour=${
+            isLight ? "394e6a" : "a6adbb"
+          }&coffee_colour=FFDD00`}
+        />
+      </Link>
       <div className="w-fit items-center gap-3 rounded-xl bg-base-300 px-4 md:flex lg:flex xl:flex">
         <div className="font-semibold tracking-wider">Connect on</div>
         <div className="flex items-center">
