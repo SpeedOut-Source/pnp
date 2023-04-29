@@ -182,13 +182,6 @@ export default function ProjectBlogView(props: ProjectBlogViewProps) {
             </div>
           </>
         );
-
-      case "blogs":
-        return (
-          <>
-            Title: <span>{(props.itemView as Blog).title}</span>
-          </>
-        );
       case "apps":
         return (
           <>
