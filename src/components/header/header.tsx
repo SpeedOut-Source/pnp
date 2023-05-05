@@ -4,7 +4,6 @@ import dynamic from "next/dynamic";
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import { DEFAULT_IS_LIGHT, useThemeStore } from "~/app_state/theme_mode";
-import { SearchButton } from "../search/button";
 
 const ConnectSection = dynamic(() => import("./connect_section"));
 const Links = dynamic(() => import("./links"));

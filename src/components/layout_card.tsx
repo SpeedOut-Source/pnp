@@ -7,6 +7,8 @@ import {
 } from "~/app_function/utils/interfaces";
 import PhotoIcon from "@heroicons/react/24/outline/PhotoIcon";
 import dynamic from "next/dynamic";
+import { AllHit, BlogHit } from "~/app_function/types/HitTypes";
+import { Highlight } from "./search/Highlight";
 
 const Link = dynamic(() => import("next/link"));
 const Image = dynamic(() => import("next/legacy/image"));
@@ -89,7 +91,7 @@ export default function LayoutCard({ data }: LayoutCard) {
                 </div>
               ) : (
                 <div className="text-md mt-2 text-justify font-semibold leading-tight">
-                  <span>{data.title}</span>
+                  <Highlight hit={data as AllHit} attribute="title" />
                 </div>
               )}
             </div>
@@ -105,7 +107,9 @@ export default function LayoutCard({ data }: LayoutCard) {
                   <span>{data.result}</span>
                 </div>
               ) : (
-                <p>{(data as Blog).desc}</p>
+                <p>
+                  <Highlight hit={data as BlogHit} attribute="desc" />
+                </p>
               )}
             </div>
             <div className=" h-0 transition-all duration-100 ease-in-out group-hover:h-5" />

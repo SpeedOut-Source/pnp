@@ -15,7 +15,7 @@ export interface WorkForProps {
   total: number;
 }
 
-export interface Blog {
+export type Blog = {
   title: string;
   imgUrl: string;
   imgBlurData?: string;
@@ -23,7 +23,7 @@ export interface Blog {
   date: number;
   readTime: number;
   fileName: string;
-}
+};
 
 export interface Project {
   imgUrl: string;
@@ -42,7 +42,7 @@ interface Listing {
   link: string;
 }
 
-export interface App {
+export type App = {
   imgUrl: string;
   imgBlurData?: string;
   date: number;
@@ -51,7 +51,7 @@ export interface App {
   platforms: Listing[];
   fileName: string;
   imgs: string[];
-}
+};
 
 export type Card = "blogs" | "projects" | "apps" | "company";
 export type CardData = Project[] | Blog[] | App[] | Company[];

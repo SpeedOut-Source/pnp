@@ -4,6 +4,7 @@ import { type App } from "~/app_function/utils/interfaces";
 const LayoutCard = dynamic(() => import("./layout_card"));
 
 interface Layout {
+  searchObject?: boolean;
   data: App[];
 }
 

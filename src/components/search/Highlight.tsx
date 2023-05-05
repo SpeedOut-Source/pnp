@@ -20,7 +20,7 @@ type HighlightHitParams<THit> = {
   tagName?: string;
 };
 
-export function Highlight<THit extends { _highlightResult?: unknown }>({
+export function Highlight<THit extends { _highlightResult?: any }>({
   hit,
   attribute,
   tagName = "mark",
