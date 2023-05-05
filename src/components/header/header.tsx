@@ -8,6 +8,7 @@ import { DEFAULT_IS_LIGHT, useThemeStore } from "~/app_state/theme_mode";
 const ConnectSection = dynamic(() => import("./connect_section"));
 const Links = dynamic(() => import("./links"));
 const Link = dynamic(() => import("next/link"));
+const Search = dynamic(() => import("../search/search"), { ssr: false });
 
 export default function Header() {
   const utm = useThemeStore();
@@ -68,6 +69,7 @@ export default function Header() {
           </span>
           <Links className="hidden items-center gap-4 md:flex lg:flex xl:flex" />
         </div>
+        <Search />
         <div>
           <div className="hidden md:inline lg:inline xl:inline">
             <ConnectSection />

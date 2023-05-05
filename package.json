@@ -13,6 +13,10 @@
     "protest": "npm run export && npx serve out"
   },
   "dependencies": {
+    "@algolia/autocomplete-js": "^1.9.2",
+    "@algolia/autocomplete-plugin-query-suggestions": "^1.9.2",
+    "@algolia/autocomplete-plugin-recent-searches": "^1.9.2",
+    "@algolia/autocomplete-theme-classic": "^1.9.2",
     "@giscus/react": "^2.2.8",
     "@react-google-maps/api": "^2.18.1",
     "@react-pdf-viewer/core": "^3.12.0",
