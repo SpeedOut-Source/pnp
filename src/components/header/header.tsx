@@ -4,11 +4,11 @@ import dynamic from "next/dynamic";
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import { DEFAULT_IS_LIGHT, useThemeStore } from "~/app_state/theme_mode";
+import { SearchButton } from "../search/button";
 
 const ConnectSection = dynamic(() => import("./connect_section"));
 const Links = dynamic(() => import("./links"));
 const Link = dynamic(() => import("next/link"));
-const Search = dynamic(() => import("../search/search"), { ssr: false });
 
 export default function Header() {
   const utm = useThemeStore();
@@ -69,21 +69,20 @@ export default function Header() {
           </span>
           <Links className="hidden items-center gap-4 md:flex lg:flex xl:flex" />
         </div>
-        <Search />
         <div>
-          <div className="hidden md:inline lg:inline xl:inline">
+          <div className="hidden lg:inline">
             <ConnectSection />
           </div>
-          <div className="md:hidden lg:hidden xl:hidden">
+          <div className="lg:hidden">
             <div className="dropdown-end dropdown">
               <label tabIndex={0} className="btn-ghost btn-circle btn">
                 <Bars3Icon className="h-8 w-8" />
               </label>
               <ul
                 tabIndex={0}
-                className="dropdown-content menu rounded-box mt-2 w-fit bg-base-100/80 p-2 shadow-2xl ring ring-base-300 backdrop-blur-3xl"
+                className="dropdown-content menu rounded-box mt-2 w-fit bg-base-100/95 px-2 py-5 shadow-2xl ring ring-base-300"
               >
-                <Links className="mb-2 flex justify-center space-x-4 rounded-lg bg-base-100/80 px-2 py-3" />
+                <Links className=" flex justify-center space-x-4 rounded-lg bg-base-100/80 px-2 pb-2" />
                 <ConnectSection />
               </ul>
             </div>
