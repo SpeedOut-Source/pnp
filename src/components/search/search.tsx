@@ -23,6 +23,7 @@ import {
   type BlogHit,
   type ProjectHit,
   CompanyHit,
+  TestimonialHit,
 } from "~/app_function/types/HitTypes";
 import SearchApps from "../apps/search_apps";
 import SearchBlogs from "../blogs/search_blogs";
@@ -30,6 +31,8 @@ import clsx from "clsx";
 import ScrollIntoView from "./scroll_into_view";
 import SearchProjects from "../projects/search_projects";
 import SearchCompany from "../company/search_company";
+import Testimonials from "../work_for_t/testimonials";
+import SearchTestimonials from "../work_for_t/serach_testimonials";
 
 const searchClient = algoliasearch(
   // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
@@ -100,6 +103,13 @@ export default function Autocomplete(
                         hitsPerPage: 5,
                       },
                     },
+                    {
+                      indexName: "testimonials",
+                      query,
+                      params: {
+                        hitsPerPage: 5,
+                      },
+                    },
                   ],
                 });
               },
@@ -117,6 +127,7 @@ export default function Autocomplete(
   const blogsRef = useRef<HTMLSpanElement>(null);
   const projectsRef = useRef<HTMLSpanElement>(null);
   const companyRef = useRef<HTMLSpanElement>(null);
+  const testimonialsRef = useRef<HTMLSpanElement>(null);
   const { getEnvironmentProps } = autocomplete;
   const apps = useMemo(() => {
     return autocompleteState.collections[0]?.items.filter(
@@ -140,6 +151,12 @@ export default function Autocomplete(
     return autocompleteState.collections[0]?.items.filter(
       (i) => i.__autocomplete_indexName === "compnay"
     ) as unknown as CompanyHit[];
+  }, [autocompleteState.collections]);
+
+  const testimonials = useMemo(() => {
+    return autocompleteState.collections[0]?.items.filter(
+      (i) => i.__autocomplete_indexName === "testimonials"
+    ) as unknown as TestimonialHit[];
   }, [autocompleteState.collections]);
 
   useEffect(() => {
@@ -196,6 +213,9 @@ export default function Autocomplete(
             <label>
               {autocompleteState.collections[0]?.items.length} items
             </label>
+            <ScrollIntoView data={testimonials} ref={testimonialsRef}>
+              Testimonials
+            </ScrollIntoView>
             <ScrollIntoView data={company} ref={companyRef}>
               Company
             </ScrollIntoView>
@@ -211,6 +231,9 @@ export default function Autocomplete(
           </span>
           <div className="ml-2 flex-1 flex-col overflow-y-auto">
             <div className="mr-2">
+              <span ref={testimonialsRef}>
+                <SearchTestimonials data={testimonials} />
+              </span>
               <span ref={companyRef}>
                 <SearchCompany data={company} />
               </span>

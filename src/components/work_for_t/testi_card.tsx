@@ -3,7 +3,7 @@ import dynamic from "next/dynamic";
 const Link = dynamic(() => import("next/link"));
 const Image = dynamic(() => import("next/legacy/image"));
 
-export interface Testimonial {
+export type Testimonial = {
   imgUrl: string;
   fullName: string;
   position: string;
@@ -11,7 +11,7 @@ export interface Testimonial {
   blank?: boolean;
   addUrl?: string;
   link?: string;
-}
+};
 export default function TestiCard(props: Testimonial) {
   return (
     <div className="p-card group relative mx-0 h-fit w-full space-y-3 overflow-visible px-0 py-4 text-justify hover:bg-base-200">
