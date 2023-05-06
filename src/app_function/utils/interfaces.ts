@@ -1,4 +1,4 @@
-export interface Company {
+export type Company = {
   title: string;
   imgUrl: string;
   imgBlurData?: string;

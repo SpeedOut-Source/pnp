@@ -22,12 +22,14 @@ import {
   type AllHit,
   type BlogHit,
   type ProjectHit,
+  CompanyHit,
 } from "~/app_function/types/HitTypes";
 import SearchApps from "../apps/search_apps";
 import SearchBlogs from "../blogs/search_blogs";
 import clsx from "clsx";
 import ScrollIntoView from "./scroll_into_view";
 import SearchProjects from "../projects/search_projects";
+import SearchCompany from "../company/search_company";
 
 const searchClient = algoliasearch(
   // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
@@ -91,6 +93,13 @@ export default function Autocomplete(
                         hitsPerPage: 5,
                       },
                     },
+                    {
+                      indexName: "compnay",
+                      query,
+                      params: {
+                        hitsPerPage: 5,
+                      },
+                    },
                   ],
                 });
               },
@@ -107,6 +116,7 @@ export default function Autocomplete(
   const appsRef = useRef<HTMLSpanElement>(null);
   const blogsRef = useRef<HTMLSpanElement>(null);
   const projectsRef = useRef<HTMLSpanElement>(null);
+  const companyRef = useRef<HTMLSpanElement>(null);
   const { getEnvironmentProps } = autocomplete;
   const apps = useMemo(() => {
     return autocompleteState.collections[0]?.items.filter(
@@ -124,6 +134,12 @@ export default function Autocomplete(
     return autocompleteState.collections[0]?.items.filter(
       (i) => i.__autocomplete_indexName === "projects"
     ) as unknown as ProjectHit[];
+  }, [autocompleteState.collections]);
+
+  const company = useMemo(() => {
+    return autocompleteState.collections[0]?.items.filter(
+      (i) => i.__autocomplete_indexName === "compnay"
+    ) as unknown as CompanyHit[];
   }, [autocompleteState.collections]);
 
   useEffect(() => {
@@ -180,6 +196,9 @@ export default function Autocomplete(
             <label>
               {autocompleteState.collections[0]?.items.length} items
             </label>
+            <ScrollIntoView data={company} ref={companyRef}>
+              Company
+            </ScrollIntoView>
             <ScrollIntoView data={apps} ref={appsRef}>
               Apps
             </ScrollIntoView>
@@ -192,6 +211,9 @@ export default function Autocomplete(
           </span>
           <div className="ml-2 flex-1 flex-col overflow-y-auto">
             <div className="mr-2">
+              <span ref={companyRef}>
+                <SearchCompany data={company} />
+              </span>
               <span ref={appsRef}>
                 <SearchApps data={apps} />
               </span>
