@@ -12,7 +12,10 @@ export default function SearchApps(props: SearchAppsProps) {
   if (props.data.length <= 0) return <></>;
   return (
     <div className="mx-auto h-fit max-w-6xl px-4 sm:pl-4 sm:pr-0 lg:pt-3">
-      <p className="flex items-center gap-2 text-2xl normal-case text-slate-400">
+      <p
+        id="apps"
+        className="flex items-center gap-2 text-2xl normal-case text-slate-400"
+      >
         <CpuChipIcon className="h-5 w-5" />
         Apps
       </p>

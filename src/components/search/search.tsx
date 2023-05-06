@@ -21,6 +21,7 @@ import {
 import SearchApps from "../apps/search_apps";
 import SearchBlogs from "../blogs/search_blogs";
 import clsx from "clsx";
+import ScrollIntoView from "./scroll_into_view";
 
 const searchClient = algoliasearch(
   // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
@@ -90,6 +91,8 @@ export default function Autocomplete(
   const inputRef = useRef<HTMLInputElement>(null);
   const formRef = useRef<HTMLFormElement>(null);
   const panelRef = useRef<HTMLDivElement>(null);
+  const appsRef = useRef<HTMLSpanElement>(null);
+  const blogsRef = useRef<HTMLSpanElement>(null);
   const { getEnvironmentProps } = autocomplete;
   const apps = useMemo(() => {
     return autocompleteState.collections[0]?.items.filter(
@@ -130,7 +133,7 @@ export default function Autocomplete(
   }, [getEnvironmentProps, autocompleteState.isOpen]);
 
   return (
-    <div className="w-full" {...autocomplete.getRootProps({})}>
+    <div className="w-full">
       <form
         ref={formRef}
         className="mb-4 flex w-full items-center gap-2 px-6"
@@ -164,12 +167,29 @@ export default function Autocomplete(
       </form>
 
       {autocompleteState.isOpen && (
-        <div className="ml-2 h-[80vh] overflow-y-auto md:h-[85vh]">
-          <div className="mr-2">
-            <SearchApps data={apps} />
-            <SearchBlogs data={blogs} />
+        <>
+          <span className="mx-6 mb-2 flex gap-4">
+            <label>
+              {autocompleteState.collections[0]?.items.length} items
+            </label>
+            <ScrollIntoView data={apps} ref={appsRef}>
+              Apps
+            </ScrollIntoView>
+            <ScrollIntoView data={blogs} ref={blogsRef}>
+              Blogs
+            </ScrollIntoView>
+          </span>
+          <div className="ml-2 h-[80vh] overflow-y-auto md:h-[85vh]">
+            <div className="mr-2">
+              <span ref={appsRef}>
+                <SearchApps data={apps} />
+              </span>
+              <span ref={blogsRef}>
+                <SearchBlogs data={blogs} />
+              </span>
+            </div>
           </div>
-        </div>
+        </>
       )}
     </div>
   );
