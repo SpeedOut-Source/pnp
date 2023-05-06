@@ -22,8 +22,8 @@ import {
   type AllHit,
   type BlogHit,
   type ProjectHit,
-  CompanyHit,
-  TestimonialHit,
+  type CompanyHit,
+  type TestimonialHit,
 } from "~/app_function/types/HitTypes";
 import SearchApps from "../apps/search_apps";
 import SearchBlogs from "../blogs/search_blogs";
@@ -31,7 +31,6 @@ import clsx from "clsx";
 import ScrollIntoView from "./scroll_into_view";
 import SearchProjects from "../projects/search_projects";
 import SearchCompany from "../company/search_company";
-import Testimonials from "../work_for_t/testimonials";
 import SearchTestimonials from "../work_for_t/serach_testimonials";
 
 const searchClient = algoliasearch(

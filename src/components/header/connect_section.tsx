@@ -32,7 +32,9 @@ export default function ConnectSection() {
         <SunIcon className="swap-on h-6 w-6" />
         <MoonIcon className="swap-off h-6 w-6" />
       </label>
-      <SearchButton />
+      <span className="hidden lg:inline">
+        <SearchButton />
+      </span>
       <Link
         className="relative h-12 w-56 overflow-hidden rounded-xl bg-base-300 ring-base-content/20 hover:ring-1 lg:hidden xl:inline"
         target="_blank"

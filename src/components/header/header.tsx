@@ -4,6 +4,7 @@ import dynamic from "next/dynamic";
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import { DEFAULT_IS_LIGHT, useThemeStore } from "~/app_state/theme_mode";
+import { SearchButton } from "../search/button";
 
 const ConnectSection = dynamic(() => import("./connect_section"));
 const Links = dynamic(() => import("./links"));
@@ -69,10 +70,11 @@ export default function Header() {
           <Links className="hidden items-center gap-4 md:flex lg:flex xl:flex" />
         </div>
         <div>
-          <div className="hidden lg:inline">
+          <div className="hidden lg:inline ">
             <ConnectSection />
           </div>
-          <div className="lg:hidden">
+          <div className="flex items-center justify-end lg:hidden">
+            <SearchButton />
             <div className="dropdown-end dropdown">
               <label tabIndex={0} className="btn-ghost btn-circle btn">
                 <Bars3Icon className="h-8 w-8" />
