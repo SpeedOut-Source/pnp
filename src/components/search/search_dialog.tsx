@@ -8,7 +8,7 @@ export default function SearchDialog() {
   const searchModeStore = useSearchModeStore();
 
   const router = useRouter();
-  
+
   const closeModal = useCallback(() => {
     searchModeStore.setIsOpen(false);
   }, [searchModeStore]);
@@ -40,7 +40,7 @@ export default function SearchDialog() {
         </Transition.Child>
 
         <div className="fixed top-0 flex w-full justify-center">
-          <div className="flex h-fit items-center justify-center overflow-y-auto p-4 text-center">
+          <div className="mb-2 flex h-screen w-full items-center justify-center p-4 text-center">
             <Transition.Child
               as={Fragment}
               enter="ease-out duration-300"
@@ -50,7 +50,7 @@ export default function SearchDialog() {
               leaveFrom="opacity-100 scale-100"
               leaveTo="opacity-0 scale-95"
             >
-              <Dialog.Panel className="h-fit w-screen transform overflow-y-auto rounded-2xl bg-base-300 pb-2 pt-6 text-left align-middle shadow-xl transition-all lg:max-w-6xl">
+              <Dialog.Panel className="h-full w-full transform  rounded-2xl bg-base-300 pb-2 pt-6 text-left align-middle shadow-xl transition-all lg:max-w-6xl">
                 <AutoComplete />
               </Dialog.Panel>
             </Transition.Child>

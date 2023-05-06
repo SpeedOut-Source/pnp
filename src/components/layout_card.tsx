@@ -7,7 +7,7 @@ import {
 } from "~/app_function/utils/interfaces";
 import PhotoIcon from "@heroicons/react/24/outline/PhotoIcon";
 import dynamic from "next/dynamic";
-import { AllHit, BlogHit } from "~/app_function/types/HitTypes";
+import { AllHit, BlogHit, ProjectHit } from "~/app_function/types/HitTypes";
 import { Highlight } from "./search/Highlight";
 
 const Link = dynamic(() => import("next/link"));
@@ -91,7 +91,7 @@ export default function LayoutCard({ data }: LayoutCard) {
                 </div>
               ) : (
                 <div className="text-md mt-2 text-justify font-semibold leading-tight">
-                  <Highlight hit={data as AllHit} attribute="title" />
+                  <Highlight hit={data as BlogHit} attribute="title" />
                 </div>
               )}
             </div>

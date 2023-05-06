@@ -25,7 +25,7 @@ export type Blog = {
   fileName: string;
 };
 
-export interface Project {
+export type Project = {
   imgUrl: string;
   imgBlurData?: string;
   app: { name: string; logoUrl: string };
@@ -35,7 +35,7 @@ export interface Project {
   date: number;
   readTime: number;
   fileName: string;
-}
+};
 
 interface Listing {
   name: string;

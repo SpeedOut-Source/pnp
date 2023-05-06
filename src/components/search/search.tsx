@@ -17,11 +17,13 @@ import {
   type AppHit,
   type AllHit,
   type BlogHit,
+  type ProjectHit,
 } from "~/app_function/types/HitTypes";
 import SearchApps from "../apps/search_apps";
 import SearchBlogs from "../blogs/search_blogs";
 import clsx from "clsx";
 import ScrollIntoView from "./scroll_into_view";
+import SearchProjects from "../projects/search_projects";
 
 const searchClient = algoliasearch(
   // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
@@ -78,6 +80,13 @@ export default function Autocomplete(
                         hitsPerPage: 5,
                       },
                     },
+                    {
+                      indexName: "projects",
+                      query,
+                      params: {
+                        hitsPerPage: 5,
+                      },
+                    },
                   ],
                 });
               },
@@ -93,6 +102,7 @@ export default function Autocomplete(
   const panelRef = useRef<HTMLDivElement>(null);
   const appsRef = useRef<HTMLSpanElement>(null);
   const blogsRef = useRef<HTMLSpanElement>(null);
+  const projectsRef = useRef<HTMLSpanElement>(null);
   const { getEnvironmentProps } = autocomplete;
   const apps = useMemo(() => {
     return autocompleteState.collections[0]?.items.filter(
@@ -106,6 +116,12 @@ export default function Autocomplete(
     ) as unknown as BlogHit[];
   }, [autocompleteState.collections]);
 
+  const projects = useMemo(() => {
+    return autocompleteState.collections[0]?.items.filter(
+      (i) => i.__autocomplete_indexName === "projects"
+    ) as unknown as ProjectHit[];
+  }, [autocompleteState.collections]);
+
   useEffect(() => {
     if (inputRef.current) {
       inputRef.current.focus();
@@ -113,27 +129,15 @@ export default function Autocomplete(
     if (!formRef.current || !panelRef.current || !inputRef.current) {
       return undefined;
     }
-
-    // eslint-disable-next-line @typescript-eslint/unbound-method
-    const { onTouchStart, onTouchMove, onMouseDown } = getEnvironmentProps({
+    getEnvironmentProps({
       formElement: formRef.current,
       inputElement: inputRef.current,
       panelElement: panelRef.current,
     });
-
-    window.addEventListener("mousedown", onMouseDown);
-    window.addEventListener("touchstart", onTouchStart);
-    window.addEventListener("touchmove", onTouchMove);
-
-    return () => {
-      window.removeEventListener("mousedown", onMouseDown);
-      window.removeEventListener("touchstart", onTouchStart);
-      window.removeEventListener("touchmove", onTouchMove);
-    };
   }, [getEnvironmentProps, autocompleteState.isOpen]);
 
   return (
-    <div className="w-full">
+    <div className="flex h-full w-full flex-col">
       <form
         ref={formRef}
         className="mb-4 flex w-full items-center gap-2 px-6"
@@ -162,27 +166,33 @@ export default function Autocomplete(
           {...autocomplete.getInputProps({
             inputElement: inputRef.current,
           })}
-          placeholder="Search apps, blogs, projects etc"
+          placeholder="Search for apps, blogs, projects etc"
         />
       </form>
 
       {autocompleteState.isOpen && (
         <>
-          <span className="mx-6 mb-2 flex gap-4">
+          <span className="mx-6 flex gap-4">
             <label>
               {autocompleteState.collections[0]?.items.length} items
             </label>
             <ScrollIntoView data={apps} ref={appsRef}>
               Apps
             </ScrollIntoView>
+            <ScrollIntoView data={projects} ref={projectsRef}>
+              Projects
+            </ScrollIntoView>
             <ScrollIntoView data={blogs} ref={blogsRef}>
               Blogs
             </ScrollIntoView>
           </span>
-          <div className="ml-2 h-[80vh] overflow-y-auto md:h-[85vh]">
+          <div className="ml-2 flex-1 flex-col overflow-y-auto">
             <div className="mr-2">
               <span ref={appsRef}>
                 <SearchApps data={apps} />
+              </span>
+              <span ref={projectsRef}>
+                <SearchProjects data={projects} />
               </span>
               <span ref={blogsRef}>
                 <SearchBlogs data={blogs} />

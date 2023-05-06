@@ -10,7 +10,6 @@ export function SearchButton() {
 
   const setOpen = useCallback(
     (e: MouseEvent | KeyboardEvent) => {
-      console.log("Clicked");
       e.preventDefault();
       searchModeStore.setIsOpen(!searchModeStore.isOpen);
     },
