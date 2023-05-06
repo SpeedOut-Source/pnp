@@ -14,7 +14,7 @@ export default forwardRef(function ScrollIntoView<T>(
   return (
     <button
       data-tip="Scroll to section"
-      className="link-hover link tooltip tooltip-bottom indicator"
+      className="indicator link-hover link tooltip tooltip-bottom"
       onClick={() => {
         const m = ref as React.RefObject<HTMLSpanElement>;
         m.current?.scrollIntoView({ behavior: "smooth" });
@@ -22,7 +22,9 @@ export default forwardRef(function ScrollIntoView<T>(
     >
       <div>
         {props.children}
-        <span className="indicator-item badge">{props.data.length}</span>
+        <span className="badge indicator-item border-0 bg-base-200 text-base-content/50">
+          {props.data.length}
+        </span>
       </div>
     </button>
   );

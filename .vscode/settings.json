@@ -6,5 +6,6 @@
     "latex",
     "plaintext",
     "typescriptreact"
-  ]
+  ],
+  "typescript.tsdk": "node_modules\\typescript\\lib"
 }

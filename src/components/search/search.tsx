@@ -12,7 +12,11 @@ import React, {
   useRef,
   useState,
 } from "react";
-import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
+import {
+  ArchiveBoxXMarkIcon,
+  FireIcon,
+  MagnifyingGlassIcon,
+} from "@heroicons/react/24/outline";
 import {
   type AppHit,
   type AllHit,
@@ -172,7 +176,7 @@ export default function Autocomplete(
 
       {autocompleteState.isOpen && (
         <>
-          <span className="mx-6 flex gap-4">
+          <span className="mx-6 flex gap-4 py-2">
             <label>
               {autocompleteState.collections[0]?.items.length} items
             </label>
@@ -201,6 +205,20 @@ export default function Autocomplete(
           </div>
         </>
       )}
+      {!autocompleteState.isOpen && autocompleteState.query.length <= 0 && (
+        <div className="flex h-full flex-col items-center justify-center gap-1">
+          <FireIcon className="h-8 w-8" />
+          Results will show here
+        </div>
+      )}
+      {autocompleteState.status === "idle" &&
+        !autocompleteState.isOpen &&
+        autocompleteState.query.length > 0 && (
+          <div className="flex h-full flex-col items-center justify-center gap-1">
+            <ArchiveBoxXMarkIcon className="h-8 w-8" />
+            No results for &rdquo;{autocompleteState.query}&rdquo;
+          </div>
+        )}
     </div>
   );
 }
