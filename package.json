@@ -21,6 +21,7 @@
     "@headlessui/react": "^1.7.14",
     "@react-google-maps/api": "^2.18.1",
     "@react-pdf-viewer/core": "^3.12.0",
+    "clsx": "^1.2.1",
     "gray-matter": "^4.0.3",
     "keyword-extractor": "^0.0.25",
     "linkify-element": "^4.1.1",
