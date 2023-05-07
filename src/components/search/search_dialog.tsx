@@ -36,11 +36,11 @@ export default function SearchDialog() {
           leaveFrom="opacity-100"
           leaveTo="opacity-0"
         >
-          <div className="fixed inset-0 bg-black/40 backdrop-blur-sm" />
+          <div className="fixed inset-0 bg-black/50 " />
         </Transition.Child>
 
         <div className="fixed top-0 flex w-full justify-center">
-          <div className="mb-2 flex h-screen w-full items-center justify-center p-4 text-center">
+          <div className="mb-2 flex h-screen w-full items-center justify-center md:p-4 text-center">
             <Transition.Child
               as={Fragment}
               enter="ease-out duration-300"
@@ -50,7 +50,7 @@ export default function SearchDialog() {
               leaveFrom="opacity-100 scale-100"
               leaveTo="opacity-0 scale-95"
             >
-              <Dialog.Panel className="relative h-full w-full transform  rounded-2xl bg-base-300 pb-2 text-left align-middle shadow-xl transition-all lg:max-w-6xl">
+              <Dialog.Panel className="relative h-full w-full transform md:rounded-2xl bg-base-300 pb-2 text-left align-middle md:shadow-xl transition-all lg:max-w-6xl">
                 <div className="absolute flex justify-end w-full p-2">
                   <button onClick={closeModal} className="btn btn-ghost p-0 m-0 min-h-fit h-fit">
                     <kbd className=" kbd kbd-xs">ESC</kbd>

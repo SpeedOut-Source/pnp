@@ -54,7 +54,7 @@ export default function LayoutCard({ data }: LayoutCard) {
         </div>
       )}
       <div className="mx-1 flex h-full w-full flex-col items-end justify-end">
-        <div className="relative mb-1 max-h-[60%] w-full overflow-hidden rounded-3xl bg-base-100 group-hover:max-h-full group-hover:shadow-xl md:bg-base-100/70 md:backdrop-blur-md md:group-hover:bg-base-100/80">
+        <div className="relative mb-1 max-h-[60%] w-full overflow-hidden rounded-3xl bg-base-100 group-hover:max-h-full group-hover:shadow-xl  md:bg-base-100/90 md:group-hover:backdrop-blur-sm md:group-hover:bg-base-100/70">
           <div className="absolute bottom-0 h-10 w-full bg-gradient-to-t from-base-100 group-hover:from-transparent">
             <div className="hidden w-full items-center justify-center pt-2 font-bold uppercase text-blue-500/70 group-hover:flex">
               <span>{isProject ? "Full case study" : "Read more"}</span>
