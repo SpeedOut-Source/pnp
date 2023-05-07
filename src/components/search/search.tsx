@@ -176,7 +176,7 @@ export default function Autocomplete(
     <div className="flex h-full w-full flex-col">
       <form
         ref={formRef}
-        className="mb-4 flex w-full items-center gap-2 px-6"
+        className="mb-2 flex w-full items-center gap-2 px-6"
         {...autocomplete.getFormProps({ inputElement: inputRef.current })}
       >
         <button
@@ -208,7 +208,7 @@ export default function Autocomplete(
 
       {autocompleteState.isOpen && (
         <>
-          <span className="mx-6 flex gap-4 py-2">
+          <span className="mx-6 flex flex-wrap gap-4 py-2 text-xs">
             <label>
               {autocompleteState.collections[0]?.items.length} items
             </label>
