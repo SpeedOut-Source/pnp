@@ -188,12 +188,12 @@ export default function Autocomplete(
         >
           <label
             className={clsx(
-              autocompleteState.status !== "loading" && "swap-active",
+              autocompleteState.status !== "idle" && "swap-active",
               "swap-rotate swap  items-center "
             )}
           >
-            <MagnifyingGlassIcon className="swap-on mx-auto h-5 w-5" />
-            <div className="loading btn-ghost swap-off btn mx-auto border-0 p-0 before:!mr-0" />
+            <MagnifyingGlassIcon className="swap-off mx-auto h-5 w-5" />
+            <div className="loading btn-ghost swap-on btn mx-auto border-0 p-0 before:!mr-0" />
           </label>
         </button>
         <input

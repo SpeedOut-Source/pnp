@@ -7,6 +7,8 @@ export interface SearchTestimonialsProps {
 }
 
 export default function SearchTestimonials(props: SearchTestimonialsProps) {
+  if (props.data.length <= 0) return <></>;
+
   return (
     <div className="mx-4">
       <p className="flex items-center gap-2 text-2xl normal-case text-slate-400">
