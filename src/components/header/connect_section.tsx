@@ -1,7 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-misused-promises */
-import SunIcon from "@heroicons/react/24/outline/SunIcon";
-import MoonIcon from "@heroicons/react/24/outline/MoonIcon";
 import { useEffect, useState } from "react";
 import { DEFAULT_IS_LIGHT, useThemeStore } from "~/app_state/theme_mode";
 import { CONNECT_OPTIONS } from "../contact/connect_data";
@@ -12,6 +10,7 @@ import {
   BUY_ME_A_COFFEE_DARK_BLURDATA,
   BUY_ME_A_COFFEE_LIGHT_BLURDATA,
 } from "~/app_function/utils/constants";
+import ThemeSwitch from "~/components/header/theme_switch";
 
 export default function ConnectSection() {
   const utm = useThemeStore();
@@ -23,16 +22,8 @@ export default function ConnectSection() {
 
   return (
     <div className="flex flex-col items-center gap-1 lg:flex-row lg:gap-2">
-      <label
-        onClick={utm.toggleTheme}
-        className={`${
-          isLight ? "swap-active" : ""
-        } swap-rotate swap w-fit text-neutral-500`}
-      >
-        <SunIcon className="swap-on h-6 w-6" />
-        <MoonIcon className="swap-off h-6 w-6" />
-      </label>
-      <span className="hidden lg:inline">
+      <span className="hidden lg:flex gap-1">
+        <ThemeSwitch />
         <SearchButton />
       </span>
       <Link
