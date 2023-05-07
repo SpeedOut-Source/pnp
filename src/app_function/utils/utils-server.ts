@@ -2,16 +2,10 @@
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 import { promises } from "fs";
 import { type Configs } from "../home/home_server";
-import {
-  type Card,
-  type Blog,
-  type Project,
-  type CardData,
-  type Company,
-} from "./interfaces";
-import { type App } from "./interfaces";
+import { type App, type Blog, type Card, type CardData, type Company, type Project } from "./interfaces";
 import { getPlaiceholder } from "plaiceholder";
 import { parse } from "path";
+import { type TestimonialsProps } from "~/components/work_for_t/testimonials";
 
 export interface DBConfigs {
   projectTotal: number;
@@ -43,21 +37,18 @@ export async function getData(path: string) {
 
 export async function getConfigs() {
   const data = (await getData("configs.json")).toString();
-  const configs = JSON.parse(data) as Configs;
-  return configs;
+  return JSON.parse(data) as Configs;
 }
 
 export async function getDBConfigs() {
   const data = (await getData("db/configs.json")).toString();
-  const configs = JSON.parse(data) as DBConfigs;
-  return configs;
+  return JSON.parse(data) as DBConfigs;
 }
 
 export async function getProjects(): Promise<RawProjectsProps> {
   try {
     const dataProjects = (await getData("db/projects.json")).toString();
-    const allPros = JSON.parse(dataProjects) as RawProjectsProps;
-    return allPros;
+    return JSON.parse(dataProjects) as RawProjectsProps;
   } catch (e) {
     return { projects: [] };
   }
@@ -66,8 +57,7 @@ export async function getProjects(): Promise<RawProjectsProps> {
 export async function getApps(): Promise<RawAppsProps> {
   try {
     const dataApps = (await getData("db/apps.json")).toString();
-    const allApps = JSON.parse(dataApps) as RawAppsProps;
-    return allApps;
+    return JSON.parse(dataApps) as RawAppsProps;
   } catch (e) {
     return { apps: [] };
   }
@@ -76,8 +66,7 @@ export async function getApps(): Promise<RawAppsProps> {
 export async function getBlogs(): Promise<RawBlogsProps> {
   try {
     const dataBlogs = (await getData("db/blogs.json")).toString();
-    const allBlogs = JSON.parse(dataBlogs) as RawBlogsProps;
-    return allBlogs;
+    return JSON.parse(dataBlogs) as RawBlogsProps;
   } catch (e) {
     return { blogs: [] };
   }
@@ -86,10 +75,18 @@ export async function getBlogs(): Promise<RawBlogsProps> {
 export async function getCompany(): Promise<RawCompanyProps> {
   try {
     const dataCompany = (await getData("db/workInfo.json")).toString();
-    const allCompany = JSON.parse(dataCompany) as RawCompanyProps;
-    return allCompany;
+    return JSON.parse(dataCompany) as RawCompanyProps;
   } catch (e) {
     return { company: [] };
+  }
+}
+
+export async function getTesti(): Promise<TestimonialsProps> {
+  try {
+    const dataTesti = (await getData("home/testimonials.json")).toString();
+    return JSON.parse(dataTesti) as TestimonialsProps;
+  } catch (e) {
+    return { testis: [] };
   }
 }
 

@@ -32,6 +32,12 @@ import ScrollIntoView from "./scroll_into_view";
 import SearchProjects from "../projects/search_projects";
 import SearchCompany from "../company/search_company";
 import SearchTestimonials from "../work_for_t/serach_testimonials";
+import {
+  ALGOLIA_INDEX_APPS,
+  ALGOLIA_INDEX_BLOGS,
+  ALGOLIA_INDEX_COMPANY,
+  ALGOLIA_INDEX_PROJECTS, ALGOLIA_INDEX_TESTIMONIALS
+} from "~/app_function/utils/constants";
 
 const searchClient = algoliasearch(
   // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
@@ -75,35 +81,35 @@ export default function Autocomplete(
                   searchClient,
                   queries: [
                     {
-                      indexName: "blogs",
+                      indexName: ALGOLIA_INDEX_BLOGS,
                       query,
                       params: {
                         hitsPerPage: 5,
                       },
                     },
                     {
-                      indexName: "apps",
+                      indexName: ALGOLIA_INDEX_APPS,
                       query,
                       params: {
                         hitsPerPage: 5,
                       },
                     },
                     {
-                      indexName: "projects",
+                      indexName: ALGOLIA_INDEX_PROJECTS,
                       query,
                       params: {
                         hitsPerPage: 5,
                       },
                     },
                     {
-                      indexName: "compnay",
+                      indexName: ALGOLIA_INDEX_COMPANY,
                       query,
                       params: {
                         hitsPerPage: 5,
                       },
                     },
                     {
-                      indexName: "testimonials",
+                      indexName: ALGOLIA_INDEX_TESTIMONIALS,
                       query,
                       params: {
                         hitsPerPage: 5,
@@ -130,31 +136,31 @@ export default function Autocomplete(
   const { getEnvironmentProps } = autocomplete;
   const apps = useMemo(() => {
     return autocompleteState.collections[0]?.items.filter(
-      (i) => i.__autocomplete_indexName === "apps"
+      (i) => i.__autocomplete_indexName === ALGOLIA_INDEX_APPS
     ) as unknown as AppHit[];
   }, [autocompleteState.collections]);
 
   const blogs = useMemo(() => {
     return autocompleteState.collections[0]?.items.filter(
-      (i) => i.__autocomplete_indexName === "blogs"
+      (i) => i.__autocomplete_indexName === ALGOLIA_INDEX_BLOGS
     ) as unknown as BlogHit[];
   }, [autocompleteState.collections]);
 
   const projects = useMemo(() => {
     return autocompleteState.collections[0]?.items.filter(
-      (i) => i.__autocomplete_indexName === "projects"
+      (i) => i.__autocomplete_indexName === ALGOLIA_INDEX_PROJECTS
     ) as unknown as ProjectHit[];
   }, [autocompleteState.collections]);
 
   const company = useMemo(() => {
     return autocompleteState.collections[0]?.items.filter(
-      (i) => i.__autocomplete_indexName === "compnay"
+      (i) => i.__autocomplete_indexName === ALGOLIA_INDEX_COMPANY
     ) as unknown as CompanyHit[];
   }, [autocompleteState.collections]);
 
   const testimonials = useMemo(() => {
     return autocompleteState.collections[0]?.items.filter(
-      (i) => i.__autocomplete_indexName === "testimonials"
+      (i) => i.__autocomplete_indexName === ALGOLIA_INDEX_TESTIMONIALS
     ) as unknown as TestimonialHit[];
   }, [autocompleteState.collections]);
 
