@@ -12,7 +12,7 @@ import {
 } from "~/app_function/utils/constants";
 
 try {
-  console.log("Sending recards to Algolia server");
+  console.log("Sending record to Algolia server");
   // eslint-disable-next-line @typescript-eslint/no-unsafe-call,@typescript-eslint/no-unsafe-member-access
   dotenv.config({path: '.env.production'});
 
@@ -103,7 +103,7 @@ void (async function() {
     console.log("ITestis");
     console.log("Init index algolia successfully");
 
-    console.log("Send recards to Algolia server");
+    console.log("Send records to Algolia server");
     const ResPros = await IPros.saveObjects(TPros);
     console.log(`🎉 Successfully added ${ALGOLIA_INDEX_PROJECTS} ${ResPros.objectIDs.length} records to Algolia search.`);
     const ResApps = await IApps.saveObjects(TApps);
@@ -114,7 +114,7 @@ void (async function() {
     console.log(`🎉 Successfully added ${ALGOLIA_INDEX_COMPANY} ${ResCompany.objectIDs.length} records to Algolia search.`);
     const ResTestis = await ITestis.saveObjects(TTestis);
     console.log(`🎉 Successfully added ${ALGOLIA_INDEX_TESTIMONIALS} ${ResTestis.objectIDs.length} records to Algolia search.`);
-    console.log("Sended recards to Algolia server successfully");
+    console.log("Sent records to Algolia server successfully");
   } catch (err) {
     console.error(err);
   }
