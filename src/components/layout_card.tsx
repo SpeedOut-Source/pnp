@@ -7,7 +7,7 @@ import {
 } from "~/app_function/utils/interfaces";
 import PhotoIcon from "@heroicons/react/24/outline/PhotoIcon";
 import dynamic from "next/dynamic";
-import { AllHit, BlogHit, ProjectHit } from "~/app_function/types/HitTypes";
+import { type BlogHit, type ProjectHit } from "~/app_function/types/HitTypes";
 import { Highlight } from "./search/Highlight";
 
 const Link = dynamic(() => import("next/link"));
@@ -75,7 +75,10 @@ export default function LayoutCard({ data }: LayoutCard) {
                         alt={data.app.name}
                       />
                     </div>
-                    <span>{data.app.name}</span>
+                    <Highlight
+                      hit={data as ProjectHit}
+                      attribute={["app", "name"]}
+                    />
                   </div>
                   <div className="flex w-full items-center gap-2">
                     <div className="relative h-5 w-5">
@@ -86,7 +89,10 @@ export default function LayoutCard({ data }: LayoutCard) {
                         alt={data.company.name}
                       />
                     </div>
-                    <span>{data.company.name}</span>
+                    <Highlight
+                      hit={data as ProjectHit}
+                      attribute={["company", "name"]}
+                    />
                   </div>
                 </div>
               ) : (
@@ -103,8 +109,14 @@ export default function LayoutCard({ data }: LayoutCard) {
             <div className="mb-2 text-xs leading-snug">
               {isProject ? (
                 <div className="space-x-1">
-                  <span className="font-semibold">{data.whatText}</span>
-                  <span>{data.result}</span>
+                  <span className="font-semibold"><Highlight
+                    hit={data as ProjectHit}
+                    attribute="whatText"
+                  /></span>
+                  <span><Highlight
+                    hit={data as ProjectHit}
+                    attribute="result"
+                  /></span>
                 </div>
               ) : (
                 <p>

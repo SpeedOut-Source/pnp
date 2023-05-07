@@ -36,10 +36,16 @@ export default function TestiCard(props: Testimonial) {
           </div>
           <div className="text-left tracking-wider">
             <p style={{ whiteSpace: "pre-line" }} className="text-sm font-bold">
-              <Highlight hit={props as TestimonialHit} attribute="fullName" />
+              <Highlight
+                hit={props as TestimonialHit}
+                attribute="fullName"
+              />
             </p>
             <p style={{ whiteSpace: "pre-line" }} className="text-xs">
-              <Highlight hit={props as TestimonialHit} attribute="position" />
+              <Highlight
+                hit={props as TestimonialHit}
+                attribute="position"
+              />
             </p>
           </div>
         </Link>
