@@ -29,7 +29,18 @@
     "**/*.cjs",
     "**/*.mjs",
     "src/components/markdown/md_render.tsx",
-    "src/app_function/utils/find_link_plugin.ts"
+    "src/app_function/utils/find_link_plugin.ts",
+    "src/app_function/scripts/build-algolia-search.ts"
   ],
-  "exclude": ["node_modules"]
+  "exclude": ["node_modules"],
+  "ts-node": {
+    "compilerOptions": {
+      // compilerOptions specified here will override those declared below,
+      // but *only* in ts-node.  Useful if you want ts-node and tsc to use
+      // different options with a single tsconfig.json.
+
+      "module": "CommonJS",
+      "isolatedModules": false
+    }
+  }
 }

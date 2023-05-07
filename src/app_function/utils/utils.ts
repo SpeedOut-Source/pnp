@@ -1,5 +1,6 @@
 import { type Project } from "./interfaces";
 import tc from "thousands-counter";
+import { type Testimonial } from "~/components/work_for_t/testi_card";
 
 export function stringToReadableUrl(str: string, reverse?: boolean): string {
   if (reverse) {
@@ -18,6 +19,10 @@ export function stringToReadableUrl(str: string, reverse?: boolean): string {
 
 export function isPro(object: any): object is Project {
   return "whatText" in object;
+}
+
+export function isTestis(object: any): object is Testimonial {
+  return "position" in object;
 }
 
 export function toTitleCase(str: string): string {

@@ -5,9 +5,10 @@ import { useEffect, useRef, useState } from "react";
 import { useIsomorphicLayoutEffect } from "~/app_function/utils/useIsomorphicLayoutEffect";
 import { useInView } from "react-intersection-observer";
 import Link from "next/link";
+import { type TestimonialHit } from "~/app_function/types/HitTypes";
 export interface TestimonialsProps {
-  testis: Testimonial[];
-  addUrl: string;
+  testis: Testimonial[] | TestimonialHit[];
+  addUrl?: string;
 }
 
 const TestiCard = dynamic(() => import("./testi_card"));
@@ -99,14 +100,16 @@ export default function Testimonials(props: TestimonialsProps) {
     >
       <p className="flex items-center gap-2 text-2xl normal-case text-slate-400">
         <ChatBubbleLeftRightIcon className="h-5 w-5" /> Testimonials{" "}
-        <Link
-          href={props.addUrl}
-          className="tooltip"
-          data-tip="Give Testimonial"
-          target="_blank"
-        >
-          <PlusIcon className="h-5 w-5" />
-        </Link>
+        {props.addUrl && (
+          <Link
+            href={props.addUrl}
+            className="tooltip"
+            data-tip="Give Testimonial"
+            target="_blank"
+          >
+            <PlusIcon className="h-5 w-5" />
+          </Link>
+        )}
       </p>
       <div className="relative md:mx-2">
         <div

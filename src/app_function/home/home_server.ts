@@ -7,7 +7,7 @@ import {
   getConfigs,
   getDBConfigs,
   getData,
-  getProjects,
+  getProjects, getTesti
 } from "../utils/utils-server";
 import { type RXTProps } from "~/components/me_section/r_x_t";
 import { type MeSectionProps } from "~/components/me_section/me_section";
@@ -53,8 +53,8 @@ export async function HomeServer() {
   const dataExpertise = (await getData("home/expertise.json")).toString();
   const techs = JSON.parse(dataExpertise) as RXTProps;
 
-  const dataTesti = (await getData("home/testimonials.json")).toString();
-  const testis = JSON.parse(dataTesti) as TestimonialsProps;
+
+  const testis = await getTesti();
 
   const allProsRaw = await getProjects();
 

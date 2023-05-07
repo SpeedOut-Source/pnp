@@ -2,6 +2,8 @@ import { type Company } from "~/app_function/utils/interfaces";
 import dynamic from "next/dynamic";
 import { useState, useEffect } from "react";
 import { useThemeStore, DEFAULT_IS_LIGHT } from "~/app_state/theme_mode";
+import { Highlight } from "../search/Highlight";
+import { type CompanyHit } from "~/app_function/types/HitTypes";
 
 const Link = dynamic(() => import("next/link"));
 const Image = dynamic(() => import("next/legacy/image"));
@@ -37,7 +39,7 @@ export default function LayoutCardCompany(x: Company) {
         </div>
         <div className="flex flex-col">
           <span className="text-sm font-semibold tracking-widest">
-            {x.title}
+            <Highlight hit={x as CompanyHit} attribute="title" />
           </span>
           <TimeLine start={x.start} end={x.end} />
         </div>

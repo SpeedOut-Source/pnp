@@ -1,11 +1,13 @@
 import { type App } from "~/app_function/utils/interfaces";
 import PhotoIcon from "@heroicons/react/24/outline/PhotoIcon";
 import dynamic from "next/dynamic";
+import { type AppHit } from "~/app_function/types/HitTypes";
+import { Highlight } from "../search/Highlight";
 
 const Link = dynamic(() => import("next/link"));
 const Image = dynamic(() => import("next/legacy/image"));
 
-export default function LayoutCardApp(props: App) {
+export default function LayoutCardApp(props: App | AppHit) {
   return (
     <Link
       className="p-card h-48 cursor-pointer flex-row items-center justify-start py-3 hover:-translate-y-1 hover:shadow-lg"
@@ -30,8 +32,12 @@ export default function LayoutCardApp(props: App) {
         )}
       </div>
       <div className="mx-0 mt-1 h-fit w-full px-2 text-center tracking-wider">
-        <p className="mb-1 font-semibold leading-4">{props.title}</p>
-        <p className="text-xs text-base-content">{props.category}</p>
+        <p className="mb-1 font-semibold leading-4">
+          <Highlight hit={props as AppHit} attribute="title" />
+        </p>
+        <p className="text-xs text-base-content">
+          <Highlight hit={props as AppHit} attribute="category" />
+        </p>
       </div>
     </Link>
   );

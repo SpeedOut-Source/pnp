@@ -7,6 +7,11 @@ import { DEFAULT_IS_LIGHT, useThemeStore } from "~/app_state/theme_mode";
 import { CONNECT_OPTIONS } from "../contact/connect_data";
 import Link from "next/link";
 import Image from "next/legacy/image";
+import { SearchButton } from "../search/button";
+import {
+  BUY_ME_A_COFFEE_DARK_BLURDATA,
+  BUY_ME_A_COFFEE_LIGHT_BLURDATA,
+} from "~/app_function/utils/constants";
 
 export default function ConnectSection() {
   const utm = useThemeStore();
@@ -17,22 +22,31 @@ export default function ConnectSection() {
   }, [utm]);
 
   return (
-    <div className="flex flex-col items-center gap-2 md:flex-row">
+    <div className="flex flex-col items-center gap-1 lg:flex-row lg:gap-2">
       <label
         onClick={utm.toggleTheme}
         className={`${
           isLight ? "swap-active" : ""
-        } swap-rotate swap h-fit w-fit text-neutral-500`}
+        } swap-rotate swap w-fit text-neutral-500`}
       >
         <SunIcon className="swap-on h-6 w-6" />
         <MoonIcon className="swap-off h-6 w-6" />
       </label>
+      <span className="hidden lg:inline">
+        <SearchButton />
+      </span>
       <Link
-        className="relative h-16 w-56 md:hidden xl:inline"
+        className="relative h-12 w-56 overflow-hidden rounded-xl bg-base-300 ring-base-content/20 hover:ring-1 lg:hidden xl:inline"
         target="_blank"
         href="https://www.buymeacoffee.com/biplobsd"
       >
         <Image
+          blurDataURL={
+            isLight
+              ? BUY_ME_A_COFFEE_LIGHT_BLURDATA
+              : BUY_ME_A_COFFEE_DARK_BLURDATA
+          }
+          placeholder="blur"
           alt="Buymeacoffee"
           layout="fill"
           objectFit="fill"
@@ -45,7 +59,7 @@ export default function ConnectSection() {
           }&coffee_colour=FFDD00`}
         />
       </Link>
-      <div className="w-fit items-center gap-3 rounded-xl bg-base-300 px-4 md:flex lg:flex xl:flex">
+      <div className="w-fit items-center gap-3 rounded-xl bg-base-300 px-4 lg:flex">
         <div className="font-semibold tracking-wider">Connect on</div>
         <div className="flex items-center">
           {CONNECT_OPTIONS.map((x) => (
