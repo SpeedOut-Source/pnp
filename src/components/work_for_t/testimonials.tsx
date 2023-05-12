@@ -6,6 +6,9 @@ import { useIsomorphicLayoutEffect } from "~/app_function/utils/useIsomorphicLay
 import { useInView } from "react-intersection-observer";
 import Link from "next/link";
 import { type TestimonialHit } from "~/app_function/types/HitTypes";
+import { shuffle } from "fast-shuffle";
+import TestiCardLoading from "./testi_card_loading";
+
 export interface TestimonialsProps {
   testis: Testimonial[] | TestimonialHit[];
   addUrl?: string;
@@ -20,26 +23,40 @@ export default function Testimonials(props: TestimonialsProps) {
   const [showCollapseButton, setShowCollapseButton] = useState(false);
   const [transition, setTransition] = useState(false);
   const { ref: inViewRef, inView } = useInView({ threshold: 0 });
+  const [threeListTestimonial, setThreeListTestimonial] = useState<{
+    l1?: tt[];
+    l2?: tt[];
+    l3?: tt[];
+  }>({ l1: undefined, l2: undefined, l3: undefined });
 
-  const l1: tt[] = [];
-  const l2: tt[] = [];
-  const l3: tt[] = [];
+  useEffect(() => {
+    const shuffleList = shuffle(props.testis);
+    const l1: tt[] = [];
+    const l2: tt[] = [];
+    const l3: tt[] = [];
 
-  for (let index = 0; index < props.testis.length; index++) {
-    switch (index % 3) {
-      case 0:
-        l1.push(props.testis[index]);
-        break;
-      case 1:
-        l2.push(props.testis[index]);
-        break;
-      case 2:
-        l3.push(props.testis[index]);
-        break;
-      default:
-        break;
+    for (let index = 0; index < shuffleList.length; index++) {
+      switch (index % 3) {
+        case 0:
+          l1.push(shuffleList[index]);
+          break;
+        case 1:
+          l2.push(shuffleList[index]);
+          break;
+        case 2:
+          l3.push(shuffleList[index]);
+          break;
+        default:
+          break;
+      }
     }
-  }
+
+    setThreeListTestimonial({
+      l1,
+      l2,
+      l3,
+    });
+  }, [props.testis]);
 
   const ref = useRef<HTMLDivElement | null>(null);
   const [initial, setInitial] = useState([true, true]);
@@ -120,40 +137,57 @@ export default function Testimonials(props: TestimonialsProps) {
                 ? "mb-16"
                 : ""
               : "max-h-[33rem] overflow-hidden md:max-h-80"
-          } mx-auto grid w-full items-start justify-center gap-2 rounded-b-3xl py-4 transition-all duration-500 ease-in-out sm:grid-cols-2 md:grid-cols-3`}
+          } mx-auto space-y-2 sm:space-y-0 sm:grid w-full min-h-[12rem] items-start justify-stretch gap-2 rounded-b-3xl  py-4 transition-all duration-500 ease-in-out sm:grid-cols-2 md:grid-cols-3`}
         >
-          <ul className="space-y-2 ">
-            {l1.map((x) => {
-              if (x)
-                return (
-                  <li key={x.imgUrl}>
-                    <TestiCard {...x} addUrl={props.addUrl} />
-                  </li>
-                );
-            })}
+          <ul className="space-y-2">
+            {threeListTestimonial.l1 ? (
+              threeListTestimonial.l1.map((x) => {
+                if (x)
+                  return (
+                    <li key={x.imgUrl}>
+                      <TestiCard {...x} addUrl={props.addUrl} />
+                    </li>
+                  );
+              })
+            ) : (
+              <li>
+                <TestiCardLoading />
+              </li>
+            )}
           </ul>
           <ul className="space-y-2">
-            {l2.map((x) => {
-              if (x)
-                return (
-                  <li key={x.imgUrl}>
-                    <TestiCard {...x} addUrl={props.addUrl} />
-                  </li>
-                );
-            })}
+            {threeListTestimonial.l2 ? (
+              threeListTestimonial.l2.map((x) => {
+                if (x)
+                  return (
+                    <li key={x.imgUrl}>
+                      <TestiCard {...x} addUrl={props.addUrl} />
+                    </li>
+                  );
+              })
+            ) : (
+              <li>
+                <TestiCardLoading />
+              </li>
+            )}
           </ul>
           <ul className="space-y-2">
-            {l3.map((x) => {
-              if (x)
-                return (
-                  <li key={x.imgUrl} className="hover:z-50">
-                    <TestiCard {...x} addUrl={props.addUrl} />
-                  </li>
-                );
-            })}
+            {threeListTestimonial.l3 ? (
+              threeListTestimonial.l3.map((x) => {
+                if (x)
+                  return (
+                    <li key={x.imgUrl} className="hover:z-50">
+                      <TestiCard {...x} addUrl={props.addUrl} />
+                    </li>
+                  );
+              })
+            ) : (
+              <li>
+                <TestiCardLoading />
+              </li>
+            )}
           </ul>
         </div>
-
         <div
           className={`${
             expanded
