@@ -11,11 +11,11 @@ export async function getStaticProps() {
   const configs = await getConfigs();
 
   const props: AboutProps = {
-    configs,
+    configs
   };
 
   return {
-    props: props,
+    props: props
   };
 }
 

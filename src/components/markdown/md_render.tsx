@@ -6,7 +6,7 @@
 import dynamic from "next/dynamic";
 import {
   // type PluggableList,
-  type ReactMarkdownOptions,
+  type ReactMarkdownOptions
 } from "react-markdown/lib/react-markdown";
 // import { useEffect, useState } from "react";
 import AbsoluteLoading from "./absolute_loading";
@@ -18,13 +18,14 @@ const ReactMarkdown = dynamic<ReactMarkdownOptions>(
     // eslint-disable-next-line @typescript-eslint/no-unsafe-return
     import("react-markdown").then((e: any) => e.default),
   {
-    loading: () => <AbsoluteLoading />,
+    loading: () => <AbsoluteLoading />
   }
 );
 
 interface MDRender {
   data: string;
 }
+
 export default function MDRender(props: MDRender) {
   // const [rehypeRaw, setRehypeRaw] = useState<PluggableList>();
   // const [remarkGfm, setRemarkGfm] = useState<PluggableList>();
@@ -46,7 +47,8 @@ export default function MDRender(props: MDRender) {
   // }, []);
 
   return (
-    <article className="container prose prose-stone relative mx-auto max-w-3xl px-2 prose-headings:my-1 prose-a:my-1 prose-a:text-blue-600 prose-a:no-underline prose-li:my-0 prose-img:my-2 prose-img:inline-block prose-img:rounded-xl">
+    <article
+      className="container prose prose-stone relative mx-auto max-w-3xl px-2 prose-headings:my-1 prose-a:my-1 prose-a:text-blue-600 prose-a:no-underline prose-li:my-0 prose-img:my-2 prose-img:inline-block prose-img:rounded-xl">
       {/* {(!rehypeRaw || !remarkGfm) && <AbsoluteLoading />} */}
       <ReactMarkdown
         components={{
@@ -57,7 +59,7 @@ export default function MDRender(props: MDRender) {
               props.className = "hover:underline";
             }
             return <a {...props}>{children}</a>;
-          },
+          }
           // img: ({ ...props }) => (
           //   <span className="flex justify-center">
           //     <img {...props} />

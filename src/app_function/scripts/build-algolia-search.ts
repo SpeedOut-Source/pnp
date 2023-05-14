@@ -1,4 +1,4 @@
-import * as dotenv from 'dotenv'
+import * as dotenv from "dotenv";
 import algoliasearch from "algoliasearch";
 import { addBlur, getApps, getBlogs, getCompany, getProjects, getTesti } from "~/app_function/utils/utils-server";
 import { type App, type Blog, type CardData, type Company, type Project } from "~/app_function/utils/interfaces";
@@ -14,7 +14,7 @@ import {
 try {
   console.log("Sending record to Algolia server");
   // eslint-disable-next-line @typescript-eslint/no-unsafe-call,@typescript-eslint/no-unsafe-member-access
-  dotenv.config({path: '.env.production'});
+  dotenv.config({ path: ".env.production" });
 
   if (!process.env.NEXT_PUBLIC_ALGOLIA_APP_ID) {
     throw new Error("NEXT_PUBLIC_ALGOLIA_APP_ID is not defined");
@@ -41,7 +41,7 @@ function transformRawToSearchObjects(data: CardData | Testimonial[]) {
 
 void (async function() {
   // eslint-disable-next-line @typescript-eslint/no-unsafe-call,@typescript-eslint/no-unsafe-member-access
-  dotenv.config({path:'.env.production'});
+  dotenv.config({ path: ".env.production" });
 
   try {
     console.log("Getting data");

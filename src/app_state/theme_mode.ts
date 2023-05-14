@@ -1,5 +1,6 @@
 import { create } from "zustand";
 import { devtools, persist, subscribeWithSelector } from "zustand/middleware";
+
 export const DEFAULT_IS_LIGHT = false;
 
 type ThemeName = "winter" | "dark";
@@ -21,10 +22,10 @@ export const useThemeStore = create(
             const currentTheme = get().themeName;
             const newTheme = currentTheme === "winter" ? "dark" : "winter";
             set({ themeName: newTheme });
-          },
+          }
         }),
         {
-          name: "theme-storage-state",
+          name: "theme-storage-state"
         }
       )
     )

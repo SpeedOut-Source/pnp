@@ -12,11 +12,11 @@ export async function getStaticProps() {
   const configs = await getConfigs();
 
   const props: ResumeProps = {
-    configs,
+    configs
   };
 
   return {
-    props: props,
+    props: props
   };
 }
 

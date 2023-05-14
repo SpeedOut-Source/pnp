@@ -6,7 +6,7 @@ import AbsoluteLoading from "../markdown/absolute_loading";
 
 export default function MapOn() {
   const { isLoaded } = useLoadScript({
-    googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY ?? "",
+    googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY ?? ""
   });
 
   if (!isLoaded) return <AbsoluteLoading />;
@@ -31,30 +31,30 @@ function Map() {
           elementType: "all",
           stylers: [
             {
-              invert_lightness: true,
+              invert_lightness: true
             },
             {
-              saturation: 10,
+              saturation: 10
             },
             {
-              lightness: 30,
+              lightness: 30
             },
             {
-              gamma: 0.5,
+              gamma: 0.5
             },
             {
-              hue: "#5e6b7b",
-            },
-          ],
-        },
-      ],
+              hue: "#5e6b7b"
+            }
+          ]
+        }
+      ]
     }),
     []
   );
 
   const lightMapOptions = useMemo(
     () => ({
-      styles: [],
+      styles: []
     }),
     []
   );

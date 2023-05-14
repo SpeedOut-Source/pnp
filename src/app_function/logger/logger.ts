@@ -9,9 +9,9 @@ const log = pino({
   transport: {
     target: "pino-pretty",
     options: {
-      colorize: true,
-    },
-  },
+      colorize: true
+    }
+  }
 });
 
 export default log;

@@ -20,8 +20,8 @@ export default function Document() {
         ></script>
       </Head>
       <body className="scrollbar-style">
-        <Main />
-        <NextScript />
+      <Main />
+      <NextScript />
       </body>
     </Html>
   );

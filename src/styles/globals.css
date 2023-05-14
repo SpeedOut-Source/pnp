@@ -3,44 +3,44 @@
 @tailwind utilities;
 
 @layer components {
-  .p-card {
-    @apply btn-ghost btn cursor-default overflow-hidden rounded-3xl bg-base-200 font-normal normal-case leading-relaxed tracking-wider;
-  }
+    .p-card {
+        @apply btn-ghost btn cursor-default overflow-hidden rounded-3xl bg-base-200 font-normal normal-case leading-relaxed tracking-wider;
+    }
 
-  .errorSplash {
-    @apply flex h-full animate-pulse items-center justify-center bg-gray-300/50 text-xl tracking-widest;
-  }
+    .errorSplash {
+        @apply flex h-full animate-pulse items-center justify-center bg-gray-300/50 text-xl tracking-widest;
+    }
 
-  .indicator-new {
-    @apply badge indicator-item border-0 bg-base-300/70 text-xs text-base-content backdrop-blur;
-  }
+    .indicator-new {
+        @apply badge indicator-item border-0 bg-base-300/70 text-xs text-base-content backdrop-blur;
+    }
 
-  .scrollbar-style {
-    @apply scrollbar-thin scrollbar-track-base-content/5 scrollbar-thumb-base-content/40 scrollbar-track-rounded-md scrollbar-thumb-rounded;
-  }
+    .scrollbar-style {
+        @apply scrollbar-thin scrollbar-track-base-content/5 scrollbar-thumb-base-content/40 scrollbar-track-rounded-md scrollbar-thumb-rounded;
+    }
 }
 
 .invert-colors {
-  -webkit-filter: grayscale(100%) invert(1);
-  filter: grayscale(100%) invert(1);
-  opacity: 0.6;
+    -webkit-filter: grayscale(100%) invert(1);
+    filter: grayscale(100%) invert(1);
+    opacity: 0.6;
 }
 
 html {
-  scroll-padding-top: 60px;
-  scroll-behavior: smooth;
-  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32' width='32' height='32' fill='none' stroke='rgb(148 163 184 / 0.05)'%3e%3cpath d='M0 .5H31.5V32'/%3e%3c/svg%3e");
+    scroll-padding-top: 60px;
+    scroll-behavior: smooth;
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32' width='32' height='32' fill='none' stroke='rgb(148 163 184 / 0.05)'%3e%3cpath d='M0 .5H31.5V32'/%3e%3c/svg%3e");
 }
 
 .rpv-core__inner-page {
-  background-color: transparent !important;
+    background-color: transparent !important;
 }
 
 .rpv-core__spinner--animating {
-  animation-duration: unset !important;
-  animation-name: none !important;
-  animation-iteration-count: unset !important;
-  animation-timing-function: unset !important;
-  height: unset !important;
-  width: unset !important;
+    animation-duration: unset !important;
+    animation-name: none !important;
+    animation-iteration-count: unset !important;
+    animation-timing-function: unset !important;
+    height: unset !important;
+    width: unset !important;
 }

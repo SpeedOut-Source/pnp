@@ -9,9 +9,9 @@ export interface IConnectButtonProps {
 }
 
 function ImageIcon({
-  props,
-  isLight,
-}: {
+                     props,
+                     isLight
+                   }: {
   isLight: boolean;
   props: IConnectButtonProps;
 }) {

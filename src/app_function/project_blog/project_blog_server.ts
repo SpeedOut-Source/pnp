@@ -47,14 +47,14 @@ export async function projectBlogGetStaticPaths(type: Card) {
   for (let index = 1; index <= Math.ceil(total / getPageSize(type)); index++) {
     paths.push({
       params: {
-        no: index.toString(),
-      },
+        no: index.toString()
+      }
     });
   }
 
   return {
     paths,
-    fallback: false, // can also be true or 'blocking'
+    fallback: false // can also be true or 'blocking'
   };
 }
 
@@ -83,12 +83,12 @@ export async function projectBlogGetStaticProps(
     pageInfo: {
       size: pageSize,
       no: pageNo,
-      total: data.length,
+      total: data.length
     },
-    type: props.type,
+    type: props.type
   };
 
   return {
-    props: allProps,
+    props: allProps
   };
 }

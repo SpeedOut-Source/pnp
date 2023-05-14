@@ -16,7 +16,8 @@ export type Testimonial = {
 };
 export default function TestiCard(props: Testimonial) {
   return (
-    <div className="p-card group relative mx-0 h-fit w-full space-y-3 overflow-visible px-0 py-4 text-justify hover:bg-base-200">
+    <div
+      className="p-card group relative mx-0 h-fit w-full space-y-3 overflow-visible px-0 py-4 text-justify hover:bg-base-200">
       <div className="w-full px-3">
         <Link
           data-tip="Visit website"

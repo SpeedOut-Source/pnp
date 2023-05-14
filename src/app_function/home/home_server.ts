@@ -19,7 +19,7 @@ import {
   type App,
   type Blog,
   type Project,
-  type WorkForProps,
+  type WorkForProps
 } from "../utils/interfaces";
 import { type AppsProps } from "~/components/apps/recent_apps";
 import { getDataUrl } from "../utils/utils";
@@ -76,25 +76,25 @@ export async function HomeServer() {
     configs,
     meSection: {
       me,
-      techs,
+      techs
     },
     workFor: { data: RCompany, total: dbConfig.companyTotal },
     testis: { ...testis, addUrl: testimonialAddUrl },
     recentApps: {
       data: RApps,
-      total: dbConfig.appTotal,
+      total: dbConfig.appTotal
     },
     recentProjects: {
       data: RPros,
-      total: dbConfig.projectTotal,
+      total: dbConfig.projectTotal
     },
     recentBlogs: {
       data: RBlogs,
-      total: dbConfig.blogTotal,
-    },
+      total: dbConfig.blogTotal
+    }
   };
 
   return {
-    props: homeProps,
+    props: homeProps
   };
 }

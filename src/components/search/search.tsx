@@ -1,7 +1,7 @@
 import {
   createAutocomplete,
   type AutocompleteOptions,
-  type AutocompleteState,
+  type AutocompleteState
 } from "@algolia/autocomplete-core";
 import { getAlgoliaResults } from "@algolia/autocomplete-preset-algolia";
 import algoliasearch from "algoliasearch/lite";
@@ -10,12 +10,12 @@ import React, {
   useEffect,
   useMemo,
   useRef,
-  useState,
+  useState
 } from "react";
 import {
   ArchiveBoxXMarkIcon,
   FireIcon,
-  MagnifyingGlassIcon,
+  MagnifyingGlassIcon
 } from "@heroicons/react/24/outline";
 import {
   type AppHit,
@@ -23,7 +23,7 @@ import {
   type BlogHit,
   type ProjectHit,
   type CompanyHit,
-  type TestimonialHit,
+  type TestimonialHit
 } from "~/app_function/types/HitTypes";
 import SearchApps from "../apps/search_apps";
 import SearchBlogs from "../blogs/search_blogs";
@@ -37,7 +37,7 @@ import {
   ALGOLIA_INDEX_BLOGS,
   ALGOLIA_INDEX_COMPANY,
   ALGOLIA_INDEX_PROJECTS,
-  ALGOLIA_INDEX_TESTIMONIALS,
+  ALGOLIA_INDEX_TESTIMONIALS
 } from "~/app_function/utils/constants";
 
 const searchClient = algoliasearch(
@@ -59,7 +59,7 @@ export default function Autocomplete(
     isOpen: false,
     query: "",
     activeItemId: null,
-    status: "idle",
+    status: "idle"
   });
   const autocomplete = useMemo(
     () =>
@@ -85,44 +85,44 @@ export default function Autocomplete(
                       indexName: ALGOLIA_INDEX_BLOGS,
                       query,
                       params: {
-                        hitsPerPage: 5,
-                      },
+                        hitsPerPage: 5
+                      }
                     },
                     {
                       indexName: ALGOLIA_INDEX_APPS,
                       query,
                       params: {
-                        hitsPerPage: 5,
-                      },
+                        hitsPerPage: 5
+                      }
                     },
                     {
                       indexName: ALGOLIA_INDEX_PROJECTS,
                       query,
                       params: {
-                        hitsPerPage: 5,
-                      },
+                        hitsPerPage: 5
+                      }
                     },
                     {
                       indexName: ALGOLIA_INDEX_COMPANY,
                       query,
                       params: {
-                        hitsPerPage: 5,
-                      },
+                        hitsPerPage: 5
+                      }
                     },
                     {
                       indexName: ALGOLIA_INDEX_TESTIMONIALS,
                       query,
                       params: {
-                        hitsPerPage: 5,
-                      },
-                    },
-                  ],
+                        hitsPerPage: 5
+                      }
+                    }
+                  ]
                 });
-              },
-            },
+              }
+            }
           ];
         },
-        ...props,
+        ...props
       }),
     [props]
   );
@@ -175,7 +175,7 @@ export default function Autocomplete(
     getEnvironmentProps({
       formElement: formRef.current,
       inputElement: inputRef.current,
-      panelElement: panelRef.current,
+      panelElement: panelRef.current
     });
   }, [getEnvironmentProps, autocompleteState.isOpen]);
 
@@ -207,7 +207,7 @@ export default function Autocomplete(
           className="input w-full"
           ref={inputRef}
           {...autocomplete.getInputProps({
-            inputElement: inputRef.current,
+            inputElement: inputRef.current
           })}
           placeholder="Search for apps, blogs, projects etc"
         />

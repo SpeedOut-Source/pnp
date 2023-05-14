@@ -21,10 +21,10 @@ type HighlightHitParams<THit> = {
 };
 
 export function Highlight<THit extends { _highlightResult?: any }>({
-  hit,
-  attribute,
-  tagName = "mark",
-}: HighlightHitParams<THit>): JSX.Element {
+                                                                     hit,
+                                                                     attribute,
+                                                                     tagName = "mark"
+                                                                   }: HighlightHitParams<THit>): JSX.Element {
   return createElement(
     Fragment,
     {},

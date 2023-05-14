@@ -1,1 +1,1 @@
-export type DevRole = 'Lead developer' | 'Developer' | 'Tester'
+export type DevRole = "Lead developer" | "Developer" | "Tester"

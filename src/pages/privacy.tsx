@@ -5,6 +5,7 @@ import { PrivacyServer } from "~/app_function/privacy/privacy_server";
 const MDRender = dynamic(() => import("~/components/markdown/md_render"));
 
 const SEO = dynamic(() => import("~/components/seo"));
+
 export interface PrivacyProps {
   data: string;
   configs: Configs;

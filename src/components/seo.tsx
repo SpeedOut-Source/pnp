@@ -16,13 +16,13 @@ interface SEOProps {
 }
 
 function SEO({
-  imgUrl: img,
-  title,
-  description: rawDesc,
-  configs,
-  itemView,
-  ogType = "website",
-}: SEOProps) {
+               imgUrl: img,
+               title,
+               description: rawDesc,
+               configs,
+               itemView,
+               ogType = "website"
+             }: SEOProps) {
   const router = useRouter();
   const baseUrl = `${process.env.NEXT_PUBLIC_BASE_URL ?? DEFAULT_BASE_URL}`;
   const description = sliceText(rawDesc);
@@ -32,7 +32,7 @@ function SEO({
       language: "english",
       remove_digits: true,
       return_changed_case: true,
-      remove_duplicates: true,
+      remove_duplicates: true
     })
     .filter((x) => !/[^\w\s]/.test(x));
   return (
@@ -43,8 +43,8 @@ function SEO({
       additionalLinkTags={[
         {
           rel: "icon",
-          href: `${baseUrl}/favicon.ico`,
-        },
+          href: `${baseUrl}/favicon.ico`
+        }
       ]}
       openGraph={{
         url: pageUrl,
@@ -52,25 +52,25 @@ function SEO({
         description,
         images: img
           ? [
-              {
-                url: img,
-                alt: `${description}`,
-              },
-            ]
+            {
+              url: img,
+              alt: `${description}`
+            }
+          ]
           : undefined,
         site_name: configs.appName,
         type: ogType,
         article: itemView && {
           publishedTime: new Date(itemView.date).toISOString(),
           authors: [baseUrl],
-          tags: keywords,
-        },
+          tags: keywords
+        }
       }}
       facebook={{ appId: "732825215185793" }}
       twitter={{
         handle: configs.twitterHandle,
         site: configs.twitterHandle,
-        cardType: "summary_large_image",
+        cardType: "summary_large_image"
       }}
     />
   );

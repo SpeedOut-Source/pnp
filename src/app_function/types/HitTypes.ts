@@ -3,7 +3,7 @@ import {
   type Project,
   type App,
   type Blog,
-  type Company,
+  type Company
 } from "../utils/interfaces";
 import { type Testimonial } from "~/components/work_for_t/testi_card";
 

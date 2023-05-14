@@ -8,7 +8,7 @@ export interface SearchBlogsProps {
 
 export default function SearchBlogs(props: SearchBlogsProps) {
   if (props.data.length <= 0) return <></>;
-  
+
   return (
     <div className="mx-auto h-fit max-w-6xl px-4 sm:pl-4 sm:pr-0">
       <p className="flex items-center gap-2 text-2xl normal-case text-slate-400">

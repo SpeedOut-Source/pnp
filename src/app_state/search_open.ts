@@ -7,5 +7,5 @@ interface SearchOpenModel {
 
 export const useSearchModeStore = create<SearchOpenModel>((set) => ({
   isOpen: false,
-  setIsOpen: (mode: boolean) => set({ isOpen: mode }),
+  setIsOpen: (mode: boolean) => set({ isOpen: mode })
 }));

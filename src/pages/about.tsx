@@ -16,11 +16,11 @@ export async function getStaticProps() {
   const configs = await getConfigs();
 
   const props: AboutProps = {
-    configs,
+    configs
   };
 
   return {
-    props: props,
+    props: props
   };
 }
 
@@ -52,27 +52,27 @@ export default function About(props: AboutProps) {
               logoUrl: `/images/logos/github-profile-dark${
                 isLight ? "-light" : ""
               }.png`,
-              alt: packageJson.name,
+              alt: packageJson.name
             },
-            version: packageJson.version,
+            version: packageJson.version
           }}
           devCompany={{
             name: "SpeedOut",
             url: "https://play.google.com/store/apps/dev?id=7013622463085625240",
-            year: 2023,
+            year: 2023
           }}
           devs={[
             {
               name: "Biplob Kumar Sutradhar",
               imgUrl: "https://avatars.githubusercontent.com/u/43641536",
               role: "Lead developer",
-              url: "https://github.com/biplobsd",
-            },
+              url: "https://github.com/biplobsd"
+            }
           ]}
           reportUrl="https://github.com/biplobsd/biplobsd.github.io/issues"
           poweredBy={{
             companyName: "Biplob Sutradhar",
-            url: "https://biplobsd.github.io",
+            url: "https://biplobsd.github.io"
           }}
           changeLogs={changeLogJson}
         />

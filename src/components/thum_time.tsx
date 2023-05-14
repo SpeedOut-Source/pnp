@@ -4,7 +4,7 @@ export default function ThumTime({ date }: { date: number }) {
       {new Date(date).toLocaleString("en-US", {
         month: "short",
         day: "numeric",
-        year: "numeric",
+        year: "numeric"
       })}
     </div>
   );

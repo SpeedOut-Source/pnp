@@ -63,6 +63,6 @@ export function getUserNRepo(repoPath: string): {
   const sp = repoPath.split("/");
   return {
     userName: sp[1] ?? "",
-    repo: sp[2] ?? "",
+    repo: sp[2] ?? ""
   };
 }

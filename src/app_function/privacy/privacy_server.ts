@@ -7,10 +7,10 @@ export async function PrivacyServer() {
 
   const privacyProps: PrivacyProps = {
     data,
-    configs,
+    configs
   };
 
   return {
-    props: privacyProps,
+    props: privacyProps
   };
 }

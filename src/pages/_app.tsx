@@ -19,7 +19,7 @@ aa("init", {
   appId: process.env.NEXT_PUBLIC_ALGOLIA_APP_ID!,
   // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
   apiKey: process.env.NEXT_PUBLIC_ALGOLIA_API_KEY!,
-  useCookie: true,
+  useCookie: true
 });
 
 const MyApp: AppType = ({ Component, pageProps }) => {

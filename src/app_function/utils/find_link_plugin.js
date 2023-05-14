@@ -20,8 +20,8 @@ const findLinksPlugin = () => {
             // Custom styles
             // style: "color: red; text-decoration: none;",
             // Open link in new tab
-            target: "_blank",
-          },
+            target: "_blank"
+          }
         });
       });
   };
@@ -42,7 +42,7 @@ const findLinksPlugin = () => {
 
   return {
     onTextLayerRender: findLinks,
-    onAnnotationLayerRender: findLinksAnnotations,
+    onAnnotationLayerRender: findLinksAnnotations
   };
 };
 

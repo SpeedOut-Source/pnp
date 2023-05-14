@@ -111,7 +111,7 @@ export function parseProject(md_text: string, fileName: string) {
     result: result,
     date: date,
     readTime: read_time,
-    fileName,
+    fileName
   };
   return project;
 }
@@ -119,51 +119,51 @@ export function parseProject(md_text: string, fileName: string) {
 export function getProject(
   data:
     | {
-        appName: string;
-        appLogo: string;
-        companyName: string;
-        companyLogo: string;
-        date: number;
-        readTime: number;
-        imgUrl: string;
-        whatText: string;
-        result: string;
-      }
+    appName: string;
+    appLogo: string;
+    companyName: string;
+    companyLogo: string;
+    date: number;
+    readTime: number;
+    imgUrl: string;
+    whatText: string;
+    result: string;
+  }
     | {
-        [key: string]: string;
-      },
+    [key: string]: string;
+  },
   fileName: string
 ): Project {
   return {
     imgUrl: data.imgUrl,
     app: {
       name: data.appName,
-      logoUrl: data.appLogo,
+      logoUrl: data.appLogo
     },
     company: {
       name: data.companyName,
-      logoUrl: data.companyLogo,
+      logoUrl: data.companyLogo
     },
     whatText: data.whatText,
     result: data.result,
     date: data.date as number,
     readTime: data.readTime as number,
-    fileName: fileName,
+    fileName: fileName
   };
 }
 
 export function getBlog(
   data:
     | {
-        title: string;
-        imgUrl: string;
-        desc: string;
-        date: number;
-        readTime: number;
-      }
+    title: string;
+    imgUrl: string;
+    desc: string;
+    date: number;
+    readTime: number;
+  }
     | {
-        [key: string]: string | number;
-      },
+    [key: string]: string | number;
+  },
   fileName: string
 ): Blog {
   return {
@@ -172,7 +172,7 @@ export function getBlog(
     desc: data.desc as string,
     date: data.date as number,
     readTime: data.readTime as number,
-    fileName: fileName,
+    fileName: fileName
   };
 }
 
@@ -191,7 +191,7 @@ export function parseBlog(md_text: string, filename: string): Blog {
     desc: desc,
     date: date,
     readTime: read_time,
-    fileName: filename,
+    fileName: filename
   };
 
   return blog;

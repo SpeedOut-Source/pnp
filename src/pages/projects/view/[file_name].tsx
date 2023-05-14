@@ -4,7 +4,7 @@ import { type GetStaticPropsContext } from "next";
 import { type Configs } from "~/app_function/home/home_server";
 import {
   getStaticPathItemView,
-  getStaticPropsItemView,
+  getStaticPropsItemView
 } from "~/app_function/project_blog/item_view_server";
 import Loading from "~/components/markdown/loading";
 import { type ParsedUrlQuery } from "querystring";
@@ -14,7 +14,7 @@ import {
   type CardItem,
   type Card,
   type App,
-  type Company,
+  type Company
 } from "~/app_function/utils/interfaces";
 import LayoutCardApp from "~/components/apps/layout_card";
 import { DEFAULT_IS_LIGHT, useThemeStore } from "~/app_state/theme_mode";
@@ -23,7 +23,7 @@ import { PencilSquareIcon } from "@heroicons/react/24/outline";
 import {
   getDataUrl,
   getUserNRepo,
-  toTitleCase,
+  toTitleCase
 } from "~/app_function/utils/utils";
 import LayoutCardCompany from "~/components/company/layout_card";
 
@@ -35,11 +35,11 @@ const Image = dynamic(() => import("next/image"));
 const ImageLegacy = dynamic(() => import("next/legacy/image"));
 const ShareWith = dynamic(() => import("~/components/share_with"));
 const DateTimePost = dynamic(() => import("~/components/date_time_post"), {
-  ssr: false,
+  ssr: false
 });
 
 const MDRender = dynamic(() => import("~/components/markdown/md_render"), {
-  loading: () => <Loading />,
+  loading: () => <Loading />
 });
 
 const LayoutCard = dynamic(() => import("~/components/layout_card"));

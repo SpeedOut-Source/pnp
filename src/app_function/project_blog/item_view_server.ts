@@ -12,14 +12,14 @@ export async function getStaticPathItemView(type: Card) {
   const paths = allData.map((x) => {
     return {
       params: {
-        file_name: x.fileName,
-      },
+        file_name: x.fileName
+      }
     };
   });
 
   return {
     paths,
-    fallback: false, // can also be true or 'blocking'
+    fallback: false // can also be true or 'blocking'
   };
 }
 
@@ -29,16 +29,16 @@ export interface ProjectBlogGetStaticServer {
 }
 
 export async function getStaticPropsItemView({
-  context,
-  type,
-}: ProjectBlogGetStaticServer) {
+                                               context,
+                                               type
+                                             }: ProjectBlogGetStaticServer) {
   if (
     !context.params ||
     !context.params.file_name ||
     typeof context.params.file_name !== "string"
   ) {
     return {
-      notFound: true,
+      notFound: true
     };
   }
   try {
@@ -61,7 +61,7 @@ export async function getStaticPropsItemView({
     const itemView = allData[currentProjectIndex];
     if (!itemView) {
       return {
-        notFound: true,
+        notFound: true
       };
     }
     let more4: unknown[] | null = null;
@@ -82,15 +82,15 @@ export async function getStaticPropsItemView({
       previous,
       next,
       type: type,
-      more4: more4 as CardData | null,
+      more4: more4 as CardData | null
     };
 
     return {
-      props: pvp,
+      props: pvp
     };
   } catch (e) {
     return {
-      notFound: true,
+      notFound: true
     };
   }
 }

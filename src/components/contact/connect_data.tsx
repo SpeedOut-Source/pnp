@@ -6,14 +6,14 @@ export const CONNECT_OPTIONS: ContactItemProps[] = [
     icon: <ConnectButton text="Gmail" />,
     name: "Gmail",
     text: "biplobsd11@gmail.com",
-    url: "mailto:biplobsd11@gmail.com",
+    url: "mailto:biplobsd11@gmail.com"
   },
   {
     icon: <ConnectButton text="GitHub" />,
     name: "GitHub",
     text: "biplobsd",
     copyUrl: true,
-    url: "https://github.com/biplobsd",
+    url: "https://github.com/biplobsd"
   },
 
   {
@@ -21,13 +21,13 @@ export const CONNECT_OPTIONS: ContactItemProps[] = [
     name: "Twitter",
     text: "biplobsd11",
     copyUrl: true,
-    url: "https://twitter.com/biplobsd11",
+    url: "https://twitter.com/biplobsd11"
   },
   {
     icon: <ConnectButton text="LinkedIn" />,
     name: "LinkedIn",
     text: "biplob-sutradhar",
     copyUrl: true,
-    url: "https://www.linkedin.com/in/biplob-sutradhar/",
-  },
+    url: "https://www.linkedin.com/in/biplob-sutradhar/"
+  }
 ];

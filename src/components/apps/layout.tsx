@@ -13,7 +13,8 @@ export default function Layout(props: Layout) {
     return <div className="text-center">No apps</div>;
   }
   return (
-    <div className="mx-auto grid w-fit justify-center gap-4 xs:grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 ">
+    <div
+      className="mx-auto grid w-fit justify-center gap-4 xs:grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 ">
       {props.data.map((x) => (
         <LayoutCard {...x} key={x.date} />
       ))}

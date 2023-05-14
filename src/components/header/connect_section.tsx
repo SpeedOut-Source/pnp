@@ -8,7 +8,7 @@ import Image from "next/legacy/image";
 import { SearchButton } from "../search/button";
 import {
   BUY_ME_A_COFFEE_DARK_BLURDATA,
-  BUY_ME_A_COFFEE_LIGHT_BLURDATA,
+  BUY_ME_A_COFFEE_LIGHT_BLURDATA
 } from "~/app_function/utils/constants";
 import ThemeSwitch from "~/components/header/theme_switch";
 
