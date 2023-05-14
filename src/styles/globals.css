@@ -14,6 +14,10 @@
   .indicator-new {
     @apply badge indicator-item border-0 bg-base-300/70 text-xs text-base-content backdrop-blur;
   }
+
+  .scrollbar-style {
+    @apply scrollbar-thin scrollbar-track-base-content/5 scrollbar-thumb-base-content/40 scrollbar-track-rounded-md scrollbar-thumb-rounded;
+  }
 }
 
 .invert-colors {

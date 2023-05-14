@@ -19,7 +19,7 @@ export default function Document() {
           data-y_margin="18"
         ></script>
       </Head>
-      <body>
+      <body className="scrollbar-style">
         <Main />
         <NextScript />
       </body>

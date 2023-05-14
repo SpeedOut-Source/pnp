@@ -36,7 +36,8 @@ import {
   ALGOLIA_INDEX_APPS,
   ALGOLIA_INDEX_BLOGS,
   ALGOLIA_INDEX_COMPANY,
-  ALGOLIA_INDEX_PROJECTS, ALGOLIA_INDEX_TESTIMONIALS
+  ALGOLIA_INDEX_PROJECTS,
+  ALGOLIA_INDEX_TESTIMONIALS,
 } from "~/app_function/utils/constants";
 
 const searchClient = algoliasearch(
@@ -195,7 +196,7 @@ export default function Autocomplete(
           <label
             className={clsx(
               autocompleteState.status !== "idle" && "swap-active",
-              "swap-rotate swap  items-center "
+              "swap swap-rotate  items-center "
             )}
           >
             <MagnifyingGlassIcon className="swap-off mx-auto h-5 w-5" />
@@ -234,7 +235,7 @@ export default function Autocomplete(
               Blogs
             </ScrollIntoView>
           </span>
-          <div className="ml-2 flex-1 flex-col overflow-y-auto">
+          <div className="scrollbar-style ml-2 flex-1 flex-col overflow-y-auto">
             <div className="mr-2">
               <span ref={testimonialsRef}>
                 <SearchTestimonials data={testimonials} />

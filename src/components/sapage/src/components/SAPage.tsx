@@ -52,7 +52,7 @@ const SAPage = (props: SAPageProps) => {
         } w-full max-w-xl `}
       >
         <div className="collapse-content w-full max-w-xl">
-          <div className="max-h-96 overflow-y-auto">
+          <div className="scrollbar-style max-h-96 overflow-y-auto">
             <div className="mx-2 mb-3 mt-2 flex flex-col justify-center rounded-xl ring-2 ring-blue-500/10">
               {Object.keys(props.changeLogs)
                 .slice(0, 20)
