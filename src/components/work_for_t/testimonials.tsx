@@ -54,7 +54,7 @@ export default function Testimonials(props: TestimonialsProps) {
     setThreeListTestimonial({
       l1,
       l2,
-      l3,
+      l3
     });
   }, [props.testis]);
 
@@ -90,6 +90,7 @@ export default function Testimonials(props: TestimonialsProps) {
 
   useEffect(() => {
     if (!expanded || !inView) return;
+
     function onScroll() {
       if (!ref.current) return;
       const bodyRect = document.body.getBoundingClientRect();
@@ -104,6 +105,7 @@ export default function Testimonials(props: TestimonialsProps) {
         setShowCollapseButton(true);
       }
     }
+
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => {
       window.removeEventListener("scroll", onScroll);
@@ -115,19 +117,20 @@ export default function Testimonials(props: TestimonialsProps) {
       ref={ref}
       className="relative mx-auto h-fit w-full px-3 sm:mx-0 lg:max-w-2xl lg:px-0"
     >
-      <p className="flex items-center gap-2 text-2xl normal-case text-slate-400">
-        <ChatBubbleLeftRightIcon className="h-5 w-5" /> Testimonials{" "}
+      <div className="flex items-center gap-2 text-2xl normal-case text-slate-400">
+        <ChatBubbleLeftRightIcon className="h-5 w-5" />
+        Testimonials
         {props.addUrl && (
           <Link
             href={props.addUrl}
-            className="tooltip"
+            className="tooltip ml-1"
             data-tip="Give Testimonial"
             target="_blank"
           >
             <PlusIcon className="h-5 w-5" />
           </Link>
         )}
-      </p>
+      </div>
       <div className="relative md:mx-2">
         <div
           ref={inViewRef}
