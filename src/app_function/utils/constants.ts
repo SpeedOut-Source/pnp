@@ -11,3 +11,5 @@ export const ALGOLIA_INDEX_APPS = "apps";
 export const ALGOLIA_INDEX_BLOGS = "blogs";
 export const ALGOLIA_INDEX_COMPANY = "compnay";
 export const ALGOLIA_INDEX_TESTIMONIALS = "testimonials";
+export const BUYMEACOFFEE_USERNAME =
+  process.env.NEXT_PUBLIC_BUYMEACOFFEE_USERNAME;
