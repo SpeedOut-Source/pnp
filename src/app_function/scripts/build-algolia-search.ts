@@ -23,12 +23,13 @@ import {
   ALGOLIA_INDEX_COMPANY,
   ALGOLIA_INDEX_PROJECTS,
   ALGOLIA_INDEX_TESTIMONIALS,
+  MAIN_ENV_PATH,
 } from "~/app_function/utils/constants";
 
 try {
   console.log("Sending record to Algolia server");
   // eslint-disable-next-line @typescript-eslint/no-unsafe-call,@typescript-eslint/no-unsafe-member-access
-  dotenv.config({ path: ".env.local" });
+  dotenv.config({ path: MAIN_ENV_PATH });
 
   if (!process.env.NEXT_PUBLIC_ALGOLIA_APP_ID) {
     throw new Error("NEXT_PUBLIC_ALGOLIA_APP_ID is not defined");
@@ -53,7 +54,7 @@ function transformRawToSearchObjects(data: CardData | Testimonial[]) {
 
 void (async function () {
   // eslint-disable-next-line @typescript-eslint/no-unsafe-call,@typescript-eslint/no-unsafe-member-access
-  dotenv.config({ path: ".env.production" });
+  dotenv.config({ path: MAIN_ENV_PATH });
 
   try {
     console.log("Getting data");

@@ -15,3 +15,4 @@ export const BUYMEACOFFEE_USERNAME =
   process.env.NEXT_PUBLIC_BUYMEACOFFEE_USERNAME;
 // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
 export const PERSON_NAME = process.env.NEXT_PUBLIC_PERSON_NAME!;
+export const MAIN_ENV_PATH = ".env.local";

@@ -5,6 +5,7 @@ export default function Document() {
   return (
     <Html lang="en" data-theme="dark">
       <Head>
+        {/* DO NOT CHANGE BELOW COMMENT */}
         {/* ADD-META-TAGS */}
         {BUYMEACOFFEE_USERNAME && (
           <script
