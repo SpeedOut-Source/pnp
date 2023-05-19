@@ -1,20 +1,34 @@
 import * as dotenv from "dotenv";
 import algoliasearch from "algoliasearch";
-import { addBlur, getApps, getBlogs, getCompany, getProjects, getTesti } from "~/app_function/utils/utils-server";
-import { type App, type Blog, type CardData, type Company, type Project } from "~/app_function/utils/interfaces";
+import {
+  addBlur,
+  getApps,
+  getBlogs,
+  getCompany,
+  getProjects,
+  getTesti,
+} from "~/app_function/utils/utils-server";
+import {
+  type App,
+  type Blog,
+  type CardData,
+  type Company,
+  type Project,
+} from "~/app_function/utils/interfaces";
 import { type Testimonial } from "~/components/work_for_t/testi_card";
 import { isTestis } from "~/app_function/utils/utils";
 import {
   ALGOLIA_INDEX_APPS,
   ALGOLIA_INDEX_BLOGS,
   ALGOLIA_INDEX_COMPANY,
-  ALGOLIA_INDEX_PROJECTS, ALGOLIA_INDEX_TESTIMONIALS
+  ALGOLIA_INDEX_PROJECTS,
+  ALGOLIA_INDEX_TESTIMONIALS,
 } from "~/app_function/utils/constants";
 
 try {
   console.log("Sending record to Algolia server");
   // eslint-disable-next-line @typescript-eslint/no-unsafe-call,@typescript-eslint/no-unsafe-member-access
-  dotenv.config({ path: ".env.production" });
+  dotenv.config({ path: ".env.local" });
 
   if (!process.env.NEXT_PUBLIC_ALGOLIA_APP_ID) {
     throw new Error("NEXT_PUBLIC_ALGOLIA_APP_ID is not defined");
@@ -28,18 +42,16 @@ try {
   process.exit(1);
 }
 
-
 function transformRawToSearchObjects(data: CardData | Testimonial[]) {
-  return data.map(x => {
+  return data.map((x) => {
     return {
       objectID: isTestis(x) ? x.imgUrl : x.fileName,
-      ...x
+      ...x,
     };
   });
 }
 
-
-void (async function() {
+void (async function () {
   // eslint-disable-next-line @typescript-eslint/no-unsafe-call,@typescript-eslint/no-unsafe-member-access
   dotenv.config({ path: ".env.production" });
 
@@ -57,15 +69,23 @@ void (async function() {
     console.log("allCompanyRaw");
     console.log("Data imported successfully");
 
-
     console.log("Adding blurdata data");
-    const RPros: Project[] = await addBlur(allProsRaw.projects, allProsRaw.projects.length);
+    const RPros: Project[] = await addBlur(
+      allProsRaw.projects,
+      allProsRaw.projects.length
+    );
     console.log("RPros");
     const RApps: App[] = await addBlur(allAppsRaw.apps, allAppsRaw.apps.length);
     console.log("RApps");
-    const RBlogs: Blog[] = await addBlur(allBlogsRaw.blogs, allBlogsRaw.blogs.length);
+    const RBlogs: Blog[] = await addBlur(
+      allBlogsRaw.blogs,
+      allBlogsRaw.blogs.length
+    );
     console.log("RBlogs");
-    const RCompany: Company[] = await addBlur(allCompanyRaw.company, allCompanyRaw.company.length);
+    const RCompany: Company[] = await addBlur(
+      allCompanyRaw.company,
+      allCompanyRaw.company.length
+    );
     console.log("RCompany");
     console.log("Blur Data added successfully");
     const RTestis: Testimonial[] = testis.testis;
@@ -105,15 +125,25 @@ void (async function() {
 
     console.log("Send records to Algolia server");
     const ResPros = await IPros.saveObjects(TPros);
-    console.log(`🎉 Successfully added ${ALGOLIA_INDEX_PROJECTS} ${ResPros.objectIDs.length} records to Algolia search.`);
+    console.log(
+      `🎉 Successfully added ${ALGOLIA_INDEX_PROJECTS} ${ResPros.objectIDs.length} records to Algolia search.`
+    );
     const ResApps = await IApps.saveObjects(TApps);
-    console.log(`🎉 Successfully added ${ALGOLIA_INDEX_APPS} ${ResApps.objectIDs.length} records to Algolia search.`);
+    console.log(
+      `🎉 Successfully added ${ALGOLIA_INDEX_APPS} ${ResApps.objectIDs.length} records to Algolia search.`
+    );
     const ResBlogs = await IBlogs.saveObjects(TBlogs);
-    console.log(`🎉 Successfully added ${ALGOLIA_INDEX_BLOGS} ${ResBlogs.objectIDs.length} records to Algolia search.`);
+    console.log(
+      `🎉 Successfully added ${ALGOLIA_INDEX_BLOGS} ${ResBlogs.objectIDs.length} records to Algolia search.`
+    );
     const ResCompany = await ICompany.saveObjects(TCompany);
-    console.log(`🎉 Successfully added ${ALGOLIA_INDEX_COMPANY} ${ResCompany.objectIDs.length} records to Algolia search.`);
+    console.log(
+      `🎉 Successfully added ${ALGOLIA_INDEX_COMPANY} ${ResCompany.objectIDs.length} records to Algolia search.`
+    );
     const ResTestis = await ITestis.saveObjects(TTestis);
-    console.log(`🎉 Successfully added ${ALGOLIA_INDEX_TESTIMONIALS} ${ResTestis.objectIDs.length} records to Algolia search.`);
+    console.log(
+      `🎉 Successfully added ${ALGOLIA_INDEX_TESTIMONIALS} ${ResTestis.objectIDs.length} records to Algolia search.`
+    );
     console.log("Sent records to Algolia server successfully");
   } catch (err) {
     console.error(err);
