@@ -1,11 +1,11 @@
 import Bars3Icon from "@heroicons/react/24/solid/Bars3Icon";
-import packageJson from "../../../package.json";
 import dynamic from "next/dynamic";
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import { DEFAULT_IS_LIGHT, useThemeStore } from "~/app_state/theme_mode";
 import { SearchButton } from "../search/button";
 import ThemeSwitch from "~/components/header/theme_switch";
+import { PERSON_NAME } from "~/app_function/utils/constants";
 
 const ConnectSection = dynamic(() => import("./connect_section"));
 const Links = dynamic(() => import("./links"));
@@ -61,11 +61,9 @@ export default function Header() {
                 }.png`}
                 width="32"
                 height="32"
-                alt={packageJson.personName}
+                alt={PERSON_NAME}
               />
-              <div className="ml-2 hidden lg:flex">
-                {packageJson.personName}
-              </div>
+              <div className="ml-2 hidden lg:flex">{PERSON_NAME}</div>
             </Link>
           </span>
           <Links className="hidden items-center gap-4 md:flex lg:flex xl:flex" />

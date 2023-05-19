@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import ConnectButton from "../header/connect_button";
 import { type ContactItemProps } from "./contact_item";
 
@@ -5,29 +6,28 @@ export const CONNECT_OPTIONS: ContactItemProps[] = [
   {
     icon: <ConnectButton text="Gmail" />,
     name: "Gmail",
-    text: "biplobsd11@gmail.com",
-    url: "mailto:biplobsd11@gmail.com"
+    text: process.env.NEXT_PUBLIC_GMAIL!,
+    url: `mailto:${process.env.NEXT_PUBLIC_GMAIL!}`,
   },
   {
     icon: <ConnectButton text="GitHub" />,
     name: "GitHub",
-    text: "biplobsd",
+    text: process.env.NEXT_PUBLIC_GITHUB!,
     copyUrl: true,
-    url: "https://github.com/biplobsd"
+    url: `https://github.com/${process.env.NEXT_PUBLIC_GITHUB!}`,
   },
-
   {
     icon: <ConnectButton text="Twitter" />,
     name: "Twitter",
-    text: "biplobsd11",
+    text: process.env.NEXT_PUBLIC_TWITTER!,
     copyUrl: true,
-    url: "https://twitter.com/biplobsd11"
+    url: `https://twitter.com/${process.env.NEXT_PUBLIC_TWITTER!}`,
   },
   {
     icon: <ConnectButton text="LinkedIn" />,
     name: "LinkedIn",
-    text: "biplob-sutradhar",
+    text: process.env.NEXT_PUBLIC_LINKEDIN!,
     copyUrl: true,
-    url: "https://www.linkedin.com/in/biplob-sutradhar/"
-  }
+    url: `https://www.linkedin.com/in/${process.env.NEXT_PUBLIC_LINKEDIN!}`,
+  },
 ];
