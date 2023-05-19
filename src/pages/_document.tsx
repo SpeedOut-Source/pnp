@@ -5,7 +5,7 @@ export default function Document() {
   return (
     <Html lang="en" data-theme="dark">
       <Head>
-        <meta name="msvalidate.01" content="2B3B56800802BE35A75AE72C50119295" />
+        {/* ADD-META-TAGS */}
         {BUYMEACOFFEE_USERNAME && (
           <script
             async
