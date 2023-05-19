@@ -54,7 +54,7 @@ export default function Testimonials(props: TestimonialsProps) {
     setThreeListTestimonial({
       l1,
       l2,
-      l3
+      l3,
     });
   }, [props.testis]);
 
@@ -131,7 +131,7 @@ export default function Testimonials(props: TestimonialsProps) {
           </Link>
         )}
       </div>
-      <div className="relative md:mx-2">
+      <div className="relative h-full md:mx-2">
         <div
           ref={inViewRef}
           className={`${
@@ -140,7 +140,7 @@ export default function Testimonials(props: TestimonialsProps) {
                 ? "mb-16"
                 : ""
               : "max-h-[33rem] overflow-hidden md:max-h-80"
-          } mx-auto space-y-2 sm:space-y-0 sm:grid w-full min-h-[12rem] items-start justify-stretch gap-2 rounded-b-3xl  py-4 transition-all duration-500 ease-in-out sm:grid-cols-2 md:grid-cols-3`}
+          } mx-auto min-h-[12rem] w-full items-start justify-stretch gap-2 space-y-2 rounded-b-3xl py-4 transition-all  duration-500 ease-in-out sm:grid sm:grid-cols-2 sm:space-y-0 md:grid-cols-3`}
         >
           <ul className="space-y-2">
             {threeListTestimonial.l1 ? (
