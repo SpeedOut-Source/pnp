@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { useEffect, useMemo, useState } from "react";
 import { GoogleMap, useLoadScript, MarkerF } from "@react-google-maps/api";
 import MapPinIcon from "@heroicons/react/24/outline/MapPinIcon";
@@ -6,7 +7,7 @@ import AbsoluteLoading from "../markdown/absolute_loading";
 
 export default function MapOn() {
   const { isLoaded } = useLoadScript({
-    googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY ?? ""
+    googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY ?? "",
   });
 
   if (!isLoaded) return <AbsoluteLoading />;
@@ -21,7 +22,13 @@ function Map() {
     setIsLight(utm.themeName === "winter");
   }, [utm]);
 
-  const center = useMemo(() => ({ lat: 23.790626, lng: 90.408972 }), []);
+  const center = useMemo(
+    () => ({
+      lat: parseFloat(process.env.NEXT_PUBLIC_GOOGLE_MAP_LAT!),
+      lng: parseFloat(process.env.NEXT_PUBLIC_GOOGLE_MAP_LNG!),
+    }),
+    []
+  );
 
   const darkMapOptions = useMemo(
     () => ({
@@ -31,30 +38,30 @@ function Map() {
           elementType: "all",
           stylers: [
             {
-              invert_lightness: true
+              invert_lightness: true,
             },
             {
-              saturation: 10
+              saturation: 10,
             },
             {
-              lightness: 30
+              lightness: 30,
             },
             {
-              gamma: 0.5
+              gamma: 0.5,
             },
             {
-              hue: "#5e6b7b"
-            }
-          ]
-        }
-      ]
+              hue: "#5e6b7b",
+            },
+          ],
+        },
+      ],
     }),
     []
   );
 
   const lightMapOptions = useMemo(
     () => ({
-      styles: []
+      styles: [],
     }),
     []
   );
@@ -64,7 +71,8 @@ function Map() {
   return (
     <>
       <div className="p-card mx-auto mb-2 flex h-fit w-fit items-center gap-2">
-        <MapPinIcon className="h-5 w-5" /> Dhaka, Bangladesh
+        <MapPinIcon className="h-5 w-5" />{" "}
+        {process.env.NEXT_PUBLIC_GOOGLE_MAP_LOCATION_NAME}
       </div>
       <div className="mx-4 overflow-hidden rounded-xl">
         <GoogleMap

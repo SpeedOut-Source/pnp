@@ -38,7 +38,10 @@ export interface RawCompanyProps {
 }
 
 export async function getData(path: string) {
-  const data = await promises.readFile(`../pnp-data/${path}`, "utf8");
+  const data = await promises.readFile(
+    `${process.env.DATA_PATH ?? "../portfolio_data/"}${path}`,
+    "utf8"
+  );
   return Buffer.from(data);
 }
 
