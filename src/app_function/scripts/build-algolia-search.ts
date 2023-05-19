@@ -34,8 +34,8 @@ try {
     throw new Error("NEXT_PUBLIC_ALGOLIA_APP_ID is not defined");
   }
 
-  if (!process.env.NEXT_PUBLIC_ALGOLIA_SEARCH_ADMIN_KEY) {
-    throw new Error("NEXT_PUBLIC_ALGOLIA_SEARCH_ADMIN_KEY is not defined");
+  if (!process.env.ALGOLIA_SEARCH_ADMIN_KEY) {
+    throw new Error("ALGOLIA_SEARCH_ADMIN_KEY is not defined");
   }
 } catch (error) {
   console.error(error);
@@ -107,7 +107,7 @@ void (async function () {
       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
       process.env.NEXT_PUBLIC_ALGOLIA_APP_ID!,
       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-      process.env.NEXT_PUBLIC_ALGOLIA_SEARCH_ADMIN_KEY!
+      process.env.ALGOLIA_SEARCH_ADMIN_KEY!
     );
 
     console.log("Init index algolia");
