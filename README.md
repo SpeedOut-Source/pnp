@@ -1,28 +1,13 @@
-# Create T3 App
+![preview](https://raw.githubusercontent.com/SpeedOut-Source/pnp-data/main/images/all-devices-black-pnp.png)
 
-This is a [T3 Stack](https://create.t3.gg/) project bootstrapped with `create-t3-app`.
+# PNP - Portfolio NextJS Project
 
-## What's next? How do I make an app with this?
+PNP, or Portfolio NextJs Project, is a portfolio website built using the NextJS framework. It is a static website that can be hosted on any static web hosting platform. PNP is a completely free and open-source project. It helps you showcase your skills and services. If anyone wants to know about your business or your personality, this type of website will boost you to the level you need.
 
-We try to keep this project as simple as possible, so you can start with just the scaffolding we set up for you, and add additional things later when they become necessary.
+## Setup and Documentation
 
-If you are not familiar with the different technologies used in this project, please refer to the respective docs. If you still are in the wind, please join our [Discord](https://t3.gg/discord) and ask for help.
+Blogs: https://biplobsd.me/blogs/view/get-started.md
 
-- [Next.js](https://nextjs.org)
-- [NextAuth.js](https://next-auth.js.org)
-- [Prisma](https://prisma.io)
-- [Tailwind CSS](https://tailwindcss.com)
-- [tRPC](https://trpc.io)
+## Development
 
-## Learn More
-
-To learn more about the [T3 Stack](https://create.t3.gg/), take a look at the following resources:
-
-- [Documentation](https://create.t3.gg/)
-- [Learn the T3 Stack](https://create.t3.gg/en/faq#what-learning-resources-are-currently-available) — Check out these awesome tutorials
-
-You can check out the [create-t3-app GitHub repository](https://github.com/t3-oss/create-t3-app) — your feedback and contributions are welcome!
-
-## How do I deploy this?
-
-Follow our deployment guides for [Vercel](https://create.t3.gg/en/deployment/vercel), [Netlify](https://create.t3.gg/en/deployment/netlify) and [Docker](https://create.t3.gg/en/deployment/docker) for more information.
+This project is using the T3 NextJS template for building the project. You can easily learn from the [T3 Stack](https://create.t3.gg/) website.
