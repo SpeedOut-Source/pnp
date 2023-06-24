@@ -1,5 +1,5 @@
 import { type AllDataProps } from "~/pages/projects";
-import { getCard, getConfigs, getDBConfigs } from "../utils/utils-server";
+import { getCard, getDBConfigs } from "../utils/utils-server";
 import { type GetStaticPropsContext, type PreviewData } from "next";
 import { PAGE_SIZE, PAGE_SIZE_APP } from "../utils/constants";
 import { type ParsedUrlQuery } from "querystring";
@@ -47,14 +47,14 @@ export async function projectBlogGetStaticPaths(type: Card) {
   for (let index = 1; index <= Math.ceil(total / getPageSize(type)); index++) {
     paths.push({
       params: {
-        no: index.toString()
-      }
+        no: index.toString(),
+      },
     });
   }
 
   return {
     paths,
-    fallback: false // can also be true or 'blocking'
+    fallback: false, // can also be true or 'blocking'
   };
 }
 
@@ -70,25 +70,22 @@ export async function projectBlogGetStaticProps(
     pageNo = Number.parseInt(props.context.params.no);
   }
 
-  const configs = await getConfigs();
-
   const data = await getCard(props.type);
   const pageSize = getPageSize(props.type);
   const limitShow = pageSize * pageNo;
   const dataArray = data.slice(limitShow - pageSize, limitShow);
 
   const allProps: AllDataProps = {
-    configs,
     data: dataArray,
     pageInfo: {
       size: pageSize,
       no: pageNo,
-      total: data.length
+      total: data.length,
     },
-    type: props.type
+    type: props.type,
   };
 
   return {
-    props: allProps
+    props: allProps,
   };
 }

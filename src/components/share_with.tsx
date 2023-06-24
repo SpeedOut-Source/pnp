@@ -1,10 +1,8 @@
 import DocumentDuplicateIcon from "@heroicons/react/24/outline/DocumentDuplicateIcon";
 import { useState } from "react";
 import { delay } from "./sapage/src/components/app/helper";
-import { useRouter } from "next/router";
-import { DEFAULT_BASE_URL } from "~/app_function/utils/constants";
 import dynamic from "next/dynamic";
-
+import { env } from "../env.mjs";
 const Link = dynamic(() => import("next/link"));
 const CopyToClipboard = dynamic(() => import("react-copy-to-clipboard"));
 
@@ -14,10 +12,6 @@ interface ShareWith {
 
 export default function ShareWith(props: ShareWith) {
   const [copyTip, setCopyTip] = useState("Copy link");
-  const router = useRouter();
-  const fullUrl = `${process.env.NEXT_PUBLIC_BASE_URL ?? DEFAULT_BASE_URL}${
-    router.asPath
-  }`;
 
   return (
     <div className="p-card flex h-fit w-full flex-col space-y-2 overflow-visible py-2 text-xs sm:w-fit">
@@ -25,7 +19,7 @@ export default function ShareWith(props: ShareWith) {
         <span>Share with</span>
         <span className="tooltip" data-tip={copyTip}>
           <CopyToClipboard
-            text={fullUrl}
+            text={env.NEXT_PUBLIC_BASE_URL}
             // eslint-disable-next-line @typescript-eslint/no-misused-promises
             onCopy={async () => {
               setCopyTip("Copied");
@@ -41,7 +35,7 @@ export default function ShareWith(props: ShareWith) {
         <Link
           target="_blank"
           className="link-hover link-primary link"
-          href={`https://www.facebook.com/sharer/sharer.php?u=${fullUrl}`}
+          href={`https://www.facebook.com/sharer/sharer.php?u=${env.NEXT_PUBLIC_BASE_URL}`}
         >
           Facebook
         </Link>
@@ -50,7 +44,7 @@ export default function ShareWith(props: ShareWith) {
           className="link-hover link-primary link"
           href={`https://twitter.com/intent/tweet?text=${
             props.text
-          } ${encodeURIComponent(fullUrl)}`}
+          } ${encodeURIComponent(env.NEXT_PUBLIC_BASE_URL)}`}
         >
           Twitter
         </Link>
@@ -58,7 +52,7 @@ export default function ShareWith(props: ShareWith) {
           target="_blank"
           className="link-hover link-primary link"
           href={`https://t.me/share/url?url=${encodeURIComponent(
-            fullUrl
+            env.NEXT_PUBLIC_BASE_URL
           )}&text=${props.text}`}
         >
           Telegram

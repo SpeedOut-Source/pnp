@@ -1,5 +1,5 @@
 import { Html, Head, Main, NextScript } from "next/document";
-import { BUYMEACOFFEE_USERNAME } from "~/app_function/utils/constants";
+import { env } from "../env.mjs";
 
 export default function Document() {
   return (
@@ -7,13 +7,13 @@ export default function Document() {
       <Head>
         {/* DO NOT CHANGE BELOW COMMENT */}
         {/* ADD-META-TAGS */}
-        {BUYMEACOFFEE_USERNAME && (
+        {env.NEXT_PUBLIC_BUYMEACOFFEE_USERNAME && (
           <script
             async
             data-name="BMC-Widget"
             data-cfasync="false"
             src="https://cdnjs.buymeacoffee.com/1.0.0/widget.prod.min.js"
-            data-id={BUYMEACOFFEE_USERNAME}
+            data-id={env.NEXT_PUBLIC_BUYMEACOFFEE_USERNAME}
             data-description="Support me on Buy me a coffee!"
             data-message=""
             data-color="#5F7FFF"

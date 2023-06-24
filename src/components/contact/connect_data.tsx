@@ -1,33 +1,33 @@
-/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import ConnectButton from "../header/connect_button";
 import { type ContactItemProps } from "./contact_item";
+import { env } from "../../env.mjs";
 
 export const CONNECT_OPTIONS: ContactItemProps[] = [
   {
     icon: <ConnectButton text="Gmail" />,
     name: "Gmail",
-    text: process.env.NEXT_PUBLIC_GMAIL!,
-    url: `mailto:${process.env.NEXT_PUBLIC_GMAIL!}`,
+    text: env.NEXT_PUBLIC_GMAIL,
+    url: `mailto:${env.NEXT_PUBLIC_GMAIL}`,
   },
   {
     icon: <ConnectButton text="GitHub" />,
     name: "GitHub",
-    text: process.env.NEXT_PUBLIC_GITHUB!,
+    text: env.NEXT_PUBLIC_GITHUB,
     copyUrl: true,
-    url: `https://github.com/${process.env.NEXT_PUBLIC_GITHUB!}`,
+    url: `https://github.com/${env.NEXT_PUBLIC_GITHUB}`,
   },
   {
     icon: <ConnectButton text="Twitter" />,
     name: "Twitter",
-    text: process.env.NEXT_PUBLIC_TWITTER!,
+    text: env.NEXT_PUBLIC_TWITTER_HANDLE,
     copyUrl: true,
-    url: `https://twitter.com/${process.env.NEXT_PUBLIC_TWITTER!}`,
+    url: `https://twitter.com/${env.NEXT_PUBLIC_TWITTER_HANDLE}`,
   },
   {
     icon: <ConnectButton text="LinkedIn" />,
     name: "LinkedIn",
-    text: process.env.NEXT_PUBLIC_LINKEDIN!,
+    text: env.NEXT_PUBLIC_LINKEDIN,
     copyUrl: true,
-    url: `https://www.linkedin.com/in/${process.env.NEXT_PUBLIC_LINKEDIN!}`,
+    url: `https://www.linkedin.com/in/${env.NEXT_PUBLIC_LINKEDIN}`,
   },
 ];

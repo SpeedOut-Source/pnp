@@ -1,12 +1,11 @@
-/* eslint-disable @typescript-eslint/no-misused-promises */
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/solid";
 import dynamic from "next/dynamic";
 import { type GetStaticProps } from "next/types";
 import { useEffect, useState } from "react";
-import { type Configs } from "~/app_function/home/home_server";
 import { projectBlogGetStaticProps } from "~/app_function/project_blog/project_blog_server";
 import { type Card, type CardData } from "~/app_function/utils/interfaces";
 import { toTitleCase } from "~/app_function/utils/utils";
+import { env } from "../../env.mjs";
 
 const SEO = dynamic(() => import("~/components/seo"));
 
@@ -22,7 +21,6 @@ export interface pageInfo {
 }
 
 export interface AllDataProps {
-  configs: Configs;
   data: CardData;
   pageInfo: pageInfo;
   type: Card;
@@ -35,7 +33,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
 export default function AllDataShowPage(props: AllDataProps) {
   const pageName: string = toTitleCase(props.type);
 
-  const title = `${pageName} | ${props.configs.appName}`;
+  const title = `${pageName} | ${env.NEXT_PUBLIC_PERSON_NAME}`;
   const [leftDisable, setLeftDisable] = useState(false);
   const [rightDisable, setRightDisable] = useState(false);
 
@@ -48,11 +46,7 @@ export default function AllDataShowPage(props: AllDataProps) {
 
   return (
     <>
-      <SEO
-        configs={props.configs}
-        description={`See all ${title}`}
-        title={title}
-      />
+      <SEO description={`See all ${title}`} title={title} />
       <div className="container mx-auto">
         <p className="text-center text-3xl uppercase">{pageName}</p>
         <div className="mx-auto w-full max-w-6xl">

@@ -1,4 +1,4 @@
-import { getCard, getConfigs, getData } from "../utils/utils-server";
+import { getCard, getData } from "../utils/utils-server";
 import matter from "gray-matter";
 import { type GetStaticPropsContext, type PreviewData } from "next";
 import { type ParsedUrlQuery } from "querystring";
@@ -56,8 +56,6 @@ export async function getStaticPropsItemView({
     const previous = allData[currentProjectIndex - 1] ?? null;
     const next = allData[currentProjectIndex + 1] ?? null;
 
-    const configs = await getConfigs();
-
     const itemView = allData[currentProjectIndex];
     if (!itemView) {
       return {
@@ -77,7 +75,6 @@ export async function getStaticPropsItemView({
 
     const pvp: ProjectBlogViewProps = {
       data: content,
-      configs,
       itemView,
       previous,
       next,

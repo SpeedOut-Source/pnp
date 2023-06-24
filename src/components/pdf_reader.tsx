@@ -2,7 +2,7 @@ import {
   type Plugin,
   SpecialZoomLevel,
   Viewer,
-  Worker
+  Worker,
 } from "@react-pdf-viewer/core";
 import "@react-pdf-viewer/core/lib/styles/index.css";
 
@@ -11,6 +11,7 @@ import { useState } from "react";
 import { delay } from "./sapage/src/components/app/helper";
 import ExclamationCircleIcon from "@heroicons/react/24/outline/ExclamationCircleIcon";
 import findLinksPlugin from "~/app_function/utils/find_link_plugin";
+import log from "~/app_function/logger/logger";
 
 export default function PdfReader({ resumeUrl }: { resumeUrl: string }) {
   const [zoomCount, setZoomCount] = useState(0);
@@ -32,7 +33,7 @@ export default function PdfReader({ resumeUrl }: { resumeUrl: string }) {
 
   return (
     <div className="relative">
-      <Worker workerUrl="https://unpkg.com/pdfjs-dist@3.5.141/build/pdf.worker.min.js">
+      <Worker workerUrl="https://unpkg.com/pdfjs-dist@3.7.107/build/pdf.worker.min.js">
         {isLoading && <AbsoluteLoading />}
         <div className={`container mx-auto h-full max-w-3xl text-gray-900`}>
           <div
@@ -47,7 +48,8 @@ export default function PdfReader({ resumeUrl }: { resumeUrl: string }) {
               onDocumentLoad={() => {
                 void m();
               }}
-              renderError={() => {
+              renderError={(e) => {
+                log.error(e);
                 setIsLoading(false);
                 return (
                   <div className="flex w-full justify-center">

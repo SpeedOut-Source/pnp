@@ -1,14 +1,6 @@
 import * as dotenv from "dotenv";
 import algoliasearch from "algoliasearch";
 import {
-  addBlur,
-  getApps,
-  getBlogs,
-  getCompany,
-  getProjects,
-  getTesti,
-} from "~/app_function/utils/utils-server";
-import {
   type App,
   type Blog,
   type CardData,
@@ -26,22 +18,6 @@ import {
   MAIN_ENV_PATH,
 } from "~/app_function/utils/constants";
 
-try {
-  console.log("📡 Sending record to Algolia server");
-  dotenv.config({ path: MAIN_ENV_PATH });
-
-  if (!process.env.NEXT_PUBLIC_ALGOLIA_APP_ID) {
-    throw new Error("NEXT_PUBLIC_ALGOLIA_APP_ID is not defined");
-  }
-
-  if (!process.env.ALGOLIA_SEARCH_ADMIN_KEY) {
-    throw new Error("ALGOLIA_SEARCH_ADMIN_KEY is not defined");
-  }
-} catch (error) {
-  console.error(error);
-  process.exit(1);
-}
-
 function transformRawToSearchObjects(data: CardData | Testimonial[]) {
   return data.map((x) => {
     return {
@@ -53,35 +29,40 @@ function transformRawToSearchObjects(data: CardData | Testimonial[]) {
 
 void (async function () {
   dotenv.config({ path: MAIN_ENV_PATH });
+  const env = (await import("../../env.mjs")).env;
+  const utils = await import("~/app_function/utils/utils-server");
 
   try {
     console.log("📥 Getting data");
-    const testis = await getTesti();
+    const testis = await utils.getTesti();
     console.log("✅ Testimonials fetched");
-    const allProsRaw = await getProjects();
+    const allProsRaw = await utils.getProjects();
     console.log("✅ Projects fetched");
-    const allAppsRaw = await getApps();
+    const allAppsRaw = await utils.getApps();
     console.log("✅ Apps fetched");
-    const allBlogsRaw = await getBlogs();
+    const allBlogsRaw = await utils.getBlogs();
     console.log("✅ Blogs fetched");
-    const allCompanyRaw = await getCompany();
+    const allCompanyRaw = await utils.getCompany();
     console.log("✅ Company fetched");
     console.log("✅ Data imported successfully");
 
     console.log("🔵 Adding blur data");
-    const RPros: Project[] = await addBlur(
+    const RPros: Project[] = await utils.addBlur(
       allProsRaw.projects,
       allProsRaw.projects.length
     );
     console.log("✅ Projects blur data added");
-    const RApps: App[] = await addBlur(allAppsRaw.apps, allAppsRaw.apps.length);
+    const RApps: App[] = await utils.addBlur(
+      allAppsRaw.apps,
+      allAppsRaw.apps.length
+    );
     console.log("✅ Apps blur data added");
-    const RBlogs: Blog[] = await addBlur(
+    const RBlogs: Blog[] = await utils.addBlur(
       allBlogsRaw.blogs,
       allBlogsRaw.blogs.length
     );
     console.log("✅ Blogs blur data added");
-    const RCompany: Company[] = await addBlur(
+    const RCompany: Company[] = await utils.addBlur(
       allCompanyRaw.company,
       allCompanyRaw.company.length
     );
@@ -103,10 +84,8 @@ void (async function () {
     console.log("✅ Data transformed successfully");
 
     const client = algoliasearch(
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-      process.env.NEXT_PUBLIC_ALGOLIA_APP_ID!,
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-      process.env.ALGOLIA_SEARCH_ADMIN_KEY!
+      env.NEXT_PUBLIC_ALGOLIA_APP_ID,
+      env.ALGOLIA_SEARCH_ADMIN_KEY
     );
 
     console.log("🔍 Initializing Algolia indexes");

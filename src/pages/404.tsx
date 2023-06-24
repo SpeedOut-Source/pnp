@@ -1,32 +1,13 @@
 import dynamic from "next/dynamic";
-import { type Configs } from "~/app_function/home/home_server";
-import { getConfigs } from "~/app_function/utils/utils-server";
-
+import { env } from "../env.mjs";
 const SEO = dynamic(() => import("~/components/seo"));
 
-export async function getStaticProps() {
-  const configs = await getConfigs();
-
-  const props: AboutProps = {
-    configs
-  };
-
-  return {
-    props: props
-  };
-}
-
-interface AboutProps {
-  configs: Configs;
-}
-
-export default function Custom404(props: AboutProps) {
+export default function Custom404() {
   return (
     <>
       <SEO
-        configs={props.configs}
-        description={`404 | ${props.configs.appName}`}
-        title={`404 | ${props.configs.appName}`}
+        description={`404 | ${env.NEXT_PUBLIC_PERSON_NAME}`}
+        title={`404 | ${env.NEXT_PUBLIC_PERSON_NAME}`}
       />
 
       <main className="errorSplash container mx-auto">

@@ -4,6 +4,7 @@ import { Titillium_Web } from "next/font/google";
 import { DEFAULT_IS_LIGHT, useThemeStore } from "~/app_state/theme_mode";
 import { useEffect, useState } from "react";
 import aa from "search-insights";
+import { env } from "../env.mjs";
 import "~/styles/globals.css";
 
 const NextNProgress = dynamic(() => import("nextjs-progressbar"));
@@ -15,11 +16,9 @@ const ImportPopup = dynamic(() => import("~/components/import_popup"));
 const inter = Titillium_Web({ subsets: ["latin"], weight: "400" });
 
 aa("init", {
-  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-  appId: process.env.NEXT_PUBLIC_ALGOLIA_APP_ID!,
-  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-  apiKey: process.env.NEXT_PUBLIC_ALGOLIA_API_KEY!,
-  useCookie: true
+  appId: env.NEXT_PUBLIC_ALGOLIA_APP_ID,
+  apiKey: env.NEXT_PUBLIC_ALGOLIA_API_KEY,
+  useCookie: true,
 });
 
 const MyApp: AppType = ({ Component, pageProps }) => {

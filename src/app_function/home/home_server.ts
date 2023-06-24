@@ -4,10 +4,10 @@ import {
   getApps,
   getBlogs,
   getCompany,
-  getConfigs,
   getDBConfigs,
   getData,
-  getProjects, getTesti
+  getProjects,
+  getTesti,
 } from "../utils/utils-server";
 import { type RXTProps } from "~/components/me_section/r_x_t";
 import { type MeSectionProps } from "~/components/me_section/me_section";
@@ -19,10 +19,11 @@ import {
   type App,
   type Blog,
   type Project,
-  type WorkForProps
+  type WorkForProps,
 } from "../utils/interfaces";
 import { type AppsProps } from "~/components/apps/recent_apps";
 import { getDataUrl } from "../utils/utils";
+import { env } from "../../env.mjs";
 
 export interface Configs {
   appName: string;
@@ -34,7 +35,6 @@ export interface Configs {
 }
 
 export interface HomeProps {
-  configs: Configs;
   meSection: MeSectionProps;
   workFor: WorkForProps;
   testis: TestimonialsProps;
@@ -44,7 +44,6 @@ export interface HomeProps {
 }
 
 export async function HomeServer() {
-  const configs = await getConfigs();
   const dbConfig = await getDBConfigs();
 
   const dataBio = (await getData("home/bio.json")).toString();
@@ -52,7 +51,6 @@ export async function HomeServer() {
 
   const dataExpertise = (await getData("home/expertise.json")).toString();
   const techs = JSON.parse(dataExpertise) as RXTProps;
-
 
   const testis = await getTesti();
 
@@ -70,31 +68,30 @@ export async function HomeServer() {
   const RCompany: Company[] = await addBlur(allCompanyRaw.company);
 
   const testimonialAddUrl =
-    getDataUrl(configs.repoPath) + "/home/testimonials.json";
+    getDataUrl(env.NEXT_PUBLIC_REPO_PATH) + "/home/testimonials.json";
 
   const homeProps: HomeProps = {
-    configs,
     meSection: {
       me,
-      techs
+      techs,
     },
     workFor: { data: RCompany, total: dbConfig.companyTotal },
     testis: { ...testis, addUrl: testimonialAddUrl },
     recentApps: {
       data: RApps,
-      total: dbConfig.appTotal
+      total: dbConfig.appTotal,
     },
     recentProjects: {
       data: RPros,
-      total: dbConfig.projectTotal
+      total: dbConfig.projectTotal,
     },
     recentBlogs: {
       data: RBlogs,
-      total: dbConfig.blogTotal
-    }
+      total: dbConfig.blogTotal,
+    },
   };
 
   return {
-    props: homeProps
+    props: homeProps,
   };
 }

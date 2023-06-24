@@ -4,10 +4,11 @@ import { GoogleMap, useLoadScript, MarkerF } from "@react-google-maps/api";
 import MapPinIcon from "@heroicons/react/24/outline/MapPinIcon";
 import { DEFAULT_IS_LIGHT, useThemeStore } from "~/app_state/theme_mode";
 import AbsoluteLoading from "../markdown/absolute_loading";
+import { env } from "../../env.mjs";
 
 export default function MapOn() {
   const { isLoaded } = useLoadScript({
-    googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY ?? "",
+    googleMapsApiKey: env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY,
   });
 
   if (!isLoaded) return <AbsoluteLoading />;
@@ -24,8 +25,8 @@ function Map() {
 
   const center = useMemo(
     () => ({
-      lat: parseFloat(process.env.NEXT_PUBLIC_GOOGLE_MAP_LAT!),
-      lng: parseFloat(process.env.NEXT_PUBLIC_GOOGLE_MAP_LNG!),
+      lat: env.NEXT_PUBLIC_GOOGLE_MAP_LAT,
+      lng: env.NEXT_PUBLIC_GOOGLE_MAP_LNG,
     }),
     []
   );
@@ -72,7 +73,7 @@ function Map() {
     <>
       <div className="p-card mx-auto mb-2 flex h-fit w-fit items-center gap-2">
         <MapPinIcon className="h-5 w-5" />{" "}
-        {process.env.NEXT_PUBLIC_GOOGLE_MAP_LOCATION_NAME}
+        {env.NEXT_PUBLIC_GOOGLE_MAP_LOCATION_NAME}
       </div>
       <div className="mx-4 overflow-hidden rounded-xl">
         <GoogleMap

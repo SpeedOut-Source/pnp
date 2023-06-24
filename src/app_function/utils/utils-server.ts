@@ -1,7 +1,4 @@
-/* eslint-disable @typescript-eslint/no-unsafe-call */
-/* eslint-disable @typescript-eslint/no-unsafe-member-access */
 import { promises } from "fs";
-import { type Configs } from "../home/home_server";
 import {
   type App,
   type Blog,
@@ -13,7 +10,7 @@ import {
 import { getPlaiceholder } from "plaiceholder";
 import { parse } from "path";
 import { type TestimonialsProps } from "~/components/work_for_t/testimonials";
-
+import { env } from "../../env.mjs";
 export interface DBConfigs {
   projectTotal: number;
   blogTotal: number;
@@ -38,16 +35,8 @@ export interface RawCompanyProps {
 }
 
 export async function getData(path: string) {
-  const data = await promises.readFile(
-    `${process.env.DATA_PATH ?? "../portfolio_data/"}${path}`,
-    "utf8"
-  );
+  const data = await promises.readFile(`${env.DATA_PATH}${path}`, "utf8");
   return Buffer.from(data);
-}
-
-export async function getConfigs() {
-  const data = (await getData("configs.json")).toString();
-  return JSON.parse(data) as Configs;
 }
 
 export async function getDBConfigs() {

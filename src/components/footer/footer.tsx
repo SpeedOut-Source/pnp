@@ -1,5 +1,5 @@
 import dynamic from "next/dynamic";
-import { PERSON_NAME } from "~/app_function/utils/constants";
+import { env } from "../../env.mjs";
 
 const Link = dynamic(() => import("next/link"));
 
@@ -10,7 +10,10 @@ export default function Footer() {
         <div className="container">
           <div className="divider" />
           <div className="mb-4 mt-2 flex flex-col items-center justify-between space-y-2 sm:flex-row sm:space-y-0">
-            <span className="text-sm "> © 2023 {PERSON_NAME}</span>
+            <span className="text-sm ">
+              {" "}
+              © 2023 {env.NEXT_PUBLIC_PERSON_NAME}
+            </span>
             <ul className="flex flex-wrap space-x-4 text-sm ">
               <li>
                 <Link href="/about" className="link-hover link">
