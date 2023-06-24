@@ -6,6 +6,7 @@ import { DEFAULT_IS_LIGHT, useThemeStore } from "~/app_state/theme_mode";
 import { SearchButton } from "../search/button";
 import ThemeSwitch from "~/components/header/theme_switch";
 import { env } from "../../env.mjs";
+import { useReadingProgress } from "~/app_function/hooks/useReadingProgressbar";
 
 const ConnectSection = dynamic(() => import("./connect_section"));
 const Links = dynamic(() => import("./links"));
@@ -21,6 +22,7 @@ export default function Header() {
 
   const [bgChange, setBgChange] = useState(false);
   const [loaded, setLoaded] = useState(false);
+  const completion = useReadingProgress();
 
   useEffect(() => {
     setLoaded(true);
@@ -48,6 +50,13 @@ export default function Header() {
           : "shadow-none"
       } supports-backdrop-blur:bg-white/60 sticky top-0 z-50 h-14 backdrop-blur-sm`}
     >
+      <span
+        id="progress-bar"
+        style={{
+          transform: `translateX(${completion - 100}%)`,
+        }}
+        className={`absolute top-0 h-1 w-full bg-base-content/40 transition-transform duration-150 ease-in-out`}
+      />
       <div className="container mx-auto flex h-14 items-center justify-between px-4 py-2">
         <div className="flex items-center gap-2">
           <span className="tooltip tooltip-bottom" data-tip="Go home">
