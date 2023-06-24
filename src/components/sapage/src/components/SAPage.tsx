@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import React, { useState } from "react";
 import { delay } from "./app/helper";
 import BugAntIcon from "@heroicons/react/24/solid/BugAntIcon";

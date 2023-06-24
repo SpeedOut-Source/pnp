@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { type Project } from "./interfaces";
 import tc from "thousands-counter";
 import { type Testimonial } from "~/components/work_for_t/testi_card";
@@ -63,6 +64,6 @@ export function getUserNRepo(repoPath: string): {
   const sp = repoPath.split("/");
   return {
     userName: sp[1] ?? "",
-    repo: sp[2] ?? ""
+    repo: sp[2] ?? "",
   };
 }

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { parseAlgoliaHitHighlight } from "@algolia/autocomplete-preset-algolia";
 import { createElement, Fragment } from "react";
 
@@ -21,10 +22,10 @@ type HighlightHitParams<THit> = {
 };
 
 export function Highlight<THit extends { _highlightResult?: any }>({
-                                                                     hit,
-                                                                     attribute,
-                                                                     tagName = "mark"
-                                                                   }: HighlightHitParams<THit>): JSX.Element {
+  hit,
+  attribute,
+  tagName = "mark",
+}: HighlightHitParams<THit>): JSX.Element {
   return createElement(
     Fragment,
     {},
