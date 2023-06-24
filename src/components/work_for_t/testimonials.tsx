@@ -131,7 +131,7 @@ export default function Testimonials(props: TestimonialsProps) {
           </Link>
         )}
       </div>
-      <div className="relative h-full md:mx-2">
+      <div className="relative h-fit md:mx-2">
         <div
           ref={inViewRef}
           className={`${
