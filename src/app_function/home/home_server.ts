@@ -7,7 +7,7 @@ import {
   getDBConfigs,
   getData,
   getProjects,
-  getTesti,
+  getTesti, getBlurData
 } from "../utils/utils-server";
 import { type RXTProps } from "~/components/me_section/r_x_t";
 import { type MeSectionProps } from "~/components/me_section/me_section";
@@ -72,7 +72,10 @@ export async function HomeServer() {
 
   const homeProps: HomeProps = {
     meSection: {
-      me,
+      me: {
+        blurDataURL: await getBlurData(me.imgUrl),
+        ...me,
+      },
       techs,
     },
     workFor: { data: RCompany, total: dbConfig.companyTotal },

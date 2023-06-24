@@ -5,6 +5,7 @@ const Image = dynamic(() => import("next/legacy/image"));
 export interface MeProps {
   fullName: string;
   imgUrl: string;
+  blurDataURL?: string;
   hText: string;
   text: string;
 }
@@ -15,6 +16,9 @@ export default function Me(props: MeProps) {
       <div className="flex w-full flex-col items-center justify-center gap-2 md:flex-row md:justify-start md:gap-4">
         <div className="relative h-32 w-32 cursor-default overflow-hidden rounded-full ring-4 ring-base-300">
           <Image
+            loading="lazy"
+            placeholder="blur"
+            blurDataURL={props.blurDataURL}
             objectFit="cover"
             layout="fill"
             src={props.imgUrl}

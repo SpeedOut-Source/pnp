@@ -11,6 +11,7 @@ import { getPlaiceholder } from "plaiceholder";
 import { parse } from "path";
 import { type TestimonialsProps } from "~/components/work_for_t/testimonials";
 import { env } from "../../env.mjs";
+import log from "~/app_function/logger/logger";
 export interface DBConfigs {
   projectTotal: number;
   blogTotal: number;
@@ -221,15 +222,15 @@ export async function getCard(type: Card) {
 
 export async function getBlurData(imgUrl: string, isUrl = true) {
   if (isUrl && getFileExtSSR(imgUrl) === "gif") {
-    return null;
+    return undefined;
   }
 
   try {
     const { base64 } = await getPlaiceholder(imgUrl);
     return base64;
   } catch (e) {
-    // log.error( e);
-    return null;
+    log.error( e);
+    return undefined;
   }
 }
 
