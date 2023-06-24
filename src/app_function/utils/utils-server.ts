@@ -214,7 +214,7 @@ export async function getCard(type: Card) {
 
 export async function getBlurData(imgUrl: string, isUrl = true) {
   if (isUrl && getFileExtSSR(imgUrl) === "gif") {
-    return undefined;
+    return null;
   }
 
   try {
@@ -222,7 +222,7 @@ export async function getBlurData(imgUrl: string, isUrl = true) {
     return base64;
   } catch (e) {
     log.error( e);
-    return undefined;
+    return null;
   }
 }
 
