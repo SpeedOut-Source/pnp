@@ -9,20 +9,29 @@ export interface IConnectButtonProps {
 }
 
 function ImageIcon({
-                     props,
-                     isLight
-                   }: {
+  props,
+  isLight,
+}: {
   isLight: boolean;
   props: IConnectButtonProps;
 }) {
+  const [isImageLoading, setIsImageLoading] = useState(true);
+  const handleLoadingComplete = () => {
+    setIsImageLoading(false);
+  };
+
   return (
-    <div className=" relative h-8 w-8 ">
+    <div className="relative h-8 w-8">
+      {isImageLoading && (
+        <div className="h-full w-full animate-pulse rounded-xl bg-base-content/80" />
+      )}
       <Image
         className={isLight ? "opacity-80" : "invert-colors"}
         layout="fill"
         objectFit="fill"
         src={`/images/logos/${props.text.toLowerCase()}.png`}
         alt={props.text}
+        onLoadingComplete={handleLoadingComplete}
       />
     </div>
   );
@@ -35,6 +44,7 @@ export default function ConnectButton(props: IConnectButtonProps) {
   useEffect(() => {
     setIsLight(utm.themeName === "winter");
   }, [utm]);
+
   return (
     <span className="tooltip tooltip-bottom" data-tip={props.text}>
       <div className="btn-ghost btn-circle btn">
