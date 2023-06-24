@@ -67,8 +67,12 @@ void (async function () {
       allCompanyRaw.company.length
     );
     console.log("✅ Company blur data added");
+    const RTestis: Testimonial[] = await utils.addBlur(
+      testis.testis,
+      testis.testis.length
+    );
+    console.log("✅ Testimonial blur data added");
     console.log("✅ Blur data added successfully");
-    const RTestis: Testimonial[] = testis.testis;
 
     console.log("🔄 Transforming data to search objects");
     const TPros = transformRawToSearchObjects(RPros);

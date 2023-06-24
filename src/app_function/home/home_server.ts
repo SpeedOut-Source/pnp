@@ -24,6 +24,7 @@ import {
 import { type AppsProps } from "~/components/apps/recent_apps";
 import { getDataUrl } from "../utils/utils";
 import { env } from "../../env.mjs";
+import { type Testimonial } from "~/components/work_for_t/testi_card";
 
 export interface Configs {
   appName: string;
@@ -66,6 +67,7 @@ export async function HomeServer() {
   const RApps: App[] = await addBlur(allAppsRaw.apps, 6);
   const RBlogs: Blog[] = await addBlur(allBlogsRaw.blogs);
   const RCompany: Company[] = await addBlur(allCompanyRaw.company);
+  const RTestis: Testimonial[] = await addBlur(testis.testis, testis.testis.length);
 
   const testimonialAddUrl =
     getDataUrl(env.NEXT_PUBLIC_REPO_PATH) + "/home/testimonials.json";
@@ -79,7 +81,7 @@ export async function HomeServer() {
       techs,
     },
     workFor: { data: RCompany, total: dbConfig.companyTotal },
-    testis: { ...testis, addUrl: testimonialAddUrl },
+    testis: {testis: RTestis, addUrl: testimonialAddUrl },
     recentApps: {
       data: RApps,
       total: dbConfig.appTotal,

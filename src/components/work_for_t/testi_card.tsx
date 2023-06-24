@@ -7,6 +7,7 @@ const Image = dynamic(() => import("next/legacy/image"));
 
 export type Testimonial = {
   imgUrl: string;
+  imgBlurData?: string;
   fullName: string;
   position: string;
   text: string;
@@ -28,6 +29,8 @@ export default function TestiCard(props: Testimonial) {
           <div>
             <div className="relative h-12 w-12 overflow-hidden rounded-full ring ring-base-300">
               <Image
+                placeholder="blur"
+                blurDataURL={props.imgBlurData}
                 src={props.imgUrl}
                 alt={props.fullName}
                 objectFit="cover"

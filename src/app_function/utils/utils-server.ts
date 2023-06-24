@@ -1,17 +1,11 @@
 import { promises } from "fs";
-import {
-  type App,
-  type Blog,
-  type Card,
-  type CardData,
-  type Company,
-  type Project,
-} from "./interfaces";
+import { type App, type Blog, type Card, type CardData, type Company, type Project } from "./interfaces";
 import { getPlaiceholder } from "plaiceholder";
 import { parse } from "path";
 import { type TestimonialsProps } from "~/components/work_for_t/testimonials";
 import { env } from "../../env.mjs";
 import log from "~/app_function/logger/logger";
+
 export interface DBConfigs {
   projectTotal: number;
   blogTotal: number;
@@ -185,7 +179,7 @@ export function parseBlog(md_text: string, filename: string): Blog {
   );
   const img_url = md_text.split("imgUrl: ")[1]?.split("\n")[0] ?? "";
 
-  const blog: Blog = {
+  return {
     imgUrl: img_url,
     title: title,
     desc: desc,
@@ -193,8 +187,6 @@ export function parseBlog(md_text: string, filename: string): Blog {
     readTime: read_time,
     fileName: filename,
   };
-
-  return blog;
 }
 
 export async function getCard(type: Card) {
@@ -240,8 +232,7 @@ export function getFileExtSSR(urlinput: string) {
     return "";
   }
   const { ext } = parse(url.pathname);
-  const woExt = ext.replace(".", "");
-  return woExt;
+  return ext.replace(".", "");
 }
 
 export async function addBlur<T>(data: T[], limit = 3) {
