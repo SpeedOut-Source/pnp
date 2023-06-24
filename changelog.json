@@ -1,4 +1,25 @@
 {
+  "1.0.8-alpha": {
+    "date": 1687631336261,
+    "changes": [
+      "loading animation connect logos",
+      "blur picture placeholder",
+      "reading progress",
+      "t3-oss env",
+      "emoji logs",
+      "META TAGS",
+      "MIT license",
+      "scrollbar style",
+      "/ removed",
+      "testimonial randomize",
+      "blur remove for lagging",
+      "search ui",
+      "algolia",
+      "buymeacoffee",
+      "fixed app platform badge",
+      "more info about works"
+    ]
+  },
   "1.0.7-alpha": {
     "date": 1681805408912,
     "changes": [
