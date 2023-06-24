@@ -1,12 +1,28 @@
 {
   "cSpell.words": [
+    "algoliasearch",
     "Biplob",
     "biplobsd",
     "BLURDATA",
     "BUYMEACOFFEE",
+    "camo",
+    "clsx",
+    "daisyui",
+    "giscus",
+    "headlessui",
+    "heroicons",
+    "linkify",
+    "linkifyjs",
+    "nextjs",
     "pino",
+    "plaiceholder",
+    "progressbar",
     "propic",
-    "Sutradhar"
+    "rehype",
+    "Sutradhar",
+    "tailwindcss",
+    "unoptimized",
+    "zustand"
   ],
   "spellright.language": ["en"],
   "spellright.documentTypes": [
@@ -15,5 +31,6 @@
     "plaintext",
     "typescriptreact"
   ],
-  "typescript.tsdk": "node_modules\\typescript\\lib"
+  "typescript.tsdk": "node_modules\\typescript\\lib",
+  "json.schemaDownload.enable": false
 }
