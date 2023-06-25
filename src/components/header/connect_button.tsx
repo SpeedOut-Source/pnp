@@ -1,7 +1,6 @@
 import { DEFAULT_IS_LIGHT, useThemeStore } from "~/app_state/theme_mode";
 import { useState, useEffect } from "react";
 import dynamic from "next/dynamic";
-import { env } from "../../env.mjs";
 import { getPrefixRepo } from "~/app_function/utils/utils";
 
 const Image = dynamic(() => import("next/legacy/image"));

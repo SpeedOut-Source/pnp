@@ -8,7 +8,6 @@ import {
   type Project,
 } from "~/app_function/utils/interfaces";
 import { type Testimonial } from "~/components/work_for_t/testi_card";
-import { isTestis } from "~/app_function/utils/utils";
 import {
   ALGOLIA_INDEX_APPS,
   ALGOLIA_INDEX_BLOGS,
@@ -17,6 +16,11 @@ import {
   ALGOLIA_INDEX_TESTIMONIALS,
   MAIN_ENV_PATH,
 } from "~/app_function/utils/constants";
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export function isTestis(object: any): object is Testimonial {
+  return "position" in object;
+}
 
 function transformRawToSearchObjects(data: CardData | Testimonial[]) {
   return data.map((x) => {
