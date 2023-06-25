@@ -2,6 +2,7 @@
 import { type Project } from "./interfaces";
 import tc from "thousands-counter";
 import { env } from "../../env.mjs";
+import urlJoin from "url-join";
 export function stringToReadableUrl(str: string, reverse?: boolean): string {
   if (reverse) {
     // Convert readable URL back to original string
@@ -49,7 +50,11 @@ export function sliceText(text: string, maxLength = 160): string {
 }
 
 export function getDataUrl(repoPath: string) {
-  return "https://github.com" + repoPath + "/blob/data";
+  return urlJoin(
+    "https://github.com",
+    repoPath,
+    `/blob/${env.NEXT_PUBLIC_REPO_DATA_BRANCH}`
+  );
 }
 
 export function getUserNRepo(repoPath: string): {
@@ -64,5 +69,7 @@ export function getUserNRepo(repoPath: string): {
 }
 
 export function getPrefixRepo() {
-  return process.env.NODE_ENV === "production" ? env.NEXT_PUBLIC_PREFIX_REPO : "";
+  return process.env.NODE_ENV === "production"
+    ? env.NEXT_PUBLIC_PREFIX_REPO
+    : "";
 }

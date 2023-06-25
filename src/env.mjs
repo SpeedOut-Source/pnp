@@ -12,6 +12,7 @@ export const env = createEnv({
     ALGOLIA_SEARCH_ADMIN_KEY: z.string(),
     DATA_PATH: z.string().default("../pnp-data/"),
     NEXT_PUBLIC_PREFIX_REPO: z.string(),
+    NEXT_PUBLIC_REPO_DATA_BRANCH: z.string(),
   },
 
   /**
@@ -53,6 +54,7 @@ export const env = createEnv({
     NEXT_PUBLIC_ALGOLIA_APP_ID: z.string(),
     NEXT_PUBLIC_ALGOLIA_API_KEY: z.string(),
     NEXT_PUBLIC_PREFIX_REPO: z.string(),
+    NEXT_PUBLIC_REPO_DATA_BRANCH: z.string(),
   },
 
   /**
@@ -92,6 +94,7 @@ export const env = createEnv({
     NEXT_PUBLIC_ALGOLIA_API_KEY: process.env.NEXT_PUBLIC_ALGOLIA_API_KEY,
     DATA_PATH: process.env.DATA_PATH,
     NEXT_PUBLIC_PREFIX_REPO: process.env.NEXT_PUBLIC_PREFIX_REPO,
+    NEXT_PUBLIC_REPO_DATA_BRANCH: process.env.NEXT_PUBLIC_REPO_DATA_BRANCH,
   },
   /**
    * Run `build` or `dev` with `SKIP_ENV_VALIDATION` to skip env validation.

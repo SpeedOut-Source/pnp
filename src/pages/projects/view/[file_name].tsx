@@ -19,9 +19,14 @@ import LayoutCardApp from "~/components/apps/layout_card";
 import { DEFAULT_IS_LIGHT, useThemeStore } from "~/app_state/theme_mode";
 import { useState, useEffect } from "react";
 import { PencilSquareIcon } from "@heroicons/react/24/outline";
-import { getDataUrl, getPrefixRepo, toTitleCase } from "~/app_function/utils/utils";
+import {
+  getDataUrl,
+  getPrefixRepo,
+  toTitleCase,
+} from "~/app_function/utils/utils";
 import LayoutCardCompany from "~/components/company/layout_card";
 import { env } from "../../../env.mjs";
+import urlJoin from "url-join";
 
 const SEO = dynamic(() => import("~/components/seo"));
 
@@ -99,7 +104,9 @@ export default function ProjectBlogView(props: ProjectBlogViewProps) {
         return (
           <Image
             className=""
-            src={`${getPrefixRepo()}/images/listing/github-mark${isLight ? "" : "-white"}.svg`}
+            src={`${getPrefixRepo()}/images/listing/github-mark${
+              isLight ? "" : "-white"
+            }.svg`}
             alt={name}
             height={10}
             width={50}
@@ -111,7 +118,9 @@ export default function ProjectBlogView(props: ProjectBlogViewProps) {
           <Image
             src={
               appLogo ??
-              `${getPrefixRepo()}/images/logos/github-profile-dark${isLight ? "-light" : ""}.png`
+              `${getPrefixRepo()}/images/logos/github-profile-dark${
+                isLight ? "-light" : ""
+              }.png`
             }
             alt={name}
             height={10}
@@ -203,13 +212,12 @@ export default function ProjectBlogView(props: ProjectBlogViewProps) {
     }
   }
 
-  const githubEditUrl =
-    getDataUrl(env.NEXT_PUBLIC_REPO_PATH) +
-    "/" +
-    props.type +
-    "/" +
-    props.itemView.fileName +
-    "?plain=1";
+  const githubEditUrl = urlJoin(
+    getDataUrl(env.NEXT_PUBLIC_REPO_PATH),
+    props.type,
+    props.itemView.fileName,
+    "?plain=1"
+  );
 
   return (
     <>

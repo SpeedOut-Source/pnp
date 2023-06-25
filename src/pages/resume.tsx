@@ -2,15 +2,18 @@ import { ArrowDownTrayIcon } from "@heroicons/react/24/solid";
 import dynamic from "next/dynamic";
 import Link from "next/link";
 import { env } from "../env.mjs";
+import urlJoin from "url-join";
 const SEO = dynamic(() => import("~/components/seo"));
 
 const PdfReader = dynamic(() => import("~/components/pdf_reader"));
 
 export default function Resume() {
-  const resumePdfUrl =
-    env.NEXT_PUBLIC_USER_CONTENT_BASE_URL +
-    env.NEXT_PUBLIC_REPO_PATH +
-    env.NEXT_PUBLIC_RESUME_PATH;
+  const resumePdfUrl = urlJoin(
+    env.NEXT_PUBLIC_USER_CONTENT_BASE_URL,
+    env.NEXT_PUBLIC_REPO_PATH,
+    env.NEXT_PUBLIC_REPO_DATA_BRANCH,
+    env.NEXT_PUBLIC_RESUME_PATH
+  );
   return (
     <>
       <SEO
