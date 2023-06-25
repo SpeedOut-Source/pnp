@@ -10,15 +10,18 @@ export default function WorkFor(props: WorkForProps) {
     <div className="mx-auto h-fit w-full px-4 sm:mx-0 lg:max-w-2xl lg:px-0">
       <div className="flex items-center gap-2 text-2xl normal-case text-slate-400">
         <BriefcaseIcon className="h-5 w-5" />
-        <Link href="/company" className="link link-hover tooltip md:tooltip-bottom" data-tip="View all">
+        <Link
+          href="/company"
+          className="link-hover link tooltip md:tooltip-bottom"
+          data-tip="View all"
+        >
           {"I've done work for"}
         </Link>
       </div>
 
-      <div
-        className="mx-auto w-full justify-center gap-2 space-y-2 py-2 sm:grid sm:grid-cols-2 sm:space-y-0 md:mx-2 md:grid-cols-3 md:gap-4">
+      <div className="mx-auto w-full justify-center gap-2 space-y-2 py-2 sm:grid sm:grid-cols-2 sm:space-y-0 md:mx-2 md:grid-cols-3 md:gap-4">
         {props.data.map((x) => (
-          <LayoutCardCompany {...x} key={x.homePage} />
+          <LayoutCardCompany {...x} key={x.fileName} />
         ))}
       </div>
     </div>

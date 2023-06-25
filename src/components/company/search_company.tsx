@@ -18,10 +18,9 @@ export default function SearchCompany(props: SearchCompanyProps) {
           <BriefcaseIcon className="h-5 w-5" /> {"Company"}
         </p>
       </div>
-      <div
-        className="mx-auto w-full justify-center gap-2 space-y-2 py-2 sm:grid sm:grid-cols-3 sm:space-y-0 md:mx-2 md:grid-cols-5 md:gap-4">
+      <div className="mx-auto w-full justify-center gap-2 space-y-2 py-2 sm:grid sm:grid-cols-3 sm:space-y-0 md:mx-2 md:grid-cols-5 md:gap-4">
         {props.data.map((x) => (
-          <LayoutCardCompany {...x} key={x.homePage} />
+          <LayoutCardCompany {...x} key={x.objectID} />
         ))}
       </div>
     </div>
