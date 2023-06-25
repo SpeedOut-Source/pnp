@@ -60,7 +60,7 @@ export default function PdfReader({ resumeUrl }: { resumeUrl: string }) {
                   </div>
                 );
               }}
-              defaultScale={SpecialZoomLevel.PageFit}
+              defaultScale={SpecialZoomLevel.PageWidth}
               theme={"dark"}
               fileUrl={resumeUrl}
               plugins={[findLinksPluginInstance]}

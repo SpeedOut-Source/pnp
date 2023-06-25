@@ -33,7 +33,6 @@
     "next": "^13.4.2",
     "next-seo": "^6.0.0",
     "nextjs-progressbar": "^0.0.16",
-    "pdfjs-dist": "^3.5.141",
     "pino": "^8.11.0",
     "pino-pretty": "^10.0.0",
     "plaiceholder": "^2.5.0",
