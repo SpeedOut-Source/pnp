@@ -3,6 +3,8 @@
  * for Docker builds.
  */
 await import("./src/env.mjs");
+import { env } from "./src/env.mjs";
+const PREFIX_REPO = env.NODE_ENV === "production" ? env.PREFIX_REPO : undefined;
 
 /** @type {import("next").NextConfig} */
 const config = {
@@ -26,6 +28,8 @@ const config = {
   //   locales: ["en"],
   //   defaultLocale: "en",
   // },
+  assetPrefix: PREFIX_REPO,
+  basePath: PREFIX_REPO,
 };
 
 export default config;
