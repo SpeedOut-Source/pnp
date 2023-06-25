@@ -7,6 +7,7 @@ import { SearchButton } from "../search/button";
 import ThemeSwitch from "~/components/header/theme_switch";
 import { env } from "../../env.mjs";
 import { useReadingProgress } from "~/app_function/hooks/useReadingProgressbar";
+import { getPrefixRepo } from "~/app_function/utils/utils";
 
 const ConnectSection = dynamic(() => import("./connect_section"));
 const Links = dynamic(() => import("./links"));
@@ -65,7 +66,7 @@ export default function Header() {
               className="btn-ghost btn px-2 text-xl font-bold normal-case tracking-wider"
             >
               <Image
-                src={`/images/logos/github-profile-dark${
+                src={`${getPrefixRepo()}/images/logos/github-profile-dark${
                   isLight ? "-light" : ""
                 }.png`}
                 width="32"

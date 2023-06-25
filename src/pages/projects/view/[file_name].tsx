@@ -19,7 +19,7 @@ import LayoutCardApp from "~/components/apps/layout_card";
 import { DEFAULT_IS_LIGHT, useThemeStore } from "~/app_state/theme_mode";
 import { useState, useEffect } from "react";
 import { PencilSquareIcon } from "@heroicons/react/24/outline";
-import { getDataUrl, toTitleCase } from "~/app_function/utils/utils";
+import { getDataUrl, getPrefixRepo, toTitleCase } from "~/app_function/utils/utils";
 import LayoutCardCompany from "~/components/company/layout_card";
 import { env } from "../../../env.mjs";
 
@@ -79,7 +79,7 @@ export default function ProjectBlogView(props: ProjectBlogViewProps) {
       case "microsoft edge":
         return (
           <Image
-            src={"/images/listing/microsoftstore.svg"}
+            src={`${getPrefixRepo()}/images/listing/microsoftstore.svg`}
             alt={name}
             height={10}
             width={135}
@@ -88,7 +88,7 @@ export default function ProjectBlogView(props: ProjectBlogViewProps) {
       case "android":
         return (
           <Image
-            src={"/images/listing/playstore.svg"}
+            src={`${getPrefixRepo()}/images/listing/playstore.svg`}
             alt={name}
             height={10}
             width={200}
@@ -99,7 +99,7 @@ export default function ProjectBlogView(props: ProjectBlogViewProps) {
         return (
           <Image
             className=""
-            src={`/images/listing/github-mark${isLight ? "" : "-white"}.svg`}
+            src={`${getPrefixRepo()}/images/listing/github-mark${isLight ? "" : "-white"}.svg`}
             alt={name}
             height={10}
             width={50}
@@ -111,7 +111,7 @@ export default function ProjectBlogView(props: ProjectBlogViewProps) {
           <Image
             src={
               appLogo ??
-              `/images/logos/github-profile-dark${isLight ? "-light" : ""}.png`
+              `${getPrefixRepo()}/images/logos/github-profile-dark${isLight ? "-light" : ""}.png`
             }
             alt={name}
             height={10}

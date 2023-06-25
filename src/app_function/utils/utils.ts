@@ -2,7 +2,7 @@
 import { type Project } from "./interfaces";
 import tc from "thousands-counter";
 import { type Testimonial } from "~/components/work_for_t/testi_card";
-
+import { env } from "../../env.mjs";
 export function stringToReadableUrl(str: string, reverse?: boolean): string {
   if (reverse) {
     // Convert readable URL back to original string
@@ -66,4 +66,8 @@ export function getUserNRepo(repoPath: string): {
     userName: sp[1] ?? "",
     repo: sp[2] ?? "",
   };
+}
+
+export function getPrefixRepo() {
+  return env.NODE_ENV === "production" ? env.PREFIX_REPO : "";
 }

@@ -4,6 +4,7 @@ import dynamic from "next/dynamic";
 import { useState, useEffect } from "react";
 import { useThemeStore, DEFAULT_IS_LIGHT } from "~/app_state/theme_mode";
 import { env } from "../env.mjs";
+import { getPrefixRepo } from "~/app_function/utils/utils";
 const SEO = dynamic(() => import("~/components/seo"));
 
 const SAPage = dynamic(
@@ -30,7 +31,7 @@ export default function About() {
             title: "Portfolio Next.js Project",
             codeName: packageJson.name,
             logo: {
-              logoUrl: `/images/logos/github-profile-dark${
+              logoUrl: `${getPrefixRepo()}/images/logos/github-profile-dark${
                 isLight ? "-light" : ""
               }.png`,
               alt: packageJson.name,
