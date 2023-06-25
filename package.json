@@ -10,7 +10,7 @@
     "start": "next start",
     "sitemap": "next-sitemap",
     "protest": "npm run export && npx serve out",
-    "protestDev": "cross-env NODE_ENV=development npm run protest",
+    "protestDev": "cross-env NEXT_PUBLIC_LOCALHOST_TEST=true NEXT_PUBLIC_LOG_ENABLE=true npm run protest",
     "search": "tsx src/app_function/scripts/build-algolia-search.ts"
   },
   "dependencies": {

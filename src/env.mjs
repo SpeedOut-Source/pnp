@@ -13,6 +13,10 @@ export const env = createEnv({
     DATA_PATH: z.string().default("../pnp-data/"),
     NEXT_PUBLIC_PREFIX_REPO: z.string(),
     NEXT_PUBLIC_REPO_DATA_BRANCH: z.string(),
+    NEXT_PUBLIC_LOCALHOST_TEST: z
+      .string()
+      .refine((s) => s === "true" || s === "false")
+      .transform((s) => s === "true"),
   },
 
   /**
@@ -55,6 +59,10 @@ export const env = createEnv({
     NEXT_PUBLIC_ALGOLIA_API_KEY: z.string(),
     NEXT_PUBLIC_PREFIX_REPO: z.string(),
     NEXT_PUBLIC_REPO_DATA_BRANCH: z.string(),
+    NEXT_PUBLIC_LOCALHOST_TEST: z
+      .string()
+      .refine((s) => s === "true" || s === "false")
+      .transform((s) => s === "true"),
   },
 
   /**
@@ -95,6 +103,7 @@ export const env = createEnv({
     DATA_PATH: process.env.DATA_PATH,
     NEXT_PUBLIC_PREFIX_REPO: process.env.NEXT_PUBLIC_PREFIX_REPO,
     NEXT_PUBLIC_REPO_DATA_BRANCH: process.env.NEXT_PUBLIC_REPO_DATA_BRANCH,
+    NEXT_PUBLIC_LOCALHOST_TEST: process.env.NEXT_PUBLIC_LOCALHOST_TEST,
   },
   /**
    * Run `build` or `dev` with `SKIP_ENV_VALIDATION` to skip env validation.

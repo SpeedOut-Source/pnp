@@ -69,7 +69,8 @@ export function getUserNRepo(repoPath: string): {
 }
 
 export function getPrefixRepo() {
-  return process.env.NODE_ENV === "production"
+  return process.env.NODE_ENV === "production" &&
+    !env.NEXT_PUBLIC_LOCALHOST_TEST
     ? env.NEXT_PUBLIC_PREFIX_REPO
     : "";
 }

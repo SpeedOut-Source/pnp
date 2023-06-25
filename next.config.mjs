@@ -5,7 +5,10 @@
 await import("./src/env.mjs");
 import { env } from "./src/env.mjs";
 const PREFIX_REPO =
-  process.env.NODE_ENV === "production" ? env.NEXT_PUBLIC_PREFIX_REPO : undefined;
+  process.env.NODE_ENV === "production" &&
+  process.env.NEXT_PUBLIC_LOCALHOST_TEST !== "true"
+    ? env.NEXT_PUBLIC_PREFIX_REPO
+    : undefined;
 
 /** @type {import("next").NextConfig} */
 const config = {
