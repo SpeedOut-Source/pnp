@@ -46,6 +46,7 @@
     "remark-gfm": "^3.0.1",
     "search-insights": "^2.6.0",
     "sharp": "^0.32.0",
+    "tailwind-merge": "^1.13.2",
     "thousands-counter": "^2.1.1",
     "url-join": "^5.0.0",
     "zod": "^3.21.4",

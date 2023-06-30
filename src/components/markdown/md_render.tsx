@@ -7,11 +7,8 @@ import rehypeRaw from "rehype-raw";
 import remarkGfm from "remark-gfm";
 
 import { PrismLight as SyntaxHighlighter } from "react-syntax-highlighter";
-import React, { useState } from "react";
+import React from "react";
 import { oneDark } from "react-syntax-highlighter/dist/cjs/styles/prism";
-import CopyToClipboard from "react-copy-to-clipboard";
-import { delay } from "~/components/sapage/src/components/app/helper";
-import DocumentDuplicateIcon from "@heroicons/react/24/outline/DocumentDuplicateIcon";
 
 import tsx from "react-syntax-highlighter/dist/cjs/languages/prism/tsx";
 import typescript from "react-syntax-highlighter/dist/cjs/languages/prism/typescript";
@@ -20,6 +17,7 @@ import bash from "react-syntax-highlighter/dist/cjs/languages/prism/bash";
 import markdown from "react-syntax-highlighter/dist/cjs/languages/prism/markdown";
 import json from "react-syntax-highlighter/dist/cjs/languages/prism/json";
 import lua from "react-syntax-highlighter/dist/cjs/languages/prism/lua";
+import CopyToClipboardButton from "../copy_to_clipboard_button";
 
 SyntaxHighlighter.registerLanguage("tsx", tsx);
 SyntaxHighlighter.registerLanguage("typescript", typescript);
@@ -77,9 +75,6 @@ export default function MDRender(props: MDRender) {
             const codeChunk = (pre as any).node.children[0].children[0]
               .value as string;
 
-            // eslint-disable-next-line react-hooks/rules-of-hooks
-            const [copyTip, setCopyTip] = useState("Copy code");
-
             // eslint-disable-next-line @typescript-eslint/no-unsafe-call,@typescript-eslint/no-unsafe-member-access
             const language = (pre as any).children[0]?.props.className.replace(
               /language-/g,
@@ -88,25 +83,14 @@ export default function MDRender(props: MDRender) {
 
             return (
               <div className="relative overflow-x-hidden">
-                <button
+                <CopyToClipboardButton
                   style={{
                     right: 0,
                   }}
-                  className="tooltip tooltip-left absolute z-40 mr-2 mt-5"
-                  data-tip={copyTip}
-                >
-                  <CopyToClipboard
-                    text={codeChunk}
-                    // eslint-disable-next-line @typescript-eslint/no-misused-promises
-                    onCopy={async () => {
-                      setCopyTip("Copied");
-                      await delay(500);
-                      setCopyTip(`Copy code`);
-                    }}
-                  >
-                    <DocumentDuplicateIcon className="h-5 w-5 cursor-pointer hover:text-blue-600" />
-                  </CopyToClipboard>
-                </button>
+                  copyText={codeChunk}
+                  tooltipText="Copy code"
+                  className="tooltip-left absolute z-40 mr-2 mt-5"
+                />
                 <span
                   style={{
                     bottom: 0,
