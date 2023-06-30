@@ -51,7 +51,7 @@ export default function About() {
               url: "https://github.com/biplobsd",
             },
           ]}
-          reportUrl="https://github.com/biplobsd/biplobsd.github.io/issues"
+          reportUrl="https://github.com/SpeedOut-Source/pnp/issues"
           poweredBy={{
             companyName: "Biplob Sutradhar",
             url: "https://biplobsd.github.io",
