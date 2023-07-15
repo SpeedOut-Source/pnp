@@ -82,12 +82,23 @@ export default function ProjectBlogView(props: ProjectBlogViewProps) {
       case "windows":
       case "microsoft":
       case "microsoft edge":
+      case "edge add-ons":
         return (
           <Image
             src={`${getPrefixRepo()}/images/listing/microsoftstore.svg`}
             alt={name}
             height={10}
             width={135}
+          />
+        );
+      case "chrome web store":
+        return (
+          <Image
+            className="rounded-md"
+            src={`${getPrefixRepo()}/images/listing/chrome-web-store.png`}
+            alt={name}
+            height={10}
+            width={160}
           />
         );
       case "android":
