@@ -3,12 +3,8 @@
 @tailwind utilities;
 
 @layer components {
-  .btn-gap-0 {
-    @apply btn !gap-0;
-  }
-
   .p-card {
-    @apply btn-ghost btn-gap-0 cursor-default overflow-hidden rounded-3xl bg-base-200 font-normal normal-case leading-relaxed tracking-wider;
+    @apply btn-ghost btn cursor-default !gap-0 overflow-hidden rounded-3xl bg-base-200 font-normal normal-case leading-relaxed tracking-wider;
   }
 
   .errorSplash {
