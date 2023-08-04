@@ -11,13 +11,20 @@ export default function ThemeSwitch() {
     setIsLight(utm.themeName === "winter");
   }, [utm]);
 
-  return <button
-    onClick={utm.toggleTheme}
-    className={`${
-      isLight ? "swap-active" : ""
-    } swap-rotate btn btn-ghost btn-circle swap`}
-  >
-    <SunIcon className="swap-on h-6 w-6" />
-    <MoonIcon className="swap-off h-6 w-6" />
-  </button>;
+  return (
+    <div
+      data-tip={`Toggle ${isLight ? "dark" : "light"} `}
+      className="tooltip tooltip-bottom"
+    >
+      <button
+        onClick={utm.toggleTheme}
+        className={`${
+          isLight ? "swap-active" : ""
+        } swap-rotate swap btn-ghost btn-circle btn`}
+      >
+        <SunIcon className="swap-on h-6 w-6" />
+        <MoonIcon className="swap-off h-6 w-6" />
+      </button>
+    </div>
+  );
 }

@@ -24,11 +24,16 @@ export default {
     themes: [
       {
         winter: {
-          ...require("daisyui/src/colors/themes")["[data-theme=winter]"],
+          ...require("daisyui/src/theming/themes")["[data-theme=winter]"],
         },
         dark: {
-          ...require("daisyui/src/colors/themes")["[data-theme=dark]"],
+          ...require("daisyui/src/theming/themes")["[data-theme=dark]"],
           primary: "rgb(37 99 235)",
+          neutral: "#191D24",
+          "neutral-focus": "#111318",
+          "base-100": "#2A303C",
+          "base-200": "#242933",
+          "base-300": "#20252E",
         },
       },
     ],
