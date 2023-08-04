@@ -64,7 +64,7 @@ export default function Header() {
             <span className="tooltip tooltip-bottom" data-tip="Go home">
               <Link
                 href="/"
-                className="btn-ghost btn px-2 text-xl font-bold normal-case tracking-wider"
+                className="btn-ghost btn-gap-0 px-2 text-xl font-bold normal-case tracking-wider"
               >
                 <Image
                   src={`${getPrefixRepo()}/images/logos/github-profile-dark${
