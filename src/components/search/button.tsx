@@ -35,29 +35,27 @@ export function SearchButton() {
   }, [searchModeStore, searchButtonRef, setOpen]);
 
   return (
-    <button
-      className="w-fit"
-      type="button"
-      ref={searchButtonRef}
-      onClick={(e) => {
-        setOpen(e as unknown as MouseEvent);
-      }}
-    >
-      <div
-        className="p-card flex w-fit cursor-pointer items-center gap-3 overflow-visible rounded-full bg-transparent px-3 lg:rounded-xl lg:bg-base-300">
-        <MagnifyingGlassIcon className="h-5 w-5" />
-        {actionKey && (
-          <div className="hidden items-center gap-1 lg:flex">
-            <kbd
-              data-tip={actionKey[1]}
-              className="kbd tooltip tooltip-bottom kbd-sm text-base-content no-underline"
-            >
-              {actionKey[0]}
-            </kbd>{" "}
-            <kbd className="kbd kbd-sm">k</kbd>
-          </div>
-        )}
-      </div>
-    </button>
+    <div data-tip="Search" className="tooltip tooltip-bottom">
+      <button
+        className="w-fit"
+        type="button"
+        ref={searchButtonRef}
+        onClick={(e) => {
+          setOpen(e as unknown as MouseEvent);
+        }}
+      >
+        <div className="p-card flex w-fit cursor-pointer items-center gap-3 overflow-visible rounded-full bg-transparent px-3 lg:rounded-xl lg:bg-base-300">
+          <MagnifyingGlassIcon className="h-5 w-5" />
+          {actionKey && (
+            <div className="hidden items-center gap-1 lg:flex">
+              <kbd className="kbd kbd-sm text-base-content no-underline">
+                {actionKey[0]}
+              </kbd>{" "}
+              <kbd className="kbd kbd-sm">k</kbd>
+            </div>
+          )}
+        </div>
+      </button>
+    </div>
   );
 }
