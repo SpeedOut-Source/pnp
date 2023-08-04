@@ -9,6 +9,7 @@ import { env } from "../../env.mjs";
 import { useReadingProgress } from "~/app_function/hooks/useReadingProgressbar";
 import { getPrefixRepo } from "~/app_function/utils/utils";
 import clsx from "clsx";
+import { useScrollDirection } from "react-scroll-hook";
 
 const ConnectSection = dynamic(() => import("./connect_section"));
 const Links = dynamic(() => import("./links"));
@@ -25,6 +26,7 @@ export default function Header() {
   const [bgChange, setBgChange] = useState(false);
   const [loaded, setLoaded] = useState(false);
   const completion = useReadingProgress();
+  const scrollDirection = useScrollDirection();
 
   useEffect(() => {
     setLoaded(true);
@@ -55,10 +57,18 @@ export default function Header() {
         bgChange
           ? "bg-gradient-to-r from-base-300/30 from-30% to-base-content/50 to-100% shadow-2xl lg:mx-1 lg:translate-y-1 lg:rounded-xl lg:ring-1 lg:ring-base-300/40"
           : "shadow-none",
-        "supports-backdrop-blur:bg-white/60 sticky top-0 z-50 h-14 backdrop-blur-sm"
+        "supports-backdrop-blur:bg-white/60 sticky top-0 z-50 backdrop-blur-sm"
       )}
     >
-      <div className="container mx-auto flex h-14 items-center justify-between overflow-visible px-4 py-2">
+      <div
+        className={clsx(
+          loaded ? "transition-all delay-100 duration-500 ease-in-out" : "",
+          bgChange && scrollDirection === "down"
+            ? "h-3 -translate-y-28"
+            : "h-14",
+          "container mx-auto flex items-center justify-between overflow-visible px-4 py-2"
+        )}
+      >
         <div className="flex items-center gap-2">
           <span className="tooltip tooltip-bottom" data-tip="Go home">
             <Link
