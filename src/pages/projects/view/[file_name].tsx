@@ -335,7 +335,7 @@ export default function ProjectBlogView(props: ProjectBlogViewProps) {
             ))}
           </div>
           <div>
-            <div className="carousel-center carousel rounded-box my-0 space-x-4 bg-base-300/40 p-4">
+            <div className="carousel-center carousel rounded-box my-0 w-full space-x-4 bg-base-300/40 p-4">
               {(props.itemView as App).imgs.map((x, i) => (
                 <div
                   id={`image${i + 1}`}
