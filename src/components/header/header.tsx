@@ -56,9 +56,12 @@ export default function Header() {
         loaded ? "transition-all duration-500 ease-in-out" : "",
         bgChange && scrollDirection === "down"
           ? "-translate-y-12"
-          : "bg-base-100 lg:bg-transparent lg:backdrop-blur-sm",
+          : "bg-base-100/95 lg:bg-transparent lg:backdrop-blur-sm" +
+              (bgChange
+                ? " shadow-2xl lg:mx-1 lg:rounded-xl lg:ring-1 lg:ring-base-300/40"
+                : ""),
         bgChange
-          ? "bg-gradient-to-r from-base-300/30 from-30% to-base-content/50 to-100% shadow-2xl lg:mx-1 lg:rounded-xl lg:ring-1 lg:ring-base-300/40"
+          ? "bg-gradient-to-r from-base-300/30 from-30% to-base-content/50 to-100%"
           : "",
         "min-h-6 sticky top-0 z-50 lg:top-1 lg:mb-2"
       )}
