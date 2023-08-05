@@ -110,7 +110,15 @@ export default function ProjectBlogView(props: ProjectBlogViewProps) {
             width={200}
           />
         );
-
+      case "google colab":
+        return (
+          <Image
+            src={`${getPrefixRepo()}/images/listing/open-in-colab.svg`}
+            alt={name}
+            height={10}
+            width={200}
+          />
+        );
       case "github release":
         return (
           <Image
