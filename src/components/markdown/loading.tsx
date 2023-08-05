@@ -1,6 +1,7 @@
 export default function Loading() {
   return (
-    <div className="p-card loading mx-auto flex w-fit justify-center">
+    <div className="flex justify-center gap-2">
+      <span className="loading loading-spinner" />
       Loading...
     </div>
   );
