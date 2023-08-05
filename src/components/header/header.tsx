@@ -50,7 +50,6 @@ export default function Header() {
     <header
       style={{
         backgroundSize: `${completion}%`,
-        backgroundRepeat: "no-repeat",
       }}
       className={clsx(
         loaded ? "transition-all duration-500 ease-in-out" : "",
@@ -63,7 +62,7 @@ export default function Header() {
         bgChange
           ? "bg-gradient-to-r from-base-300/30 from-30% to-base-content/50 to-100%"
           : "",
-        "min-h-6 sticky top-0 z-50 lg:top-1 lg:mb-2"
+        "min-h-6 sticky top-0 z-50 bg-no-repeat lg:top-1 lg:mb-2"
       )}
     >
       <div
@@ -109,7 +108,7 @@ export default function Header() {
                 tabIndex={0}
                 className="dropdown-content menu rounded-box mt-2 w-fit bg-base-100/95 px-2 py-5 shadow-2xl ring ring-base-300"
               >
-                <Links className=" flex justify-center space-x-4 rounded-lg bg-base-100/80 px-2 pb-2" />
+                <Links className="flex justify-center space-x-4 rounded-lg bg-base-100/80 px-2 pb-2" />
                 <ConnectSection />
               </ul>
             </div>
