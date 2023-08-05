@@ -1,4 +1,21 @@
 {
+  "1.0.9-alpha": {
+    "date": 1691263846935,
+    "changes": [
+      "open in colab",
+      "bmc Random Message",
+      "blur placeholder app, company",
+      "scroll down disappear header",
+      "daisyui 3.5.1",
+      "chrome web store",
+      "issues report link update",
+      "share with link fixed",
+      "code syntax highlighter",
+      "background reading progress",
+      "pdfReader scale page Width",
+      "github edit url fix"
+    ]
+  },
   "1.0.8-alpha": {
     "date": 1687631336261,
     "changes": [
