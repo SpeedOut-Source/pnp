@@ -63,6 +63,10 @@ export const env = createEnv({
       .string()
       .refine((s) => s === "true" || s === "false")
       .transform((s) => s === "true"),
+    NEXT_PUBLIC_BUYMEACOFFEE_MESSAGE: z
+      .string()
+      .transform((s) => s.split("\n"))
+      .optional(),
   },
 
   /**
@@ -104,6 +108,8 @@ export const env = createEnv({
     NEXT_PUBLIC_PREFIX_REPO: process.env.NEXT_PUBLIC_PREFIX_REPO,
     NEXT_PUBLIC_REPO_DATA_BRANCH: process.env.NEXT_PUBLIC_REPO_DATA_BRANCH,
     NEXT_PUBLIC_LOCALHOST_TEST: process.env.NEXT_PUBLIC_LOCALHOST_TEST,
+    NEXT_PUBLIC_BUYMEACOFFEE_MESSAGE:
+      process.env.NEXT_PUBLIC_BUYMEACOFFEE_MESSAGE,
   },
   /**
    * Run `build` or `dev` with `SKIP_ENV_VALIDATION` to skip env validation.
