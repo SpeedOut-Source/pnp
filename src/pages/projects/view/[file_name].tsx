@@ -309,6 +309,8 @@ export default function ProjectBlogView(props: ProjectBlogViewProps) {
               alt={(props.itemView as App).title}
               width={100}
               height={100}
+              blurDataURL={(props.itemView as App).imgBlurData}
+              placeholder="blur"
             />
             <p className="text-center text-4xl font-semibold tracking-wider">
               {(props.itemView as App).title}
@@ -378,6 +380,8 @@ export default function ProjectBlogView(props: ProjectBlogViewProps) {
               alt={(props.itemView as Company).title}
               width={100}
               height={100}
+              blurDataURL={(props.itemView as Company).imgBlurData}
+              placeholder="blur"
             />
             <p className="text-center text-4xl font-semibold tracking-wider">
               {(props.itemView as Company).title}
