@@ -240,6 +240,51 @@ export default function ProjectBlogView(props: ProjectBlogViewProps) {
     "?plain=1"
   );
 
+  function metaData() {
+    return (
+      <div className="mx-auto flex w-full max-w-3xl flex-col items-center justify-between gap-2 px-2 sm:flex-row sm:items-end 2xl:flex-col 2xl:items-end 2xl:px-0">
+        <div className="p-card flex h-fit w-full flex-col items-start py-2 text-xs text-slate-500 sm:w-fit">
+          {(props.type === "projects" || props.type === "company") && (
+            <div className="flex items-center gap-1">
+              Company Name:{" "}
+              <div>
+                <div className="flex items-center gap-1">
+                  <Image
+                    width={20}
+                    height={20}
+                    src={
+                      project ? project.company.logoUrl : props.itemView.imgUrl
+                    }
+                    alt={
+                      project
+                        ? project.company.name
+                        : (props.itemView as Company).title
+                    }
+                  />
+                  <span>
+                    {project
+                      ? project.company.name
+                      : (props.itemView as Company).title}
+                  </span>
+                </div>
+              </div>
+            </div>
+          )}
+          <div className="flex items-center gap-1">{headerCard()}</div>
+          <div className="flex items-center gap-1">
+            Post date: <DateTimePost date={props.itemView.date} />
+          </div>
+          {props.type !== "apps" && (
+            <div className="flex items-center gap-1">
+              Read time: <span>{(props.itemView as Project).readTime} min</span>
+            </div>
+          )}
+        </div>
+        <ShareWith text={shareTxt} />
+      </div>
+    );
+  }
+
   return (
     <>
       <SEO
@@ -249,169 +294,135 @@ export default function ProjectBlogView(props: ProjectBlogViewProps) {
         ogType="article"
         itemView={props.itemView}
       />
-      <div className="container mx-auto max-w-3xl px-2">
-        <div className="flex flex-wrap items-center gap-1">
-          <Link
-            className="title link-hover link-primary link capitalize"
-            href={"/" + props.type}
-          >
-            {props.type}
-          </Link>{" "}
-          / {props.itemView.fileName}
-          <div
-            className="tooltip tooltip-bottom"
-            data-tip="Edit this on Github"
-          >
-            <Link href={githubEditUrl} target="_blank" rel="">
-              <PencilSquareIcon className="link-hover link h-4 w-4" />
-            </Link>
-          </div>
-        </div>
-        <div className="my-2 flex flex-col items-center justify-between gap-2 sm:flex-row sm:items-end">
-          <div className="p-card flex h-fit w-full flex-col items-start py-2 text-xs text-slate-500 sm:w-fit">
-            {(props.type === "projects" || props.type === "company") && (
-              <div className="flex items-center gap-1">
-                Company Name:{" "}
-                <div>
-                  <div className="flex items-center gap-1">
-                    <Image
-                      width={20}
-                      height={20}
-                      src={
-                        project
-                          ? project.company.logoUrl
-                          : props.itemView.imgUrl
-                      }
-                      alt={
-                        project
-                          ? project.company.name
-                          : (props.itemView as Company).title
-                      }
-                    />
-                    <span>
-                      {project
-                        ? project.company.name
-                        : (props.itemView as Company).title}
-                    </span>
-                  </div>
-                </div>
-              </div>
-            )}
-            <div className="flex items-center gap-1">{headerCard()}</div>
-            <div className="flex items-center gap-1">
-              Post date: <DateTimePost date={props.itemView.date} />
-            </div>
-            {props.type !== "apps" && (
-              <div className="flex items-center gap-1">
-                Read time:{" "}
-                <span>{(props.itemView as Project).readTime} min</span>
-              </div>
-            )}
-          </div>
-          <ShareWith text={shareTxt} />
-        </div>
-      </div>
-      {props.type === "apps" && (
-        <div className="container mx-auto mb-4 max-w-3xl space-y-4 px-2">
-          <div className="flex w-full flex-col items-center justify-center">
-            <Image
-              src={props.itemView.imgUrl}
-              alt={(props.itemView as App).title}
-              width={100}
-              height={100}
-              blurDataURL={(props.itemView as App).imgBlurData}
-              placeholder="blur"
-            />
-            <p className="text-center text-4xl font-semibold tracking-wider">
-              {(props.itemView as App).title}
-            </p>
-          </div>
-
-          <div className="flex flex-wrap justify-center gap-3">
-            {(props.itemView as App).platforms.map((x) => (
-              <Link
-                href={x.link}
-                target="_blank"
-                className="p-card flex h-fit w-fit cursor-pointer flex-col py-2"
-                key={x.link}
-              >
-                {
-                  <div className="h-24 space-y-2 py-2">
-                    <p className="text-center">{x.name}</p>
-                    <div className="flex h-fit w-40 justify-center overflow-hidden">
-                      {getLogoListing(x.name, props.itemView.imgUrl)}
-                    </div>
-                  </div>
-                }
-              </Link>
-            ))}
+      <div className="container mx-auto px-2">
+        <div className="flex items-start justify-around gap-4">
+          <div className="sticky top-5 hidden flex-1 2xl:inline">
+            {metaData()}
           </div>
           <div>
-            <div className="carousel-center carousel rounded-box my-0 w-full space-x-4 bg-base-300/40 p-4">
-              {(props.itemView as App).imgs.map((x, i) => (
-                <div
-                  id={`image${i + 1}`}
-                  key={x}
-                  className="carousel-item relative h-72 w-[98%] xs:h-72 sm:h-80 md:h-[30rem]"
-                >
-                  <ImageLegacy
-                    alt={i.toString()}
-                    layout="fill"
-                    objectFit="scale-down"
-                    src={x}
-                    className="rounded-box"
+            {props.type === "apps" && (
+              <div className="container mx-auto mb-4 max-w-3xl space-y-4 px-2">
+                <div className="flex w-full flex-col items-center justify-center">
+                  <Image
+                    src={props.itemView.imgUrl}
+                    alt={(props.itemView as App).title}
+                    width={100}
+                    height={100}
+                    blurDataURL={(props.itemView as App).imgBlurData}
+                    placeholder="blur"
                   />
+                  <p className="text-center text-4xl font-semibold tracking-wider">
+                    {(props.itemView as App).title}
+                  </p>
                 </div>
-              ))}
-            </div>
-            {(props.itemView as App).imgs.length > 1 && (
-              <div className="my-2 flex w-full justify-center gap-2">
-                {(props.itemView as App).imgs.map((x, i) => (
-                  <Link
-                    autoFocus={false}
-                    scroll={false}
-                    key={i}
-                    href={`#image${i + 1}`}
-                    className="btn-xs btn my-0 py-0"
-                  >
-                    {i + 1}
-                  </Link>
-                ))}
+
+                <div className="flex flex-wrap justify-center gap-3">
+                  {(props.itemView as App).platforms.map((x) => (
+                    <Link
+                      href={x.link}
+                      target="_blank"
+                      className="p-card flex h-fit w-fit cursor-pointer flex-col py-2"
+                      key={x.link}
+                    >
+                      {
+                        <div className="h-24 space-y-2 py-2">
+                          <p className="text-center">{x.name}</p>
+                          <div className="flex h-fit w-40 justify-center overflow-hidden">
+                            {getLogoListing(x.name, props.itemView.imgUrl)}
+                          </div>
+                        </div>
+                      }
+                    </Link>
+                  ))}
+                </div>
+                <div>
+                  <div className="carousel-center carousel rounded-box my-0 w-full space-x-4 bg-base-300/40 p-4">
+                    {(props.itemView as App).imgs.map((x, i) => (
+                      <div
+                        id={`image${i + 1}`}
+                        key={x}
+                        className="carousel-item relative h-72 w-[98%] xs:h-72 sm:h-80 md:h-[30rem]"
+                      >
+                        <ImageLegacy
+                          alt={i.toString()}
+                          layout="fill"
+                          objectFit="scale-down"
+                          src={x}
+                          className="rounded-box"
+                        />
+                      </div>
+                    ))}
+                  </div>
+                  {(props.itemView as App).imgs.length > 1 && (
+                    <div className="my-2 flex w-full justify-center gap-2">
+                      {(props.itemView as App).imgs.map((x, i) => (
+                        <Link
+                          autoFocus={false}
+                          scroll={false}
+                          key={i}
+                          href={`#image${i + 1}`}
+                          className="btn-xs btn my-0 py-0"
+                        >
+                          {i + 1}
+                        </Link>
+                      ))}
+                    </div>
+                  )}
+                </div>
               </div>
             )}
-          </div>
-        </div>
-      )}
-      {props.type === "company" && (
-        <div className="container mx-auto mb-4 max-w-3xl space-y-4 px-2">
-          <div className="flex w-full flex-col items-center justify-center">
-            <Image
-              src={props.itemView.imgUrl}
-              alt={(props.itemView as Company).title}
-              width={100}
-              height={100}
-              blurDataURL={(props.itemView as Company).imgBlurData}
-              placeholder="blur"
-            />
-            <p className="text-center text-4xl font-semibold tracking-wider">
-              {(props.itemView as Company).title}
-            </p>
+            {props.type === "company" && (
+              <div className="container mx-auto mb-4 max-w-3xl space-y-4 px-2">
+                <div className="flex w-full flex-col items-center justify-center">
+                  <Image
+                    src={props.itemView.imgUrl}
+                    alt={(props.itemView as Company).title}
+                    width={100}
+                    height={100}
+                    blurDataURL={(props.itemView as Company).imgBlurData}
+                    placeholder="blur"
+                  />
+                  <p className="text-center text-4xl font-semibold tracking-wider">
+                    {(props.itemView as Company).title}
+                  </p>
 
-            <Link
-              href={(props.itemView as Company).homePage}
-              target="_blank"
-              className="p-card mt-3 cursor-pointer"
-            >
-              Goto website
-            </Link>
+                  <Link
+                    href={(props.itemView as Company).homePage}
+                    target="_blank"
+                    className="p-card mt-3 cursor-pointer"
+                  >
+                    Goto website
+                  </Link>
+                </div>
+              </div>
+            )}
+            <div className="max-w-3xl">
+              <MDRender
+                key={props.itemView.date}
+                data={props.data}
+                imgBlurdata={props.imgBlurdata}
+              />
+            </div>
           </div>
+          <div className="sticky top-5 hidden flex-1 2xl:inline" />
         </div>
-      )}
-      <MDRender
-        key={props.itemView.date}
-        data={props.data}
-        imgBlurdata={props.imgBlurdata}
-      />
+      </div>
+
+      <div className="my-5 flex flex-wrap items-center justify-center gap-1">
+        <Link
+          className="title link-hover link-primary link capitalize"
+          href={"/" + props.type}
+        >
+          {props.type}
+        </Link>{" "}
+        / {props.itemView.fileName}
+        <div className="tooltip tooltip-bottom" data-tip="Edit this on Github">
+          <Link href={githubEditUrl} target="_blank" rel="">
+            <PencilSquareIcon className="link-hover link h-4 w-4" />
+          </Link>
+        </div>
+      </div>
+      <div className="flex w-full 2xl:hidden">{metaData()}</div>
       <div className="container divider mx-auto max-w-3xl px-2" />
       {(props.previous || props.next) && (
         <div className="container mx-auto max-w-3xl px-2">
