@@ -7,13 +7,14 @@ import {
 } from "~/app_function/project_blog/item_view_server";
 import Loading from "~/components/markdown/loading";
 import { type ParsedUrlQuery } from "querystring";
-import {
-  type Project,
-  type Blog,
-  type CardItem,
-  type Card,
-  type App,
-  type Company,
+import type {
+  Project,
+  Blog,
+  CardItem,
+  Card,
+  App,
+  Company,
+  ImgBlurData,
 } from "~/app_function/utils/interfaces";
 import LayoutCardApp from "~/components/apps/layout_card";
 import { DEFAULT_IS_LIGHT, useThemeStore } from "~/app_state/theme_mode";
@@ -57,6 +58,7 @@ export async function getStaticProps(
 
 export interface ProjectBlogViewProps {
   data: string;
+  imgBlurdata: ImgBlurData;
   itemView: CardItem;
   previous: CardItem | null;
   next: CardItem | null;
@@ -405,7 +407,11 @@ export default function ProjectBlogView(props: ProjectBlogViewProps) {
           </div>
         </div>
       )}
-      <MDRender key={props.itemView.date} data={props.data} />
+      <MDRender
+        key={props.itemView.date}
+        data={props.data}
+        imgBlurdata={props.imgBlurdata}
+      />
       <div className="container divider mx-auto max-w-3xl px-2" />
       {(props.previous || props.next) && (
         <div className="container mx-auto max-w-3xl px-2">

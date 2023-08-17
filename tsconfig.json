@@ -28,11 +28,10 @@
     "**/*.tsx",
     "**/*.cjs",
     "**/*.mjs",
-    "src/components/markdown/md_render.tsx",
     "src/app_function/utils/find_link_plugin.ts",
     "src/app_function/scripts/build-algolia-search.ts"
   ],
-  "exclude": ["node_modules"],
+  "exclude": ["node_modules", "src/components/markdown/md_render.tsx"],
   "ts-node": {
     "compilerOptions": {
       // compilerOptions specified here will override those declared below,

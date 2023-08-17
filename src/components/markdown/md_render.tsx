@@ -1,4 +1,8 @@
+/* eslint-disable @next/next/no-img-element */
+/* eslint-disable jsx-a11y/alt-text */
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 /* eslint-disable @typescript-eslint/no-explicit-any */
+// @ts-nocheck
 
 import dynamic from "next/dynamic";
 import { type ReactMarkdownOptions } from "react-markdown/lib/react-markdown";
@@ -18,6 +22,8 @@ import markdown from "react-syntax-highlighter/dist/cjs/languages/prism/markdown
 import json from "react-syntax-highlighter/dist/cjs/languages/prism/json";
 import lua from "react-syntax-highlighter/dist/cjs/languages/prism/lua";
 import CopyToClipboardButton from "../copy_to_clipboard_button";
+import Image from "next/image";
+import { type ImgBlurData } from "~/app_function/utils/interfaces";
 
 SyntaxHighlighter.registerLanguage("tsx", tsx);
 SyntaxHighlighter.registerLanguage("typescript", typescript);
@@ -38,13 +44,47 @@ const ReactMarkdown = dynamic<ReactMarkdownOptions>(
 
 interface MDRender {
   data: string;
+  imgBlurdata?: ImgBlurData;
 }
 
-export default function MDRender(props: MDRender) {
+export default function MDRender({ data, imgBlurdata }: MDRender) {
   return (
     <article className="container prose prose-stone relative mx-auto max-w-3xl rounded-2xl bg-base-100/80 px-4 py-2 ring-1 ring-base-content/5 prose-headings:my-1 prose-a:my-1 prose-a:text-blue-600 prose-a:no-underline prose-pre:m-0 prose-pre:bg-transparent prose-pre:p-0 prose-li:my-0 prose-img:my-2 prose-img:inline-block prose-img:rounded-xl">
       <ReactMarkdown
         components={{
+          img: ({ ...props }) => {
+            if (!props.src) return <></>;
+
+            if (!imgBlurdata) return <img {...props} />;
+
+            const blurDataURL = imgBlurdata.hasOwnProperty(props.src)
+              ? imgBlurdata[props.src]
+              : undefined;
+
+            return (
+              <Image
+                {...props}
+                blurDataURL={blurDataURL ? blurDataURL.base64 : undefined}
+                placeholder={blurDataURL ? "blur" : "empty"}
+                width={
+                  props.width
+                    ? parseFloat(props.width)
+                    : blurDataURL
+                    ? blurDataURL.width
+                    : 0
+                }
+                height={
+                  props.height
+                    ? parseFloat(props.height)
+                    : blurDataURL
+                    ? blurDataURL.height
+                    : 0
+                }
+                sizes="100vw"
+                className={props.width ? undefined : "w-auto"}
+              />
+            );
+          },
           a: ({ children, ...props }) => {
             if (props.href?.includes("http")) {
               props.target = "_blank";
@@ -108,7 +148,7 @@ export default function MDRender(props: MDRender) {
         rehypePlugins={[rehypeRaw]}
         remarkPlugins={[remarkGfm]}
       >
-        {props.data}
+        {data}
       </ReactMarkdown>
     </article>
   );

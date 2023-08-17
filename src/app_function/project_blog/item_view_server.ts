@@ -1,4 +1,9 @@
-import { getCard, getData } from "../utils/utils-server";
+import {
+  addBlurList,
+  extractImageUrlsFromMarkdown,
+  getCard,
+  getData,
+} from "../utils/utils-server";
 import matter from "gray-matter";
 import { type GetStaticPropsContext, type PreviewData } from "next";
 import { type ParsedUrlQuery } from "querystring";
@@ -72,9 +77,12 @@ export async function getStaticPropsItemView({
       more4 = ringBuffer.toArray().slice(0, 5);
       more4.splice(1, 1);
     }
-
+    const imgBlurdata = await addBlurList(
+      extractImageUrlsFromMarkdown(content)
+    );
     const pvp: ProjectBlogViewProps = {
       data: content,
+      imgBlurdata,
       itemView,
       previous,
       next,

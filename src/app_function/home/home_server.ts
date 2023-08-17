@@ -7,7 +7,8 @@ import {
   getDBConfigs,
   getData,
   getProjects,
-  getTesti, getBlurData
+  getTesti,
+  getBlurData,
 } from "../utils/utils-server";
 import { type RXTProps } from "~/components/me_section/r_x_t";
 import { type MeSectionProps } from "~/components/me_section/me_section";
@@ -67,21 +68,26 @@ export async function HomeServer() {
   const RApps: App[] = await addBlur(allAppsRaw.apps, 6);
   const RBlogs: Blog[] = await addBlur(allBlogsRaw.blogs);
   const RCompany: Company[] = await addBlur(allCompanyRaw.company);
-  const RTestis: Testimonial[] = await addBlur(testis.testis, testis.testis.length);
+  const RTestis: Testimonial[] = await addBlur(
+    testis.testis,
+    testis.testis.length
+  );
 
   const testimonialAddUrl =
     getDataUrl(env.NEXT_PUBLIC_REPO_PATH) + "/home/testimonials.json";
 
+  const blurUrlItem = await getBlurData(me.imgUrl);
+
   const homeProps: HomeProps = {
     meSection: {
       me: {
-        blurDataURL: await getBlurData(me.imgUrl),
+        blurDataURL: blurUrlItem ? blurUrlItem.base64 : null,
         ...me,
       },
       techs,
     },
     workFor: { data: RCompany, total: dbConfig.companyTotal },
-    testis: {testis: RTestis, addUrl: testimonialAddUrl },
+    testis: { testis: RTestis, addUrl: testimonialAddUrl },
     recentApps: {
       data: RApps,
       total: dbConfig.appTotal,

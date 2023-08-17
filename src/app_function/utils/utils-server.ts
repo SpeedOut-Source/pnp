@@ -1,5 +1,13 @@
 import { promises } from "fs";
-import { type App, type Blog, type Card, type CardData, type Company, type Project } from "./interfaces";
+import type {
+  ImgBlurData,
+  App,
+  Blog,
+  Card,
+  CardData,
+  Company,
+  Project,
+} from "./interfaces";
 import { getPlaiceholder } from "plaiceholder";
 import { parse } from "path";
 import { type TestimonialsProps } from "~/components/work_for_t/testimonials";
@@ -218,10 +226,11 @@ export async function getBlurData(imgUrl: string, isUrl = true) {
   }
 
   try {
-    const { base64 } = await getPlaiceholder(imgUrl);
-    return base64;
+    const data = await getPlaiceholder(imgUrl);
+
+    return data;
   } catch (e) {
-    log.error( e);
+    log.error(e);
     return null;
   }
 }
@@ -241,11 +250,58 @@ export async function addBlur<T>(data: T[], limit = 3) {
     const element = data[index];
     if (!element) continue;
     // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
-    const imgBlurData = await getBlurData(
+    const imgBlurDataRaw = await getBlurData(
       (element as unknown as { imgUrl: string }).imgUrl,
       false
     );
+
+    let imgBlurData = null;
+    if (imgBlurDataRaw) {
+      imgBlurData = imgBlurDataRaw.base64;
+    }
+
     rData.push({ ...element, imgBlurData });
   }
   return rData;
+}
+
+export function extractImageUrlsFromMarkdown(markdown: string): string[] {
+  const imageUrls: string[] = [];
+
+  // Match Markdown-style image syntax: ![alt text](url)
+  const markdownImageRegex = /!\[[^\]]*?\]\((.*?)\)/g;
+  let match;
+
+  while ((match = markdownImageRegex.exec(markdown)) !== null) {
+    const url = match[1];
+    if (url) {
+      imageUrls.push(url);
+    }
+  }
+
+  // Match HTML img tags: <img src="url" ...>
+  const htmlImageRegex = /<img[^>]*src=['"]([^'"]+)['"][^>]*>/g;
+
+  while ((match = htmlImageRegex.exec(markdown)) !== null) {
+    const url = match[1];
+    if (url) {
+      imageUrls.push(url);
+    }
+  }
+
+  return imageUrls;
+}
+
+export async function addBlurList(imgs: string[]): Promise<ImgBlurData> {
+  const imgsBlurObj: ImgBlurData = {};
+
+  for (const url of imgs) {
+    const blurData = await getBlurData(url);
+    if (blurData) {
+      const { base64, img } = blurData;
+      imgsBlurObj[url] = { base64, height: img.height, width: img.width };
+    }
+  }
+
+  return imgsBlurObj;
 }

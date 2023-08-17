@@ -8,7 +8,7 @@ export type Company = {
   end: number;
   fileName: string;
   readTime: string;
-}
+};
 
 export interface WorkForProps {
   data: Company[];
@@ -56,3 +56,5 @@ export type App = {
 export type Card = "blogs" | "projects" | "apps" | "company";
 export type CardData = Project[] | Blog[] | App[] | Company[];
 export type CardItem = Project | Blog | App | Company;
+export type ImgBlurItem = { base64: string; height: number; width: number };
+export type ImgBlurData = { [url: string]: ImgBlurItem };
