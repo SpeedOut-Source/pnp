@@ -30,8 +30,7 @@ import { env } from "../../../env.mjs";
 import urlJoin from "url-join";
 import type { TransformNodeOutput } from "~/app_function/remark/headings";
 import TableOfContents from "~/components/table_of_contents/toc";
-import { useScrollDirection } from "react-scroll-hook";
-import clsx from "clsx";
+import LRWrap from "~/components/artical/lr_wrap";
 
 const SEO = dynamic(() => import("~/components/seo"));
 
@@ -74,7 +73,6 @@ export interface ProjectBlogViewProps {
 export default function ProjectBlogView(props: ProjectBlogViewProps) {
   const utm = useThemeStore();
   const [isLight, setIsLight] = useState(DEFAULT_IS_LIGHT);
-  const scrollDirection = useScrollDirection();
 
   let title: string;
   let desc: string;
@@ -321,15 +319,7 @@ export default function ProjectBlogView(props: ProjectBlogViewProps) {
       />
       <div className="container mx-auto px-2">
         <div className="flex items-start justify-around gap-4">
-          <div
-            className={clsx(
-              "sticky hidden flex-1 2xl:inline",
-              "transition-all duration-500 ease-in-out",
-              scrollDirection === "up" ? "top-20" : "top-5"
-            )}
-          >
-            {metaData()}
-          </div>
+          <LRWrap>{metaData()}</LRWrap>
           <div className="container my-2 max-w-3xl">
             {props.type === "apps" && (
               <div className="container mx-auto mb-4 max-w-3xl space-y-4 px-2">
@@ -433,15 +423,9 @@ export default function ProjectBlogView(props: ProjectBlogViewProps) {
               imgBlurdata={props.imgBlurdata}
             />
           </div>
-          <div
-            className={clsx(
-              "sticky hidden flex-1 2xl:inline",
-              "transition-all duration-500 ease-in-out",
-              scrollDirection === "up" ? "top-20" : "top-5"
-            )}
-          >
+          <LRWrap>
             <TableOfContents nodes={props.toc} />
-          </div>
+          </LRWrap>
         </div>
       </div>
       <div className="flex w-full 2xl:hidden">{metaData()}</div>
