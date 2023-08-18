@@ -9,6 +9,7 @@ import { type ReactMarkdownOptions } from "react-markdown/lib/react-markdown";
 import AbsoluteLoading from "./absolute_loading";
 import rehypeRaw from "rehype-raw";
 import remarkGfm from "remark-gfm";
+import { headingTree } from "../../app_function/remark/headings";
 
 import { PrismLight as SyntaxHighlighter } from "react-syntax-highlighter";
 import React from "react";
@@ -146,7 +147,7 @@ export default function MDRender({ data, imgBlurdata }: MDRender) {
           },
         }}
         rehypePlugins={[rehypeRaw]}
-        remarkPlugins={[remarkGfm]}
+        remarkPlugins={[remarkGfm, headingTree]}
       >
         {data}
       </ReactMarkdown>

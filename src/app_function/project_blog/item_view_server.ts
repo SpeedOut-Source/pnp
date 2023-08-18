@@ -10,6 +10,8 @@ import { type ParsedUrlQuery } from "querystring";
 import { type ProjectBlogViewProps } from "~/pages/projects/view/[file_name]";
 import { type Card, type CardData } from "../utils/interfaces";
 import { RingBuffer } from "../utils/ring_buffer";
+import { remark } from "remark";
+import { type TransformNodeOutput, headingTree } from "../remark/headings";
 
 export async function getStaticPathItemView(type: Card) {
   const allData: CardData = await getCard(type);
@@ -80,6 +82,11 @@ export async function getStaticPropsItemView({
     const imgBlurdata = await addBlurList(
       extractImageUrlsFromMarkdown(content)
     );
+
+    const processedContentTOC = await remark()
+      .use(headingTree)
+      .process(content);
+
     const pvp: ProjectBlogViewProps = {
       data: content,
       imgBlurdata,
@@ -88,12 +95,14 @@ export async function getStaticPropsItemView({
       next,
       type: type,
       more4: more4 as CardData | null,
+      toc: processedContentTOC.data.headings as TransformNodeOutput[],
     };
 
     return {
       props: pvp,
     };
   } catch (e) {
+    console.error(e);
     return {
       notFound: true,
     };

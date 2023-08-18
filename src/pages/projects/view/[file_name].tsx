@@ -28,6 +28,8 @@ import {
 import LayoutCardCompany from "~/components/company/layout_card";
 import { env } from "../../../env.mjs";
 import urlJoin from "url-join";
+import type { TransformNodeOutput } from "~/app_function/remark/headings";
+import TableOfContents from "~/components/table_of_contents/toc";
 
 const SEO = dynamic(() => import("~/components/seo"));
 
@@ -64,6 +66,7 @@ export interface ProjectBlogViewProps {
   next: CardItem | null;
   more4: CardItem[] | null;
   type: Card;
+  toc: TransformNodeOutput[];
 }
 
 export default function ProjectBlogView(props: ProjectBlogViewProps) {
@@ -404,7 +407,9 @@ export default function ProjectBlogView(props: ProjectBlogViewProps) {
               />
             </div>
           </div>
-          <div className="sticky top-5 hidden flex-1 2xl:inline" />
+          <div className="sticky top-24 hidden flex-1 2xl:inline">
+            <TableOfContents nodes={props.toc} />
+          </div>
         </div>
       </div>
 
