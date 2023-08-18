@@ -30,6 +30,8 @@ import { env } from "../../../env.mjs";
 import urlJoin from "url-join";
 import type { TransformNodeOutput } from "~/app_function/remark/headings";
 import TableOfContents from "~/components/table_of_contents/toc";
+import { useScrollDirection } from "react-scroll-hook";
+import clsx from "clsx";
 
 const SEO = dynamic(() => import("~/components/seo"));
 
@@ -72,6 +74,7 @@ export interface ProjectBlogViewProps {
 export default function ProjectBlogView(props: ProjectBlogViewProps) {
   const utm = useThemeStore();
   const [isLight, setIsLight] = useState(DEFAULT_IS_LIGHT);
+  const scrollDirection = useScrollDirection();
 
   let title: string;
   let desc: string;
@@ -246,7 +249,7 @@ export default function ProjectBlogView(props: ProjectBlogViewProps) {
   function metaData() {
     return (
       <div className="mx-auto flex w-full max-w-3xl flex-col items-center justify-between gap-2 px-2 sm:flex-row sm:items-end 2xl:flex-col 2xl:items-end 2xl:px-0">
-        <div className="p-card flex h-fit w-full flex-col items-start py-2 text-xs text-slate-500 sm:w-fit">
+        <div className="p-card flex h-fit w-full flex-col items-start overflow-visible py-2 text-xs text-slate-500 sm:w-fit">
           {(props.type === "projects" || props.type === "company") && (
             <div className="flex items-center gap-1">
               Company Name:{" "}
@@ -282,6 +285,25 @@ export default function ProjectBlogView(props: ProjectBlogViewProps) {
               Read time: <span>{(props.itemView as Project).readTime} min</span>
             </div>
           )}
+          <div className="flex items-center gap-1">
+            Type:
+            <div className="flex items-center gap-1">
+              <Link
+                className="title link-hover link-primary link capitalize"
+                href={"/" + props.type}
+              >
+                {props.type}
+              </Link>{" "}
+              <div
+                className="tooltip tooltip-right"
+                data-tip="Edit this on Github"
+              >
+                <Link href={githubEditUrl} target="_blank" rel="">
+                  <PencilSquareIcon className="link-hover link h-4 w-4" />
+                </Link>
+              </div>
+            </div>
+          </div>
         </div>
         <ShareWith text={shareTxt} />
       </div>
@@ -299,10 +321,16 @@ export default function ProjectBlogView(props: ProjectBlogViewProps) {
       />
       <div className="container mx-auto px-2">
         <div className="flex items-start justify-around gap-4">
-          <div className="sticky top-5 hidden flex-1 2xl:inline">
+          <div
+            className={clsx(
+              "sticky hidden flex-1 2xl:inline",
+              "transition-all duration-500 ease-in-out",
+              scrollDirection === "up" ? "top-20" : "top-5"
+            )}
+          >
             {metaData()}
           </div>
-          <div>
+          <div className="container my-2 max-w-3xl">
             {props.type === "apps" && (
               <div className="container mx-auto mb-4 max-w-3xl space-y-4 px-2">
                 <div className="flex w-full flex-col items-center justify-center">
@@ -399,32 +427,21 @@ export default function ProjectBlogView(props: ProjectBlogViewProps) {
                 </div>
               </div>
             )}
-            <div className="max-w-3xl">
-              <MDRender
-                key={props.itemView.date}
-                data={props.data}
-                imgBlurdata={props.imgBlurdata}
-              />
-            </div>
+            <MDRender
+              key={props.itemView.date}
+              data={props.data}
+              imgBlurdata={props.imgBlurdata}
+            />
           </div>
-          <div className="sticky top-24 hidden flex-1 2xl:inline">
+          <div
+            className={clsx(
+              "sticky hidden flex-1 2xl:inline",
+              "transition-all duration-500 ease-in-out",
+              scrollDirection === "up" ? "top-20" : "top-5"
+            )}
+          >
             <TableOfContents nodes={props.toc} />
           </div>
-        </div>
-      </div>
-
-      <div className="my-5 flex flex-wrap items-center justify-center gap-1">
-        <Link
-          className="title link-hover link-primary link capitalize"
-          href={"/" + props.type}
-        >
-          {props.type}
-        </Link>{" "}
-        / {props.itemView.fileName}
-        <div className="tooltip tooltip-bottom" data-tip="Edit this on Github">
-          <Link href={githubEditUrl} target="_blank" rel="">
-            <PencilSquareIcon className="link-hover link h-4 w-4" />
-          </Link>
         </div>
       </div>
       <div className="flex w-full 2xl:hidden">{metaData()}</div>
@@ -469,7 +486,7 @@ export default function ProjectBlogView(props: ProjectBlogViewProps) {
       {(props.type === "apps" || props.type === "company") && props.more4 && (
         <div
           key={`${props.itemView.fileName}`}
-          className="mx-auto grid max-w-3xl gap-2 px-2 xs:grid-cols-2 sm:grid-cols-3 lg:grid-cols-4"
+          className="container mx-auto grid max-w-3xl gap-2 px-2 xs:grid-cols-2 sm:grid-cols-3 lg:grid-cols-4"
         >
           {props.more4.map((x) => {
             if (props.type === "apps") {
