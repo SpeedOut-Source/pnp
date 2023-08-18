@@ -429,61 +429,61 @@ export default function ProjectBlogView(props: ProjectBlogViewProps) {
         </div>
       </div>
       <div className="flex w-full 2xl:hidden">{metaData()}</div>
-      <div className="container divider mx-auto max-w-3xl px-2" />
-      {(props.previous || props.next) && (
-        <div className="container mx-auto max-w-3xl px-2">
-          <div className="flex w-full items-center justify-center gap-4">
-            {props.previous && (
-              <div className="h-fit w-full">
-                <div className=" mb-2 flex items-center text-2xl normal-case text-slate-400">
-                  <Link
-                    href={`/${props.type}/view/${props.previous.fileName}`}
-                    className="link-hover link flex items-center "
-                  >
-                    <ChevronLeftIcon className="h-6 w-6"></ChevronLeftIcon>
-                    Previous{" "}
-                  </Link>
+      <div className="border-2 container mx-auto max-w-3xl border-base-content/5 rounded-2xl bg-base-100/80">
+        {(props.previous || props.next) && (
+          <div className="container mx-auto max-w-3xl px-2 m-2">
+            <div className="flex w-full items-center justify-center gap-4">
+              {props.previous && (
+                <div className="h-fit w-full">
+                  <div className=" mb-2 flex items-center text-2xl normal-case text-slate-400">
+                    <Link
+                      href={`/${props.type}/view/${props.previous.fileName}`}
+                      className="link-hover link flex items-center "
+                    >
+                      <ChevronLeftIcon className="h-6 w-6" />
+                      Previous{" "}
+                    </Link>
+                  </div>
+                  {props.type !== "apps" && props.type !== "company" && (
+                    <LayoutCard data={props.previous} />
+                  )}
                 </div>
-                {props.type !== "apps" && props.type !== "company" && (
-                  <LayoutCard data={props.previous} />
-                )}
-              </div>
-            )}
-            {props.next && (
-              <div className="h-fit w-full">
-                <div className="mb-2 flex items-center justify-end text-2xl normal-case text-slate-400">
-                  <Link
-                    href={`/${props.type}/view/${props.next.fileName}`}
-                    className="link-hover link flex items-center"
-                  >
-                    Next <ChevronRightIcon className="h-6 w-6" />
-                  </Link>
+              )}
+              {props.next && (
+                <div className="h-fit w-full">
+                  <div className="mb-2 flex items-center justify-end text-2xl normal-case text-slate-400">
+                    <Link
+                      href={`/${props.type}/view/${props.next.fileName}`}
+                      className="link-hover link flex items-center"
+                    >
+                      Next <ChevronRightIcon className="h-6 w-6" />
+                    </Link>
+                  </div>
+                  {props.type !== "apps" && props.type !== "company" && (
+                    <LayoutCard data={props.next} />
+                  )}
                 </div>
-                {props.type !== "apps" && props.type !== "company" && (
-                  <LayoutCard data={props.next} />
-                )}
-              </div>
-            )}
+              )}
+            </div>
           </div>
-        </div>
-      )}
-      {(props.type === "apps" || props.type === "company") && props.more4 && (
-        <div
-          key={`${props.itemView.fileName}`}
-          className="container mx-auto grid max-w-3xl gap-2 px-2 xs:grid-cols-2 sm:grid-cols-3 lg:grid-cols-4"
-        >
-          {props.more4.map((x) => {
-            if (props.type === "apps") {
-              const m = x as App;
-              return <LayoutCardApp {...m} key={x.date} />;
-            } else {
-              const m = x as Company;
-              return <LayoutCardCompany {...m} key={x.date} />;
-            }
-          })}
-        </div>
-      )}
-      <div className="container divider mx-auto max-w-3xl px-2" />
+        )}
+        {(props.type === "apps" || props.type === "company") && props.more4 && (
+          <div
+            key={`${props.itemView.fileName}`}
+            className="container mx-auto grid max-w-3xl gap-2 px-2 m-2 xs:grid-cols-2 sm:grid-cols-3 lg:grid-cols-4"
+          >
+            {props.more4.map((x) => {
+              if (props.type === "apps") {
+                const m = x as App;
+                return <LayoutCardApp {...m} key={x.date} />;
+              } else {
+                const m = x as Company;
+                return <LayoutCardCompany {...m} key={x.date} />;
+              }
+            })}
+          </div>
+        )}
+      </div>
       <div className="container mx-auto max-w-3xl px-2">
         <Comments
           key={githubEditUrl}
