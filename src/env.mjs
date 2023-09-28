@@ -8,15 +8,8 @@ export const env = createEnv({
    */
   server: {
     NODE_ENV: z.enum(["development", "test", "production"]),
-    NEXT_PUBLIC_REPO_PATH: z.string(),
     ALGOLIA_SEARCH_ADMIN_KEY: z.string(),
     DATA_PATH: z.string().default("../pnp-data/"),
-    NEXT_PUBLIC_PREFIX_REPO: z.string(),
-    NEXT_PUBLIC_REPO_DATA_BRANCH: z.string(),
-    NEXT_PUBLIC_LOCALHOST_TEST: z
-      .string()
-      .refine((s) => s === "true" || s === "false")
-      .transform((s) => s === "true"),
   },
 
   /**
