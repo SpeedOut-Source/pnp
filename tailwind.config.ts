@@ -5,20 +5,43 @@
 import { type Config } from "tailwindcss";
 import defaultTheme from "tailwindcss/defaultTheme";
 
-export default {
-  darkMode: "class",
+/** @type {import('tailwindcss').Config} */
+module.exports = {
+  darkMode: ["class"],
   content: ["./src/**/*.{js,ts,jsx,tsx}"],
+
   theme: {
-    screens: {
-      xs: "400px",
-      ...defaultTheme.screens,
+    container: {
+      center: true,
+      padding: "2rem",
+      screens: {
+        ...defaultTheme.screens,
+        xs: "400px",
+        "2xl": "1400px",
+      },
     },
-    extend: {},
+    extend: {
+      keyframes: {
+        "accordion-down": {
+          from: { height: "0" },
+          to: { height: "var(--radix-accordion-content-height)" },
+        },
+        "accordion-up": {
+          from: { height: "var(--radix-accordion-content-height)" },
+          to: { height: "0" },
+        },
+      },
+      animation: {
+        "accordion-down": "accordion-down 0.2s ease-out",
+        "accordion-up": "accordion-up 0.2s ease-out",
+      },
+    },
   },
   plugins: [
     require("daisyui"),
     require("@tailwindcss/typography"),
     require("tailwind-scrollbar")({ nocompatible: true }),
+    require("tailwindcss-animate"),
   ],
   daisyui: {
     themes: [
