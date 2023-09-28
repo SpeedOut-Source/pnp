@@ -54,7 +54,7 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps(
-  context: GetStaticPropsContext<ParsedUrlQuery, ProjectBlogViewProps>
+  context: GetStaticPropsContext<ParsedUrlQuery, ProjectBlogViewProps>,
 ) {
   return await getStaticPropsItemView({ context, type: "projects" });
 }
@@ -241,7 +241,7 @@ export default function ProjectBlogView(props: ProjectBlogViewProps) {
     getDataUrl(env.NEXT_PUBLIC_REPO_PATH),
     props.type,
     props.itemView.fileName,
-    "?plain=1"
+    "?plain=1",
   );
 
   function metaData() {
@@ -357,7 +357,7 @@ export default function ProjectBlogView(props: ProjectBlogViewProps) {
                   ))}
                 </div>
                 <div>
-                  <div className="carousel-center carousel rounded-box my-0 w-full space-x-4 bg-base-300/40 p-4">
+                  <div className="carousel carousel-center rounded-box my-0 w-full space-x-4 bg-base-300/40 p-4">
                     {(props.itemView as App).imgs.map((x, i) => (
                       <div
                         id={`image${i + 1}`}
@@ -382,7 +382,7 @@ export default function ProjectBlogView(props: ProjectBlogViewProps) {
                           scroll={false}
                           key={i}
                           href={`#image${i + 1}`}
-                          className="btn-xs btn my-0 py-0"
+                          className="btn btn-xs my-0 py-0"
                         >
                           {i + 1}
                         </Link>
@@ -429,9 +429,9 @@ export default function ProjectBlogView(props: ProjectBlogViewProps) {
         </div>
       </div>
       <div className="flex w-full 2xl:hidden">{metaData()}</div>
-      <div className="border-2 container mx-auto max-w-3xl border-base-content/5 rounded-2xl bg-base-100/80">
+      <div className="container mx-auto mt-2 max-w-3xl rounded-2xl border-2 border-base-content/5 bg-base-100/80">
         {(props.previous || props.next) && (
-          <div className="container mx-auto max-w-3xl px-2 m-2">
+          <div className="container m-2 mx-auto max-w-3xl px-2">
             <div className="flex w-full items-center justify-center gap-4">
               {props.previous && (
                 <div className="h-fit w-full">
@@ -470,7 +470,7 @@ export default function ProjectBlogView(props: ProjectBlogViewProps) {
         {(props.type === "apps" || props.type === "company") && props.more4 && (
           <div
             key={`${props.itemView.fileName}`}
-            className="container mx-auto grid max-w-3xl gap-2 px-2 m-2 xs:grid-cols-2 sm:grid-cols-3 lg:grid-cols-4"
+            className="container m-2 mx-auto grid max-w-3xl gap-2 px-2 xs:grid-cols-2 sm:grid-cols-3 lg:grid-cols-4"
           >
             {props.more4.map((x) => {
               if (props.type === "apps") {

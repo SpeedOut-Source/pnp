@@ -12,7 +12,7 @@ export default function Resume() {
     env.NEXT_PUBLIC_USER_CONTENT_BASE_URL,
     env.NEXT_PUBLIC_REPO_PATH,
     env.NEXT_PUBLIC_REPO_DATA_BRANCH,
-    env.NEXT_PUBLIC_RESUME_PATH
+    env.NEXT_PUBLIC_RESUME_PATH,
   );
   return (
     <>
@@ -27,8 +27,8 @@ export default function Resume() {
             download={true}
             className="p-card cursor-pointer gap-2"
           >
-            <ArrowDownTrayIcon className="h-5 w-5" />
-            Download resume
+            <ArrowDownTrayIcon className="m-1 h-5 w-5 " />
+            <span>Download resume</span>
           </Link>
         </div>
         <PdfReader resumeUrl={resumePdfUrl} />

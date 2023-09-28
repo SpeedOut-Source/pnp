@@ -14,7 +14,6 @@ export default function Contact() {
       />
 
       <ContactSection />
-
       <MapOn />
     </>
   );

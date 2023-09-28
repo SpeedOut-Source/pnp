@@ -28,7 +28,7 @@ function Map() {
       lat: env.NEXT_PUBLIC_GOOGLE_MAP_LAT,
       lng: env.NEXT_PUBLIC_GOOGLE_MAP_LNG,
     }),
-    []
+    [],
   );
 
   const darkMapOptions = useMemo(
@@ -57,14 +57,14 @@ function Map() {
         },
       ],
     }),
-    []
+    [],
   );
 
   const lightMapOptions = useMemo(
     () => ({
       styles: [],
     }),
-    []
+    [],
   );
 
   const mapOptions = isLight ? lightMapOptions : darkMapOptions;
@@ -72,8 +72,8 @@ function Map() {
   return (
     <>
       <div className="p-card mx-auto mb-2 flex h-fit w-fit items-center gap-2">
-        <MapPinIcon className="h-5 w-5" />{" "}
-        {env.NEXT_PUBLIC_GOOGLE_MAP_LOCATION_NAME}
+        <MapPinIcon className="m-1 h-5 w-5" />
+        <span>{env.NEXT_PUBLIC_GOOGLE_MAP_LOCATION_NAME}</span>
       </div>
       <div className="mx-4 overflow-hidden rounded-xl">
         <GoogleMap
