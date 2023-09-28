@@ -31,7 +31,7 @@ const TOCLink = (node: TransformNodeOutput) => {
   return (
     <Link
       href={`#${id}`}
-      className={`block ${fontSizes.get(node.depth) ?? "text-base"} py-1  ${
+      className={`block whitespace-normal ${fontSizes.get(node.depth) ?? "text-base"} py-1  ${
         value ? "focus" : ""
       }`}
       scroll={false}

@@ -197,7 +197,7 @@ export default function ProjectBlogView(props: ProjectBlogViewProps) {
         }
         return (
           <>
-            App Name:{" "}
+            <span>App:</span>
             <div>
               <div className="flex items-center gap-1">
                 <Image
@@ -246,11 +246,11 @@ export default function ProjectBlogView(props: ProjectBlogViewProps) {
 
   function metaData() {
     return (
-      <div className="mx-auto flex w-full max-w-3xl flex-col items-center justify-between gap-2 px-2 sm:flex-row sm:items-end 2xl:flex-col 2xl:items-end 2xl:px-0">
+      <div className="mx-auto flex w-full max-w-3xl flex-col items-center justify-between gap-2 px-2 sm:flex-row sm:items-end xl:flex-col xl:items-end xl:px-0">
         <div className="p-card flex h-fit w-full flex-col items-start overflow-visible py-2 text-xs text-slate-500 sm:w-fit">
           {(props.type === "projects" || props.type === "company") && (
             <div className="flex items-center gap-1">
-              Company Name:{" "}
+              <span>Company :</span>
               <div>
                 <div className="flex items-center gap-1">
                   <Image
@@ -317,7 +317,7 @@ export default function ProjectBlogView(props: ProjectBlogViewProps) {
         ogType="article"
         itemView={props.itemView}
       />
-      <div className="container mx-auto px-2">
+      <div className="mx-auto px-2">
         <div className="flex items-start justify-around gap-4">
           <LRWrap>{metaData()}</LRWrap>
           <div className="container my-2 max-w-3xl">
@@ -428,7 +428,7 @@ export default function ProjectBlogView(props: ProjectBlogViewProps) {
           </LRWrap>
         </div>
       </div>
-      <div className="flex w-full 2xl:hidden">{metaData()}</div>
+      <div className="flex w-full xl:hidden">{metaData()}</div>
       <div className="container mx-auto mt-2 max-w-3xl rounded-2xl border-2 border-base-content/5 bg-base-100/80">
         {(props.previous || props.next) && (
           <div className="container m-2 mx-auto max-w-3xl px-2">

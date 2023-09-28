@@ -62,21 +62,21 @@ export default function Header() {
         bgChange
           ? "bg-gradient-to-r from-base-300/30 from-30% to-base-content/50 to-100%"
           : "",
-        "min-h-6 sticky top-0 z-50 bg-no-repeat lg:top-1 lg:mb-2"
+        "min-h-6 sticky top-0 z-50 bg-no-repeat lg:top-1 lg:mb-2",
       )}
     >
       <div
         className={clsx(
           bgChange && scrollDirection === "down" ? "-translate-y-14" : "",
           loaded ? "transition-all delay-100 duration-500 ease-in-out" : "",
-          "container mx-auto flex h-14 items-center justify-between px-4 py-2"
+          "mx-auto flex h-14 items-center justify-between px-4 py-2 xl:container",
         )}
       >
         <div className="flex items-center gap-2">
           <span className="tooltip tooltip-bottom" data-tip="Go home">
             <Link
               href="/"
-              className="btn-ghost btn !gap-0 px-2 text-xl font-bold normal-case tracking-wider"
+              className="btn btn-ghost !gap-0 px-2 text-xl font-bold normal-case tracking-wider"
             >
               <Image
                 src={`${getPrefixRepo()}/images/logos/github-profile-dark${
@@ -100,13 +100,13 @@ export default function Header() {
           <div className="flex items-center justify-end lg:hidden">
             <SearchButton />
             <ThemeSwitch />
-            <div className="dropdown-end dropdown">
-              <label tabIndex={0} className="btn-ghost btn-circle btn">
+            <div className="dropdown dropdown-end">
+              <label tabIndex={0} className="btn btn-circle btn-ghost">
                 <Bars3Icon className="h-8 w-8" />
               </label>
               <ul
                 tabIndex={0}
-                className="dropdown-content menu rounded-box mt-2 w-fit bg-base-100/95 px-2 py-5 shadow-2xl ring ring-base-300"
+                className="menu dropdown-content rounded-box mt-2 w-fit bg-base-100/95 px-2 py-5 shadow-2xl ring ring-base-300"
               >
                 <Links className="flex justify-center space-x-4 rounded-lg bg-base-100/80 px-2 pb-2" />
                 <ConnectSection />
