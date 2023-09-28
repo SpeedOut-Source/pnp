@@ -1,4 +1,3 @@
-import Bars3Icon from "@heroicons/react/24/solid/Bars3Icon";
 import dynamic from "next/dynamic";
 import { useEffect, useState } from "react";
 import Image from "next/image";
@@ -10,6 +9,7 @@ import { useReadingProgress } from "~/app_function/hooks/useReadingProgressbar";
 import { getPrefixRepo } from "~/app_function/utils/utils";
 import clsx from "clsx";
 import { useScrollDirection } from "react-scroll-hook";
+import Hamburger from "./hamburger";
 
 const ConnectSection = dynamic(() => import("./connect_section"));
 const Links = dynamic(() => import("./links"));
@@ -100,18 +100,7 @@ export default function Header() {
           <div className="flex items-center justify-end lg:hidden">
             <SearchButton />
             <ThemeSwitch />
-            <div className="dropdown dropdown-end">
-              <label tabIndex={0} className="btn btn-circle btn-ghost">
-                <Bars3Icon className="h-8 w-8" />
-              </label>
-              <ul
-                tabIndex={0}
-                className="menu dropdown-content rounded-box mt-2 w-fit bg-base-100/95 px-2 py-5 shadow-2xl ring ring-base-300"
-              >
-                <Links className="flex justify-center space-x-4 rounded-lg bg-base-100/80 px-2 pb-2" />
-                <ConnectSection />
-              </ul>
-            </div>
+            <Hamburger />
           </div>
         </div>
       </div>
