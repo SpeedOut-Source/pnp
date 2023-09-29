@@ -1,4 +1,14 @@
 {
+  "1.1.0-alpha": {
+    "date": 1695967023862,
+    "changes": [
+      "shadcn dropdown menu",
+      "space adjust",
+      "updated with t3-app",
+      "xl screen table of contents",
+      "hidden read more when small screen"
+    ]
+  },
   "1.0.9-alpha": {
     "date": 1691263846935,
     "changes": [
