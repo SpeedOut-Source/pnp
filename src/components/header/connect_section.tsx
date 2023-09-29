@@ -12,8 +12,7 @@ export default function ConnectSection() {
         <SearchButton />
       </span>
       <Buymeacoffee />
-      <div className="w-fit items-center gap-3 rounded-xl bg-base-300 px-4 lg:flex">
-        <div className="font-semibold tracking-wider">Connect on</div>
+      <div className="w-fit items-center rounded-xl bg-base-300 px-4 py-1">
         <div className="flex items-center">
           {CONNECT_OPTIONS.map((x) => (
             <Link target="_blank" key={x.url} href={x.url}>

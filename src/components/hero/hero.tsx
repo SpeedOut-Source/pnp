@@ -15,11 +15,11 @@ export interface HeroProps {
 
 export default function Hero(props: HeroProps) {
   return (
-    <div className="mx-auto flex w-full max-w-6xl flex-col justify-between gap-4 lg:flex-row lg:gap-0">
-      <div className="lg:mr-3">
+    <div className="mx-auto flex w-full max-w-6xl flex-col justify-between gap-4 xl:flex-row xl:gap-0">
+      <div className="xl:mr-3">
         <MeSection {...props.me} />
       </div>
-      <div className="flex flex-1 flex-col w-full md:space-y-2">
+      <div className="flex w-full flex-1 flex-col xl:space-y-2">
         <WorkFor {...props.company} />
         <Testimonials {...props.testis} />
       </div>

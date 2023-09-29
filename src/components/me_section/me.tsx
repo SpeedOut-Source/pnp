@@ -12,8 +12,8 @@ export interface MeProps {
 
 export default function Me(props: MeProps) {
   return (
-    <div className="p-card h-fit w-full space-y-3 p-4 text-justify md:max-w-md">
-      <div className="flex w-full flex-col items-center justify-center gap-2 md:flex-row md:justify-start md:gap-4">
+    <div className="p-card h-fit w-full space-y-3 p-4 text-justify xl:max-w-md">
+      <div className="flex w-full flex-col items-center justify-center gap-2 xl:flex-row xl:justify-start xl:gap-4">
         <div className="relative h-32 w-32 cursor-default overflow-hidden rounded-full ring-4 ring-base-300">
           <Image
             loading="lazy"
@@ -26,7 +26,7 @@ export default function Me(props: MeProps) {
             alt={props.fullName}
           />
         </div>
-        <h1 className="w-fit text-xl md:w-0">{props.fullName}</h1>
+        <h1 className="w-fit text-xl xl:w-0">{props.fullName}</h1>
       </div>
       <div>
         <span className="font-bold">{props.hText}</span>

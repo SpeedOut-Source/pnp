@@ -7,12 +7,12 @@ import { env } from "../env.mjs";
 const SEO = dynamic(() => import("~/components/seo"));
 const RecentApps = dynamic(() => import("~/components/apps/recent_apps"));
 const RecentProjects = dynamic(
-  () => import("~/components/projects/recent_projects")
+  () => import("~/components/projects/recent_projects"),
 );
 const Hero = dynamic(() => import("~/components/hero/hero"));
 const RecentBlogs = dynamic(() => import("~/components/blogs/recent_blogs"));
 const ContactSection = dynamic(
-  () => import("~/components/contact/contact_section")
+  () => import("~/components/contact/contact_section"),
 );
 const Comments = dynamic(() => import("~/components/comments"));
 
@@ -38,7 +38,7 @@ const Home = (props: HomeProps) => {
         }
         title={title}
       />
-      <div className="container mx-auto space-y-2 md:mt-5">
+      <div className="mx-auto space-y-2 xl:container xl:mt-5">
         <Hero
           me={props.meSection}
           company={props.workFor}

@@ -115,7 +115,7 @@ export default function Testimonials(props: TestimonialsProps) {
   return (
     <div
       ref={ref}
-      className="relative mx-auto h-fit w-full px-3 sm:mx-0 lg:max-w-2xl lg:px-0"
+      className="relative mx-auto h-fit w-full px-3 sm:mx-0 xl:max-w-2xl xl:px-0"
     >
       <div className="flex items-center gap-2 text-2xl normal-case text-slate-400">
         <ChatBubbleLeftRightIcon className="h-5 w-5" />
@@ -140,7 +140,7 @@ export default function Testimonials(props: TestimonialsProps) {
                 ? "mb-16"
                 : ""
               : "max-h-[33rem] overflow-hidden md:max-h-80"
-          } mx-auto min-h-[12rem] w-full items-start justify-stretch gap-2 space-y-2 rounded-b-3xl py-4 transition-all  duration-500 ease-in-out sm:grid sm:grid-cols-2 sm:space-y-0 md:grid-cols-3`}
+          } mx-auto min-h-[12rem] w-full items-start justify-stretch gap-2 space-y-2 rounded-b-3xl py-4 transition-all  duration-500 ease-in-out sm:grid sm:grid-cols-2 sm:space-y-0 xl:grid-cols-3`}
         >
           <ul className="space-y-2">
             {threeListTestimonial.l1 ? (
