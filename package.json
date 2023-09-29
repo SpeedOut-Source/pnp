@@ -20,6 +20,7 @@
     "@algolia/autocomplete-theme-classic": "^1.9.2",
     "@giscus/react": "^2.2.8",
     "@headlessui/react": "^1.7.14",
+    "@radix-ui/react-dropdown-menu": "^2.0.6",
     "@radix-ui/react-slot": "^1.0.2",
     "@react-google-maps/api": "^2.18.1",
     "@react-pdf-viewer/core": "^3.12.0",
