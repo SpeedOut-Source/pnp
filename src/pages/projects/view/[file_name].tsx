@@ -317,178 +317,181 @@ export default function ProjectBlogView(props: ProjectBlogViewProps) {
         ogType="article"
         itemView={props.itemView}
       />
-      <div className="mx-auto px-2">
-        <div className="flex items-start justify-around gap-4">
-          <LRWrap>{metaData()}</LRWrap>
-          <div className="container my-2 max-w-3xl">
-            {props.type === "apps" && (
-              <div className="container mx-auto mb-4 max-w-3xl space-y-4 px-2">
-                <div className="flex w-full flex-col items-center justify-center">
-                  <Image
-                    src={props.itemView.imgUrl}
-                    alt={(props.itemView as App).title}
-                    width={100}
-                    height={100}
-                    blurDataURL={(props.itemView as App).imgBlurData}
-                    placeholder="blur"
-                  />
-                  <p className="text-center text-4xl font-semibold tracking-wider">
-                    {(props.itemView as App).title}
-                  </p>
-                </div>
+      <div className="px-2">
+        <div className="mx-auto">
+          <div className="flex items-start justify-around gap-4">
+            <LRWrap>{metaData()}</LRWrap>
+            <div className="my-2 w-full max-w-3xl">
+              {props.type === "apps" && (
+                <div className="container mx-auto mb-4 max-w-3xl space-y-4 px-2">
+                  <div className="flex w-full flex-col items-center justify-center">
+                    <Image
+                      src={props.itemView.imgUrl}
+                      alt={(props.itemView as App).title}
+                      width={100}
+                      height={100}
+                      blurDataURL={(props.itemView as App).imgBlurData}
+                      placeholder="blur"
+                    />
+                    <p className="text-center text-4xl font-semibold tracking-wider">
+                      {(props.itemView as App).title}
+                    </p>
+                  </div>
 
-                <div className="flex flex-wrap justify-center gap-3">
-                  {(props.itemView as App).platforms.map((x) => (
-                    <Link
-                      href={x.link}
-                      target="_blank"
-                      className="p-card flex h-fit w-fit cursor-pointer flex-col py-2"
-                      key={x.link}
-                    >
-                      {
-                        <div className="h-24 space-y-2 py-2">
-                          <p className="text-center">{x.name}</p>
-                          <div className="flex h-fit w-40 justify-center overflow-hidden">
-                            {getLogoListing(x.name, props.itemView.imgUrl)}
-                          </div>
-                        </div>
-                      }
-                    </Link>
-                  ))}
-                </div>
-                <div>
-                  <div className="carousel carousel-center rounded-box my-0 w-full space-x-4 bg-base-300/40 p-4">
-                    {(props.itemView as App).imgs.map((x, i) => (
-                      <div
-                        id={`image${i + 1}`}
-                        key={x}
-                        className="carousel-item relative h-72 w-[98%] xs:h-72 sm:h-80 md:h-[30rem]"
+                  <div className="flex flex-wrap justify-center gap-3">
+                    {(props.itemView as App).platforms.map((x) => (
+                      <Link
+                        href={x.link}
+                        target="_blank"
+                        className="p-card flex h-fit w-fit cursor-pointer flex-col py-2"
+                        key={x.link}
                       >
-                        <ImageLegacy
-                          alt={i.toString()}
-                          layout="fill"
-                          objectFit="scale-down"
-                          src={x}
-                          className="rounded-box"
-                        />
-                      </div>
+                        {
+                          <div className="h-24 space-y-2 py-2">
+                            <p className="text-center">{x.name}</p>
+                            <div className="flex h-fit w-40 justify-center overflow-hidden">
+                              {getLogoListing(x.name, props.itemView.imgUrl)}
+                            </div>
+                          </div>
+                        }
+                      </Link>
                     ))}
                   </div>
-                  {(props.itemView as App).imgs.length > 1 && (
-                    <div className="my-2 flex w-full justify-center gap-2">
+                  <div>
+                    <div className="carousel carousel-center rounded-box my-0 w-full space-x-4 bg-base-300/40 p-4">
                       {(props.itemView as App).imgs.map((x, i) => (
-                        <Link
-                          autoFocus={false}
-                          scroll={false}
-                          key={i}
-                          href={`#image${i + 1}`}
-                          className="btn btn-xs my-0 py-0"
+                        <div
+                          id={`image${i + 1}`}
+                          key={x}
+                          className="xs:h-72 carousel-item relative h-72 w-[98%] sm:h-80 md:h-[30rem]"
                         >
-                          {i + 1}
-                        </Link>
+                          <ImageLegacy
+                            alt={i.toString()}
+                            layout="fill"
+                            objectFit="scale-down"
+                            src={x}
+                            className="rounded-box"
+                          />
+                        </div>
                       ))}
                     </div>
-                  )}
+                    {(props.itemView as App).imgs.length > 1 && (
+                      <div className="my-2 flex w-full justify-center gap-2">
+                        {(props.itemView as App).imgs.map((x, i) => (
+                          <Link
+                            autoFocus={false}
+                            scroll={false}
+                            key={i}
+                            href={`#image${i + 1}`}
+                            className="btn btn-xs my-0 py-0"
+                          >
+                            {i + 1}
+                          </Link>
+                        ))}
+                      </div>
+                    )}
+                  </div>
                 </div>
-              </div>
-            )}
-            {props.type === "company" && (
-              <div className="container mx-auto mb-4 max-w-3xl space-y-4 px-2">
-                <div className="flex w-full flex-col items-center justify-center">
-                  <Image
-                    src={props.itemView.imgUrl}
-                    alt={(props.itemView as Company).title}
-                    width={100}
-                    height={100}
-                    blurDataURL={(props.itemView as Company).imgBlurData}
-                    placeholder="blur"
-                  />
-                  <p className="text-center text-4xl font-semibold tracking-wider">
-                    {(props.itemView as Company).title}
-                  </p>
+              )}
+              {props.type === "company" && (
+                <div className="mx-auto mb-4 max-w-3xl space-y-4 px-2">
+                  <div className="flex w-full flex-col items-center justify-center">
+                    <Image
+                      src={props.itemView.imgUrl}
+                      alt={(props.itemView as Company).title}
+                      width={100}
+                      height={100}
+                      blurDataURL={(props.itemView as Company).imgBlurData}
+                      placeholder="blur"
+                    />
+                    <p className="text-center text-4xl font-semibold tracking-wider">
+                      {(props.itemView as Company).title}
+                    </p>
 
-                  <Link
-                    href={(props.itemView as Company).homePage}
-                    target="_blank"
-                    className="p-card mt-3 cursor-pointer"
-                  >
-                    Goto website
-                  </Link>
+                    <Link
+                      href={(props.itemView as Company).homePage}
+                      target="_blank"
+                      className="p-card mt-3 cursor-pointer"
+                    >
+                      Goto website
+                    </Link>
+                  </div>
                 </div>
+              )}
+              <MDRender
+                key={props.itemView.date}
+                data={props.data}
+                imgBlurdata={props.imgBlurdata}
+              />
+            </div>
+            <LRWrap>
+              <TableOfContents nodes={props.toc} />
+            </LRWrap>
+          </div>
+        </div>
+        <div className="flex w-full xl:hidden">{metaData()}</div>
+        <div className="mx-auto mt-2 max-w-3xl rounded-2xl border-2 border-base-content/5 bg-base-100/80">
+          {(props.previous || props.next) && (
+            <div className="container m-2 mx-auto max-w-3xl px-2">
+              <div className="flex w-full items-center justify-center gap-4">
+                {props.previous && (
+                  <div className="h-fit w-full">
+                    <div className=" mb-2 flex items-center text-2xl normal-case text-slate-400">
+                      <Link
+                        href={`/${props.type}/view/${props.previous.fileName}`}
+                        className="link-hover link flex items-center "
+                      >
+                        <ChevronLeftIcon className="h-6 w-6" />
+                        Previous{" "}
+                      </Link>
+                    </div>
+                    {props.type !== "apps" && props.type !== "company" && (
+                      <LayoutCard data={props.previous} />
+                    )}
+                  </div>
+                )}
+                {props.next && (
+                  <div className="h-fit w-full">
+                    <div className="mb-2 flex items-center justify-end text-2xl normal-case text-slate-400">
+                      <Link
+                        href={`/${props.type}/view/${props.next.fileName}`}
+                        className="link-hover link flex items-center"
+                      >
+                        Next <ChevronRightIcon className="h-6 w-6" />
+                      </Link>
+                    </div>
+                    {props.type !== "apps" && props.type !== "company" && (
+                      <LayoutCard data={props.next} />
+                    )}
+                  </div>
+                )}
+              </div>
+            </div>
+          )}
+          {(props.type === "apps" || props.type === "company") &&
+            props.more4 && (
+              <div
+                key={`${props.itemView.fileName}`}
+                className="xs:grid-cols-2 container m-2 mx-auto grid max-w-3xl gap-2 px-2 sm:grid-cols-3 lg:grid-cols-4"
+              >
+                {props.more4.map((x) => {
+                  if (props.type === "apps") {
+                    const m = x as App;
+                    return <LayoutCardApp {...m} key={x.date} />;
+                  } else {
+                    const m = x as Company;
+                    return <LayoutCardCompany {...m} key={x.date} />;
+                  }
+                })}
               </div>
             )}
-            <MDRender
-              key={props.itemView.date}
-              data={props.data}
-              imgBlurdata={props.imgBlurdata}
-            />
-          </div>
-          <LRWrap>
-            <TableOfContents nodes={props.toc} />
-          </LRWrap>
         </div>
-      </div>
-      <div className="flex w-full xl:hidden">{metaData()}</div>
-      <div className="container mx-auto mt-2 max-w-3xl rounded-2xl border-2 border-base-content/5 bg-base-100/80">
-        {(props.previous || props.next) && (
-          <div className="container m-2 mx-auto max-w-3xl px-2">
-            <div className="flex w-full items-center justify-center gap-4">
-              {props.previous && (
-                <div className="h-fit w-full">
-                  <div className=" mb-2 flex items-center text-2xl normal-case text-slate-400">
-                    <Link
-                      href={`/${props.type}/view/${props.previous.fileName}`}
-                      className="link-hover link flex items-center "
-                    >
-                      <ChevronLeftIcon className="h-6 w-6" />
-                      Previous{" "}
-                    </Link>
-                  </div>
-                  {props.type !== "apps" && props.type !== "company" && (
-                    <LayoutCard data={props.previous} />
-                  )}
-                </div>
-              )}
-              {props.next && (
-                <div className="h-fit w-full">
-                  <div className="mb-2 flex items-center justify-end text-2xl normal-case text-slate-400">
-                    <Link
-                      href={`/${props.type}/view/${props.next.fileName}`}
-                      className="link-hover link flex items-center"
-                    >
-                      Next <ChevronRightIcon className="h-6 w-6" />
-                    </Link>
-                  </div>
-                  {props.type !== "apps" && props.type !== "company" && (
-                    <LayoutCard data={props.next} />
-                  )}
-                </div>
-              )}
-            </div>
-          </div>
-        )}
-        {(props.type === "apps" || props.type === "company") && props.more4 && (
-          <div
-            key={`${props.itemView.fileName}`}
-            className="container m-2 mx-auto grid max-w-3xl gap-2 px-2 xs:grid-cols-2 sm:grid-cols-3 lg:grid-cols-4"
-          >
-            {props.more4.map((x) => {
-              if (props.type === "apps") {
-                const m = x as App;
-                return <LayoutCardApp {...m} key={x.date} />;
-              } else {
-                const m = x as Company;
-                return <LayoutCardCompany {...m} key={x.date} />;
-              }
-            })}
-          </div>
-        )}
-      </div>
-      <div className="container mx-auto max-w-3xl px-2">
-        <Comments
-          key={githubEditUrl}
-          theme={isLight ? "light" : "dark_dimmed"}
-        />
+        <div className="mx-auto max-w-3xl mt-2">
+          <Comments
+            key={githubEditUrl}
+            theme={isLight ? "light" : "dark_dimmed"}
+          />
+        </div>
       </div>
     </>
   );
