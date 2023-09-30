@@ -1,5 +1,6 @@
 import { Html, Head, Main, NextScript } from "next/document";
 import { env } from "../env.mjs";
+import GradientEffectTop from "~/components/gradient_effect/top";
 
 export default function Document() {
   let bmcRandomMessage: string | undefined = "";
@@ -30,7 +31,8 @@ export default function Document() {
           ></script>
         )}
       </Head>
-      <body className="scrollbar-style">
+      <body className="scrollbar-style relative isolate">
+        <GradientEffectTop />
         <Main />
         <NextScript />
       </body>
