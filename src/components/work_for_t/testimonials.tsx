@@ -206,7 +206,7 @@ export default function Testimonials(props: TestimonialsProps) {
               expanded ? (!showCollapseButton ? "translate-y-4" : "") : ""
             } ${
               !expanded || showCollapseButton ? "pointer-events-auto" : ""
-            } p-card ring ring-base-content/10`}
+            } p-card ring ring-base-content/10 transform-gpu`}
           >
             {expanded ? "Okay, I get the point" : "Show more..."}
           </button>

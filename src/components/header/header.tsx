@@ -54,22 +54,22 @@ export default function Header() {
       className={clsx(
         loaded ? "transition-all duration-500 ease-in-out" : "",
         bgChange && scrollDirection === "down"
-          ? "-translate-y-12"
-          : "bg-base-100/95 lg:bg-transparent lg:backdrop-blur-sm" +
+          ? "-translate-y-12 "
+          : "" +
               (bgChange
                 ? " shadow-2xl lg:mx-1 lg:rounded-xl lg:ring-1 lg:ring-base-300/40"
                 : ""),
         bgChange
           ? "bg-gradient-to-r from-base-300/30 from-30% to-base-content/50 to-100%"
           : "",
-        "min-h-6 sticky top-0 z-50 bg-no-repeat lg:top-1 lg:mb-2",
+        "min-h-6 sticky top-0 z-50 transform-gpu bg-base-100/95 bg-no-repeat lg:top-1 lg:mb-2 lg:bg-transparent lg:backdrop-blur-xl",
       )}
     >
       <div
         className={clsx(
           bgChange && scrollDirection === "down" ? "-translate-y-14" : "",
           loaded ? "transition-all delay-100 duration-500 ease-in-out" : "",
-          "mx-auto flex h-14 items-center justify-between px-4 py-2 xl:container",
+          "mx-auto flex h-14 transform-gpu items-center justify-between px-4 py-2 xl:container",
         )}
       >
         <div className="flex items-center gap-2">
