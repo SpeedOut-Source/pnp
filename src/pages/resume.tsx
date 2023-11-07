@@ -1,7 +1,8 @@
 import { ArrowDownTrayIcon } from "@heroicons/react/24/solid";
+import { env } from "../env.mjs";
+import { event } from "nextjs-google-analytics";
 import dynamic from "next/dynamic";
 import Link from "next/link";
-import { env } from "../env.mjs";
 import urlJoin from "url-join";
 import Spotlight from "~/components/spotlight";
 const SEO = dynamic(() => import("~/components/seo"));
@@ -24,6 +25,12 @@ export default function Resume() {
       <Spotlight />
       <div className="my-5 flex justify-center">
         <Link
+          onClick={() =>
+            event("resume", {
+              category: "resume",
+              label: "Resume download",
+            })
+          }
           href={resumePdfUrl}
           download={true}
           className="p-card cursor-pointer gap-2"

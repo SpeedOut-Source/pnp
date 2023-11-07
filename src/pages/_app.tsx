@@ -1,10 +1,11 @@
 import { type AppType } from "next/dist/shared/lib/utils";
-import dynamic from "next/dynamic";
 import { Titillium_Web } from "next/font/google";
 import { DEFAULT_IS_LIGHT, useThemeStore } from "~/app_state/theme_mode";
 import { useEffect, useState } from "react";
-import aa from "search-insights";
+import { GoogleAnalytics } from "nextjs-google-analytics";
 import { env } from "../env.mjs";
+import aa from "search-insights";
+import dynamic from "next/dynamic";
 import "~/styles/globals.css";
 
 const NextNProgress = dynamic(() => import("nextjs-progressbar"));
@@ -46,6 +47,7 @@ const MyApp: AppType = ({ Component, pageProps }) => {
         </div>
       </ThemeProvider>
       <ImportPopup />
+      <GoogleAnalytics trackPageViews={{ ignoreHashChange: true }} />
     </>
   );
 };
