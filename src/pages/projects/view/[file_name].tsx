@@ -31,6 +31,7 @@ import urlJoin from "url-join";
 import type { TransformNodeOutput } from "~/app_function/remark/headings";
 import TableOfContents from "~/components/table_of_contents/toc";
 import LRWrap from "~/components/artical/lr_wrap";
+import Spotlight from "~/components/spotlight";
 
 const SEO = dynamic(() => import("~/components/seo"));
 
@@ -137,7 +138,6 @@ export default function ProjectBlogView(props: ProjectBlogViewProps) {
             width={50}
           />
         );
-
       default:
         return (
           <Image
@@ -317,6 +317,7 @@ export default function ProjectBlogView(props: ProjectBlogViewProps) {
         ogType="article"
         itemView={props.itemView}
       />
+      {props.type === "apps" && <Spotlight />}
       <div className="px-2">
         <div className="mx-auto">
           <div className="flex items-start justify-around gap-4">
@@ -358,7 +359,7 @@ export default function ProjectBlogView(props: ProjectBlogViewProps) {
                     ))}
                   </div>
                   <div>
-                    <div className="carousel carousel-center rounded-box my-0 w-full space-x-4 bg-base-300/40 p-4">
+                    <div className="carousel-center carousel rounded-box my-0 w-full space-x-4 bg-base-300/40 p-4">
                       {(props.itemView as App).imgs.map((x, i) => (
                         <div
                           id={`image${i + 1}`}
@@ -486,7 +487,7 @@ export default function ProjectBlogView(props: ProjectBlogViewProps) {
               </div>
             )}
         </div>
-        <div className="mx-auto max-w-3xl mt-2">
+        <div className="mx-auto mt-2 max-w-3xl">
           <Comments
             key={githubEditUrl}
             theme={isLight ? "light" : "dark_dimmed"}
