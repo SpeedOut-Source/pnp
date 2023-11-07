@@ -6,7 +6,6 @@
 
 import dynamic from "next/dynamic";
 import { type ReactMarkdownOptions } from "react-markdown/lib/react-markdown";
-import AbsoluteLoading from "./absolute_loading";
 import rehypeRaw from "rehype-raw";
 import remarkGfm from "remark-gfm";
 import { headingTree } from "../../app_function/remark/headings";
@@ -25,6 +24,7 @@ import lua from "react-syntax-highlighter/dist/cjs/languages/prism/lua";
 import CopyToClipboardButton from "../copy_to_clipboard_button";
 import Image from "next/image";
 import { type ImgBlurData } from "~/app_function/utils/interfaces";
+import Skeleton from "../skeleton";
 
 SyntaxHighlighter.registerLanguage("tsx", tsx);
 SyntaxHighlighter.registerLanguage("typescript", typescript);
@@ -39,8 +39,8 @@ const ReactMarkdown = dynamic<ReactMarkdownOptions>(
     // eslint-disable-next-line @typescript-eslint/no-unsafe-return,@typescript-eslint/no-unsafe-member-access
     import("react-markdown").then((e: any) => e.default),
   {
-    loading: () => <AbsoluteLoading />,
-  }
+    loading: () => <Skeleton count={3} />,
+  },
 );
 
 interface MDRender {
@@ -119,7 +119,7 @@ export default function MDRender({ data, imgBlurdata }: MDRender) {
             // eslint-disable-next-line @typescript-eslint/no-unsafe-call,@typescript-eslint/no-unsafe-member-access
             const language = (pre as any).children[0]?.props.className.replace(
               /language-/g,
-              ""
+              "",
             ) as string;
 
             return (
