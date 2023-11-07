@@ -317,7 +317,7 @@ export default function ProjectBlogView(props: ProjectBlogViewProps) {
         ogType="article"
         itemView={props.itemView}
       />
-      {props.type === "apps" && <Spotlight />}
+      {(props.type === "apps" || props.type === "company") && <Spotlight />}
       <div className="px-2">
         <div className="mx-auto">
           <div className="flex items-start justify-around gap-4">
@@ -359,7 +359,7 @@ export default function ProjectBlogView(props: ProjectBlogViewProps) {
                     ))}
                   </div>
                   <div>
-                    <div className="carousel-center carousel rounded-box my-0 w-full space-x-4 bg-base-300/40 p-4">
+                    <div className="carousel carousel-center rounded-box my-0 w-full space-x-4 bg-base-300/40 p-4">
                       {(props.itemView as App).imgs.map((x, i) => (
                         <div
                           id={`image${i + 1}`}

@@ -5,10 +5,11 @@ import { useState, useEffect } from "react";
 import { useThemeStore, DEFAULT_IS_LIGHT } from "~/app_state/theme_mode";
 import { env } from "../env.mjs";
 import { getPrefixRepo } from "~/app_function/utils/utils";
+import Spotlight from "~/components/spotlight";
 const SEO = dynamic(() => import("~/components/seo"));
 
 const SAPage = dynamic(
-  () => import("../components/sapage/src/components/SAPage")
+  () => import("../components/sapage/src/components/SAPage"),
 );
 
 export default function About() {
@@ -20,11 +21,12 @@ export default function About() {
   }, [utm]);
 
   return (
-    <div>
+    <>
       <SEO
         description={`About | ${env.NEXT_PUBLIC_PERSON_NAME}`}
         title={`About | ${env.NEXT_PUBLIC_PERSON_NAME}`}
       />
+      <Spotlight />
       <div className="container mx-auto">
         <SAPage
           app={{
@@ -59,6 +61,6 @@ export default function About() {
           changeLogs={changeLogJson}
         />
       </div>
-    </div>
+    </>
   );
 }

@@ -3,6 +3,7 @@ import dynamic from "next/dynamic";
 import Link from "next/link";
 import { env } from "../env.mjs";
 import urlJoin from "url-join";
+import Spotlight from "~/components/spotlight";
 const SEO = dynamic(() => import("~/components/seo"));
 
 const PdfReader = dynamic(() => import("~/components/pdf_reader"));
@@ -20,6 +21,7 @@ export default function Resume() {
         description={`Resume | ${env.NEXT_PUBLIC_PERSON_NAME}`}
         title={`Resume | ${env.NEXT_PUBLIC_PERSON_NAME}`}
       />
+      <Spotlight />
       <div>
         <div className="mb-5 flex justify-center">
           <Link
