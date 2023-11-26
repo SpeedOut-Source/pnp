@@ -27,7 +27,7 @@ export default function Spotlight() {
   }, []);
 
   return (
-    <div className="absolute -z-10 flex w-full items-center justify-center">
+    <div className="absolute -z-10 flex w-full overflow-hidden items-center justify-center">
       <Image
         width={631}
         height={550}
@@ -39,7 +39,7 @@ export default function Spotlight() {
         }}
       />
       <Image
-        width={643}
+        width={631}
         height={535}
         className="absolute top-0 -z-10"
         src="/images/spotlight-right.png"
