@@ -8,8 +8,7 @@ import defaultTheme from "tailwindcss/defaultTheme";
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   darkMode: ["class"],
-  content: ["./src/**/*.{js,ts,jsx,tsx}"],
-
+  content: ["./src/**/*.{js,ts,jsx,tsx}", `${process.env.DATA_PATH}/**/*.md`],
   theme: {
     container: {
       center: true,
