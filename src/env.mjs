@@ -9,7 +9,7 @@ export const env = createEnv({
   server: {
     NODE_ENV: z.enum(["development", "test", "production"]),
     ALGOLIA_SEARCH_ADMIN_KEY: z.string(),
-    DATA_PATH: z.string().default("../pnp-data/"),
+    DATA_PATH: z.string().default("../pnp-data/"), // Look also in tailwind.config.ts
   },
 
   /**
