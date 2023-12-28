@@ -33,12 +33,13 @@
     "unoptimized",
     "zustand"
   ],
-  "spellright.language": ["en"],
+  "spellright.language": [
+    "en"
+  ],
   "spellright.documentTypes": [
     "markdown",
     "latex",
-    "plaintext",
-    "typescriptreact"
+    "plaintext"
   ],
   "typescript.tsdk": "node_modules\\typescript\\lib",
   "json.schemaDownload.enable": false

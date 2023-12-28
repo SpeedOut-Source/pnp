@@ -11,7 +11,7 @@ import type {
   Project,
   Blog,
   CardItem,
-  Card,
+  Card as CardType,
   App,
   Company,
   ImgBlurData,
@@ -32,6 +32,15 @@ import type { TransformNodeOutput } from "~/app_function/remark/headings";
 import TableOfContents from "~/components/table_of_contents/toc";
 import LRWrap from "~/components/artical/lr_wrap";
 import Spotlight from "~/components/spotlight";
+import {
+  Carousel,
+  type CarouselApi,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "~/components/ui/carousel";
+import Autoplay from "embla-carousel-autoplay";
 
 const SEO = dynamic(() => import("~/components/seo"));
 
@@ -67,13 +76,17 @@ export interface ProjectBlogViewProps {
   previous: CardItem | null;
   next: CardItem | null;
   more4: CardItem[] | null;
-  type: Card;
+  type: CardType;
   toc: TransformNodeOutput[];
 }
 
 export default function ProjectBlogView(props: ProjectBlogViewProps) {
   const utm = useThemeStore();
   const [isLight, setIsLight] = useState(DEFAULT_IS_LIGHT);
+
+  const [api, setApi] = useState<CarouselApi>();
+  const [current, setCurrent] = useState(0);
+  const [count, setCount] = useState(0);
 
   let title: string;
   let desc: string;
@@ -83,6 +96,19 @@ export default function ProjectBlogView(props: ProjectBlogViewProps) {
   useEffect(() => {
     setIsLight(utm.themeName === "winter");
   }, [utm]);
+
+  useEffect(() => {
+    if (!api) {
+      return;
+    }
+
+    setCount(api.scrollSnapList().length);
+    setCurrent(api.selectedScrollSnap() + 1);
+
+    api.on("select", () => {
+      setCurrent(api.selectedScrollSnap() + 1);
+    });
+  }, [api]);
 
   function getLogoListing(name: string, appLogo?: string) {
     switch (name.toLowerCase()) {
@@ -287,7 +313,7 @@ export default function ProjectBlogView(props: ProjectBlogViewProps) {
             Type:
             <div className="flex items-center gap-1">
               <Link
-                className="title link-hover link-primary link capitalize"
+                className="title link-hover link link-primary capitalize"
                 href={"/" + props.type}
               >
                 {props.type}
@@ -359,38 +385,43 @@ export default function ProjectBlogView(props: ProjectBlogViewProps) {
                     ))}
                   </div>
                   <div>
-                    <div className="carousel carousel-center rounded-box my-0 w-full space-x-4 bg-base-300/40 p-4">
-                      {(props.itemView as App).imgs.map((x, i) => (
-                        <div
-                          id={`image${i + 1}`}
-                          key={x}
-                          className="xs:h-72 carousel-item relative h-72 w-[98%] sm:h-80 md:h-[30rem]"
-                        >
-                          <ImageLegacy
-                            alt={i.toString()}
-                            layout="fill"
-                            objectFit="scale-down"
-                            src={x}
-                            className="rounded-box"
-                          />
-                        </div>
-                      ))}
-                    </div>
-                    {(props.itemView as App).imgs.length > 1 && (
-                      <div className="my-2 flex w-full justify-center gap-2">
+                    <Carousel
+                      setApi={setApi}
+                      plugins={[
+                        Autoplay({
+                          delay: 2000,
+                        }),
+                      ]}
+                      className="relative rounded-box bg-base-300/40 p-4"
+                    >
+                      <CarouselContent>
                         {(props.itemView as App).imgs.map((x, i) => (
-                          <Link
-                            autoFocus={false}
-                            scroll={false}
-                            key={i}
-                            href={`#image${i + 1}`}
-                            className="btn btn-xs my-0 py-0"
+                          <CarouselItem
+                            key={x}
+                            className="xs:h-72 relative m-1 h-72 w-[98%] sm:h-80 md:h-[30rem]"
                           >
-                            {i + 1}
-                          </Link>
+                            <ImageLegacy
+                              alt={i.toString()}
+                              layout="fill"
+                              objectFit="scale-down"
+                              src={x}
+                              className="rounded-box"
+                            />
+                          </CarouselItem>
                         ))}
-                      </div>
-                    )}
+                      </CarouselContent>
+                      <CarouselPrevious
+                        variant="ghost"
+                        className="translate-x-16 bg-base-300/60 disabled:invisible hover:bg-base-300 hover:text-base-content"
+                      />
+                      <CarouselNext
+                        variant="ghost"
+                        className="-translate-x-16 bg-base-300/60 disabled:invisible hover:bg-base-300 hover:text-base-content"
+                      />
+                    </Carousel>
+                    <div className="text-muted-foreground py-2 text-center text-sm">
+                      {current} of {count}
+                    </div>
                   </div>
                 </div>
               )}
