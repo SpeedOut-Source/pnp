@@ -32,21 +32,12 @@ import type { TransformNodeOutput } from "~/app_function/remark/headings";
 import TableOfContents from "~/components/table_of_contents/toc";
 import LRWrap from "~/components/artical/lr_wrap";
 import Spotlight from "~/components/spotlight";
-import {
-  Carousel,
-  type CarouselApi,
-  CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
-} from "~/components/ui/carousel";
-import Autoplay from "embla-carousel-autoplay";
+import CarouselSlider from "~/components/carousel_slider";
 
 const SEO = dynamic(() => import("~/components/seo"));
 
 const Link = dynamic(() => import("next/link"));
 const Image = dynamic(() => import("next/image"));
-const ImageLegacy = dynamic(() => import("next/legacy/image"));
 const ShareWith = dynamic(() => import("~/components/share_with"));
 const DateTimePost = dynamic(() => import("~/components/date_time_post"), {
   ssr: false,
@@ -84,10 +75,6 @@ export default function ProjectBlogView(props: ProjectBlogViewProps) {
   const utm = useThemeStore();
   const [isLight, setIsLight] = useState(DEFAULT_IS_LIGHT);
 
-  const [api, setApi] = useState<CarouselApi>();
-  const [current, setCurrent] = useState(0);
-  const [count, setCount] = useState(0);
-
   let title: string;
   let desc: string;
   let shareTxt: string;
@@ -96,19 +83,6 @@ export default function ProjectBlogView(props: ProjectBlogViewProps) {
   useEffect(() => {
     setIsLight(utm.themeName === "winter");
   }, [utm]);
-
-  useEffect(() => {
-    if (!api) {
-      return;
-    }
-
-    setCount(api.scrollSnapList().length);
-    setCurrent(api.selectedScrollSnap() + 1);
-
-    api.on("select", () => {
-      setCurrent(api.selectedScrollSnap() + 1);
-    });
-  }, [api]);
 
   function getLogoListing(name: string, appLogo?: string) {
     switch (name.toLowerCase()) {
@@ -384,45 +358,7 @@ export default function ProjectBlogView(props: ProjectBlogViewProps) {
                       </Link>
                     ))}
                   </div>
-                  <div>
-                    <Carousel
-                      setApi={setApi}
-                      plugins={[
-                        Autoplay({
-                          delay: 2000,
-                        }),
-                      ]}
-                      className="relative rounded-box bg-base-300/40 p-4"
-                    >
-                      <CarouselContent>
-                        {(props.itemView as App).imgs.map((x, i) => (
-                          <CarouselItem
-                            key={x}
-                            className="xs:h-72 relative m-1 h-72 w-[98%] sm:h-80 md:h-[30rem]"
-                          >
-                            <ImageLegacy
-                              alt={i.toString()}
-                              layout="fill"
-                              objectFit="scale-down"
-                              src={x}
-                              className="rounded-box"
-                            />
-                          </CarouselItem>
-                        ))}
-                      </CarouselContent>
-                      <CarouselPrevious
-                        variant="ghost"
-                        className="translate-x-16 bg-base-300/60 disabled:invisible hover:bg-base-300 hover:text-base-content"
-                      />
-                      <CarouselNext
-                        variant="ghost"
-                        className="-translate-x-16 bg-base-300/60 disabled:invisible hover:bg-base-300 hover:text-base-content"
-                      />
-                    </Carousel>
-                    <div className="text-muted-foreground py-2 text-center text-sm">
-                      {current} of {count}
-                    </div>
-                  </div>
+                  <CarouselSlider key={githubEditUrl} images={(props.itemView as App).imgs} />
                 </div>
               )}
               {props.type === "company" && (
