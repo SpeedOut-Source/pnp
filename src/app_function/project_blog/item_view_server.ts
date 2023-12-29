@@ -8,7 +8,7 @@ import matter from "gray-matter";
 import { type GetStaticPropsContext, type PreviewData } from "next";
 import { type ParsedUrlQuery } from "querystring";
 import { type ProjectBlogViewProps } from "~/pages/projects/view/[file_name]";
-import { type Card, type CardData } from "../utils/interfaces";
+import { type App, type Card, type CardData } from "../utils/interfaces";
 import { RingBuffer } from "../utils/ring_buffer";
 import { remark } from "remark";
 import { type TransformNodeOutput, headingTree } from "../remark/headings";
@@ -58,7 +58,7 @@ export async function getStaticPropsItemView({
     const allData = await getCard(type);
 
     const currentProjectIndex = allData.findIndex(
-      (p) => p.fileName === context.params?.file_name
+      (p) => p.fileName === context.params?.file_name,
     );
     const previous = allData[currentProjectIndex - 1] ?? null;
     const next = allData[currentProjectIndex + 1] ?? null;
@@ -73,15 +73,21 @@ export async function getStaticPropsItemView({
     if (type === "apps" || type === "company") {
       const ringBuffer = RingBuffer.fromArray(
         allData as unknown[],
-        allData.length
+        allData.length,
       );
       ringBuffer.setPos(currentProjectIndex - 1);
       more4 = ringBuffer.toArray().slice(0, 5);
       more4.splice(1, 1);
     }
     const imgBlurdata = await addBlurList(
-      extractImageUrlsFromMarkdown(content)
+      extractImageUrlsFromMarkdown(content),
     );
+
+    if (type === "apps") {
+      const images = (itemView as App).imgs;
+      const imgBlurdata = await addBlurList(images);
+      (itemView as App).imgsBlurData = imgBlurdata;
+    }
 
     const processedContentTOC = await remark()
       .use(headingTree)

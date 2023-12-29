@@ -9,15 +9,18 @@ import {
 import { useState, useEffect } from "react";
 import clsx from "clsx";
 import Autoplay from "embla-carousel-autoplay";
-import dynamic from "next/dynamic";
+import { type ImgBlurData } from "~/app_function/utils/interfaces";
+import Image from "next/image";
 
 interface CarouselSliderProp {
   images: string[];
+  imgsBlurData: ImgBlurData;
 }
 
-export default function CarouselSlider({ images }: CarouselSliderProp) {
-  const ImageLegacy = dynamic(() => import("next/legacy/image"));
-
+export default function CarouselSlider({
+  images,
+  imgsBlurData,
+}: CarouselSliderProp) {
   const [api, setApi] = useState<CarouselApi>();
   const [current, setCurrent] = useState(0);
   const [count, setCount] = useState(0);
@@ -50,20 +53,32 @@ export default function CarouselSlider({ images }: CarouselSliderProp) {
         className="relative rounded-box bg-base-300/40 p-4"
       >
         <CarouselContent>
-          {images.map((x, i) => (
-            <CarouselItem
-              key={x}
-              className="xs:h-72 relative m-1 h-72 w-[98%] sm:h-80 md:h-[30rem]"
-            >
-              <ImageLegacy
-                alt={i.toString()}
-                layout="fill"
-                objectFit="scale-down"
-                src={x}
-                className="rounded-box"
-              />
-            </CarouselItem>
-          ))}
+          {images.map((x, i) => {
+            const imgBlurData = imgsBlurData[x];
+
+            return (
+              <CarouselItem
+                key={x}
+                className={clsx(
+                  imgBlurData
+                    ? "flex items-center justify-center"
+                    : "xs:h-72 relative m-1 h-72 w-[98%] sm:h-80 md:h-[30rem]",
+                )}
+              >
+                <Image
+                  alt={i.toString()}
+                  layout={imgBlurData ? undefined : "fill"}
+                  objectFit="scale-down"
+                  src={x}
+                  className="rounded-box"
+                  placeholder={imgBlurData ? "blur" : "empty"}
+                  blurDataURL={imgBlurData ? imgBlurData.base64 : ""}
+                  height={imgBlurData ? imgBlurData.height : undefined}
+                  width={imgBlurData ? imgBlurData.width : undefined}
+                />
+              </CarouselItem>
+            );
+          })}
         </CarouselContent>
         <CarouselPrevious
           variant="ghost"

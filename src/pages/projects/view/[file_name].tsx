@@ -358,7 +358,11 @@ export default function ProjectBlogView(props: ProjectBlogViewProps) {
                       </Link>
                     ))}
                   </div>
-                  <CarouselSlider key={githubEditUrl} images={(props.itemView as App).imgs} />
+                  <CarouselSlider
+                    key={githubEditUrl}
+                    images={(props.itemView as App).imgs}
+                    imgsBlurData={(props.itemView as App).imgsBlurData}
+                  />
                 </div>
               )}
               {props.type === "company" && (

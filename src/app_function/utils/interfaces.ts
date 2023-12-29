@@ -51,6 +51,7 @@ export type App = {
   platforms: Listing[];
   fileName: string;
   imgs: string[];
+  imgsBlurData: ImgBlurData;
 };
 
 export type Card = "blogs" | "projects" | "apps" | "company";
