@@ -23,11 +23,11 @@ export default function ProjectBlogLayout(props: ProjectBlogLayout) {
     return (
       <div
         className="mx-auto grid w-fit justify-center gap-4 xs:grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6">
-        {props.data.map((x) =>
+        {props.data.map((x, i) =>
           props.type === "apps" ? (
-            <LayoutCardApp {...(x as App)} key={x.date} />
+            <LayoutCardApp {...(x as App)} key={i+x.fileName+x.date} />
           ) : (
-            <LayoutCardCompany {...(x as Company)} key={x.date} />
+            <LayoutCardCompany {...(x as Company)} key={i+x.fileName+x.date} />
           )
         )}
       </div>
@@ -36,8 +36,8 @@ export default function ProjectBlogLayout(props: ProjectBlogLayout) {
 
   return (
     <div className="mx-auto grid w-fit justify-center gap-4 xs:grid-cols-2 sm:grid-cols-2 md:grid-cols-3">
-      {props.data.map((x) => (
-        <LayoutCard data={x} key={x.date} />
+      {props.data.map((x, i) => (
+        <LayoutCard data={x} key={i+x.fileName+x.date} />
       ))}
     </div>
   );

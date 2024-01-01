@@ -33,7 +33,7 @@ export default function PdfReader({ resumeUrl }: { resumeUrl: string }) {
 
   return (
     <div className="relative">
-      <Worker workerUrl="https://unpkg.com/pdfjs-dist@3.7.107/build/pdf.worker.min.js">
+      <Worker workerUrl="https://unpkg.com/pdfjs-dist@3.11.174/build/pdf.worker.min.js">
         {isLoading && <AbsoluteLoading />}
         <div className={`container mx-auto h-full max-w-3xl text-gray-900`}>
           <div
