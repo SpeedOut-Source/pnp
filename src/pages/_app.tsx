@@ -30,6 +30,11 @@ const MyApp: AppType = ({ Component, pageProps }) => {
     setIsLight(utm.themeName === "winter");
   }, [utm]);
 
+  const CrispWithNoSSR = dynamic(
+    () => import('../components/crisp_chat'),
+    { ssr: false }
+  )
+
   return (
     <>
       <ThemeProvider>
@@ -48,6 +53,7 @@ const MyApp: AppType = ({ Component, pageProps }) => {
       </ThemeProvider>
       <ImportPopup />
       <GoogleAnalytics trackPageViews={{ ignoreHashChange: true }} />
+      <CrispWithNoSSR />
     </>
   );
 };

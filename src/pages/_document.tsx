@@ -1,21 +1,20 @@
 import { Html, Head, Main, NextScript } from "next/document";
-import { env } from "../env.mjs";
 import GradientEffectTop from "~/components/gradient_effect/top";
 
 export default function Document() {
-  let bmcRandomMessage: string | undefined = "";
-  if (env.NEXT_PUBLIC_BUYMEACOFFEE_MESSAGE) {
-    const len = env.NEXT_PUBLIC_BUYMEACOFFEE_MESSAGE.length;
-    bmcRandomMessage =
-      env.NEXT_PUBLIC_BUYMEACOFFEE_MESSAGE[Math.floor(Math.random() * len)];
-  }
+  // let bmcRandomMessage: string | undefined = "";
+  // if (env.NEXT_PUBLIC_BUYMEACOFFEE_MESSAGE) {
+  //   const len = env.NEXT_PUBLIC_BUYMEACOFFEE_MESSAGE.length;
+  //   bmcRandomMessage =
+  //     env.NEXT_PUBLIC_BUYMEACOFFEE_MESSAGE[Math.floor(Math.random() * len)];
+  // }
 
   return (
     <Html lang="en" data-theme="dark">
       <Head>
         {/* DO NOT CHANGE BELOW COMMENT */}
         {/* ADD-META-TAGS */}
-        {env.NEXT_PUBLIC_BUYMEACOFFEE_USERNAME && (
+        {/* {env.NEXT_PUBLIC_BUYMEACOFFEE_USERNAME && (
           <script
             async
             data-name="BMC-Widget"
@@ -29,7 +28,7 @@ export default function Document() {
             data-x_margin="18"
             data-y_margin="18"
           ></script>
-        )}
+        )} */}
       </Head>
       <body className="scrollbar-style relative isolate">
         <GradientEffectTop />
