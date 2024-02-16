@@ -30,7 +30,7 @@ import { env } from "../../../env.mjs";
 import urlJoin from "url-join";
 import type { TransformNodeOutput } from "~/app_function/remark/headings";
 import TableOfContents from "~/components/table_of_contents/toc";
-import LRWrap from "~/components/artical/lr_wrap";
+import LRWrap from "~/components/article/lr_wrap";
 import Spotlight from "~/components/spotlight";
 import CarouselSlider from "~/components/carousel_slider";
 
