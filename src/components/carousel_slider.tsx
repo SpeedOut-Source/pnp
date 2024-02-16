@@ -59,22 +59,16 @@ export default function CarouselSlider({
             return (
               <CarouselItem
                 key={x}
-                className={clsx(
-                  imgBlurData
-                    ? "flex items-center justify-center"
-                    : "xs:h-72 relative m-1 h-72 w-[98%] sm:h-80 md:h-[30rem]",
-                )}
+                className="xs:h-72 relative m-1 h-72 w-[98%] sm:h-80 md:h-[30rem]"
               >
                 <Image
                   alt={i.toString()}
-                  layout={imgBlurData ? undefined : "fill"}
+                  layout="fill"
                   objectFit="scale-down"
                   src={x}
                   className="rounded-box"
                   placeholder={imgBlurData ? "blur" : "empty"}
                   blurDataURL={imgBlurData ? imgBlurData.base64 : ""}
-                  height={imgBlurData ? imgBlurData.height : undefined}
-                  width={imgBlurData ? imgBlurData.width : undefined}
                 />
               </CarouselItem>
             );
