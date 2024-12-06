@@ -8,11 +8,10 @@ import type {
   Company,
   Project,
 } from "./interfaces";
-import { getPlaiceholder } from "plaiceholder";
 import { parse } from "path";
 import { type TestimonialsProps } from "~/components/work_for_t/testimonials";
 import { env } from "../../env.mjs";
-import log from "~/app_function/logger/logger";
+import { getBlurData } from "./blur_cache";
 
 export interface DBConfigs {
   projectTotal: number;
@@ -51,7 +50,7 @@ export async function getProjects(): Promise<RawProjectsProps> {
   try {
     const dataProjects = (await getData("db/projects.json")).toString();
     return JSON.parse(dataProjects) as RawProjectsProps;
-  } catch (e) {
+  } catch {
     return { projects: [] };
   }
 }
@@ -60,7 +59,7 @@ export async function getApps(): Promise<RawAppsProps> {
   try {
     const dataApps = (await getData("db/apps.json")).toString();
     return JSON.parse(dataApps) as RawAppsProps;
-  } catch (e) {
+  } catch {
     return { apps: [] };
   }
 }
@@ -69,7 +68,7 @@ export async function getBlogs(): Promise<RawBlogsProps> {
   try {
     const dataBlogs = (await getData("db/blogs.json")).toString();
     return JSON.parse(dataBlogs) as RawBlogsProps;
-  } catch (e) {
+  } catch {
     return { blogs: [] };
   }
 }
@@ -78,7 +77,7 @@ export async function getCompany(): Promise<RawCompanyProps> {
   try {
     const dataCompany = (await getData("db/workInfo.json")).toString();
     return JSON.parse(dataCompany) as RawCompanyProps;
-  } catch (e) {
+  } catch {
     return { company: [] };
   }
 }
@@ -87,7 +86,7 @@ export async function getTesti(): Promise<TestimonialsProps> {
   try {
     const dataTesti = (await getData("home/testimonials.json")).toString();
     return JSON.parse(dataTesti) as TestimonialsProps;
-  } catch (e) {
+  } catch {
     return { testis: [] };
   }
 }
@@ -131,9 +130,7 @@ export function getProject(
         whatText: string;
         result: string;
       }
-    | {
-        [key: string]: string;
-      },
+    | Record<string, string>,
   fileName: string
 ): Project {
   return {
@@ -163,9 +160,7 @@ export function getBlog(
         date: number;
         readTime: number;
       }
-    | {
-        [key: string]: string | number;
-      },
+    | Record<string, string | number>,
   fileName: string
 ): Blog {
   return {
@@ -220,20 +215,20 @@ export async function getCard(type: Card) {
   return allData;
 }
 
-export async function getBlurData(imgUrl: string, isUrl = true) {
-  if (isUrl && getFileExtSSR(imgUrl) === "gif") {
-    return null;
-  }
+// export async function getBlurData(imgUrl: string, isUrl = true) {
+//   if (isUrl && getFileExtSSR(imgUrl) === "gif") {
+//     return null;
+//   }
 
-  try {
-    const data = await getPlaiceholder(imgUrl);
+//   try {
+//     const data = await getPlaiceholder(imgUrl);
 
-    return data;
-  } catch (e) {
-    log.error(e);
-    return null;
-  }
-}
+//     return data;
+//   } catch (e) {
+//     log.error(e);
+//     return null;
+//   }
+// }
 
 export function getFileExtSSR(urlinput: string) {
   const url = new URL(urlinput);

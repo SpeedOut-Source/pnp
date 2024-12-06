@@ -50,7 +50,7 @@ interface MDRender {
 
 export default function MDRender({ data, imgBlurdata }: MDRender) {
   return (
-    <article className="container prose prose-stone relative mx-auto max-w-3xl rounded-2xl bg-base-100/80 px-4 py-2 ring-1 ring-base-content/5 prose-headings:my-1 prose-a:my-1 prose-a:text-blue-600 prose-a:no-underline prose-pre:m-0 prose-pre:bg-transparent prose-pre:p-0 prose-li:my-0 prose-img:my-2 prose-img:inline-block prose-img:rounded-xl">
+    <div className="container prose prose-stone relative mx-auto max-w-3xl rounded-2xl bg-base-100/80 px-4 py-2 ring-1 ring-base-content/5 prose-headings:my-1 prose-a:my-1 prose-a:text-blue-600 prose-a:no-underline prose-pre:m-0 prose-pre:bg-transparent prose-pre:p-0 prose-li:my-0 prose-img:my-2 prose-img:inline-block prose-img:rounded-xl">
       <ReactMarkdown
         components={{
           img: ({ ...props }) => {
@@ -95,7 +95,7 @@ export default function MDRender({ data, imgBlurdata }: MDRender) {
             return <a {...props}>{children}</a>;
           },
           code({ inline, className, ...props }) {
-            const hasLang = /language-(\w+)/.exec(className || "");
+            const hasLang = /language-(\w+)/.exec(className ?? "");
             return !inline && hasLang ? (
               <SyntaxHighlighter
                 style={oneDark}
@@ -151,6 +151,6 @@ export default function MDRender({ data, imgBlurdata }: MDRender) {
       >
         {data}
       </ReactMarkdown>
-    </article>
+    </div>
   );
 }

@@ -14,13 +14,9 @@ export type TransformNodeOutput = {
   children: TransformNodeOutput[];
 };
 
-type IndexMap = {
-  [key: number]: TransformNodeOutput;
-};
+type IndexMap = Record<number, TransformNodeOutput>;
 
-type Nodes = {
-  [key: string]: number;
-};
+type Nodes = Record<string, number>;
 
 function transformNode(
   node: TransformNodeOutput,
@@ -65,7 +61,7 @@ function getHeadings(root: Root) {
 
 function addID(node: TransformNodeOutput, nodes: Nodes) {
   const id = node.children.map((c) => c.value).join("");
-  nodes[id] = (nodes[id] || 0) + 1;
+  nodes[id] = (nodes[id] ?? 0) + 1;
   node.data = node.data || {
     hProperties: {
       id: `${id}${nodes[id] ?? 0 > 1 ? ` ${nodes[id] ?? 0 - 1}` : ""}`

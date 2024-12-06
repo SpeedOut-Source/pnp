@@ -63,8 +63,7 @@ export async function projectBlogGetStaticProps(
 ) {
   let pageNo = 1;
   if (
-    props.context.params &&
-    props.context.params.no &&
+    props.context.params?.no &&
     typeof props.context.params.no === "string"
   ) {
     pageNo = Number.parseInt(props.context.params.no);

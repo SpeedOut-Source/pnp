@@ -18,7 +18,7 @@ export function SearchButton() {
 
   useEffect(() => {
     function onKeyDown(event: KeyboardEvent) {
-      if (searchButtonRef && searchButtonRef.current) {
+      if (searchButtonRef?.current) {
         if (
           (event.keyCode === 27 && searchModeStore.isOpen) ||
           (event.key === "k" && (event.metaKey || event.ctrlKey))

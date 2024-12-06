@@ -403,7 +403,7 @@ export default function ProjectBlogView(props: ProjectBlogViewProps) {
         </div>
         <div className="flex w-full xl:hidden">{metaData()}</div>
         <div className="mx-auto mt-2 max-w-3xl rounded-2xl border-2 border-base-content/5 bg-base-100/80">
-          {(props.previous || props.next) && (
+          {(props.previous ?? props.next) && (
             <div className="container m-2 mx-auto max-w-3xl px-2">
               <div className="flex w-full items-center justify-center gap-4">
                 {props.previous && (

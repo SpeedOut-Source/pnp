@@ -4,7 +4,7 @@ import {
   type AutocompleteState,
 } from "@algolia/autocomplete-core";
 import { getAlgoliaResults } from "@algolia/autocomplete-preset-algolia";
-import algoliasearch from "algoliasearch/lite";
+import { liteClient } from "algoliasearch/lite";
 import React, {
   type BaseSyntheticEvent,
   useEffect,
@@ -41,13 +41,13 @@ import {
 } from "~/app_function/utils/constants";
 import { env } from "../../env.mjs";
 
-const searchClient = algoliasearch(
+const searchClient = liteClient(
   env.NEXT_PUBLIC_ALGOLIA_APP_ID,
-  env.NEXT_PUBLIC_ALGOLIA_API_KEY
+  env.NEXT_PUBLIC_ALGOLIA_API_KEY,
 );
 
 export default function Autocomplete(
-  props: Partial<AutocompleteOptions<AllHit>>
+  props: Partial<AutocompleteOptions<AllHit>>,
 ) {
   const [autocompleteState, setAutocompleteState] = useState<
     AutocompleteState<AllHit>
@@ -82,36 +82,36 @@ export default function Autocomplete(
                   queries: [
                     {
                       indexName: ALGOLIA_INDEX_BLOGS,
-                      query,
                       params: {
+                        query,
                         hitsPerPage: 5,
                       },
                     },
                     {
                       indexName: ALGOLIA_INDEX_APPS,
-                      query,
                       params: {
+                        query,
                         hitsPerPage: 5,
                       },
                     },
                     {
                       indexName: ALGOLIA_INDEX_PROJECTS,
-                      query,
                       params: {
+                        query,
                         hitsPerPage: 5,
                       },
                     },
                     {
                       indexName: ALGOLIA_INDEX_COMPANY,
-                      query,
                       params: {
+                        query,
                         hitsPerPage: 5,
                       },
                     },
                     {
                       indexName: ALGOLIA_INDEX_TESTIMONIALS,
-                      query,
                       params: {
+                        query,
                         hitsPerPage: 5,
                       },
                     },
@@ -123,7 +123,7 @@ export default function Autocomplete(
         },
         ...props,
       }),
-    [props]
+    [props],
   );
   const inputRef = useRef<HTMLInputElement>(null);
   const formRef = useRef<HTMLFormElement>(null);
@@ -136,31 +136,31 @@ export default function Autocomplete(
   const { getEnvironmentProps } = autocomplete;
   const apps = useMemo(() => {
     return autocompleteState.collections[0]?.items.filter(
-      (i) => i.__autocomplete_indexName === ALGOLIA_INDEX_APPS
+      (i) => i.__autocomplete_indexName === ALGOLIA_INDEX_APPS,
     ) as unknown as AppHit[];
   }, [autocompleteState.collections]);
 
   const blogs = useMemo(() => {
     return autocompleteState.collections[0]?.items.filter(
-      (i) => i.__autocomplete_indexName === ALGOLIA_INDEX_BLOGS
+      (i) => i.__autocomplete_indexName === ALGOLIA_INDEX_BLOGS,
     ) as unknown as BlogHit[];
   }, [autocompleteState.collections]);
 
   const projects = useMemo(() => {
     return autocompleteState.collections[0]?.items.filter(
-      (i) => i.__autocomplete_indexName === ALGOLIA_INDEX_PROJECTS
+      (i) => i.__autocomplete_indexName === ALGOLIA_INDEX_PROJECTS,
     ) as unknown as ProjectHit[];
   }, [autocompleteState.collections]);
 
   const company = useMemo(() => {
     return autocompleteState.collections[0]?.items.filter(
-      (i) => i.__autocomplete_indexName === ALGOLIA_INDEX_COMPANY
+      (i) => i.__autocomplete_indexName === ALGOLIA_INDEX_COMPANY,
     ) as unknown as CompanyHit[];
   }, [autocompleteState.collections]);
 
   const testimonials = useMemo(() => {
     return autocompleteState.collections[0]?.items.filter(
-      (i) => i.__autocomplete_indexName === ALGOLIA_INDEX_TESTIMONIALS
+      (i) => i.__autocomplete_indexName === ALGOLIA_INDEX_TESTIMONIALS,
     ) as unknown as TestimonialHit[];
   }, [autocompleteState.collections]);
 
@@ -187,7 +187,7 @@ export default function Autocomplete(
       >
         <button
           className={clsx(
-            "p-card flex h-full cursor-pointer items-center rounded-xl"
+            "p-card flex h-full cursor-pointer items-center rounded-xl",
           )}
           type="submit"
           title="Submit"
@@ -195,11 +195,11 @@ export default function Autocomplete(
           <label
             className={clsx(
               autocompleteState.status !== "idle" && "swap-active",
-              "swap-rotate swap  items-center "
+              "swap swap-rotate items-center",
             )}
           >
             <MagnifyingGlassIcon className="swap-off mx-auto h-5 w-5" />
-            <div className="loading loading-xs swap-on mx-auto border-0 p-0 before:!mr-0" />
+            <div className="swap-on loading loading-xs mx-auto border-0 p-0 before:!mr-0" />
           </label>
         </button>
         <input

@@ -40,8 +40,7 @@ export async function getStaticPropsItemView({
   type,
 }: ProjectBlogGetStaticServer) {
   if (
-    !context.params ||
-    !context.params.file_name ||
+    !context.params?.file_name ||
     typeof context.params.file_name !== "string"
   ) {
     return {

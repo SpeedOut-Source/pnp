@@ -58,4 +58,4 @@ export type Card = "blogs" | "projects" | "apps" | "company";
 export type CardData = Project[] | Blog[] | App[] | Company[];
 export type CardItem = Project | Blog | App | Company;
 export type ImgBlurItem = { base64: string; height: number; width: number };
-export type ImgBlurData = { [url: string]: ImgBlurItem };
+export type ImgBlurData = Record<string, ImgBlurItem>;

@@ -8,7 +8,6 @@ import {
   getData,
   getProjects,
   getTesti,
-  getBlurData,
 } from "../utils/utils-server";
 import { type RXTProps } from "~/components/me_section/r_x_t";
 import { type MeSectionProps } from "~/components/me_section/me_section";
@@ -26,6 +25,7 @@ import { type AppsProps } from "~/components/apps/recent_apps";
 import { getDataUrl } from "../utils/utils";
 import { env } from "../../env.mjs";
 import { type Testimonial } from "~/components/work_for_t/testi_card";
+import { getBlurData } from "../utils/blur_cache";
 
 export interface Configs {
   appName: string;
