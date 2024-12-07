@@ -1,3 +1,5 @@
+"use client";
+
 import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 import { useRef, useEffect, useCallback } from "react";
 import { useActionKey } from "~/app_function/hooks/useActionKey";

@@ -1,3 +1,5 @@
+"use client";
+
 import DocumentDuplicateIcon from "@heroicons/react/24/outline/DocumentDuplicateIcon";
 import { useState } from "react";
 import CopyToClipboard from "react-copy-to-clipboard";
@@ -15,7 +17,7 @@ export interface ContactItemProps {
 export default function ContactItem(props: ContactItemProps) {
   const [copyTip, setCopyTip] = useState(`Copy ${props.name}`);
   return (
-    <div className="group flex w-fit items-center gap-2 ">
+    <div className="group flex w-fit items-center gap-2">
       <Link
         href={props.url}
         target="_blank"

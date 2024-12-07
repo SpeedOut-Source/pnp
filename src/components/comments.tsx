@@ -1,3 +1,5 @@
+"use client";
+
 import Giscus from "@giscus/react";
 import { getUserNRepo } from "~/app_function/utils/utils";
 import { env } from "~/env.mjs";

@@ -71,15 +71,15 @@ export default function MDRender({ data, imgBlurdata }: MDRender) {
                   props.width
                     ? parseFloat(props.width)
                     : blurDataURL
-                    ? blurDataURL.width
-                    : 0
+                      ? blurDataURL.width
+                      : 0
                 }
                 height={
                   props.height
                     ? parseFloat(props.height)
                     : blurDataURL
-                    ? blurDataURL.height
-                    : 0
+                      ? blurDataURL.height
+                      : 0
                 }
                 sizes="100vw"
                 className={props.width ? undefined : "w-auto"}

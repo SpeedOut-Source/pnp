@@ -4,11 +4,11 @@ import { type ReactNode } from "react";
 const Link = dynamic(() => import("next/link"));
 
 const LinkWrapper = ({
-                       href,
-                       children,
-                       disabled,
-                       className
-                     }: {
+  href,
+  children,
+  disabled,
+  className,
+}: {
   href: string;
   children: ReactNode;
   className: string;

@@ -1,3 +1,5 @@
+"use client";
+
 import Image from "next/image";
 import React, { useState, useEffect } from "react";
 
@@ -27,7 +29,7 @@ export default function Spotlight() {
   }, []);
 
   return (
-    <div className="absolute -z-10 flex w-full overflow-hidden items-center justify-center">
+    <div className="absolute -z-10 flex w-full items-center justify-center overflow-hidden">
       <Image
         width={631}
         height={550}

@@ -11,9 +11,9 @@ const CACHE_DIR = path.join(env.DATA_PATH, "blur-cache");
 // Ensure cache directory exists
 async function ensureCacheDir() {
   try {
-	await fs.mkdir(CACHE_DIR, { recursive: true });
+    await fs.mkdir(CACHE_DIR, { recursive: true });
   } catch (error) {
-	log.error("Failed to create cache directory", error);
+    console.error("Failed to create cache directory", error);
   }
 }
 
@@ -29,7 +29,7 @@ export async function getBlurData(
 ) {
   // Check if it's a GIF
   if (isUrl && getFileExtSSR(imgUrl) === "gif") {
-	return null;
+    return null;
   }
 
   await ensureCacheDir();
@@ -39,28 +39,28 @@ export async function getBlurData(
 
   // Check cache first
   if (!forceRefresh) {
-	try {
-	  const cachedData = await fs.readFile(cachePath, "utf8");
-	  return JSON.parse(cachedData) as IGetPlaiceholderReturn;
-	} catch {
-	  // Cache miss or error reading cache
-	}
+    try {
+      const cachedData = await fs.readFile(cachePath, "utf8");
+      return JSON.parse(cachedData) as IGetPlaiceholderReturn;
+    } catch {
+      // Cache miss or error reading cache
+    }
   }
 
   try {
-	const blurData = await getPlaiceholder(imgUrl);
+    const blurData = await getPlaiceholder(imgUrl);
 
-	// Store in file cache
-	await fs.writeFile(cachePath, JSON.stringify(blurData), "utf8");
+    // Store in file cache
+    await fs.writeFile(cachePath, JSON.stringify(blurData), "utf8");
 
-	return blurData;
+    return blurData;
   } catch (e) {
-	log.error(`Blur data fetch error for ${imgUrl}:`, e);
+    log.error(`Blur data fetch error for ${imgUrl}:`, e);
 
-	// Optionally, you could still save the null result to prevent repeated attempts
-	await fs.writeFile(cachePath, "null", "utf8");
+    // Optionally, you could still save the null result to prevent repeated attempts
+    await fs.writeFile(cachePath, "null", "utf8");
 
-	return null;
+    return null;
   }
 }
 
@@ -69,24 +69,24 @@ export async function clearBlurCache(imgUrl?: string) {
   await ensureCacheDir();
 
   if (imgUrl) {
-	const cacheKey = generateCacheKey(imgUrl);
-	const cachePath = path.join(CACHE_DIR, `${cacheKey}.json`);
+    const cacheKey = generateCacheKey(imgUrl);
+    const cachePath = path.join(CACHE_DIR, `${cacheKey}.json`);
 
-	try {
-	  await fs.unlink(cachePath);
-	} catch (error) {
-	  log.error("Failed to delete specific cache entry", error);
-	}
+    try {
+      await fs.unlink(cachePath);
+    } catch (error) {
+      log.error("Failed to delete specific cache entry", error);
+    }
   } else {
-	// Clear all cache entries
-	try {
-	  const files = await fs.readdir(CACHE_DIR);
-	  for (const file of files) {
-		await fs.unlink(path.join(CACHE_DIR, file));
-	  }
-	} catch (error) {
-	  log.error("Failed to clear blur cache", error);
-	}
+    // Clear all cache entries
+    try {
+      const files = await fs.readdir(CACHE_DIR);
+      for (const file of files) {
+        await fs.unlink(path.join(CACHE_DIR, file));
+      }
+    } catch (error) {
+      log.error("Failed to clear blur cache", error);
+    }
   }
 }
 
@@ -98,16 +98,16 @@ export async function cleanupOldCache(maxAgeHours = 24) {
   const currentTime = Date.now();
 
   try {
-	const files = await fs.readdir(CACHE_DIR);
-	for (const file of files) {
-	  const filePath = path.join(CACHE_DIR, file);
-	  const stats = await fs.stat(filePath);
+    const files = await fs.readdir(CACHE_DIR);
+    for (const file of files) {
+      const filePath = path.join(CACHE_DIR, file);
+      const stats = await fs.stat(filePath);
 
-	  if (currentTime - stats.mtime.getTime() > maxAge) {
-		await fs.unlink(filePath);
-	  }
-	}
+      if (currentTime - stats.mtime.getTime() > maxAge) {
+        await fs.unlink(filePath);
+      }
+    }
   } catch (error) {
-	log.error("Cache cleanup failed", error);
+    log.error("Cache cleanup failed", error);
   }
 }

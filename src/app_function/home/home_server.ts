@@ -7,9 +7,9 @@ import {
   getDBConfigs,
   getData,
   getProjects,
+  getTechs,
   getTesti,
 } from "../utils/utils-server";
-import { type RXTProps } from "~/components/me_section/r_x_t";
 import { type MeSectionProps } from "~/components/me_section/me_section";
 import { type TestimonialsProps } from "~/components/work_for_t/testimonials";
 import { type ProjectsProps } from "~/components/projects/recent_projects";
@@ -51,8 +51,7 @@ export async function HomeServer() {
   const dataBio = (await getData("home/bio.json")).toString();
   const me = JSON.parse(dataBio) as MeProps;
 
-  const dataExpertise = (await getData("home/expertise.json")).toString();
-  const techs = JSON.parse(dataExpertise) as RXTProps;
+  const techs = await getTechs();
 
   const testis = await getTesti();
 
@@ -70,7 +69,7 @@ export async function HomeServer() {
   const RCompany: Company[] = await addBlur(allCompanyRaw.company);
   const RTestis: Testimonial[] = await addBlur(
     testis.testis,
-    testis.testis.length
+    testis.testis.length,
   );
 
   const testimonialAddUrl =
@@ -102,7 +101,5 @@ export async function HomeServer() {
     },
   };
 
-  return {
-    props: homeProps,
-  };
+  return homeProps;
 }

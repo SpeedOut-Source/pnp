@@ -36,7 +36,7 @@ export function Highlight<THit extends { _highlightResult?: any }>({
         }
 
         return value;
-      }
-    )
+      },
+    ),
   );
 }

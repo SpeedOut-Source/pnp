@@ -15,22 +15,24 @@ export default function CountAdd(props: CountAddProp) {
   const counts =
     props.counts && props.counts > 0 ? showCountHuman(props.counts) : undefined;
   return (
-    <div className="indicator ">
+    <div className="indicator">
       {counts && props.name && (
-        <span className="indicator-new bg-base-300/60 -mr-1 mt-1">
-          <span className={clsx("tooltip", props.tooltipClass)} data-tip={`${counts} ${props.name}`}>
+        <span className="indicator-new -mr-1 mt-1 bg-base-300/60">
+          <span
+            className={clsx("tooltip", props.tooltipClass)}
+            data-tip={`${counts} ${props.name}`}
+          >
             {counts}
           </span>
         </span>
       )}
-      {props.url ?
-        <Link
-          href={props.url}
-          className="link link-hover"
-        >
+      {props.url ? (
+        <Link href={props.url} className="link-hover link">
           {props.children}
-        </Link> : props.children
-      }
+        </Link>
+      ) : (
+        props.children
+      )}
     </div>
   );
 }

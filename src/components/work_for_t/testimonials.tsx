@@ -1,3 +1,5 @@
+"use client";
+
 import dynamic from "next/dynamic";
 import { type Testimonial } from "./testi_card";
 import { ChatBubbleLeftRightIcon, PlusIcon } from "@heroicons/react/24/outline";
@@ -140,7 +142,7 @@ export default function Testimonials(props: TestimonialsProps) {
                 ? "mb-16"
                 : ""
               : "max-h-[33rem] overflow-hidden md:max-h-80"
-          } mx-auto min-h-[12rem] w-full items-start justify-stretch gap-2 space-y-2 rounded-b-3xl py-4 transition-all  duration-500 ease-in-out sm:grid sm:grid-cols-2 sm:space-y-0 xl:grid-cols-3`}
+          } mx-auto min-h-[12rem] w-full items-start justify-stretch gap-2 space-y-2 rounded-b-3xl py-4 transition-all duration-500 ease-in-out sm:grid sm:grid-cols-2 sm:space-y-0 xl:grid-cols-3`}
         >
           <ul className="space-y-2">
             {threeListTestimonial.l1 ? (
@@ -198,7 +200,7 @@ export default function Testimonials(props: TestimonialsProps) {
               : "absolute"
           } ${transition ? "transition-opacity duration-300" : ""} ${
             expanded ? (showCollapseButton ? "visible" : "invisible") : ""
-          } inset-x-0 bottom-0 z-40 flex justify-center overflow-hidden rounded-3xl bg-gradient-to-t from-base-300 pb-8 pt-32 `}
+          } inset-x-0 bottom-0 z-40 flex justify-center overflow-hidden rounded-3xl bg-gradient-to-t from-base-300 pb-8 pt-32`}
         >
           <button
             onClick={() => setExpanded((x) => !x)}
@@ -206,7 +208,7 @@ export default function Testimonials(props: TestimonialsProps) {
               expanded ? (!showCollapseButton ? "translate-y-4" : "") : ""
             } ${
               !expanded || showCollapseButton ? "pointer-events-auto" : ""
-            } p-card ring ring-base-content/10 transform-gpu`}
+            } p-card transform-gpu ring ring-base-content/10`}
           >
             {expanded ? "Okay, I get the point" : "Show more..."}
           </button>

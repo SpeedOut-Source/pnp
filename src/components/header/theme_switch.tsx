@@ -20,7 +20,7 @@ export default function ThemeSwitch() {
         onClick={utm.toggleTheme}
         className={`${
           isLight ? "swap-active" : ""
-        } swap-rotate swap btn-ghost btn-circle btn`}
+        } btn btn-circle btn-ghost swap swap-rotate`}
       >
         <SunIcon className="swap-on h-6 w-6" />
         <MoonIcon className="swap-off h-6 w-6" />

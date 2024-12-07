@@ -22,12 +22,12 @@ export const useThemeStore = create(
             const currentTheme = get().themeName;
             const newTheme = currentTheme === "winter" ? "dark" : "winter";
             set({ themeName: newTheme });
-          }
+          },
         }),
         {
-          name: "theme-storage-state"
-        }
-      )
-    )
-  )
+          name: "theme-storage-state",
+        },
+      ),
+    ),
+  ),
 );

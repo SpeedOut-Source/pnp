@@ -1,3 +1,5 @@
+"use client";
+
 import dynamic from "next/dynamic";
 import { useEffect, useState } from "react";
 import Image from "next/image";
@@ -54,7 +56,7 @@ export default function Header() {
       className={clsx(
         loaded ? "transition-all duration-500 ease-in-out" : "",
         bgChange && scrollDirection === "down"
-          ? "-translate-y-12 "
+          ? "-translate-y-12"
           : "" +
               (bgChange
                 ? " shadow-2xl lg:mx-1 lg:rounded-xl lg:ring-1 lg:ring-base-300/40"
@@ -62,7 +64,7 @@ export default function Header() {
         bgChange
           ? "bg-gradient-to-r from-base-300/30 from-30% to-base-content/50 to-100%"
           : "",
-        "min-h-6 sticky top-0 z-50 transform-gpu bg-base-100/95 bg-no-repeat lg:top-1 lg:mb-2 lg:bg-transparent lg:backdrop-blur-xl",
+        "sticky top-0 z-50 min-h-6 transform-gpu bg-base-100/95 bg-no-repeat lg:top-1 lg:mb-2 lg:bg-transparent lg:backdrop-blur-xl",
       )}
     >
       <div
@@ -94,7 +96,7 @@ export default function Header() {
           <Links className="hidden items-center gap-4 md:flex lg:flex xl:flex" />
         </div>
         <div>
-          <div className="hidden lg:inline ">
+          <div className="hidden lg:inline">
             <ConnectSection />
           </div>
           <div className="flex items-center justify-end lg:hidden">

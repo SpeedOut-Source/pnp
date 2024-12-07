@@ -17,8 +17,7 @@ export type Testimonial = {
 };
 export default function TestiCard(props: Testimonial) {
   return (
-    <div
-      className="p-card group relative mx-0 h-fit w-full space-y-3 overflow-visible px-0 py-4 text-justify hover:bg-base-200">
+    <div className="p-card group relative mx-0 h-fit w-full space-y-3 overflow-visible px-0 py-4 text-justify hover:bg-base-200">
       <div className="w-full px-3">
         <Link
           data-tip="Visit website"
@@ -40,16 +39,10 @@ export default function TestiCard(props: Testimonial) {
           </div>
           <div className="text-left tracking-wider">
             <p style={{ whiteSpace: "pre-line" }} className="text-sm font-bold">
-              <Highlight
-                hit={props as TestimonialHit}
-                attribute="fullName"
-              />
+              <Highlight hit={props as TestimonialHit} attribute="fullName" />
             </p>
             <p style={{ whiteSpace: "pre-line" }} className="text-xs">
-              <Highlight
-                hit={props as TestimonialHit}
-                attribute="position"
-              />
+              <Highlight hit={props as TestimonialHit} attribute="position" />
             </p>
           </div>
         </Link>

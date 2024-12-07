@@ -8,10 +8,11 @@ import type {
   Company,
   Project,
 } from "./interfaces";
-import { parse } from "path";
+import { parse, join } from "path";
 import { type TestimonialsProps } from "~/components/work_for_t/testimonials";
 import { env } from "../../env.mjs";
 import { getBlurData } from "./blur_cache";
+import { type RXTProps } from "~/components/me_section/r_x_t";
 
 export interface DBConfigs {
   projectTotal: number;
@@ -37,7 +38,7 @@ export interface RawCompanyProps {
 }
 
 export async function getData(path: string) {
-  const data = await promises.readFile(`${env.DATA_PATH}${path}`, "utf8");
+  const data = await promises.readFile(join(env.DATA_PATH, path), "utf8");
   return Buffer.from(data);
 }
 
@@ -91,6 +92,16 @@ export async function getTesti(): Promise<TestimonialsProps> {
   }
 }
 
+export async function getTechs(): Promise<RXTProps> {
+  try {
+    const dataExpertise = (await getData("home/expertise.json")).toString();
+    const techs = JSON.parse(dataExpertise) as RXTProps;
+    return techs;
+  } catch {
+    return { techs: [] };
+  }
+}
+
 export function parseProject(md_text: string, fileName: string) {
   const app_name = md_text.split("appName: ")[1]?.split("\n")[0] ?? "";
   const app_logo = md_text.split("appLogo: ")[1]?.split("\n")[0] ?? "";
@@ -98,7 +109,7 @@ export function parseProject(md_text: string, fileName: string) {
   const company_logo = md_text.split("companyLogo: ")[1]?.split("\n")[0] ?? "";
   const date = parseInt(md_text.split("date: ")[1]?.split("\n")[0] ?? "0");
   const read_time = parseInt(
-    md_text.split("readTime: ")[1]?.split("\n")[0] ?? "0"
+    md_text.split("readTime: ")[1]?.split("\n")[0] ?? "0",
   );
   const img_url = md_text.split("imgUrl: ")[1]?.split("\n")[0] ?? "";
   const what_text = md_text.split("whatText: ")[1]?.split("\n")[0] ?? "";
@@ -131,7 +142,7 @@ export function getProject(
         result: string;
       }
     | Record<string, string>,
-  fileName: string
+  fileName: string,
 ): Project {
   return {
     imgUrl: data.imgUrl,
@@ -161,7 +172,7 @@ export function getBlog(
         readTime: number;
       }
     | Record<string, string | number>,
-  fileName: string
+  fileName: string,
 ): Blog {
   return {
     title: data.title as string,
@@ -178,7 +189,7 @@ export function parseBlog(md_text: string, filename: string): Blog {
   const desc = md_text.split("desc: ")[1]?.split("\n")[0] ?? "";
   const date = parseInt(md_text.split("date: ")[1]?.split("\n")[0] ?? "0");
   const read_time = parseInt(
-    md_text.split("readTime: ")[1]?.split("\n")[0] ?? "0"
+    md_text.split("readTime: ")[1]?.split("\n")[0] ?? "0",
   );
   const img_url = md_text.split("imgUrl: ")[1]?.split("\n")[0] ?? "";
 
@@ -215,21 +226,6 @@ export async function getCard(type: Card) {
   return allData;
 }
 
-// export async function getBlurData(imgUrl: string, isUrl = true) {
-//   if (isUrl && getFileExtSSR(imgUrl) === "gif") {
-//     return null;
-//   }
-
-//   try {
-//     const data = await getPlaiceholder(imgUrl);
-
-//     return data;
-//   } catch (e) {
-//     log.error(e);
-//     return null;
-//   }
-// }
-
 export function getFileExtSSR(urlinput: string) {
   const url = new URL(urlinput);
   if (!url.pathname) {
@@ -247,7 +243,7 @@ export async function addBlur<T>(data: T[], limit = 3) {
     // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
     const imgBlurDataRaw = await getBlurData(
       (element as unknown as { imgUrl: string }).imgUrl,
-      false
+      false,
     );
 
     let imgBlurData = null;

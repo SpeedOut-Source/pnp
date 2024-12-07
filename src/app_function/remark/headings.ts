@@ -21,7 +21,7 @@ type Nodes = Record<string, number>;
 function transformNode(
   node: TransformNodeOutput,
   output: TransformNodeOutput[],
-  indexMap: IndexMap
+  indexMap: IndexMap,
 ) {
   const transformedNode: TransformNodeOutput = {
     value: toString(node),
@@ -64,7 +64,7 @@ function addID(node: TransformNodeOutput, nodes: Nodes) {
   nodes[id] = (nodes[id] ?? 0) + 1;
   node.data = node.data || {
     hProperties: {
-      id: `${id}${nodes[id] ?? 0 > 1 ? ` ${nodes[id] ?? 0 - 1}` : ""}`
+      id: `${id}${(nodes[id] ?? 0 > 1) ? ` ${nodes[id] ?? 0 - 1}` : ""}`
         .replace(/[^a-zA-Z\d\s-]/g, "")
         .split(" ")
         .join("-")

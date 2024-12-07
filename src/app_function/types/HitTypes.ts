@@ -3,7 +3,7 @@ import {
   type Project,
   type App,
   type Blog,
-  type Company
+  type Company,
 } from "../utils/interfaces";
 import { type Testimonial } from "~/components/work_for_t/testi_card";
 
@@ -18,4 +18,9 @@ export type ProjectHit = WithAutocompleteAnalytics<Hit<Project>>;
 export type CompanyHit = WithAutocompleteAnalytics<Hit<Company>>;
 export type TestimonialHit = WithAutocompleteAnalytics<Hit<Testimonial>>;
 
-export type AllHit = BlogHit | AppHit | ProjectHit | CompanyHit | TestimonialHit;
+export type AllHit =
+  | BlogHit
+  | AppHit
+  | ProjectHit
+  | CompanyHit
+  | TestimonialHit;

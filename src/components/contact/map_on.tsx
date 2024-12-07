@@ -1,4 +1,5 @@
-/* eslint-disable @typescript-eslint/no-non-null-assertion */
+"use client";
+
 import { useEffect, useMemo, useState } from "react";
 import { GoogleMap, useLoadScript, MarkerF } from "@react-google-maps/api";
 import MapPinIcon from "@heroicons/react/24/outline/MapPinIcon";

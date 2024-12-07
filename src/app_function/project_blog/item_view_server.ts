@@ -5,68 +5,61 @@ import {
   getData,
 } from "../utils/utils-server";
 import matter from "gray-matter";
-import { type GetStaticPropsContext, type PreviewData } from "next";
-import { type ParsedUrlQuery } from "querystring";
-import { type ProjectBlogViewProps } from "~/pages/projects/view/[file_name]";
 import { type App, type Card, type CardData } from "../utils/interfaces";
 import { RingBuffer } from "../utils/ring_buffer";
 import { remark } from "remark";
 import { type TransformNodeOutput, headingTree } from "../remark/headings";
+import { type ProjectBlogViewProps } from "~/components/view/project_blog_view";
+import { join } from "path";
+import { env } from "~/env.mjs";
 
 export async function getStaticPathItemView(type: Card) {
   const allData: CardData = await getCard(type);
 
   const paths = allData.map((x) => {
     return {
-      params: {
-        file_name: x.fileName,
-      },
+      file_name:
+        env.NODE_ENV === "development"
+          ? encodeURIComponent(x.fileName)
+          : x.fileName,
+      category: type,
     };
   });
 
-  return {
-    paths,
-    fallback: false, // can also be true or 'blocking'
-  };
+  return paths;
 }
 
 export interface ProjectBlogGetStaticServer {
-  context: GetStaticPropsContext<ParsedUrlQuery, PreviewData>;
+  file_name?: string;
   type: Card;
 }
 
 export async function getStaticPropsItemView({
-  context,
+  file_name,
   type,
 }: ProjectBlogGetStaticServer) {
-  if (
-    !context.params?.file_name ||
-    typeof context.params.file_name !== "string"
-  ) {
-    return {
-      notFound: true,
-    };
+  if (!file_name || typeof file_name !== "string") {
+    return "-1";
   }
   try {
-    const dataRaw = (
-      await getData(`${type}/${context.params.file_name}`)
-    ).toString();
+    const decodedPath = decodeURIComponent(decodeURIComponent(file_name));
+    const filePath = join(type, decodedPath);
+    const dataRaw = (await getData(filePath)).toString();
 
     const { content } = matter(dataRaw);
 
     const allData = await getCard(type);
 
     const currentProjectIndex = allData.findIndex(
-      (p) => p.fileName === context.params?.file_name,
+      (p) => p.fileName === decodedPath,
     );
+
     const previous = allData[currentProjectIndex - 1] ?? null;
     const next = allData[currentProjectIndex + 1] ?? null;
 
     const itemView = allData[currentProjectIndex];
     if (!itemView) {
-      return {
-        notFound: true,
-      };
+      return "-1";
     }
     let more4: unknown[] | null = null;
     if (type === "apps" || type === "company") {
@@ -103,13 +96,9 @@ export async function getStaticPropsItemView({
       toc: processedContentTOC.data.headings as TransformNodeOutput[],
     };
 
-    return {
-      props: pvp,
-    };
+    return pvp;
   } catch (e) {
     console.error(e);
-    return {
-      notFound: true,
-    };
+    return "-1";
   }
 }

@@ -1,14 +1,7 @@
-import { type AllDataProps } from "~/pages/projects";
 import { getCard, getDBConfigs } from "../utils/utils-server";
-import { type GetStaticPropsContext, type PreviewData } from "next";
 import { PAGE_SIZE, PAGE_SIZE_APP } from "../utils/constants";
-import { type ParsedUrlQuery } from "querystring";
 import { type Card } from "../utils/interfaces";
-
-export interface ProjectBlogGetStaticServer {
-  context: GetStaticPropsContext<ParsedUrlQuery, PreviewData>;
-  type: Card;
-}
+import { type AllDataProps } from "~/components/view/all_data_show_page";
 
 export function getPageSize(type: Card) {
   switch (type) {
@@ -40,51 +33,46 @@ export async function projectBlogGetStaticPaths(type: Card) {
   }
 
   const paths: {
-    params: {
-      no: string;
-    };
+    no: string;
   }[] = [];
+
   for (let index = 1; index <= Math.ceil(total / getPageSize(type)); index++) {
     paths.push({
-      params: {
-        no: index.toString(),
-      },
+      no: index.toString(),
     });
   }
 
-  return {
-    paths,
-    fallback: false, // can also be true or 'blocking'
-  };
+  return paths;
 }
 
-export async function projectBlogGetStaticProps(
-  props: ProjectBlogGetStaticServer
-) {
+export async function projectBlogGetStaticProps({
+  no,
+  type,
+}: {
+  no?: string;
+  type: Card;
+}): Promise<AllDataProps | "-1"> {
   let pageNo = 1;
-  if (
-    props.context.params?.no &&
-    typeof props.context.params.no === "string"
-  ) {
-    pageNo = Number.parseInt(props.context.params.no);
+  if (no && typeof no === "string") {
+    pageNo = Number.parseInt(no);
   }
 
-  const data = await getCard(props.type);
-  const pageSize = getPageSize(props.type);
-  const limitShow = pageSize * pageNo;
-  const dataArray = data.slice(limitShow - pageSize, limitShow);
+  try {
+    const data = await getCard(type);
+    const pageSize = getPageSize(type);
+    const limitShow = pageSize * pageNo;
+    const dataArray = data.slice(limitShow - pageSize, limitShow);
 
-  const allProps: AllDataProps = {
-    data: dataArray,
-    pageInfo: {
-      size: pageSize,
-      no: pageNo,
-      total: data.length,
-    },
-    type: props.type,
-  };
-
-  return {
-    props: allProps,
-  };
+    return {
+      data: dataArray,
+      pageInfo: {
+        size: pageSize,
+        no: pageNo,
+        total: data.length,
+      },
+      type: type,
+    };
+  } catch {
+    return "-1";
+  }
 }

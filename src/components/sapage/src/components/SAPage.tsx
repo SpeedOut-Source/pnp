@@ -1,4 +1,5 @@
-/* eslint-disable @typescript-eslint/no-non-null-assertion */
+"use client";
+
 import React, { useState } from "react";
 import { delay } from "./app/helper";
 import BugAntIcon from "@heroicons/react/24/solid/BugAntIcon";
@@ -26,7 +27,7 @@ const SAPage = (props: SAPageProps) => {
 
   return (
     <div className="mx-2 mt-2 flex flex-col items-center tracking-wider sm:mx-5 lg:mx-10 xl:mx-10">
-      <div className="btn-ghost btn relative h-32 w-32 overflow-hidden rounded-full ring-4 ring-base-300">
+      <div className="btn btn-ghost relative h-32 w-32 overflow-hidden rounded-full ring-4 ring-base-300">
         <Image
           // eslint-disable-next-line @typescript-eslint/no-misused-promises
           onClick={tapToOpen}
@@ -50,7 +51,7 @@ const SAPage = (props: SAPageProps) => {
       <div
         className={`collapse -mt-1 ${
           clIsOpen ? "collapse-open" : ""
-        } w-full max-w-xl `}
+        } w-full max-w-xl`}
       >
         <div className="collapse-content w-full max-w-xl">
           <div className="scrollbar-style max-h-96 overflow-y-auto">
@@ -96,7 +97,7 @@ const SAPage = (props: SAPageProps) => {
         target="_blank"
         rel="noopener noreferrer"
       >
-        <div className="mt-3 text-xs transition-all duration-700 hover:tracking-widest hover:text-black ">
+        <div className="mt-3 text-xs transition-all duration-700 hover:tracking-widest hover:text-black">
           Developed by {props.devCompany.name}, {props.devCompany.year}
         </div>
       </Link>
@@ -127,14 +128,14 @@ const SAPage = (props: SAPageProps) => {
         Issue or Bug report
       </div>
       <Link
-        className="w-full "
+        className="w-full"
         href={props.reportUrl}
         target="_blank"
         rel="noopener noreferrer"
       >
         <div className="p-card h-fit w-full cursor-pointer">
           <div className="flex w-full items-center py-2 text-left">
-            <div className="h-16 w-16 ">
+            <div className="h-16 w-16">
               <BugAntIcon />
             </div>
             <div className="ml-3">
