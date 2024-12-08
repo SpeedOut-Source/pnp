@@ -1,7 +1,7 @@
 import fs from "fs/promises";
 import path from "path";
 import crypto from "crypto";
-import { getPlaiceholder, type IGetPlaiceholderReturn } from "plaiceholder";
+import { getPlaiceholder, type GetPlaiceholderReturn } from "plaiceholder";
 import log from "../logger/logger";
 import { getFileExtSSR } from "./utils-server";
 import { env } from "~/env.mjs";
@@ -41,14 +41,18 @@ export async function getBlurData(
   if (!forceRefresh) {
     try {
       const cachedData = await fs.readFile(cachePath, "utf8");
-      return JSON.parse(cachedData) as IGetPlaiceholderReturn;
+      return JSON.parse(cachedData) as GetPlaiceholderReturn;
     } catch {
       // Cache miss or error reading cache
     }
   }
 
   try {
-    const blurData = await getPlaiceholder(imgUrl);
+    const buffer = await fetch(imgUrl).then(async (res) =>
+      Buffer.from(await res.arrayBuffer()),
+    );
+
+    const blurData = await getPlaiceholder(buffer);
 
     // Store in file cache
     await fs.writeFile(cachePath, JSON.stringify(blurData), "utf8");

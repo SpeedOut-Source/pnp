@@ -289,8 +289,12 @@ export async function addBlurList(imgs: string[]): Promise<ImgBlurData> {
   for (const url of imgs) {
     const blurData = await getBlurData(url);
     if (blurData) {
-      const { base64, img } = blurData;
-      imgsBlurObj[url] = { base64, height: img.height, width: img.width };
+      const { base64, metadata } = blurData;
+      imgsBlurObj[url] = {
+        base64,
+        height: metadata.height,
+        width: metadata.width,
+      };
     }
   }
 
