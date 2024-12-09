@@ -19,14 +19,11 @@ export const useThemeStore = create<ThemeModeModel>()(
         (set) => ({
           themeName: DEFAULT_THEME,
           isLight: false,
-          setThemeName: (themeName) => {
-            document.documentElement.setAttribute("data-theme", themeName);
-            return set({ themeName, isLight: themeName === "winter" });
-          },
+          setThemeName: (themeName) =>
+            set({ themeName, isLight: themeName === "winter" }),
           toggleTheme: () =>
             set((state) => {
               const newTheme = state.themeName === "winter" ? "dark" : "winter";
-              document.documentElement.setAttribute("data-theme", newTheme);
               return { themeName: newTheme, isLight: newTheme === "winter" };
             }),
         }),

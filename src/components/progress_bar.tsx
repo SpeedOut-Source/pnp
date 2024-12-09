@@ -7,12 +7,21 @@ const ProgressBar = () => {
   const { isLight } = useThemeStore();
 
   return (
-    <AppProgressBar
-      height={"3px"}
-      color={isLight ? "#696969" : "#f5f5f5"}
-      options={{ showSpinner: false }}
-      shallowRouting
-    />
+    <>
+      <style>
+        {`
+          #nprogress .bar {
+            background: ${isLight ? "#696969" : "#f5f5f5"} !important;
+          }
+        `}
+      </style>
+      <AppProgressBar
+        height={"3px"}
+        color={isLight ? "#696969" : "#f5f5f5"}
+        options={{ showSpinner: false }}
+        shallowRouting
+      />
+    </>
   );
 };
 
