@@ -5,6 +5,7 @@
   "scripts": {
     "build": "next build",
     "check": "next lint && tsc --noEmit",
+    "clean": "npx rimraf node_modules .turbo dist .eslintcache .next",
     "export": "npm run format:write && next build && npm run sitemap && npm run search",
     "dev": "cross-env NODE_NO_WARNINGS=1 next dev --turbo",
     "lint": "next lint",
@@ -14,17 +15,17 @@
     "sitemap": "next-sitemap",
     "protest": "npm run export && npx serve@latest out",
     "devEnv": "cross-env NEXT_PUBLIC_LOCALHOST_TEST=true NEXT_PUBLIC_LOG_ENABLE=true NODE_NO_WARNINGS=1",
-    "protestDev": "npm run devEnv npm run protest",
+    "protestDev": "npm run clean && npm i && npm run devEnv npm run protest",
     "search": "tsx src/app_function/scripts/build-algolia-search.ts",
     "typecheck": "tsc --noEmit",
     "format:write": "prettier --write \"**/*.{ts,tsx,js,jsx,mdx}\" --cache",
     "format:check": "prettier --check \"**/*.{ts,tsx,js,jsx,mdx}\" --cache"
   },
   "dependencies": {
-    "@algolia/autocomplete-js": "^1.17.7",
-    "@algolia/autocomplete-plugin-query-suggestions": "^1.17.7",
-    "@algolia/autocomplete-plugin-recent-searches": "^1.17.7",
-    "@algolia/autocomplete-theme-classic": "^1.17.7",
+    "@algolia/autocomplete-js": "^1.17.8",
+    "@algolia/autocomplete-plugin-query-suggestions": "^1.17.8",
+    "@algolia/autocomplete-plugin-recent-searches": "^1.17.8",
+    "@algolia/autocomplete-theme-classic": "^1.17.8",
     "@giscus/react": "^3.0.0",
     "@headlessui/react": "^2.2.0",
     "@radix-ui/react-dropdown-menu": "^2.1.2",
@@ -60,7 +61,7 @@
     "rehype-raw": "^6.1.1",
     "remark": "^14.0.3",
     "remark-gfm": "^3.0.1",
-    "search-insights": "^2.6.0",
+    "search-insights": "^2.17.3",
     "sharp": "^0.33.5",
     "tailwind-merge": "^2.5.5",
     "tailwindcss-animate": "^1.0.7",
@@ -84,13 +85,14 @@
     "@typescript-eslint/parser": "^8.1.0",
     "autoprefixer": "^10.4.20",
     "cross-env": "^7.0.3",
-    "daisyui": "^4.12.14",
+    "daisyui": "^4.12.20",
     "eslint": "^8.57.0",
     "eslint-config-next": "^14.2.3",
     "next-sitemap": "^4.2.3",
     "postcss": "^8.4.49",
     "prettier": "^3.4.2",
     "prettier-plugin-tailwindcss": "^0.6.9",
+    "rimraf": "^6.0.1",
     "tailwind-scrollbar": "^3.1.0",
     "tailwindcss": "^3.4.16",
     "ts-node": "^10.9.2",
@@ -99,6 +101,5 @@
   },
   "ct3aMetadata": {
     "initVersion": "7.38.1"
-  },
-  "packageManager": "npm@10.9.0"
+  }
 }

@@ -21,6 +21,8 @@ import bash from "react-syntax-highlighter/dist/cjs/languages/prism/bash";
 import markdown from "react-syntax-highlighter/dist/cjs/languages/prism/markdown";
 import json from "react-syntax-highlighter/dist/cjs/languages/prism/json";
 import lua from "react-syntax-highlighter/dist/cjs/languages/prism/lua";
+import python from "react-syntax-highlighter/dist/cjs/languages/prism/python";
+import sql from "react-syntax-highlighter/dist/cjs/languages/prism/sql";
 import CopyToClipboardButton from "../copy_to_clipboard_button";
 import Image from "next/image";
 import { type ImgBlurData } from "~/app_function/utils/interfaces";
@@ -33,6 +35,8 @@ SyntaxHighlighter.registerLanguage("bash", bash);
 SyntaxHighlighter.registerLanguage("markdown", markdown);
 SyntaxHighlighter.registerLanguage("json", json);
 SyntaxHighlighter.registerLanguage("lua", lua);
+SyntaxHighlighter.registerLanguage("python", python);
+SyntaxHighlighter.registerLanguage("sql", sql);
 
 const ReactMarkdown = dynamic<ReactMarkdownOptions>(
   () =>
