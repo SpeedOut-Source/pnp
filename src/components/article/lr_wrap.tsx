@@ -1,3 +1,5 @@
+"use client";
+
 import clsx from "clsx";
 import React, { type ReactNode } from "react";
 import { useScrollDirection } from "react-scroll-hook";

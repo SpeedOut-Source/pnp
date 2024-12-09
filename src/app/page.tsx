@@ -42,7 +42,7 @@ const Home = async () => {
         <ContactSection />
         <div className="divider mx-auto max-w-6xl px-2" />
         <div className="mx-auto max-w-6xl px-2">
-          <Comments key={title} theme={"dark_dimmed"} />
+          <Comments key={title} />
         </div>
       </div>
     </>

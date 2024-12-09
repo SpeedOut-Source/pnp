@@ -1,9 +1,9 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useMemo } from "react";
 import { GoogleMap, useLoadScript, MarkerF } from "@react-google-maps/api";
 import MapPinIcon from "@heroicons/react/24/outline/MapPinIcon";
-import { DEFAULT_IS_LIGHT, useThemeStore } from "~/app_state/theme_mode";
+import { useThemeStore } from "~/app_state/theme_mode";
 import AbsoluteLoading from "../markdown/absolute_loading";
 import { env } from "../../env.mjs";
 
@@ -17,12 +17,7 @@ export default function MapOn() {
 }
 
 function Map() {
-  const utm = useThemeStore();
-  const [isLight, setIsLight] = useState(DEFAULT_IS_LIGHT);
-
-  useEffect(() => {
-    setIsLight(utm.themeName === "winter");
-  }, [utm]);
+  const { isLight } = useThemeStore();
 
   const center = useMemo(
     () => ({

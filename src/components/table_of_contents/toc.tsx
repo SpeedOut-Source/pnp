@@ -1,3 +1,5 @@
+"use client";
+
 import RenderNodes, { type RenderNodesProps } from "./render_nodes";
 
 export default function TableOfContents({ nodes }: RenderNodesProps) {

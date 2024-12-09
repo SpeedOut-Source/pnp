@@ -1,3 +1,5 @@
+"use client";
+
 export default function DateTimePost({ date }: { date: number }) {
   return (
     <span>

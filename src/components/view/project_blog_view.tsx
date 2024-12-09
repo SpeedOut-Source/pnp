@@ -1,5 +1,3 @@
-"use client";
-
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/solid";
 import dynamic from "next/dynamic";
 import Loading from "~/components/markdown/loading";
@@ -13,10 +11,8 @@ import type {
   ImgBlurData,
 } from "~/app_function/utils/interfaces";
 import LayoutCardApp from "~/components/apps/layout_card";
-import { DEFAULT_IS_LIGHT, useThemeStore } from "~/app_state/theme_mode";
-import { useState, useEffect } from "react";
 import { PencilSquareIcon } from "@heroicons/react/24/outline";
-import { getDataUrl, getPrefixRepo } from "~/app_function/utils/utils";
+import { getDataUrl } from "~/app_function/utils/utils";
 import LayoutCardCompany from "~/components/company/layout_card";
 import urlJoin from "url-join";
 import type { TransformNodeOutput } from "~/app_function/remark/headings";
@@ -25,13 +21,12 @@ import LRWrap from "~/components/article/lr_wrap";
 import Spotlight from "~/components/spotlight";
 import CarouselSlider from "~/components/carousel_slider";
 import { env } from "~/env.mjs";
+import GetLogoListing from "./get_logo_listing";
 
 const Link = dynamic(() => import("next/link"));
 const Image = dynamic(() => import("next/image"));
 const ShareWith = dynamic(() => import("~/components/share_with"));
-const DateTimePost = dynamic(() => import("~/components/date_time_post"), {
-  ssr: false,
-});
+const DateTimePost = dynamic(() => import("~/components/date_time_post"));
 
 const MDRender = dynamic(() => import("~/components/markdown/md_render"), {
   loading: () => <Loading />,
@@ -52,86 +47,8 @@ export interface ProjectBlogViewProps {
 }
 
 export function ProjectBlogView(props: ProjectBlogViewProps) {
-  const utm = useThemeStore();
-  const [isLight, setIsLight] = useState(DEFAULT_IS_LIGHT);
-
   let shareTxt: string;
   let project: Project | undefined = undefined;
-
-  useEffect(() => {
-    setIsLight(utm.themeName === "winter");
-  }, [utm]);
-
-  function getLogoListing(name: string, appLogo?: string) {
-    switch (name.toLowerCase()) {
-      case "windows":
-      case "microsoft":
-      case "microsoft edge":
-      case "edge add-ons":
-        return (
-          <Image
-            src={`${getPrefixRepo()}/images/listing/microsoftstore.svg`}
-            alt={name}
-            height={10}
-            width={135}
-          />
-        );
-      case "chrome web store":
-        return (
-          <Image
-            className="rounded-md"
-            src={`${getPrefixRepo()}/images/listing/chrome-web-store.png`}
-            alt={name}
-            height={10}
-            width={160}
-          />
-        );
-      case "android":
-        return (
-          <Image
-            src={`${getPrefixRepo()}/images/listing/playstore.svg`}
-            alt={name}
-            height={10}
-            width={200}
-          />
-        );
-      case "google colab":
-        return (
-          <Image
-            src={`${getPrefixRepo()}/images/listing/open-in-colab.svg`}
-            alt={name}
-            height={10}
-            width={200}
-          />
-        );
-      case "github release":
-        return (
-          <Image
-            className=""
-            src={`${getPrefixRepo()}/images/listing/github-mark${
-              isLight ? "" : "-white"
-            }.svg`}
-            alt={name}
-            height={10}
-            width={50}
-          />
-        );
-      default:
-        return (
-          <Image
-            src={
-              appLogo ??
-              `${getPrefixRepo()}/images/logos/github-profile-dark${
-                isLight ? "-light" : ""
-              }.png`
-            }
-            alt={name}
-            height={10}
-            width={50}
-          />
-        );
-    }
-  }
 
   switch (props.type) {
     case "projects":
@@ -308,7 +225,10 @@ export function ProjectBlogView(props: ProjectBlogViewProps) {
                           <div className="h-24 space-y-2 py-2">
                             <p className="text-center">{x.name}</p>
                             <div className="flex h-fit w-40 justify-center overflow-hidden">
-                              {getLogoListing(x.name, props.itemView.imgUrl)}
+                              <GetLogoListing
+                                name={x.name}
+                                appLogo={props.itemView.imgUrl}
+                              />
                             </div>
                           </div>
                         }
@@ -416,10 +336,7 @@ export function ProjectBlogView(props: ProjectBlogViewProps) {
             )}
         </div>
         <div className="mx-auto mt-2 max-w-3xl">
-          <Comments
-            key={githubEditUrl}
-            theme={isLight ? "light" : "dark_dimmed"}
-          />
+          <Comments key={githubEditUrl} />
         </div>
       </div>
     </>

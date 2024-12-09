@@ -1,7 +1,7 @@
 import { create } from "zustand";
 import { devtools, persist, subscribeWithSelector } from "zustand/middleware";
 
-export const DEFAULT_IS_LIGHT = false;
+export const DEFAULT_THEME: ThemeName = "dark";
 
 type ThemeName = "winter" | "dark";
 
@@ -9,20 +9,26 @@ interface ThemeModeModel {
   themeName: ThemeName;
   setThemeName: (themeName: ThemeName) => void;
   toggleTheme: () => void;
+  isLight: boolean;
 }
 
-export const useThemeStore = create(
+export const useThemeStore = create<ThemeModeModel>()(
   subscribeWithSelector(
     devtools(
-      persist<ThemeModeModel>(
-        (set, get) => ({
-          themeName: "dark",
-          setThemeName: (themeName) => set({ themeName }),
-          toggleTheme: () => {
-            const currentTheme = get().themeName;
-            const newTheme = currentTheme === "winter" ? "dark" : "winter";
-            set({ themeName: newTheme });
+      persist(
+        (set) => ({
+          themeName: DEFAULT_THEME,
+          isLight: false,
+          setThemeName: (themeName) => {
+            document.documentElement.setAttribute("data-theme", themeName);
+            return set({ themeName, isLight: themeName === "winter" });
           },
+          toggleTheme: () =>
+            set((state) => {
+              const newTheme = state.themeName === "winter" ? "dark" : "winter";
+              document.documentElement.setAttribute("data-theme", newTheme);
+              return { themeName: newTheme, isLight: newTheme === "winter" };
+            }),
         }),
         {
           name: "theme-storage-state",

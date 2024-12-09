@@ -3,7 +3,7 @@
 import dynamic from "next/dynamic";
 import { useEffect, useState } from "react";
 import Image from "next/image";
-import { DEFAULT_IS_LIGHT, useThemeStore } from "~/app_state/theme_mode";
+import { useThemeStore } from "~/app_state/theme_mode";
 import { SearchButton } from "../search/button";
 import ThemeSwitch from "~/components/header/theme_switch";
 import { env } from "../../env.mjs";
@@ -18,12 +18,7 @@ const Links = dynamic(() => import("./links"));
 const Link = dynamic(() => import("next/link"));
 
 export default function Header() {
-  const utm = useThemeStore();
-  const [isLight, setIsLight] = useState(DEFAULT_IS_LIGHT);
-
-  useEffect(() => {
-    setIsLight(utm.themeName === "winter");
-  }, [utm]);
+  const { isLight } = useThemeStore();
 
   const [bgChange, setBgChange] = useState(false);
   const [loaded, setLoaded] = useState(false);
