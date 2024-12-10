@@ -10,7 +10,7 @@
     "dev": "cross-env NODE_NO_WARNINGS=1 next dev --turbo",
     "lint": "next lint",
     "lint:fix": "next lint --fix",
-    "preview": "npm run format:write && npm run devEnv next build && npx serve@latest out",
+    "preview": "npm i && npm run format:write && npm run devEnv next build && npx serve@latest out",
     "start": "next start",
     "sitemap": "next-sitemap",
     "protest": "npm run export && npx serve@latest out",
