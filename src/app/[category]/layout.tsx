@@ -1,4 +1,4 @@
-import { type Card } from "~/app_function/utils/interfaces";
+import { CardSchema } from "~/app_function/utils/interfaces";
 import { type generateStaticParamsType } from "./page/[no]/page";
 import { toTitleCase } from "~/app_function/utils/utils";
 import { env } from "~/env.mjs";
@@ -16,7 +16,7 @@ export async function generateMetadata({ params }: generateStaticParamsType) {
 }
 
 export async function generateStaticParams() {
-  const categories: Card[] = ["apps", "blogs", "company", "projects"];
+  const categories = CardSchema.options;
   return categories.map((category) => ({
     category,
   }));

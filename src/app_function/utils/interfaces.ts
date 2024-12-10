@@ -1,3 +1,5 @@
+import { z } from "zod";
+
 export type Company = {
   title: string;
   imgUrl: string;
@@ -54,7 +56,9 @@ export type App = {
   imgsBlurData: ImgBlurData;
 };
 
-export type Card = "blogs" | "projects" | "apps" | "company";
+export const CardSchema = z.enum(["blogs", "projects", "apps", "company"]);
+
+export type Card = z.infer<typeof CardSchema>;
 export type CardData = Project[] | Blog[] | App[] | Company[];
 export type CardItem = Project | Blog | App | Company;
 export type ImgBlurItem = { base64: string; height: number; width: number };
