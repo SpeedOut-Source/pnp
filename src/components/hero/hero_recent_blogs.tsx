@@ -1,16 +1,16 @@
-import ProjectBlogLayout from "../projects/project_blog_layout";
 import { type Blog } from "~/app_function/utils/interfaces";
 import PencilSquareIcon from "@heroicons/react/24/outline/PencilSquareIcon";
 import dynamic from "next/dynamic";
+import HeroBlogLayout from "./hero_blog_layout";
 
 const ViewMore = dynamic(() => import("../view_more"));
 
-export interface RecentBlogsProps {
+export interface HeroRecentBlogsProps {
   data: Blog[];
   total: number;
 }
 
-export default function RecentBlogs(props: RecentBlogsProps) {
+export default function HeroRecentBlogs(props: HeroRecentBlogsProps) {
   return (
     <div className="mx-auto h-fit max-w-6xl px-4 sm:pl-4 sm:pr-0">
       <div className="flex justify-between">
@@ -24,7 +24,7 @@ export default function RecentBlogs(props: RecentBlogsProps) {
       </div>
 
       <div className="py-3 xl:py-2">
-        <ProjectBlogLayout {...props} />
+        <HeroBlogLayout {...props} />
       </div>
       <div className="flex justify-center xl:hidden">
         <ViewMore url="/blogs" counts={props.total} name="blogs" />

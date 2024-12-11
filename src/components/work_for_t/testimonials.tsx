@@ -117,7 +117,7 @@ export default function Testimonials(props: TestimonialsProps) {
   return (
     <div
       ref={ref}
-      className="relative mx-auto h-fit w-full px-3 sm:mx-0 xl:max-w-2xl xl:px-0"
+      className="relative mx-auto h-fit w-full px-3 sm:mx-0 xl:px-0"
     >
       <div className="flex items-center gap-2 text-2xl normal-case text-slate-400">
         <ChatBubbleLeftRightIcon className="h-5 w-5" />

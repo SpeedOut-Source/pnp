@@ -4,10 +4,10 @@ import Hero from "~/components/hero/hero";
 import RecentApps from "~/components/apps/recent_apps";
 import RecentProjects from "~/components/projects/recent_projects";
 import ContactSection from "~/components/contact/contact_section";
-import RecentBlogs from "~/components/blogs/recent_blogs";
 import Comments from "~/components/comments";
 import { env } from "~/env.mjs";
 import { getApps, getTechs } from "~/app_function/utils/utils-server";
+import Testimonials from "~/components/work_for_t/testimonials";
 
 export const generateMetadata = async () => {
   const { apps } = await getApps();
@@ -33,12 +33,14 @@ const Home = async () => {
   return (
     <>
       <div className="mx-auto space-y-2 xl:container xl:mt-5">
-        <Hero me={meSection} company={workFor} testis={testis} />
+        <Hero me={meSection} company={workFor} recentBlogs={recentBlogs} />
         {recentApps.data.length > 0 && <RecentApps {...recentApps} />}
         {recentProjects.data.length > 0 && (
           <RecentProjects {...recentProjects} />
         )}
-        {recentBlogs.data.length > 0 && <RecentBlogs {...recentBlogs} />}
+        <div className="mx-auto max-w-6xl px-2">
+          <Testimonials {...testis} />
+        </div>
         <ContactSection />
         <div className="divider mx-auto max-w-6xl px-2" />
         <div className="mx-auto max-w-6xl px-2">
