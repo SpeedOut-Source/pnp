@@ -41,10 +41,10 @@ export function AllDataShowPage(props: AllDataProps) {
 
   return (
     <>
-      <div className="container mx-auto">
+      <div className="container mx-auto max-w-6xl">
         <p className="text-center text-3xl uppercase">{pageName}</p>
         {props.tags?.length ? (
-          <div className="mx-auto w-full max-w-6xl space-x-2 capitalize">
+          <div className="my-4 capitalize flex overflow-x-auto space-x-2 scroll-smooth scrollbar-style pb-2">
             <Link
               href={`/${props.type}/page/tag/`}
               className={`btn ${props.tag === undefined ? "btn-active" : ""}`}
