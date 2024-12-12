@@ -8,8 +8,8 @@ import {
 import PhotoIcon from "@heroicons/react/24/outline/PhotoIcon";
 import dynamic from "next/dynamic";
 import { type BlogHit, type ProjectHit } from "~/app_function/types/HitTypes";
-import { Highlight } from "./search/Highlight";
 import ThumTime from "./thum_time";
+import { HighlightSwitch } from "./search/highlight_switch";
 
 const Link = dynamic(() => import("next/link"));
 const Image = dynamic(() => import("next/legacy/image"));
@@ -75,9 +75,10 @@ export default function LayoutCard({ data }: LayoutCard) {
                         alt={data.app.name}
                       />
                     </div>
-                    <Highlight
+                    <HighlightSwitch
                       hit={data as ProjectHit}
                       attribute={["app", "name"]}
+                      data={data.app.name}
                     />
                   </div>
                   <div className="flex w-full items-center gap-2">
@@ -89,15 +90,20 @@ export default function LayoutCard({ data }: LayoutCard) {
                         alt={data.company.name}
                       />
                     </div>
-                    <Highlight
+                    <HighlightSwitch
                       hit={data as ProjectHit}
                       attribute={["company", "name"]}
+                      data={data.company.name}
                     />
                   </div>
                 </div>
               ) : (
                 <div className="text-md mt-2 text-justify font-semibold leading-tight">
-                  <Highlight hit={data as BlogHit} attribute="title" />
+                  <HighlightSwitch
+                    hit={data as BlogHit}
+                    attribute="title"
+                    data={data.title}
+                  />
                 </div>
               )}
             </div>
@@ -110,15 +116,27 @@ export default function LayoutCard({ data }: LayoutCard) {
               {isProject ? (
                 <div className="space-x-1">
                   <span className="font-semibold">
-                    <Highlight hit={data as ProjectHit} attribute="whatText" />
+                    <HighlightSwitch
+                      hit={data as ProjectHit}
+                      attribute="whatText"
+                      data={data.whatText}
+                    />
                   </span>
                   <span>
-                    <Highlight hit={data as ProjectHit} attribute="result" />
+                    <HighlightSwitch
+                      hit={data as ProjectHit}
+                      attribute="result"
+                      data={data.result}
+                    />
                   </span>
                 </div>
               ) : (
                 <p>
-                  <Highlight hit={data as BlogHit} attribute="desc" />
+                  <HighlightSwitch
+                    hit={data as BlogHit}
+                    attribute="desc"
+                    data={(data as BlogHit).desc}
+                  />
                 </p>
               )}
             </div>

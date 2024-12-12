@@ -2,7 +2,7 @@ import { type App } from "~/app_function/utils/interfaces";
 import PhotoIcon from "@heroicons/react/24/outline/PhotoIcon";
 import dynamic from "next/dynamic";
 import { type AppHit } from "~/app_function/types/HitTypes";
-import { Highlight } from "../search/Highlight";
+import { HighlightSwitch } from "../search/highlight_switch";
 
 const Link = dynamic(() => import("next/link"));
 const Image = dynamic(() => import("next/legacy/image"));
@@ -33,10 +33,18 @@ export default function LayoutCardApp(props: App | AppHit) {
       </div>
       <div className="mx-0 mt-1 h-fit w-full px-2 text-center tracking-wider">
         <p className="mb-1 font-semibold leading-4">
-          <Highlight hit={props as AppHit} attribute="title" />
+          <HighlightSwitch
+            hit={props as AppHit}
+            attribute="title"
+            data={props.title}
+          />
         </p>
         <p className="text-xs text-base-content">
-          <Highlight hit={props as AppHit} attribute="category" />
+          <HighlightSwitch
+            hit={props as AppHit}
+            attribute="category"
+            data={props.category}
+          />
         </p>
       </div>
     </Link>

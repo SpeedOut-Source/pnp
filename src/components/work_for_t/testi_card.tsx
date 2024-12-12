@@ -1,6 +1,6 @@
 import dynamic from "next/dynamic";
-import { Highlight } from "../search/Highlight";
 import { type TestimonialHit } from "~/app_function/types/HitTypes";
+import { HighlightSwitch } from "../search/highlight_switch";
 
 const Link = dynamic(() => import("next/link"));
 const Image = dynamic(() => import("next/legacy/image"));
@@ -39,10 +39,18 @@ export default function TestiCard(props: Testimonial) {
           </div>
           <div className="text-left tracking-wider">
             <p style={{ whiteSpace: "pre-line" }} className="text-sm font-bold">
-              <Highlight hit={props as TestimonialHit} attribute="fullName" />
+              <HighlightSwitch
+                hit={props as TestimonialHit}
+                attribute="fullName"
+                data={props.fullName}
+              />
             </p>
             <p style={{ whiteSpace: "pre-line" }} className="text-xs">
-              <Highlight hit={props as TestimonialHit} attribute="position" />
+              <HighlightSwitch
+                hit={props as TestimonialHit}
+                attribute="position"
+                data={props.position}
+              />
             </p>
           </div>
         </Link>
@@ -51,7 +59,11 @@ export default function TestiCard(props: Testimonial) {
         style={{ whiteSpace: "pre-line" }}
         className="mx-4 text-xs leading-relaxed md:mx-3"
       >
-        <Highlight hit={props as TestimonialHit} attribute="text" />
+        <HighlightSwitch
+          hit={props as TestimonialHit}
+          attribute="text"
+          data={props.text}
+        />
       </p>
     </div>
   );
