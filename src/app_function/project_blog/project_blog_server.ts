@@ -13,8 +13,8 @@ export function getPageSize(type: Card) {
   }
 }
 
-export async function projectBlogGetStaticPaths(type: Card) {
-  const dbConfig = await getDBConfigs();
+export async function projectBlogGetStaticPaths(type: Card, tag?: string) {
+  const dbConfig = await getDBConfigs(tag, type);
 
   let total = 0;
   switch (type) {
@@ -48,9 +48,11 @@ export async function projectBlogGetStaticPaths(type: Card) {
 export async function projectBlogGetStaticProps({
   no,
   type,
+  tag,
 }: {
   no?: string;
   type: Card;
+  tag?: string;
 }): Promise<AllDataProps | "-1"> {
   let pageNo = 1;
   if (no && typeof no === "string") {
@@ -58,7 +60,7 @@ export async function projectBlogGetStaticProps({
   }
 
   try {
-    const data = await getCard(type);
+    const data = await getCard(type, tag);
     const pageSize = getPageSize(type);
     const limitShow = pageSize * pageNo;
     const dataArray = data.slice(limitShow - pageSize, limitShow);

@@ -19,6 +19,7 @@ export interface DBConfigs {
   blogTotal: number;
   appTotal: number;
   companyTotal: number;
+  total?: number;
 }
 
 export interface RawProjectsProps {
@@ -42,42 +43,79 @@ export async function getData(path: string) {
   return Buffer.from(data);
 }
 
-export async function getDBConfigs() {
+export async function getDBConfigs(tag?: string, card?: Card) {
+  if (tag && card) {
+    const data = (
+      await getData(`db/tags/${card}/${tag}/configs.json`)
+    ).toString();
+    return JSON.parse(data) as DBConfigs;
+  }
+
   const data = (await getData("db/configs.json")).toString();
   return JSON.parse(data) as DBConfigs;
 }
 
-export async function getProjects(): Promise<RawProjectsProps> {
+export async function getTagConfigs(card?: Card) {
+  const data = (await getData(`db/tags/${card}/configs.json`)).toString();
+  return JSON.parse(data) as { tags: string[] };
+}
+
+export async function getProjects(tag?: string): Promise<RawProjectsProps> {
   try {
-    const dataProjects = (await getData("db/projects.json")).toString();
+    let dataProjects: string;
+    if (tag) {
+      dataProjects = (
+        await getData(`db/tags/projects/${tag}/data.json`)
+      ).toString();
+    } else {
+      dataProjects = (await getData("db/projects.json")).toString();
+    }
     return JSON.parse(dataProjects) as RawProjectsProps;
   } catch {
     return { projects: [] };
   }
 }
 
-export async function getApps(): Promise<RawAppsProps> {
+export async function getApps(tag?: string): Promise<RawAppsProps> {
   try {
-    const dataApps = (await getData("db/apps.json")).toString();
-    return JSON.parse(dataApps) as RawAppsProps;
+    let data: string;
+    if (tag) {
+      data = (await getData(`db/tags/apps/${tag}/data.json`)).toString();
+    } else {
+      data = (await getData("db/apps.json")).toString();
+    }
+
+    return JSON.parse(data) as RawAppsProps;
   } catch {
     return { apps: [] };
   }
 }
 
-export async function getBlogs(): Promise<RawBlogsProps> {
+export async function getBlogs(tag?: string): Promise<RawBlogsProps> {
   try {
-    const dataBlogs = (await getData("db/blogs.json")).toString();
-    return JSON.parse(dataBlogs) as RawBlogsProps;
+    let data: string;
+    if (tag) {
+      data = (await getData(`db/tags/blogs/${tag}/data.json`)).toString();
+    } else {
+      data = (await getData("db/blogs.json")).toString();
+    }
+
+    return JSON.parse(data) as RawBlogsProps;
   } catch {
     return { blogs: [] };
   }
 }
 
-export async function getCompany(): Promise<RawCompanyProps> {
+export async function getCompany(tag?: string): Promise<RawCompanyProps> {
   try {
-    const dataCompany = (await getData("db/workInfo.json")).toString();
-    return JSON.parse(dataCompany) as RawCompanyProps;
+    let data: string;
+    if (tag) {
+      data = (await getData(`db/tags/company/${tag}/data.json`)).toString();
+    } else {
+      data = (await getData("db/workInfo.json")).toString();
+    }
+
+    return JSON.parse(data) as RawCompanyProps;
   } catch {
     return { company: [] };
   }
@@ -203,23 +241,23 @@ export function parseBlog(md_text: string, filename: string): Blog {
   };
 }
 
-export async function getCard(type: Card) {
+export async function getCard(type: Card, tag?: string) {
   let allData: CardData;
   switch (type) {
     case "projects":
-      const projects = (await getProjects()).projects;
+      const projects = (await getProjects(tag)).projects;
       allData = await addBlur(projects, projects.length);
       break;
     case "blogs":
-      const blogs = (await getBlogs()).blogs;
+      const blogs = (await getBlogs(tag)).blogs;
       allData = await addBlur(blogs, blogs.length);
       break;
     case "apps":
-      const apps = (await getApps()).apps;
+      const apps = (await getApps(tag)).apps;
       allData = await addBlur(apps, apps.length);
       break;
     case "company":
-      const company = (await getCompany()).company;
+      const company = (await getCompany(tag)).company;
       allData = await addBlur(company, company.length);
       break;
   }

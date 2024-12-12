@@ -2,6 +2,7 @@
 
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/solid";
 import dynamic from "next/dynamic";
+import Link from "next/link";
 import { useEffect, useState } from "react";
 import { type Card, type CardData } from "~/app_function/utils/interfaces";
 import { toTitleCase } from "~/app_function/utils/utils";
@@ -21,6 +22,8 @@ export interface AllDataProps {
   data: CardData;
   pageInfo: pageInfo;
   type: Card;
+  tags?: string[];
+  tag?: string;
 }
 
 export function AllDataShowPage(props: AllDataProps) {
@@ -40,6 +43,27 @@ export function AllDataShowPage(props: AllDataProps) {
     <>
       <div className="container mx-auto">
         <p className="text-center text-3xl uppercase">{pageName}</p>
+        {props.tags?.length ? (
+          <div className="mx-auto w-full max-w-6xl space-x-2 capitalize">
+            <Link
+              href={`/${props.type}/page/tag/`}
+              className={`btn ${props.tag === undefined ? "btn-active" : ""}`}
+            >
+              All
+            </Link>
+            {props.tags.map((x) => (
+              <Link
+                href={`/${props.type}/page/tag/${x}`}
+                className={`btn ${props.tag === x ? "btn-active" : ""}`}
+                key={x}
+              >
+                {x}
+              </Link>
+            ))}
+          </div>
+        ) : (
+          <></>
+        )}
         <div className="mx-auto w-full max-w-6xl">
           <div className="m-2">
             <ProjectBlogLayout
