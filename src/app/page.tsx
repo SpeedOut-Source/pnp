@@ -6,15 +6,18 @@ import RecentProjects from "~/components/projects/recent_projects";
 import ContactSection from "~/components/contact/contact_section";
 import Comments from "~/components/comments";
 import { env } from "~/env.mjs";
-import { getApps, getTechs } from "~/app_function/utils/utils-server";
+import { getApps, getTags } from "~/app_function/utils/utils-server";
 import Testimonials from "~/components/work_for_t/testimonials";
 
 export const generateMetadata = async () => {
   const { apps } = await getApps();
-  const { techs } = await getTechs();
+  const { tags } = await getTags();
 
   return generateMetadataSEO({
-    description: `${techs.join(", ")}`,
+    description: `${tags
+      .splice(0, 10)
+      .map(({ tag }) => tag)
+      .join(", ")}`,
     imgUrl: apps[0]?.imgUrl,
   });
 };

@@ -50,7 +50,7 @@ export default async function Page({ params }: PageType) {
     return notFound();
   }
 
-  const tags = await getTagConfigs(category);
+  const { tags } = await getTagConfigs(category);
 
-  return <AllDataShowPage {...data} {...tags} tag={tag} />;
+  return <AllDataShowPage {...data} tags={tags} tag={tag} />;
 }

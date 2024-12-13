@@ -11,7 +11,7 @@ export async function generateStaticParams({
 }: generateStaticParamsType) {
   const { category } = await params;
 
-  return (await getTagConfigs(category)).tags.map((tag) => ({
+  return (await getTagConfigs(category)).tags.map(({ tag }) => ({
     tag: env.NODE_ENV === "development" ? encodeURIComponent(tag) : tag,
   }));
 }

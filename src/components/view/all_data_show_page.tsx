@@ -6,6 +6,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { type Card, type CardData } from "~/app_function/utils/interfaces";
 import { toTitleCase } from "~/app_function/utils/utils";
+import { type TagsListType } from "~/app_function/utils/utils-server";
 
 const ProjectBlogLayout = dynamic(
   () => import("~/components/projects/project_blog_layout"),
@@ -22,7 +23,7 @@ export interface AllDataProps {
   data: CardData;
   pageInfo: pageInfo;
   type: Card;
-  tags?: string[];
+  tags?: TagsListType;
   tag?: string;
 }
 
@@ -44,20 +45,20 @@ export function AllDataShowPage(props: AllDataProps) {
       <div className="container mx-auto max-w-6xl">
         <p className="text-center text-3xl uppercase">{pageName}</p>
         {props.tags?.length ? (
-          <div className="my-4 capitalize flex overflow-x-auto space-x-2 scroll-smooth scrollbar-style pb-2">
+          <div className="scrollbar-style my-4 flex space-x-2 overflow-x-auto scroll-smooth pb-2 capitalize">
             <Link
               href={`/${props.type}/page/tag/`}
               className={`btn ${props.tag === undefined ? "btn-active" : ""}`}
             >
               All
             </Link>
-            {props.tags.map((x) => (
+            {props.tags.map(({ tag }) => (
               <Link
-                href={`/${props.type}/page/tag/${x}`}
-                className={`btn ${props.tag === x ? "btn-active" : ""}`}
-                key={x}
+                href={`/${props.type}/page/tag/${tag}`}
+                className={`btn ${props.tag === tag ? "btn-active" : ""}`}
+                key={tag}
               >
-                {x}
+                {tag}
               </Link>
             ))}
           </div>

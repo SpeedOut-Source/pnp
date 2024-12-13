@@ -7,8 +7,8 @@ import {
   getDBConfigs,
   getData,
   getProjects,
-  getTechs,
   getTesti,
+  getTags,
 } from "../utils/utils-server";
 import { type MeSectionProps } from "~/components/me_section/me_section";
 import { type TestimonialsProps } from "~/components/work_for_t/testimonials";
@@ -51,7 +51,7 @@ export async function HomeServer() {
   const dataBio = (await getData("home/bio.json")).toString();
   const me = JSON.parse(dataBio) as MeProps;
 
-  const techs = await getTechs();
+  const totalTags = await getTags();
 
   const testis = await getTesti();
 
@@ -83,7 +83,9 @@ export async function HomeServer() {
         blurDataURL: blurUrlItem ? blurUrlItem.base64 : null,
         ...me,
       },
-      techs,
+      totalTags: {
+        tags: totalTags.tags.splice(0, 10),
+      },
     },
     workFor: { data: RCompany, total: dbConfig.companyTotal },
     testis: { testis: RTestis, addUrl: testimonialAddUrl },

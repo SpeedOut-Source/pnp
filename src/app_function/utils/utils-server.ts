@@ -1,18 +1,21 @@
 import { promises } from "fs";
 import type {
-  ImgBlurData,
   App,
   Blog,
   Card,
   CardData,
   Company,
+  ImgBlurData,
   Project,
 } from "./interfaces";
-import { parse, join } from "path";
+import { join, parse } from "path";
 import { type TestimonialsProps } from "~/components/work_for_t/testimonials";
 import { env } from "../../env.mjs";
 import { getBlurData } from "./blur_cache";
-import { type RXTProps } from "~/components/me_section/r_x_t";
+
+export interface RXTProps {
+  techs: string[];
+}
 
 export interface DBConfigs {
   projectTotal: number;
@@ -38,6 +41,22 @@ export interface RawCompanyProps {
   company: Company[];
 }
 
+export type TagsListType = { tag: string; date: number }[];
+
+export type TagsType = { tags: TagsListType };
+
+export type TotalTagsType = {
+  tags: {
+    tag: string;
+    exist: {
+      type: string;
+      total: number;
+      date: number;
+    }[];
+    latest_date: number;
+    total: number;
+  }[];
+};
 export async function getData(path: string) {
   const data = await promises.readFile(join(env.DATA_PATH, path), "utf8");
   return Buffer.from(data);
@@ -57,7 +76,7 @@ export async function getDBConfigs(tag?: string, card?: Card) {
 
 export async function getTagConfigs(card?: Card) {
   const data = (await getData(`db/tags/${card}/configs.json`)).toString();
-  return JSON.parse(data) as { tags: string[] };
+  return JSON.parse(data) as TagsType;
 }
 
 export async function getProjects(tag?: string): Promise<RawProjectsProps> {
@@ -133,10 +152,18 @@ export async function getTesti(): Promise<TestimonialsProps> {
 export async function getTechs(): Promise<RXTProps> {
   try {
     const dataExpertise = (await getData("home/expertise.json")).toString();
-    const techs = JSON.parse(dataExpertise) as RXTProps;
-    return techs;
+    return JSON.parse(dataExpertise) as RXTProps;
   } catch {
     return { techs: [] };
+  }
+}
+
+export async function getTags() {
+  try {
+    const data = (await getData("db/tags/configs.json")).toString();
+    return JSON.parse(data) as TotalTagsType;
+  } catch {
+    return { tags: [] };
   }
 }
 
@@ -298,7 +325,7 @@ export function extractImageUrlsFromMarkdown(markdown: string): string[] {
   const imageUrls: string[] = [];
 
   // Match Markdown-style image syntax: ![alt text](url)
-  const markdownImageRegex = /!\[[^\]]*?\]\((.*?)\)/g;
+  const markdownImageRegex = /!\[[^\]]*?]\((.*?)\)/g;
   let match;
 
   while ((match = markdownImageRegex.exec(markdown)) !== null) {
