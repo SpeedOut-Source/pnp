@@ -15,7 +15,7 @@ export default function WorkFor(props: WorkForProps) {
           className="link-hover link tooltip md:tooltip-bottom"
           data-tip="View all"
         >
-          {"I've done work for"}
+          Experience
         </Link>
       </div>
 

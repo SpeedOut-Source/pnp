@@ -13,7 +13,7 @@ export default function TimeLine({
         month: "short",
         year: "numeric",
       })}
-      -{" "}
+      {" - "}
       {end > 0
         ? new Date(end).toLocaleString("en-US", {
             month: "short",

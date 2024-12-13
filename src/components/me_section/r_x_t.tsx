@@ -22,16 +22,16 @@ export default function RXT({ tags }: TotalTagsType) {
         <Menubar>
           {tags.map(({ tag, exist, total }) => (
             <MenubarMenu key={tag}>
-              <MenubarTrigger className="capitalize">
+              <MenubarTrigger className="capitalize hover:underline">
                 {tag}{" "}
                 {total > 1 ? (
-                  <span className="indicator-new ml-1">
+                  <span className="indicator-new ml-1 bg-base-100">
                     <span>{total}</span>
                   </span>
                 ) : (
                   <></>
                 )}
-                <span>{tag === tags[tags.length - 1].tag ? "" : ","}</span>
+                <span>{tag === tags[tags.length - 1]!.tag ? "" : ","}</span>
               </MenubarTrigger>
 
               <MenubarContent>

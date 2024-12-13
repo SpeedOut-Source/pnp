@@ -55,7 +55,7 @@ export async function projectBlogGetStaticProps({
   tag?: string;
 }): Promise<AllDataProps | "-1"> {
   let pageNo = 1;
-  if (no && typeof no === "string") {
+  if (no) {
     pageNo = Number.parseInt(no);
   }
 

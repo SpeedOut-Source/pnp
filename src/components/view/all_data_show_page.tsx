@@ -2,11 +2,11 @@
 
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/solid";
 import dynamic from "next/dynamic";
-import Link from "next/link";
 import { useEffect, useState } from "react";
 import { type Card, type CardData } from "~/app_function/utils/interfaces";
 import { toTitleCase } from "~/app_function/utils/utils";
 import { type TagsListType } from "~/app_function/utils/utils-server";
+import TagsShow from "~/components/view/tags_show";
 
 const ProjectBlogLayout = dynamic(
   () => import("~/components/projects/project_blog_layout"),
@@ -44,27 +44,7 @@ export function AllDataShowPage(props: AllDataProps) {
     <>
       <div className="container mx-auto max-w-6xl">
         <p className="text-center text-3xl uppercase">{pageName}</p>
-        {props.tags?.length ? (
-          <div className="scrollbar-style my-4 flex space-x-2 overflow-x-auto scroll-smooth pb-2 capitalize">
-            <Link
-              href={`/${props.type}/page/tag/`}
-              className={`btn ${props.tag === undefined ? "btn-active" : ""}`}
-            >
-              All
-            </Link>
-            {props.tags.map(({ tag }) => (
-              <Link
-                href={`/${props.type}/page/tag/${tag}`}
-                className={`btn ${props.tag === tag ? "btn-active" : ""}`}
-                key={tag}
-              >
-                {tag}
-              </Link>
-            ))}
-          </div>
-        ) : (
-          <></>
-        )}
+        <TagsShow {...props} allShow />
         <div className="mx-auto w-full max-w-6xl">
           <div className="m-2">
             <ProjectBlogLayout

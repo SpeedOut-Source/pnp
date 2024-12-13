@@ -10,6 +10,7 @@ export type Company = {
   end: number;
   fileName: string;
   readTime: string;
+  tags: string[];
 };
 
 export interface WorkForProps {
@@ -25,6 +26,7 @@ export type Blog = {
   date: number;
   readTime: number;
   fileName: string;
+  tags: string[];
 };
 
 export type Project = {
@@ -37,6 +39,7 @@ export type Project = {
   date: number;
   readTime: number;
   fileName: string;
+  tags: string[];
 };
 
 interface Listing {
@@ -54,6 +57,7 @@ export type App = {
   fileName: string;
   imgs: string[];
   imgsBlurData: ImgBlurData;
+  tags: string[];
 };
 
 export const CardSchema = z.enum(["blogs", "projects", "apps", "company"]);
