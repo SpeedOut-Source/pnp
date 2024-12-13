@@ -74,7 +74,7 @@ export async function generateMetadata({ params }: generateStaticParamsType) {
 
   return generateMetadataSEO({
     description,
-    title,
+    title: `${title} | ${env.NEXT_PUBLIC_PERSON_NAME}`,
     imgUrl: itemView.imgUrl,
     ogType: "article",
     itemView: itemView,

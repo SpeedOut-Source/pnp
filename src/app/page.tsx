@@ -6,19 +6,17 @@ import RecentProjects from "~/components/projects/recent_projects";
 import ContactSection from "~/components/contact/contact_section";
 import Comments from "~/components/comments";
 import { env } from "~/env.mjs";
-import { getApps, getTags } from "~/app_function/utils/utils-server";
+import { getData } from "~/app_function/utils/utils-server";
 import Testimonials from "~/components/work_for_t/testimonials";
+import type { MeProps } from "~/components/me_section/me";
 
 export const generateMetadata = async () => {
-  const { apps } = await getApps();
-  const { tags } = await getTags();
+  const dataBio = (await getData("home/bio.json")).toString();
+  const me = JSON.parse(dataBio) as MeProps;
 
   return generateMetadataSEO({
-    description: `${tags
-      .splice(0, 10)
-      .map(({ tag }) => tag)
-      .join(", ")}`,
-    imgUrl: apps[0]?.imgUrl,
+    description: `${me.hText} ${me.text}`,
+    imgUrl: me.imgUrl,
   });
 };
 

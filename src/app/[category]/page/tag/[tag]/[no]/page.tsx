@@ -5,10 +5,6 @@ import { toTitleCase } from "~/app_function/utils/utils";
 import { env } from "~/env.mjs";
 import Page from "../../../[no]/page";
 
-export type PageType = {
-  params: Promise<{ no: string; category: Card; tag: string }>;
-};
-
 export type generateStaticParamsType = {
   params: Promise<{ no: string; category: Card; tag: string }>;
 };

@@ -3,8 +3,8 @@ import { env } from "~/env.mjs";
 
 export const generateMetadata = async () => {
   return generateMetadataSEO({
-    description: `404 | ${env.NEXT_PUBLIC_PERSON_NAME}`,
-    title: `404 | ${env.NEXT_PUBLIC_PERSON_NAME}`,
+    description: `404 | This page is not found | ${env.NEXT_PUBLIC_PERSON_NAME}`,
+    title: `404 | This page is not found | ${env.NEXT_PUBLIC_PERSON_NAME}`,
   });
 };
 

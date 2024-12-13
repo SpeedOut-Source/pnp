@@ -21,7 +21,7 @@ export type generateStaticParamsType = {
 export async function generateMetadata({ params }: generateStaticParamsType) {
   const { category, no } = await params;
   const pageName = toTitleCase(category);
-  const title = `${pageName} | Page ${no} | ${env.NEXT_PUBLIC_PERSON_NAME}`;
+  const title = `Page ${no} | ${pageName} | ${env.NEXT_PUBLIC_PERSON_NAME}`;
 
   return generateMetadataSEO({
     description: `See all ${title}`,
