@@ -33,7 +33,10 @@ export default function TagsShow({
       {allShow ? (
         <Link
           href={`/${type}/page/tag/`}
-          className={clsx("p-card cursor-pointer", tag === undefined ? "btn-active" : "")}
+          className={clsx(
+            "p-card cursor-pointer",
+            tag === undefined ? "btn-active" : "",
+          )}
         >
           All
         </Link>
@@ -43,7 +46,10 @@ export default function TagsShow({
       {tags.map((x) => (
         <Link
           href={`/${type}/page/tag/${x.tag}`}
-          className={clsx(`p-card cursor-pointer`, x.tag === tag ? "btn-active" : "")}
+          className={clsx(
+            `p-card cursor-pointer capitalize`,
+            x.tag === tag ? "btn-active" : "",
+          )}
           key={x.tag}
         >
           {x.tag}

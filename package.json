@@ -1,12 +1,12 @@
 {
   "name": "pnp",
-  "version": "1.1.0-alpha",
+  "version": "2.0.0-alpha",
   "private": true,
   "scripts": {
     "build": "next build",
     "check": "next lint && tsc --noEmit",
     "clean": "npx rimraf node_modules .turbo dist .eslintcache .next",
-    "export": "npm run format:write && next build && npm run sitemap && npm run search",
+    "export": "next build && npm run sitemap && npm run search",
     "dev": "next dev --turbo",
     "lint": "next lint",
     "lint:fix": "next lint --fix",
