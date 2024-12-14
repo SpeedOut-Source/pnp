@@ -18,7 +18,7 @@ export default function RXT({ tags }: TotalTagsType) {
         <WrenchScrewdriverIcon className="h-5 w-5" />
         Recent Expertise Technology
       </p>
-        <Menubar className="flex flex-wrap !border-none !bg-transparent !p-0 !h-auto">
+        <Menubar className="flex flex-wrap !border-none !bg-transparent !p-0 !h-auto justify-evenly">
           {tags.map(({ tag, exist, total }) => (
             <MenubarMenu key={tag}>
               <MenubarTrigger className="capitalize hover:underline !cursor-pointer !py-0.5 !px-0 focus:!bg-transparent focus:!text-base-content data-[state=open]:!bg-transparent data-[state=open]:text-base-content">
