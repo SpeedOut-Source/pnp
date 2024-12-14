@@ -84,7 +84,7 @@ export async function HomeServer() {
         ...me,
       },
       totalTags: {
-        tags: totalTags.tags.splice(0, 10),
+        tags: totalTags.tags.splice(0, 15),
       },
     },
     workFor: { data: RCompany, total: dbConfig.companyTotal },

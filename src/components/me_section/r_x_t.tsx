@@ -18,8 +18,7 @@ export default function RXT({ tags }: TotalTagsType) {
         <WrenchScrewdriverIcon className="h-5 w-5" />
         Recent Expertise Technology
       </p>
-      {
-        <Menubar>
+        <Menubar className="flex flex-wrap">
           {tags.map(({ tag, exist, total }) => (
             <MenubarMenu key={tag}>
               <MenubarTrigger className="capitalize hover:underline">
@@ -59,7 +58,7 @@ export default function RXT({ tags }: TotalTagsType) {
             </MenubarMenu>
           ))}
         </Menubar>
-      }
+
     </div>
   );
 }

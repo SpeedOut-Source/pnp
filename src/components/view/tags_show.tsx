@@ -26,17 +26,18 @@ export default function TagsShow({
   return (
     <div
       className={twMerge(
-        "scrollbar-style my-4 flex space-x-2 overflow-x-auto scroll-smooth pb-2 capitalize",
+        "scrollbar-style-100 my-4 flex space-x-2 overflow-x-auto  scroll-smooth pb-2 capitalize",
         className,
       )}
     >
       {allShow ? (
         <Link
-          href={`/${type}/page/tag/`}
+          href={`/${type}/page/tag#all`}
           className={clsx(
             "p-card cursor-pointer",
             tag === undefined ? "btn-active" : "",
           )}
+          id="all"
         >
           All
         </Link>
@@ -45,7 +46,8 @@ export default function TagsShow({
       )}
       {tags.map((x) => (
         <Link
-          href={`/${type}/page/tag/${x.tag}`}
+          href={`/${type}/page/tag/${x.tag}#${x.tag}`}
+          id={x.tag}
           className={clsx(
             `p-card cursor-pointer capitalize`,
             x.tag === tag ? "btn-active" : "",
