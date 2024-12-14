@@ -18,10 +18,10 @@ export default function RXT({ tags }: TotalTagsType) {
         <WrenchScrewdriverIcon className="h-5 w-5" />
         Recent Expertise Technology
       </p>
-        <Menubar className="flex flex-wrap">
+        <Menubar className="flex flex-wrap !border-none !bg-transparent !p-0 !h-auto">
           {tags.map(({ tag, exist, total }) => (
             <MenubarMenu key={tag}>
-              <MenubarTrigger className="capitalize hover:underline">
+              <MenubarTrigger className="capitalize hover:underline !cursor-pointer !py-0.5 !px-0 focus:!bg-transparent focus:!text-base-content data-[state=open]:!bg-transparent data-[state=open]:text-base-content">
                 {tag}{" "}
                 {total > 1 ? (
                   <span className="indicator-new ml-1 bg-base-100">
@@ -33,11 +33,11 @@ export default function RXT({ tags }: TotalTagsType) {
                 <span>{tag === tags[tags.length - 1]!.tag ? "" : ","}</span>
               </MenubarTrigger>
 
-              <MenubarContent>
-                <MenubarItem disabled className="capitalize">
+              <MenubarContent className="!border-base-300 !bg-base-100 !text-base-content">
+                <MenubarItem disabled className="capitalize !text-base-content">
                   tag mentioned in
                 </MenubarItem>
-                <MenubarSeparator />
+                <MenubarSeparator className="!bg-base-content/30 " />
                 {exist.map(({ type, total: itemTotal }) => (
                   <Link
                     key={`/${type}/page/tag/${tag}`}
@@ -45,7 +45,7 @@ export default function RXT({ tags }: TotalTagsType) {
                   >
                     <MenubarItem
                       key={type}
-                      className="flex justify-between capitalize"
+                      className="flex justify-between capitalize focus:!bg-base-300 focus:!text-base-content !cursor-pointer"
                     >
                       <span>{type}</span>
                       <span className="indicator-new ml-1">
