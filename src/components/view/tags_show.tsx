@@ -26,7 +26,7 @@ export default function TagsShow({
   return (
     <div
       className={twMerge(
-        "scrollbar-style-100 my-4 flex space-x-2 overflow-x-auto  scroll-smooth pb-2 capitalize",
+        "scrollbar-style-100 my-4 flex space-x-2 overflow-x-auto scroll-smooth pb-2 capitalize",
         className,
       )}
     >
