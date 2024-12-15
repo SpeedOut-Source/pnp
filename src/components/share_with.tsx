@@ -1,4 +1,6 @@
-import { useRouter } from "next/router";
+"use client";
+
+import { usePathname } from "next/navigation";
 import dynamic from "next/dynamic";
 import { env } from "~/env.mjs";
 import urlJoin from "url-join";
@@ -11,8 +13,8 @@ interface ShareWith {
 }
 
 export default function ShareWith(props: ShareWith) {
-  const router = useRouter();
-  const fullUrl = urlJoin(env.NEXT_PUBLIC_BASE_URL, router.asPath);
+  const asPath = usePathname();
+  const fullUrl = urlJoin(env.NEXT_PUBLIC_BASE_URL, asPath);
 
   return (
     <div className="p-card flex h-fit w-full flex-col space-y-2 overflow-visible py-2 text-xs sm:w-fit">
@@ -23,14 +25,14 @@ export default function ShareWith(props: ShareWith) {
       <div className="space-x-2">
         <Link
           target="_blank"
-          className="link-hover link-primary link"
+          className="link-hover link link-primary"
           href={`https://www.facebook.com/sharer/sharer.php?u=${fullUrl}`}
         >
           Facebook
         </Link>
         <Link
           target="_blank"
-          className="link-hover link-primary link"
+          className="link-hover link link-primary"
           href={`https://twitter.com/intent/tweet?text=${
             props.text
           } ${encodeURIComponent(fullUrl)}`}
@@ -39,9 +41,9 @@ export default function ShareWith(props: ShareWith) {
         </Link>
         <Link
           target="_blank"
-          className="link-hover link-primary link"
+          className="link-hover link link-primary"
           href={`https://t.me/share/url?url=${encodeURIComponent(
-            fullUrl
+            fullUrl,
           )}&text=${props.text}`}
         >
           Telegram

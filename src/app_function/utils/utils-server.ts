@@ -1,24 +1,28 @@
 import { promises } from "fs";
 import type {
-  ImgBlurData,
   App,
   Blog,
   Card,
   CardData,
   Company,
+  ImgBlurData,
   Project,
 } from "./interfaces";
-import { getPlaiceholder } from "plaiceholder";
-import { parse } from "path";
+import { join, parse } from "path";
 import { type TestimonialsProps } from "~/components/work_for_t/testimonials";
 import { env } from "../../env.mjs";
-import log from "~/app_function/logger/logger";
+import { getBlurData } from "./blur_cache";
+
+export interface RXTProps {
+  techs: string[];
+}
 
 export interface DBConfigs {
   projectTotal: number;
   blogTotal: number;
   appTotal: number;
   companyTotal: number;
+  total?: number;
 }
 
 export interface RawProjectsProps {
@@ -37,48 +41,101 @@ export interface RawCompanyProps {
   company: Company[];
 }
 
+export type TagsListType = { tag: string; date: number }[];
+
+export type TagsType = { tags: TagsListType };
+
+export type TotalTagsType = {
+  tags: {
+    tag: string;
+    exist: {
+      type: string;
+      total: number;
+      date: number;
+    }[];
+    latest_date: number;
+    total: number;
+  }[];
+};
 export async function getData(path: string) {
-  const data = await promises.readFile(`${env.DATA_PATH}${path}`, "utf8");
+  const data = await promises.readFile(join(env.DATA_PATH, path), "utf8");
   return Buffer.from(data);
 }
 
-export async function getDBConfigs() {
+export async function getDBConfigs(tag?: string, card?: Card) {
+  if (tag && card) {
+    const data = (
+      await getData(`db/tags/${card}/${tag}/configs.json`)
+    ).toString();
+    return JSON.parse(data) as DBConfigs;
+  }
+
   const data = (await getData("db/configs.json")).toString();
   return JSON.parse(data) as DBConfigs;
 }
 
-export async function getProjects(): Promise<RawProjectsProps> {
+export async function getTagConfigs(card?: Card) {
+  const data = (await getData(`db/tags/${card}/configs.json`)).toString();
+  return JSON.parse(data) as TagsType;
+}
+
+export async function getProjects(tag?: string): Promise<RawProjectsProps> {
   try {
-    const dataProjects = (await getData("db/projects.json")).toString();
+    let dataProjects: string;
+    if (tag) {
+      dataProjects = (
+        await getData(`db/tags/projects/${tag}/data.json`)
+      ).toString();
+    } else {
+      dataProjects = (await getData("db/projects.json")).toString();
+    }
     return JSON.parse(dataProjects) as RawProjectsProps;
-  } catch (e) {
+  } catch {
     return { projects: [] };
   }
 }
 
-export async function getApps(): Promise<RawAppsProps> {
+export async function getApps(tag?: string): Promise<RawAppsProps> {
   try {
-    const dataApps = (await getData("db/apps.json")).toString();
-    return JSON.parse(dataApps) as RawAppsProps;
-  } catch (e) {
+    let data: string;
+    if (tag) {
+      data = (await getData(`db/tags/apps/${tag}/data.json`)).toString();
+    } else {
+      data = (await getData("db/apps.json")).toString();
+    }
+
+    return JSON.parse(data) as RawAppsProps;
+  } catch {
     return { apps: [] };
   }
 }
 
-export async function getBlogs(): Promise<RawBlogsProps> {
+export async function getBlogs(tag?: string): Promise<RawBlogsProps> {
   try {
-    const dataBlogs = (await getData("db/blogs.json")).toString();
-    return JSON.parse(dataBlogs) as RawBlogsProps;
-  } catch (e) {
+    let data: string;
+    if (tag) {
+      data = (await getData(`db/tags/blogs/${tag}/data.json`)).toString();
+    } else {
+      data = (await getData("db/blogs.json")).toString();
+    }
+
+    return JSON.parse(data) as RawBlogsProps;
+  } catch {
     return { blogs: [] };
   }
 }
 
-export async function getCompany(): Promise<RawCompanyProps> {
+export async function getCompany(tag?: string): Promise<RawCompanyProps> {
   try {
-    const dataCompany = (await getData("db/workInfo.json")).toString();
-    return JSON.parse(dataCompany) as RawCompanyProps;
-  } catch (e) {
+    let data: string;
+    if (tag) {
+      data = (await getData(`db/tags/company/${tag}/data.json`)).toString();
+    } else {
+      data = (await getData("db/workInfo.json")).toString();
+    }
+
+    return JSON.parse(data) as RawCompanyProps;
+  } catch {
     return { company: [] };
   }
 }
@@ -87,152 +144,50 @@ export async function getTesti(): Promise<TestimonialsProps> {
   try {
     const dataTesti = (await getData("home/testimonials.json")).toString();
     return JSON.parse(dataTesti) as TestimonialsProps;
-  } catch (e) {
+  } catch {
     return { testis: [] };
   }
 }
 
-export function parseProject(md_text: string, fileName: string) {
-  const app_name = md_text.split("appName: ")[1]?.split("\n")[0] ?? "";
-  const app_logo = md_text.split("appLogo: ")[1]?.split("\n")[0] ?? "";
-  const company_name = md_text.split("companyName: ")[1]?.split("\n")[0] ?? "";
-  const company_logo = md_text.split("companyLogo: ")[1]?.split("\n")[0] ?? "";
-  const date = parseInt(md_text.split("date: ")[1]?.split("\n")[0] ?? "0");
-  const read_time = parseInt(
-    md_text.split("readTime: ")[1]?.split("\n")[0] ?? "0"
-  );
-  const img_url = md_text.split("imgUrl: ")[1]?.split("\n")[0] ?? "";
-  const what_text = md_text.split("whatText: ")[1]?.split("\n")[0] ?? "";
-  const result = md_text.split("result: ")[1]?.split("\n")[0] ?? "";
-
-  const project: Project = {
-    imgUrl: img_url,
-    app: { name: app_name, logoUrl: app_logo },
-    company: { name: company_name, logoUrl: company_logo },
-    whatText: what_text,
-    result: result,
-    date: date,
-    readTime: read_time,
-    fileName,
-  };
-  return project;
+export async function getTechs(): Promise<RXTProps> {
+  try {
+    const dataExpertise = (await getData("home/expertise.json")).toString();
+    return JSON.parse(dataExpertise) as RXTProps;
+  } catch {
+    return { techs: [] };
+  }
 }
 
-export function getProject(
-  data:
-    | {
-        appName: string;
-        appLogo: string;
-        companyName: string;
-        companyLogo: string;
-        date: number;
-        readTime: number;
-        imgUrl: string;
-        whatText: string;
-        result: string;
-      }
-    | {
-        [key: string]: string;
-      },
-  fileName: string
-): Project {
-  return {
-    imgUrl: data.imgUrl,
-    app: {
-      name: data.appName,
-      logoUrl: data.appLogo,
-    },
-    company: {
-      name: data.companyName,
-      logoUrl: data.companyLogo,
-    },
-    whatText: data.whatText,
-    result: data.result,
-    date: data.date as number,
-    readTime: data.readTime as number,
-    fileName: fileName,
-  };
+export async function getTags() {
+  try {
+    const data = (await getData("db/tags/configs.json")).toString();
+    return JSON.parse(data) as TotalTagsType;
+  } catch {
+    return { tags: [] };
+  }
 }
 
-export function getBlog(
-  data:
-    | {
-        title: string;
-        imgUrl: string;
-        desc: string;
-        date: number;
-        readTime: number;
-      }
-    | {
-        [key: string]: string | number;
-      },
-  fileName: string
-): Blog {
-  return {
-    title: data.title as string,
-    imgUrl: data.imgUrl as string,
-    desc: data.desc as string,
-    date: data.date as number,
-    readTime: data.readTime as number,
-    fileName: fileName,
-  };
-}
-
-export function parseBlog(md_text: string, filename: string): Blog {
-  const title = md_text.split("title: ")[1]?.split("\n")[0] ?? "";
-  const desc = md_text.split("desc: ")[1]?.split("\n")[0] ?? "";
-  const date = parseInt(md_text.split("date: ")[1]?.split("\n")[0] ?? "0");
-  const read_time = parseInt(
-    md_text.split("readTime: ")[1]?.split("\n")[0] ?? "0"
-  );
-  const img_url = md_text.split("imgUrl: ")[1]?.split("\n")[0] ?? "";
-
-  return {
-    imgUrl: img_url,
-    title: title,
-    desc: desc,
-    date: date,
-    readTime: read_time,
-    fileName: filename,
-  };
-}
-
-export async function getCard(type: Card) {
+export async function getCard(type: Card, tag?: string) {
   let allData: CardData;
   switch (type) {
     case "projects":
-      const projects = (await getProjects()).projects;
+      const projects = (await getProjects(tag)).projects;
       allData = await addBlur(projects, projects.length);
       break;
     case "blogs":
-      const blogs = (await getBlogs()).blogs;
+      const blogs = (await getBlogs(tag)).blogs;
       allData = await addBlur(blogs, blogs.length);
       break;
     case "apps":
-      const apps = (await getApps()).apps;
+      const apps = (await getApps(tag)).apps;
       allData = await addBlur(apps, apps.length);
       break;
     case "company":
-      const company = (await getCompany()).company;
+      const company = (await getCompany(tag)).company;
       allData = await addBlur(company, company.length);
       break;
   }
   return allData;
-}
-
-export async function getBlurData(imgUrl: string, isUrl = true) {
-  if (isUrl && getFileExtSSR(imgUrl) === "gif") {
-    return null;
-  }
-
-  try {
-    const data = await getPlaiceholder(imgUrl);
-
-    return data;
-  } catch (e) {
-    log.error(e);
-    return null;
-  }
 }
 
 export function getFileExtSSR(urlinput: string) {
@@ -252,7 +207,7 @@ export async function addBlur<T>(data: T[], limit = 3) {
     // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
     const imgBlurDataRaw = await getBlurData(
       (element as unknown as { imgUrl: string }).imgUrl,
-      false
+      false,
     );
 
     let imgBlurData = null;
@@ -269,7 +224,7 @@ export function extractImageUrlsFromMarkdown(markdown: string): string[] {
   const imageUrls: string[] = [];
 
   // Match Markdown-style image syntax: ![alt text](url)
-  const markdownImageRegex = /!\[[^\]]*?\]\((.*?)\)/g;
+  const markdownImageRegex = /!\[[^\]]*?]\((.*?)\)/g;
   let match;
 
   while ((match = markdownImageRegex.exec(markdown)) !== null) {
@@ -298,8 +253,12 @@ export async function addBlurList(imgs: string[]): Promise<ImgBlurData> {
   for (const url of imgs) {
     const blurData = await getBlurData(url);
     if (blurData) {
-      const { base64, img } = blurData;
-      imgsBlurObj[url] = { base64, height: img.height, width: img.width };
+      const { base64, metadata } = blurData;
+      imgsBlurObj[url] = {
+        base64,
+        height: metadata.height,
+        width: metadata.width,
+      };
     }
   }
 

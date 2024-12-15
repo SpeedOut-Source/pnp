@@ -1,3 +1,5 @@
+"use client";
+
 import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 import { useRef, useEffect, useCallback } from "react";
 import { useActionKey } from "~/app_function/hooks/useActionKey";
@@ -18,7 +20,7 @@ export function SearchButton() {
 
   useEffect(() => {
     function onKeyDown(event: KeyboardEvent) {
-      if (searchButtonRef && searchButtonRef.current) {
+      if (searchButtonRef?.current) {
         if (
           (event.keyCode === 27 && searchModeStore.isOpen) ||
           (event.key === "k" && (event.metaKey || event.ctrlKey))

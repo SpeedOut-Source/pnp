@@ -2,7 +2,7 @@
 import { parseAlgoliaHitHighlight } from "@algolia/autocomplete-preset-algolia";
 import { createElement, Fragment } from "react";
 
-type HighlightHitParams<THit> = {
+export type HighlightHitParams<THit> = {
   /**
    * The Algolia hit whose attribute to retrieve the highlighted parts from.
    */
@@ -36,7 +36,7 @@ export function Highlight<THit extends { _highlightResult?: any }>({
         }
 
         return value;
-      }
-    )
+      },
+    ),
   );
 }

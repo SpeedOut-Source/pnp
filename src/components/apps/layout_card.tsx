@@ -2,7 +2,7 @@ import { type App } from "~/app_function/utils/interfaces";
 import PhotoIcon from "@heroicons/react/24/outline/PhotoIcon";
 import dynamic from "next/dynamic";
 import { type AppHit } from "~/app_function/types/HitTypes";
-import { Highlight } from "../search/Highlight";
+import { HighlightSwitch } from "../search/highlight_switch";
 
 const Link = dynamic(() => import("next/link"));
 const Image = dynamic(() => import("next/legacy/image"));
@@ -10,7 +10,7 @@ const Image = dynamic(() => import("next/legacy/image"));
 export default function LayoutCardApp(props: App | AppHit) {
   return (
     <Link
-      className="p-card h-48 cursor-pointer flex-row items-center justify-start py-3 transform-gpu hover:-translate-y-1 hover:shadow-lg"
+      className="p-card h-48 transform-gpu cursor-pointer flex-row items-center justify-start py-3 hover:-translate-y-1 hover:shadow-lg"
       href={`/apps/view/${props.fileName}`}
     >
       <div className="relative mx-auto h-24 w-24 overflow-hidden rounded-3xl px-0 text-justify">
@@ -33,10 +33,18 @@ export default function LayoutCardApp(props: App | AppHit) {
       </div>
       <div className="mx-0 mt-1 h-fit w-full px-2 text-center tracking-wider">
         <p className="mb-1 font-semibold leading-4">
-          <Highlight hit={props as AppHit} attribute="title" />
+          <HighlightSwitch
+            hit={props as AppHit}
+            attribute="title"
+            data={props.title}
+          />
         </p>
         <p className="text-xs text-base-content">
-          <Highlight hit={props as AppHit} attribute="category" />
+          <HighlightSwitch
+            hit={props as AppHit}
+            attribute="category"
+            data={props.category}
+          />
         </p>
       </div>
     </Link>

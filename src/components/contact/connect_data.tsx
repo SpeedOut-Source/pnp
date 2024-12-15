@@ -17,11 +17,11 @@ export const CONNECT_OPTIONS: ContactItemProps[] = [
     url: `https://github.com/${env.NEXT_PUBLIC_GITHUB}`,
   },
   {
-    icon: <ConnectButton text="Twitter" />,
-    name: "Twitter",
+    icon: <ConnectButton text="X" />,
+    name: "X",
     text: env.NEXT_PUBLIC_TWITTER_HANDLE,
     copyUrl: true,
-    url: `https://twitter.com/${env.NEXT_PUBLIC_TWITTER_HANDLE}`,
+    url: `https://x.com/${env.NEXT_PUBLIC_TWITTER_HANDLE}`,
   },
   {
     icon: <ConnectButton text="LinkedIn" />,

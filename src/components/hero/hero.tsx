@@ -1,16 +1,16 @@
 import dynamic from "next/dynamic";
 import { type MeSectionProps } from "../me_section/me_section";
-import { type TestimonialsProps } from "../work_for_t/testimonials";
 import { type WorkForProps } from "~/app_function/utils/interfaces";
+import { type RecentBlogsProps } from "../blogs/recent_blogs";
 
 const WorkFor = dynamic(() => import("../company/work_for"));
-const Testimonials = dynamic(() => import("../work_for_t/testimonials"));
 const MeSection = dynamic(() => import("../me_section/me_section"));
+const HeroRecentBlogs = dynamic(() => import("./hero_recent_blogs"));
 
 export interface HeroProps {
   me: MeSectionProps;
   company: WorkForProps;
-  testis: TestimonialsProps;
+  recentBlogs: RecentBlogsProps;
 }
 
 export default function Hero(props: HeroProps) {
@@ -21,7 +21,7 @@ export default function Hero(props: HeroProps) {
       </div>
       <div className="flex w-full flex-1 flex-col xl:space-y-2">
         <WorkFor {...props.company} />
-        <Testimonials {...props.testis} />
+        <HeroRecentBlogs {...props.recentBlogs} />
       </div>
     </div>
   );

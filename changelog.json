@@ -1,4 +1,16 @@
 {
+  "2.0.0-alpha": {
+    "date": 1734106110056,
+    "changes": [
+      "Enhanced metadata generation and refactored metadata, tags, and header components.",
+      "Introduced advanced tag handling and added a tag listing feature.",
+      "Resolved scrollable issues, autocomplete warnings, and improved table of contents handling.",
+      "Replaced hero testimonials with blogs for updated content priorities.",
+      "Updated dependencies: Next.js 15.0.4, Algolia, React Highlighter, and Plaiceholder v3.0.0.",
+      "Migrated from pages router to app route.",
+      "Refined theme management"
+    ]
+  },
   "1.1.0-alpha": {
     "date": 1695967023862,
     "changes": [

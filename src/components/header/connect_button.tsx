@@ -1,5 +1,7 @@
-import { DEFAULT_IS_LIGHT, useThemeStore } from "~/app_state/theme_mode";
-import { useState, useEffect } from "react";
+"use client";
+
+import { useThemeStore } from "~/app_state/theme_mode";
+import { useState } from "react";
 import dynamic from "next/dynamic";
 import { getPrefixRepo } from "~/app_function/utils/utils";
 
@@ -39,16 +41,11 @@ function ImageIcon({
 }
 
 export default function ConnectButton(props: IConnectButtonProps) {
-  const utm = useThemeStore();
-  const [isLight, setIsLight] = useState(DEFAULT_IS_LIGHT);
-
-  useEffect(() => {
-    setIsLight(utm.themeName === "winter");
-  }, [utm]);
+  const { isLight } = useThemeStore();
 
   return (
     <span className="tooltip tooltip-bottom" data-tip={props.text}>
-      <div className="btn-ghost btn-circle btn">
+      <div className="btn btn-circle btn-ghost">
         <ImageIcon isLight={isLight} props={props} />
       </div>
     </span>

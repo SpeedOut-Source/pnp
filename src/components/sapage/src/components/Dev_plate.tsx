@@ -21,7 +21,7 @@ export default function DevPlate(props: DevPlateProps) {
             layout="fill"
           />
         </div>
-        <div className="ml-3 ">
+        <div className="ml-3">
           <div className="text-lg font-semibold">{props.name}</div>
           <div className="text-sm">{props.role}</div>
         </div>

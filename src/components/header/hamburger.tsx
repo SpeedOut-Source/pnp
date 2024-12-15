@@ -28,11 +28,11 @@ export default function Hamburger() {
 
   return (
     <DropdownMenu open={isDropdownOpen} onOpenChange={setDropdownOpen}>
-      <DropdownMenuTrigger className="swap-rotate btn btn-circle btn-ghost swap data-[state=open]:swap-active">
+      <DropdownMenuTrigger className="btn btn-circle btn-ghost swap swap-rotate data-[state=open]:swap-active">
         <Bars3Icon className="swap-off h-8 w-8" />
         <X className="swap-on h-8 w-8" />
       </DropdownMenuTrigger>
-      <DropdownMenuContent className="menu dropdown-content rounded-box m-2 mt-2 w-fit overflow-visible border-none bg-base-100/95 px-2 py-5 text-base-content shadow-2xl ring ring-base-300">
+      <DropdownMenuContent className="menu dropdown-content m-2 mt-2 w-fit overflow-visible rounded-box border-none bg-base-100/95 px-2 py-5 text-base-content shadow-2xl ring ring-base-300">
         <Links className="flex justify-center space-x-4 rounded-lg bg-base-100/80 px-2 pb-2" />
         <ConnectSection />
       </DropdownMenuContent>

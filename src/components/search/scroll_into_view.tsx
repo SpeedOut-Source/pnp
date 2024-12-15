@@ -8,13 +8,13 @@ interface ScrollIntoViewProps<T> {
 
 export default forwardRef(function ScrollIntoView<T>(
   props: ScrollIntoViewProps<T>,
-  ref: ForwardedRef<HTMLSpanElement>
+  ref: ForwardedRef<HTMLSpanElement>,
 ) {
   if (props.data.length <= 0) return <></>;
   return (
     <button
       data-tip="Scroll to section"
-      className="indicator link-hover link tooltip tooltip-bottom"
+      className="link-hover indicator link tooltip tooltip-bottom"
       onClick={() => {
         const m = ref as React.RefObject<HTMLSpanElement>;
         m.current?.scrollIntoView({ behavior: "smooth" });

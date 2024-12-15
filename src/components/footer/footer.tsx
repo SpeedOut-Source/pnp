@@ -12,11 +12,11 @@ export default function Footer() {
           <div className="container">
             <div className="divider" />
             <div className="mb-4 mt-2 flex flex-col items-center justify-between space-y-2 sm:flex-row sm:space-y-0">
-              <span className="text-sm ">
+              <span className="text-sm">
                 {" "}
-                © 2023 {env.NEXT_PUBLIC_PERSON_NAME}
+                © 2025 {env.NEXT_PUBLIC_PERSON_NAME}
               </span>
-              <ul className="flex flex-wrap space-x-4 text-sm ">
+              <ul className="flex flex-wrap space-x-4 text-sm">
                 <li>
                   <Link href="/about" className="link-hover link">
                     About

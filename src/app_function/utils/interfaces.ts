@@ -1,3 +1,5 @@
+import { z } from "zod";
+
 export type Company = {
   title: string;
   imgUrl: string;
@@ -8,6 +10,7 @@ export type Company = {
   end: number;
   fileName: string;
   readTime: string;
+  tags: string[];
 };
 
 export interface WorkForProps {
@@ -23,6 +26,7 @@ export type Blog = {
   date: number;
   readTime: number;
   fileName: string;
+  tags: string[];
 };
 
 export type Project = {
@@ -35,6 +39,7 @@ export type Project = {
   date: number;
   readTime: number;
   fileName: string;
+  tags: string[];
 };
 
 interface Listing {
@@ -52,10 +57,13 @@ export type App = {
   fileName: string;
   imgs: string[];
   imgsBlurData: ImgBlurData;
+  tags: string[];
 };
 
-export type Card = "blogs" | "projects" | "apps" | "company";
+export const CardSchema = z.enum(["blogs", "projects", "apps", "company"]);
+
+export type Card = z.infer<typeof CardSchema>;
 export type CardData = Project[] | Blog[] | App[] | Company[];
 export type CardItem = Project | Blog | App | Company;
 export type ImgBlurItem = { base64: string; height: number; width: number };
-export type ImgBlurData = { [url: string]: ImgBlurItem };
+export type ImgBlurData = Record<string, ImgBlurItem>;

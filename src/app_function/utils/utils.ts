@@ -25,7 +25,7 @@ export function isPro(object: any): object is Project {
 export function toTitleCase(str: string): string {
   return str.replace(
     /\b\w+/g,
-    (txt) => txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase()
+    (txt) => txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase(),
   );
 }
 
@@ -53,7 +53,7 @@ export function getDataUrl(repoPath: string) {
   return urlJoin(
     "https://github.com",
     repoPath,
-    `/blob/${env.NEXT_PUBLIC_REPO_DATA_BRANCH}`
+    `/blob/${env.NEXT_PUBLIC_REPO_DATA_BRANCH}`,
   );
 }
 

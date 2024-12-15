@@ -1,7 +1,6 @@
 {
   "compilerOptions": {
-    "target": "es2017",
-    "lib": ["dom", "dom.iterable", "esnext"],
+    "lib": ["dom", "dom.iterable", "ES2022"],
     "allowJs": true,
     "checkJs": true,
     "skipLibCheck": true,
@@ -9,8 +8,8 @@
     "forceConsistentCasingInFileNames": true,
     "noEmit": true,
     "esModuleInterop": true,
-    "module": "esnext",
-    "moduleResolution": "node",
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
     "resolveJsonModule": true,
     "isolatedModules": true,
     "jsx": "preserve",
@@ -19,7 +18,10 @@
     "baseUrl": ".",
     "paths": {
       "~/*": ["./src/*"]
-    }
+    },
+    "target": "es2022",
+    "moduleDetection": "force",
+    "plugins": [{ "name": "next" }]
   },
   "include": [
     ".eslintrc.cjs",
@@ -28,10 +30,11 @@
     "**/*.tsx",
     "**/*.cjs",
     "**/*.mjs",
-    "src/app_function/utils/find_link_plugin.ts",
-    "src/app_function/scripts/build-algolia-search.ts"
+    "src/app_function/utils/find_link_plugin.js",
+    ".next/types/**/*.ts",
+    "**/*.js"
   ],
-  "exclude": ["node_modules", "src/components/markdown/md_render.tsx"],
+  "exclude": ["node_modules"],
   "ts-node": {
     "compilerOptions": {
       // compilerOptions specified here will override those declared below,

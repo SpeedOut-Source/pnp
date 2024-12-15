@@ -1,3 +1,5 @@
+"use client";
+
 export default function DateTimePost({ date }: { date: number }) {
   return (
     <span>
@@ -6,7 +8,7 @@ export default function DateTimePost({ date }: { date: number }) {
         day: "numeric",
         year: "numeric",
         hour: "2-digit",
-        minute: "2-digit"
+        minute: "2-digit",
       })}
     </span>
   );

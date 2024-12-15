@@ -1,3 +1,5 @@
+"use client";
+
 import {
   type Plugin,
   SpecialZoomLevel,
@@ -31,9 +33,14 @@ export default function PdfReader({ resumeUrl }: { resumeUrl: string }) {
   };
   const findLinksPluginInstance = findLinksPlugin() as unknown as Plugin;
 
+  const workerUrl = new URL(
+    "pdfjs-dist/build/pdf.worker.min.js",
+    import.meta.url,
+  ).toString();
+
   return (
     <div className="relative">
-      <Worker workerUrl="https://unpkg.com/pdfjs-dist@3.11.174/build/pdf.worker.min.js">
+      <Worker workerUrl={workerUrl}>
         {isLoading && <AbsoluteLoading />}
         <div className={`container mx-auto h-full max-w-3xl text-gray-900`}>
           <div

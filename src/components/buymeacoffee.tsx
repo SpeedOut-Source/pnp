@@ -5,16 +5,10 @@ import {
   BUY_ME_A_COFFEE_DARK_BLURDATA,
 } from "~/app_function/utils/constants";
 import { env } from "~/env.mjs";
-import { useState, useEffect } from "react";
-import { useThemeStore, DEFAULT_IS_LIGHT } from "~/app_state/theme_mode";
+import { useThemeStore } from "~/app_state/theme_mode";
 
 export default function Buymeacoffee() {
-  const utm = useThemeStore();
-  const [isLight, setIsLight] = useState(DEFAULT_IS_LIGHT);
-
-  useEffect(() => {
-    setIsLight(utm.themeName === "winter");
-  }, [utm]);
+  const { isLight } = useThemeStore();
 
   return env.NEXT_PUBLIC_BUYMEACOFFEE_USERNAME ? (
     <Link

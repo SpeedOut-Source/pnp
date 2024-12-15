@@ -8,9 +8,8 @@ import {
   getData,
   getProjects,
   getTesti,
-  getBlurData,
+  getTags,
 } from "../utils/utils-server";
-import { type RXTProps } from "~/components/me_section/r_x_t";
 import { type MeSectionProps } from "~/components/me_section/me_section";
 import { type TestimonialsProps } from "~/components/work_for_t/testimonials";
 import { type ProjectsProps } from "~/components/projects/recent_projects";
@@ -26,6 +25,7 @@ import { type AppsProps } from "~/components/apps/recent_apps";
 import { getDataUrl } from "../utils/utils";
 import { env } from "../../env.mjs";
 import { type Testimonial } from "~/components/work_for_t/testi_card";
+import { getBlurData } from "../utils/blur_cache";
 
 export interface Configs {
   appName: string;
@@ -51,8 +51,7 @@ export async function HomeServer() {
   const dataBio = (await getData("home/bio.json")).toString();
   const me = JSON.parse(dataBio) as MeProps;
 
-  const dataExpertise = (await getData("home/expertise.json")).toString();
-  const techs = JSON.parse(dataExpertise) as RXTProps;
+  const totalTags = await getTags();
 
   const testis = await getTesti();
 
@@ -70,7 +69,7 @@ export async function HomeServer() {
   const RCompany: Company[] = await addBlur(allCompanyRaw.company);
   const RTestis: Testimonial[] = await addBlur(
     testis.testis,
-    testis.testis.length
+    testis.testis.length,
   );
 
   const testimonialAddUrl =
@@ -84,7 +83,9 @@ export async function HomeServer() {
         blurDataURL: blurUrlItem ? blurUrlItem.base64 : null,
         ...me,
       },
-      techs,
+      totalTags: {
+        tags: totalTags.tags.splice(0, 15),
+      },
     },
     workFor: { data: RCompany, total: dbConfig.companyTotal },
     testis: { testis: RTestis, addUrl: testimonialAddUrl },
@@ -102,7 +103,5 @@ export async function HomeServer() {
     },
   };
 
-  return {
-    props: homeProps,
-  };
+  return homeProps;
 }

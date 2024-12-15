@@ -1,15 +1,9 @@
 import SunIcon from "@heroicons/react/24/outline/SunIcon";
 import MoonIcon from "@heroicons/react/24/outline/MoonIcon";
-import { DEFAULT_IS_LIGHT, useThemeStore } from "~/app_state/theme_mode";
-import { useEffect, useState } from "react";
+import { useThemeStore } from "~/app_state/theme_mode";
 
 export default function ThemeSwitch() {
-  const utm = useThemeStore();
-  const [isLight, setIsLight] = useState(DEFAULT_IS_LIGHT);
-
-  useEffect(() => {
-    setIsLight(utm.themeName === "winter");
-  }, [utm]);
+  const { isLight, toggleTheme } = useThemeStore();
 
   return (
     <div
@@ -17,10 +11,10 @@ export default function ThemeSwitch() {
       className="tooltip tooltip-bottom"
     >
       <button
-        onClick={utm.toggleTheme}
+        onClick={toggleTheme}
         className={`${
           isLight ? "swap-active" : ""
-        } swap-rotate swap btn-ghost btn-circle btn`}
+        } btn btn-circle btn-ghost swap swap-rotate`}
       >
         <SunIcon className="swap-on h-6 w-6" />
         <MoonIcon className="swap-off h-6 w-6" />

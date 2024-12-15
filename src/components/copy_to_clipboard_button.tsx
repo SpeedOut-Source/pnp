@@ -1,3 +1,5 @@
+"use client";
+
 import dynamic from "next/dynamic";
 import { useState } from "react";
 import { delay } from "./sapage/src/components/app/helper";
@@ -14,7 +16,7 @@ interface CopyToClipboardButtonProps {
 }
 
 export default function CopyToClipboardButton(
-  props: CopyToClipboardButtonProps
+  props: CopyToClipboardButtonProps,
 ) {
   const [copyTip, setCopyTip] = useState(props.tooltipText);
   return (

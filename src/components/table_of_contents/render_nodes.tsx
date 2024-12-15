@@ -1,4 +1,5 @@
-import Link from "next/link";
+"use client";
+
 import { useHighlighted } from "~/app_function/hooks/useHighlighted";
 import type { TransformNodeOutput } from "~/app_function/remark/headings";
 
@@ -29,14 +30,13 @@ const TOCLink = (node: TransformNodeOutput) => {
   const id = node.data.hProperties.id;
   const { value } = useHighlighted(id);
   return (
-    <Link
+    <a
       href={`#${id}`}
-      className={`block whitespace-normal ${fontSizes.get(node.depth) ?? "text-base"} py-1  ${
+      className={`block whitespace-normal ${fontSizes.get(node.depth) ?? "text-base"} py-1 ${
         value ? "focus" : ""
       }`}
-      scroll={false}
     >
       {node.value}
-    </Link>
+    </a>
   );
 };

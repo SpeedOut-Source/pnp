@@ -3,7 +3,7 @@ import linkifyElement from "linkify-element";
 
 const findLinksPlugin = () => {
   const findLinks = (
-    /** @type {{ status: LayerRenderStatus; ele: { querySelectorAll: (arg0: string) => HTMLElement[]; }; }} */ e
+    /** @type {{ status: LayerRenderStatus; ele: { querySelectorAll: (arg0: string) => HTMLElement[]; }; }} */ e,
   ) => {
     if (e.status !== LayerRenderStatus.DidRender) {
       return;
@@ -20,29 +20,29 @@ const findLinksPlugin = () => {
             // Custom styles
             // style: "color: red; text-decoration: none;",
             // Open link in new tab
-            target: "_blank"
-          }
+            target: "_blank",
+          },
         });
       });
   };
 
   const findLinksAnnotations = (
-    /** @type {{ container: { querySelectorAll: (arg0: string) => { setAttribute: (arg0: string, arg1: string) => void; }[]; }; }} */ e
+    /** @type {{ container: { querySelectorAll: (arg0: string) => { setAttribute: (arg0: string, arg1: string) => void; }[]; }; }} */ e,
   ) => {
     e.container
       .querySelectorAll(".rpv-core__annotation--link a")
       .forEach(
         (
-          /** @type {{ setAttribute: (arg0: string, arg1: string) => void; }} */ link
+          /** @type {{ setAttribute: (arg0: string, arg1: string) => void; }} */ link,
         ) => {
           link.setAttribute("target", "_blank");
-        }
+        },
       );
   };
 
   return {
     onTextLayerRender: findLinks,
-    onAnnotationLayerRender: findLinksAnnotations
+    onAnnotationLayerRender: findLinksAnnotations,
   };
 };
 

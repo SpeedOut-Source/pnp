@@ -21,6 +21,8 @@ import bash from "react-syntax-highlighter/dist/cjs/languages/prism/bash";
 import markdown from "react-syntax-highlighter/dist/cjs/languages/prism/markdown";
 import json from "react-syntax-highlighter/dist/cjs/languages/prism/json";
 import lua from "react-syntax-highlighter/dist/cjs/languages/prism/lua";
+import python from "react-syntax-highlighter/dist/cjs/languages/prism/python";
+import sql from "react-syntax-highlighter/dist/cjs/languages/prism/sql";
 import CopyToClipboardButton from "../copy_to_clipboard_button";
 import Image from "next/image";
 import { type ImgBlurData } from "~/app_function/utils/interfaces";
@@ -33,6 +35,8 @@ SyntaxHighlighter.registerLanguage("bash", bash);
 SyntaxHighlighter.registerLanguage("markdown", markdown);
 SyntaxHighlighter.registerLanguage("json", json);
 SyntaxHighlighter.registerLanguage("lua", lua);
+SyntaxHighlighter.registerLanguage("python", python);
+SyntaxHighlighter.registerLanguage("sql", sql);
 
 const ReactMarkdown = dynamic<ReactMarkdownOptions>(
   () =>
@@ -50,7 +54,7 @@ interface MDRender {
 
 export default function MDRender({ data, imgBlurdata }: MDRender) {
   return (
-    <article className="container prose prose-stone relative mx-auto max-w-3xl rounded-2xl bg-base-100/80 px-4 py-2 ring-1 ring-base-content/5 prose-headings:my-1 prose-a:my-1 prose-a:text-blue-600 prose-a:no-underline prose-pre:m-0 prose-pre:bg-transparent prose-pre:p-0 prose-li:my-0 prose-img:my-2 prose-img:inline-block prose-img:rounded-xl">
+    <div className="container prose prose-stone relative mx-auto max-w-3xl rounded-2xl bg-base-100/80 px-4 py-2 ring-1 ring-base-content/5 prose-headings:my-1 prose-a:my-1 prose-a:text-blue-600 prose-a:no-underline prose-pre:m-0 prose-pre:bg-transparent prose-pre:p-0 prose-li:my-0 prose-img:my-2 prose-img:inline-block prose-img:rounded-xl">
       <ReactMarkdown
         components={{
           img: ({ ...props }) => {
@@ -71,15 +75,15 @@ export default function MDRender({ data, imgBlurdata }: MDRender) {
                   props.width
                     ? parseFloat(props.width)
                     : blurDataURL
-                    ? blurDataURL.width
-                    : 0
+                      ? blurDataURL.width
+                      : 0
                 }
                 height={
                   props.height
                     ? parseFloat(props.height)
                     : blurDataURL
-                    ? blurDataURL.height
-                    : 0
+                      ? blurDataURL.height
+                      : 0
                 }
                 sizes="100vw"
                 className={props.width ? undefined : "w-auto"}
@@ -95,7 +99,7 @@ export default function MDRender({ data, imgBlurdata }: MDRender) {
             return <a {...props}>{children}</a>;
           },
           code({ inline, className, ...props }) {
-            const hasLang = /language-(\w+)/.exec(className || "");
+            const hasLang = /language-(\w+)/.exec(className ?? "");
             return !inline && hasLang ? (
               <SyntaxHighlighter
                 style={oneDark}
@@ -151,6 +155,6 @@ export default function MDRender({ data, imgBlurdata }: MDRender) {
       >
         {data}
       </ReactMarkdown>
-    </article>
+    </div>
   );
 }

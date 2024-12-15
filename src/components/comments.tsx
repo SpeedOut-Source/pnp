@@ -1,12 +1,13 @@
+"use client";
+
 import Giscus from "@giscus/react";
 import { getUserNRepo } from "~/app_function/utils/utils";
+import { useThemeStore } from "~/app_state/theme_mode";
 import { env } from "~/env.mjs";
 
-interface CommentsProps {
-  theme: "light" | "dark_dimmed";
-}
+export default function Comments() {
+  const { isLight } = useThemeStore();
 
-export default function Comments(props: CommentsProps) {
   const sp = getUserNRepo(env.NEXT_PUBLIC_REPO_PATH);
 
   return (
@@ -23,7 +24,7 @@ export default function Comments(props: CommentsProps) {
       inputPosition="top"
       lang="en"
       loading="lazy"
-      {...props}
+      theme={isLight ? "light" : "dark_dimmed"}
     />
   );
 }

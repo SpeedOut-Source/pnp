@@ -10,6 +10,11 @@ export default function Links(props: ILinksProps) {
   return (
     <div className={props.className}>
       <span className="tooltip tooltip-bottom" data-tip="View all">
+        <Link href="/blogs" className="link-hover link">
+          Blogs
+        </Link>
+      </span>
+      <span className="tooltip tooltip-bottom" data-tip="View all">
         <Link href="/apps" className="link-hover link">
           Apps
         </Link>
@@ -17,11 +22,6 @@ export default function Links(props: ILinksProps) {
       <span className="tooltip tooltip-bottom" data-tip="View all">
         <Link href="/projects" className="link-hover link">
           Projects
-        </Link>
-      </span>
-      <span className="tooltip tooltip-bottom" data-tip="View all">
-        <Link href="/blogs" className="link-hover link">
-          Blogs
         </Link>
       </span>
       <span className="tooltip tooltip-bottom" data-tip="View">

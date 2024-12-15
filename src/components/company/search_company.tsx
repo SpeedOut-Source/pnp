@@ -12,7 +12,7 @@ export default function SearchCompany(props: SearchCompanyProps) {
   if (props.data.length <= 0) return <></>;
 
   return (
-    <div className="mx-4 h-fit max-w-6xl ">
+    <div className="mx-4 h-fit max-w-6xl">
       <div className="flex justify-between">
         <p className="flex items-center gap-2 text-2xl normal-case text-slate-400">
           <BriefcaseIcon className="h-5 w-5" /> {"Company"}

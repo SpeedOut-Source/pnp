@@ -18,6 +18,10 @@
   .scrollbar-style {
     @apply scrollbar-thin scrollbar-track-base-content/5 scrollbar-thumb-base-content/40 scrollbar-track-rounded-md scrollbar-thumb-rounded;
   }
+
+  .scrollbar-style-100 {
+    @apply scrollbar-thin scrollbar-track-base-content/5 scrollbar-thumb-base-content/10 scrollbar-track-rounded-md scrollbar-thumb-rounded;
+  }
 }
 
 .invert-colors {
