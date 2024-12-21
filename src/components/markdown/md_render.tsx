@@ -8,7 +8,7 @@ import dynamic from "next/dynamic";
 import { type ReactMarkdownOptions } from "react-markdown/lib/react-markdown";
 import rehypeRaw from "rehype-raw";
 import remarkGfm from "remark-gfm";
-import { headingTree } from "../../app_function/remark/headings";
+import { headingTree } from "~/app_function/remark/headings";
 
 import { PrismLight as SyntaxHighlighter } from "react-syntax-highlighter";
 import React from "react";
@@ -23,6 +23,7 @@ import json from "react-syntax-highlighter/dist/cjs/languages/prism/json";
 import lua from "react-syntax-highlighter/dist/cjs/languages/prism/lua";
 import python from "react-syntax-highlighter/dist/cjs/languages/prism/python";
 import sql from "react-syntax-highlighter/dist/cjs/languages/prism/sql";
+import dart from "react-syntax-highlighter/dist/cjs/languages/prism/dart";
 import CopyToClipboardButton from "../copy_to_clipboard_button";
 import Image from "next/image";
 import { type ImgBlurData } from "~/app_function/utils/interfaces";
@@ -37,6 +38,7 @@ SyntaxHighlighter.registerLanguage("json", json);
 SyntaxHighlighter.registerLanguage("lua", lua);
 SyntaxHighlighter.registerLanguage("python", python);
 SyntaxHighlighter.registerLanguage("sql", sql);
+SyntaxHighlighter.registerLanguage("dart", dart);
 
 const ReactMarkdown = dynamic<ReactMarkdownOptions>(
   () =>
