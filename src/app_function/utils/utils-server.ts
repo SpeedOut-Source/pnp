@@ -191,12 +191,14 @@ export async function getCard(type: Card, tag?: string) {
 }
 
 export function getFileExtSSR(urlinput: string) {
-  const url = new URL(urlinput);
-  if (!url.pathname) {
-    return "";
+  try {
+    const url = new URL(urlinput);
+    const { ext } = parse(url.pathname);
+    return ext.replace(".", "");
+  } catch (error) {
+    const { ext } = parse(urlinput);
+    return ext.replace(".", "");
   }
-  const { ext } = parse(url.pathname);
-  return ext.replace(".", "");
 }
 
 export async function addBlur<T>(data: T[], limit = 3) {

@@ -6,7 +6,7 @@ await import("./src/env.mjs");
 import { env } from "./src/env.mjs";
 const PREFIX_REPO =
   process.env.NODE_ENV === "production" &&
-  process.env.NEXT_PUBLIC_LOCALHOST_TEST !== "true"
+    process.env.NEXT_PUBLIC_LOCALHOST_TEST !== "true"
     ? env.NEXT_PUBLIC_PREFIX_REPO
     : undefined;
 
@@ -46,11 +46,9 @@ const config = {
     // eslint-disable-next-line @typescript-eslint/no-unsafe-return
     return config;
   },
-  experimental: {
-    turbo: {
-      resolveAlias: {
-        canvas: "./empty-module.ts",
-      },
+  turbopack: {
+    resolveAlias: {
+      canvas: "./empty-module.ts",
     },
   },
 };
