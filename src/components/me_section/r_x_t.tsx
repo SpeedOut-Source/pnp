@@ -39,7 +39,7 @@ export default function RXT({
       </p>
       <Menubar
         className={cn(
-          "flex !h-auto flex-wrap justify-evenly !border-none !bg-transparent !p-0",
+          "flex !h-auto flex-wrap justify-start !border-none !bg-transparent !p-0",
           classNameMenubar,
         )}
       >

@@ -20,6 +20,9 @@ const ImportPopup = dynamic(() => import("~/components/import_popup"));
 const GradientEffectTop = dynamic(
   () => import("~/components/gradient_effect/top"),
 );
+const DiscountBanner = dynamic(
+  () => import("~/components/header/discount_banner"),
+);
 
 export default function RootLayout({
   children,
@@ -29,6 +32,7 @@ export default function RootLayout({
   return (
     <html lang="en" data-theme="dark">
       <body className="scrollbar-style relative isolate">
+        <DiscountBanner />
         <GradientEffectTop />
         <div className="flex h-screen flex-col justify-between">
           <main className={inter.className}>
