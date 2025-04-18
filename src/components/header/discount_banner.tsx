@@ -34,7 +34,7 @@ export default function DiscountBanner() {
     // Select a random emoji
     const getRandomEmoji = (): string => {
         const randomIndex = Math.floor(Math.random() * EMOJIS.length);
-        return EMOJIS[randomIndex] || '🎉'; // Fallback to celebration emoji if undefined
+        return EMOJIS[randomIndex] ?? '🎉'; // Fallback to celebration emoji if undefined
     };
 
     // Parse config from environment variable on mount

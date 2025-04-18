@@ -196,6 +196,7 @@ export function getFileExtSSR(urlinput: string) {
     const { ext } = parse(url.pathname);
     return ext.replace(".", "");
   } catch (error) {
+    console.error("Error getting file extension:", error);
     const { ext } = parse(urlinput);
     return ext.replace(".", "");
   }
