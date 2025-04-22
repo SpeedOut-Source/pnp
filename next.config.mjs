@@ -12,6 +12,9 @@ const PREFIX_REPO =
 
 /** @type {import("next").NextConfig} */
 const config = {
+  experimental: {
+    viewTransition: true,
+  },
   output: "export",
   reactStrictMode: true,
   images: {

@@ -3,6 +3,7 @@ import { type Project } from "./interfaces";
 import tc from "thousands-counter";
 import { env } from "../../env.mjs";
 import urlJoin from "url-join";
+
 export function stringToReadableUrl(str: string, reverse?: boolean): string {
   if (reverse) {
     // Convert readable URL back to original string
@@ -73,4 +74,15 @@ export function getPrefixRepo() {
     !env.NEXT_PUBLIC_LOCALHOST_TEST
     ? env.NEXT_PUBLIC_PREFIX_REPO
     : "";
+}
+
+export function toViewTransitionName(str: string, prefix?: string): string {
+  const cleanStr = str
+    .trim()
+    .toLowerCase()
+    .replace(/[^\w\s-]/g, "")
+    .replace(/\s+/g, "-")
+    .replace(/-+/g, "-");
+
+  return prefix ? `${prefix}-${cleanStr}` : cleanStr;
 }

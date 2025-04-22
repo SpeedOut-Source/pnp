@@ -34,7 +34,7 @@
     ".next/types/**/*.ts",
     "**/*.js"
   ],
-  "exclude": ["node_modules"],
+  "exclude": ["src/components/markdown/md_render.tsx","node_modules"],
   "ts-node": {
     "compilerOptions": {
       // compilerOptions specified here will override those declared below,

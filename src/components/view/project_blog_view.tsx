@@ -1,3 +1,4 @@
+import { unstable_ViewTransition as ViewTransition } from "react";
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/solid";
 import dynamic from "next/dynamic";
 import Loading from "~/components/markdown/loading";
@@ -11,7 +12,7 @@ import type {
   ImgBlurData,
 } from "~/app_function/utils/interfaces";
 import LayoutCardApp from "~/components/apps/layout_card";
-import { getDataUrl } from "~/app_function/utils/utils";
+import { getDataUrl, toViewTransitionName } from "~/app_function/utils/utils";
 import LayoutCardCompany from "~/components/company/layout_card";
 import urlJoin from "url-join";
 import type { TransformNodeOutput } from "~/app_function/remark/headings";
@@ -47,24 +48,29 @@ export interface ProjectBlogViewProps {
 export function ProjectBlogView(props: ProjectBlogViewProps) {
   let shareTxt: string;
   let project: Project | undefined = undefined;
+  let transitionName = "";
 
   switch (props.type) {
     case "projects":
       const itemView = props.itemView as Project;
       shareTxt = `${itemView.whatText} ${itemView.result}`;
       project = itemView;
+      transitionName = toViewTransitionName(itemView.fileName, "project");
       break;
     case "blogs":
       const b = props.itemView as Blog;
       shareTxt = b.desc;
+      transitionName = toViewTransitionName(b.fileName, "blog");
       break;
     case "apps":
       const a = props.itemView as App;
       shareTxt = a.title;
+      transitionName = toViewTransitionName(a.fileName, "app");
       break;
     case "company":
       const c = props.itemView as Company;
       shareTxt = c.title;
+      transitionName = toViewTransitionName(c.fileName, "company");
       break;
   }
 
@@ -93,14 +99,16 @@ export function ProjectBlogView(props: ProjectBlogViewProps) {
               {props.type === "apps" && (
                 <div className="container mx-auto mb-4 max-w-3xl space-y-4 px-2">
                   <div className="flex w-full flex-col items-center justify-center">
-                    <Image
-                      src={props.itemView.imgUrl}
-                      alt={(props.itemView as App).title}
-                      width={100}
-                      height={100}
-                      blurDataURL={(props.itemView as App).imgBlurData}
-                      placeholder="blur"
-                    />
+                    <ViewTransition name={transitionName}>
+                      <Image
+                        src={props.itemView.imgUrl}
+                        alt={(props.itemView as App).title}
+                        width={100}
+                        height={100}
+                        blurDataURL={(props.itemView as App).imgBlurData}
+                        placeholder="blur"
+                      />
+                    </ViewTransition>
                     <p className="text-center text-4xl font-semibold tracking-wider">
                       {(props.itemView as App).title}
                     </p>
@@ -138,14 +146,16 @@ export function ProjectBlogView(props: ProjectBlogViewProps) {
               {props.type === "company" && (
                 <div className="mx-auto mb-4 max-w-3xl space-y-4 px-2">
                   <div className="flex w-full flex-col items-center justify-center">
-                    <Image
-                      src={props.itemView.imgUrl}
-                      alt={(props.itemView as Company).title}
-                      width={100}
-                      height={100}
-                      blurDataURL={(props.itemView as Company).imgBlurData}
-                      placeholder="blur"
-                    />
+                    <ViewTransition name={transitionName}>
+                      <Image
+                        src={props.itemView.imgUrl}
+                        alt={(props.itemView as Company).title}
+                        width={100}
+                        height={100}
+                        blurDataURL={(props.itemView as Company).imgBlurData}
+                        placeholder="blur"
+                      />
+                    </ViewTransition>
                     <p className="text-center text-4xl font-semibold tracking-wider">
                       {(props.itemView as Company).title}
                     </p>
@@ -160,11 +170,19 @@ export function ProjectBlogView(props: ProjectBlogViewProps) {
                   </div>
                 </div>
               )}
-              <MDRender
-                key={props.itemView.date}
-                data={props.data}
-                imgBlurdata={props.imgBlurdata}
-              />
+              <ViewTransition
+                name={
+                  props.type === "company" || props.type === "apps"
+                    ? undefined
+                    : transitionName
+                }
+              >
+                <MDRender
+                  key={props.itemView.date}
+                  data={props.data}
+                  imgBlurdata={props.imgBlurdata}
+                />
+              </ViewTransition>
               {props.itemView.tags ? (
                 <TagsShow
                   className="!mb-0 mt-2 !pb-0"

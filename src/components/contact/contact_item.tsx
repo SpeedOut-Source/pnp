@@ -2,7 +2,7 @@
 
 import DocumentDuplicateIcon from "@heroicons/react/24/outline/DocumentDuplicateIcon";
 import { useState } from "react";
-import CopyToClipboard from "react-copy-to-clipboard";
+import ClipboardCopy from "../ClipboardCopy";
 import { delay } from "../sapage/src/components/app/helper";
 import Link from "next/link";
 
@@ -36,7 +36,7 @@ export default function ContactItem(props: ContactItemProps) {
         className="tooltip invisible group-hover:visible"
         data-tip={copyTip}
       >
-        <CopyToClipboard
+        <ClipboardCopy
           text={props.copyUrl ? props.url : props.text}
           // eslint-disable-next-line @typescript-eslint/no-misused-promises
           onCopy={async () => {
@@ -46,7 +46,7 @@ export default function ContactItem(props: ContactItemProps) {
           }}
         >
           <DocumentDuplicateIcon className="h-5 w-5 cursor-pointer hover:text-blue-600" />
-        </CopyToClipboard>
+        </ClipboardCopy>
       </span>
     </div>
   );

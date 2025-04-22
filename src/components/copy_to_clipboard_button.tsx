@@ -1,12 +1,10 @@
 "use client";
 
-import dynamic from "next/dynamic";
 import { useState } from "react";
 import { delay } from "./sapage/src/components/app/helper";
 import DocumentDuplicateIcon from "@heroicons/react/24/outline/DocumentDuplicateIcon";
 import { twMerge } from "tailwind-merge";
-
-const CopyToClipboard = dynamic(() => import("react-copy-to-clipboard"));
+import ClipboardCopy from "./ClipboardCopy";
 
 interface CopyToClipboardButtonProps {
   tooltipText: string;
@@ -25,7 +23,7 @@ export default function CopyToClipboardButton(
       data-tip={copyTip}
       style={props.style}
     >
-      <CopyToClipboard
+      <ClipboardCopy
         text={props.copyText}
         // eslint-disable-next-line @typescript-eslint/no-misused-promises
         onCopy={async () => {
@@ -35,7 +33,7 @@ export default function CopyToClipboardButton(
         }}
       >
         <DocumentDuplicateIcon className="h-4 w-4 cursor-pointer hover:text-blue-600" />
-      </CopyToClipboard>
+      </ClipboardCopy>
     </span>
   );
 }
