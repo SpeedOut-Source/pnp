@@ -4,6 +4,7 @@ import { devtools, persist, subscribeWithSelector } from "zustand/middleware";
 export const DEFAULT_THEME: ThemeName = "dark";
 
 type ThemeName = "winter" | "dark";
+export type { ThemeName };
 
 interface ThemeModeModel {
   themeName: ThemeName;
