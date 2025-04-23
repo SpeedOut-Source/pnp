@@ -18,8 +18,9 @@ export default function ThemeSwitch() {
       <button
         ref={buttonRef}
         onClick={handleToggle}
-        className={`${isLight ? "swap-active" : ""
-          } btn btn-circle btn-ghost swap swap-rotate`}
+        className={`${
+          isLight ? "swap-active" : ""
+        } btn btn-circle btn-ghost swap swap-rotate`}
       >
         <SunIcon className="swap-on h-6 w-6" />
         <MoonIcon className="swap-off h-6 w-6" />

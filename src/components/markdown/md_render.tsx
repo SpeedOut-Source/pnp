@@ -114,7 +114,7 @@ export default function MDRender({ data, imgBlurdata }: MDRender) {
                 {String(props.children).replace(/\n$/, "")}
               </SyntaxHighlighter>
             ) : (
-              <code className={className} {...props} />
+              <code className={`${className} break-all`} {...props} />
             );
           },
           pre: (pre) => {

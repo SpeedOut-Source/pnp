@@ -1,7 +1,7 @@
 "use client";
 
 import { useThemeStore } from "~/app_state/theme_mode";
-import { AppProgressBar } from "next-nprogress-bar";
+import { ProgressProvider } from "@bprogress/next/app";
 
 const ProgressBar = () => {
   const { isLight } = useThemeStore();
@@ -10,12 +10,12 @@ const ProgressBar = () => {
     <>
       <style>
         {`
-          #nprogress .bar {
+          #bprogress .bar {
             background: ${isLight ? "#696969" : "#f5f5f5"} !important;
           }
         `}
       </style>
-      <AppProgressBar
+      <ProgressProvider
         height={"3px"}
         color={isLight ? "#696969" : "#f5f5f5"}
         options={{ showSpinner: false }}

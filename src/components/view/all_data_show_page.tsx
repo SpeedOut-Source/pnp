@@ -42,7 +42,7 @@ export function AllDataShowPage(props: AllDataProps) {
 
   return (
     <>
-      <div className="container mx-auto max-w-6xl">
+      <div className="mx-4 max-w-6xl md:container sm:mx-auto">
         <p className="text-center text-3xl uppercase">{pageName}</p>
         <TagsShow {...props} allShow />
         <div className="mx-auto w-full max-w-6xl">
