@@ -52,7 +52,7 @@ export default function SearchDialog() {
               leaveFrom="opacity-100 scale-100"
               leaveTo="opacity-0 scale-95"
             >
-              <Dialog.Panel className="relative h-full w-full transform bg-base-300 pb-2 text-left align-middle transition-all md:rounded-2xl md:shadow-xl lg:max-w-6xl">
+              <Dialog.Panel className="bg-base-300 relative h-full w-full transform pb-2 text-left align-middle transition-all md:rounded-2xl md:shadow-xl lg:max-w-6xl">
                 <div className="absolute flex w-full justify-end p-2">
                   <button
                     onClick={closeModal}

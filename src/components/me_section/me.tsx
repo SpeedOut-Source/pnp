@@ -14,7 +14,7 @@ export default function Me(props: MeProps) {
   return (
     <div className="p-card h-fit w-full space-y-3 p-4 text-justify xl:max-w-md">
       <div className="flex w-full flex-col items-center justify-center gap-2 xl:flex-row xl:justify-start xl:gap-4">
-        <div className="relative h-32 w-32 cursor-default overflow-hidden rounded-full ring-4 ring-base-300">
+        <div className="ring-base-300 relative h-32 w-32 cursor-default overflow-hidden rounded-full ring-4">
           <Image
             loading="lazy"
             placeholder="blur"

@@ -27,7 +27,7 @@ const SAPage = (props: SAPageProps) => {
 
   return (
     <div className="mx-2 mt-2 flex flex-col items-center tracking-wider sm:mx-5 lg:mx-10 xl:mx-10">
-      <div className="btn btn-ghost relative h-32 w-32 overflow-hidden rounded-full ring-4 ring-base-300">
+      <div className="btn btn-ghost ring-base-300 relative h-32 w-32 overflow-hidden rounded-full ring-4">
         <Image
           // eslint-disable-next-line @typescript-eslint/no-misused-promises
           onClick={tapToOpen}
@@ -43,7 +43,7 @@ const SAPage = (props: SAPageProps) => {
         onClick={() => setCLIsopen(!clIsOpen)}
         className={`${
           clIsOpen ? "font-bold tracking-[0.5em]" : ""
-        } mb-4 mt-1 flex cursor-pointer space-x-2 text-center text-xs tracking-wider transition-all duration-700 hover:tracking-widest hover:text-black`}
+        } mt-1 mb-4 flex cursor-pointer space-x-2 text-center text-xs tracking-wider transition-all duration-700 hover:tracking-widest hover:text-black`}
       >
         <span className="font-semibold">{props.app.codeName}</span>
         <span>v{props.app.version}</span>
@@ -55,13 +55,13 @@ const SAPage = (props: SAPageProps) => {
       >
         <div className="collapse-content w-full max-w-xl">
           <div className="scrollbar-style max-h-96 overflow-y-auto">
-            <div className="mx-2 mb-3 mt-2 flex flex-col justify-center rounded-xl ring-2 ring-blue-500/10">
+            <div className="mx-2 mt-2 mb-3 flex flex-col justify-center rounded-xl ring-2 ring-blue-500/10">
               {Object.keys(props.changeLogs)
                 .slice(0, 20)
                 .map((x) => (
                   <div
                     key={x}
-                    className="mx-3 my-2 h-fit rounded-xl bg-base-300/10 p-3 ring-1 ring-blue-300/40 hover:bg-blue-200/10"
+                    className="bg-base-300/10 mx-3 my-2 h-fit rounded-xl p-3 ring-1 ring-blue-300/40 hover:bg-blue-200/10"
                   >
                     <div className="text-sm font-semibold tracking-wider">
                       v{x}
@@ -102,7 +102,7 @@ const SAPage = (props: SAPageProps) => {
         </div>
       </Link>
       <div className="my-5 w-full px-5">
-        <hr className="border-1 flex border-black/10" />
+        <hr className="flex border-1 border-black/10" />
       </div>
       <div
         className={`${
@@ -124,7 +124,7 @@ const SAPage = (props: SAPageProps) => {
           ))}
         </div>
       </div>
-      <div className="mb-2 mt-5 flex w-full justify-start px-5 text-2xl">
+      <div className="mt-5 mb-2 flex w-full justify-start px-5 text-2xl">
         Issue or Bug report
       </div>
       <Link

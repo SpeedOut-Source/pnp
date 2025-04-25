@@ -14,7 +14,7 @@ export default function SearchCompany(props: SearchCompanyProps) {
   return (
     <div className="mx-4 h-fit max-w-6xl">
       <div className="flex justify-between">
-        <p className="flex items-center gap-2 text-2xl normal-case text-slate-400">
+        <p className="flex items-center gap-2 text-2xl text-slate-400 normal-case">
           <BriefcaseIcon className="h-5 w-5" /> {"Company"}
         </p>
       </div>

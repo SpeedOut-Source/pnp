@@ -7,6 +7,7 @@ import {
   DropdownMenuTrigger,
 } from "../ui/dropdown-menu";
 import { useEffect, useState } from "react";
+import { cn } from "~/lib/utils";
 
 const ConnectSection = dynamic(() => import("./connect_section"));
 const Links = dynamic(() => import("./links"));
@@ -28,12 +29,17 @@ export default function Hamburger() {
 
   return (
     <DropdownMenu open={isDropdownOpen} onOpenChange={setDropdownOpen}>
-      <DropdownMenuTrigger className="btn btn-circle btn-ghost swap swap-rotate data-[state=open]:swap-active">
-        <Bars3Icon className="swap-off h-8 w-8" />
-        <X className="swap-on h-8 w-8" />
+      <DropdownMenuTrigger
+        className={cn(
+          "btn btn-circle btn-ghost swap swap-rotate",
+          isDropdownOpen && "swap-active",
+        )}
+      >
+        <Bars3Icon className="swap-off h-8 w-8 fill-current" />
+        <X className="swap-on h-8 w-8 fill-current" />
       </DropdownMenuTrigger>
-      <DropdownMenuContent className="menu dropdown-content m-2 mt-2 w-fit overflow-visible rounded-box border-none bg-base-100/95 px-2 py-5 text-base-content shadow-2xl ring ring-base-300">
-        <Links className="flex justify-center space-x-4 rounded-lg bg-base-100/80 px-2 pb-2" />
+      <DropdownMenuContent className="menu dropdown-content rounded-box bg-base-100/95 text-base-content ring-base-300 m-2 mt-2 w-fit space-y-1 overflow-visible border-none px-2 py-5 shadow-2xl ring-3">
+        <Links className="bg-base-100/80 flex justify-center space-x-4 rounded-lg px-2 pb-2" />
         <ConnectSection />
       </DropdownMenuContent>
     </DropdownMenu>

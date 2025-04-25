@@ -52,7 +52,7 @@ export default function CarouselSlider({
             delay: 2000,
           }),
         ]}
-        className="relative rounded-box bg-base-300/40 p-4"
+        className="rounded-box bg-base-300/40 relative p-4"
       >
         <CarouselContent>
           {images.map((x, i) => {

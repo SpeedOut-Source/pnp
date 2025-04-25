@@ -199,7 +199,7 @@ export default function Autocomplete(
             )}
           >
             <MagnifyingGlassIcon className="swap-off mx-auto h-5 w-5" />
-            <div className="swap-on loading loading-xs mx-auto border-0 p-0 before:!mr-0" />
+            <div className="swap-on loading loading-xs mx-auto border-0 p-0 before:mr-0!" />
           </label>
         </button>
         <input

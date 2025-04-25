@@ -12,8 +12,8 @@ export interface ProjectsProps {
 
 export default function RecentProjects(props: ProjectsProps) {
   return (
-    <div className="mx-auto h-fit max-w-6xl px-4 sm:pl-4 sm:pr-0">
-      <p className="flex items-center gap-2 text-2xl normal-case text-slate-400">
+    <div className="mx-auto h-fit max-w-6xl px-4 sm:pr-0 sm:pl-4">
+      <p className="flex items-center gap-2 text-2xl text-slate-400 normal-case">
         <CogIcon className="h-5 w-5" />
         Recent projects
       </p>

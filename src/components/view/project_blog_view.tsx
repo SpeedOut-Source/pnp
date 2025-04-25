@@ -185,7 +185,7 @@ export function ProjectBlogView(props: ProjectBlogViewProps) {
               </ViewTransition>
               {props.itemView.tags ? (
                 <TagsShow
-                  className="!mb-0 mt-2 !pb-0"
+                  className="mt-2 mb-0! pb-0!"
                   type={props.type}
                   tags={props.itemView.tags.map((x) => ({ tag: x, date: 0 }))}
                 />
@@ -206,13 +206,13 @@ export function ProjectBlogView(props: ProjectBlogViewProps) {
             shareTxt={shareTxt}
           />
         </div>
-        <div className="mx-auto mt-2 max-w-3xl rounded-2xl border-2 border-base-content/5 bg-base-100/80">
+        <div className="border-base-content/5 bg-base-100/80 mx-auto mt-2 max-w-3xl rounded-2xl border-2">
           {(props.previous ?? props.next) && (
             <div className="container m-2 mx-auto max-w-3xl px-2">
               <div className="flex w-full items-center justify-center gap-4">
                 {props.previous && (
                   <div className="h-fit w-full">
-                    <div className="mb-2 flex items-center text-2xl normal-case text-slate-400">
+                    <div className="mb-2 flex items-center text-2xl text-slate-400 normal-case">
                       <Link
                         href={`/${props.type}/view/${props.previous.fileName}`}
                         className="link-hover link flex items-center"
@@ -228,7 +228,7 @@ export function ProjectBlogView(props: ProjectBlogViewProps) {
                 )}
                 {props.next && (
                   <div className="h-fit w-full">
-                    <div className="mb-2 flex items-center justify-end text-2xl normal-case text-slate-400">
+                    <div className="mb-2 flex items-center justify-end text-2xl text-slate-400 normal-case">
                       <Link
                         href={`/${props.type}/view/${props.next.fileName}`}
                         className="link-hover link flex items-center"

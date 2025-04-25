@@ -12,7 +12,7 @@ export default function Buymeacoffee() {
 
   return env.NEXT_PUBLIC_BUYMEACOFFEE_USERNAME ? (
     <Link
-      className="relative h-12 w-56 overflow-hidden rounded-xl bg-base-300 ring-base-content/20 hover:ring-1 lg:hidden xl:inline"
+      className="bg-base-300 ring-base-content/20 relative h-12 w-56 overflow-hidden rounded-xl hover:ring-1 lg:hidden xl:inline"
       target="_blank"
       href={`https://www.buymeacoffee.com/${env.NEXT_PUBLIC_BUYMEACOFFEE_USERNAME}`}
     >

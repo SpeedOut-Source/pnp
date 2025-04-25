@@ -29,7 +29,7 @@ export default function LayoutCard({ data }: LayoutCard) {
     <ViewTransition name={transitionName}>
       <Link
         href={`/${isProject ? "projects" : "blogs"}/view/${data.fileName}`}
-        className="p-card group relative h-80 w-full cursor-pointer overflow-hidden px-0 text-justify ring ring-base-300 hover:shadow-xl hover:ring hover:ring-blue-200"
+        className="p-card group ring-base-300 relative h-80 w-full cursor-pointer overflow-hidden px-0 text-justify ring-3 hover:shadow-xl hover:ring-3 hover:ring-blue-200"
       >
         {data.imgUrl ? (
           <div>
@@ -60,9 +60,9 @@ export default function LayoutCard({ data }: LayoutCard) {
           </div>
         )}
         <div className="mx-1 flex h-full w-full flex-col items-end justify-end">
-          <div className="relative mb-1 max-h-[60%] w-full overflow-hidden rounded-3xl bg-base-100 ring-2 ring-base-300/50 group-hover:max-h-full group-hover:shadow-xl md:bg-base-100/90 md:group-hover:bg-base-100/70 md:group-hover:backdrop-blur-sm">
-            <div className="absolute bottom-0 hidden h-10 w-full bg-gradient-to-t from-base-100 group-hover:from-transparent md:inline">
-              <div className="hidden w-full items-center justify-center pt-2 font-bold uppercase text-blue-500/70 group-hover:flex">
+          <div className="bg-base-100 ring-base-300/50 md:bg-base-100/90 md:group-hover:bg-base-100/70 relative mb-1 max-h-[60%] w-full overflow-hidden rounded-3xl ring-2 group-hover:max-h-full group-hover:shadow-xl md:group-hover:backdrop-blur-xs">
+            <div className="from-base-100 absolute bottom-0 hidden h-10 w-full bg-linear-to-t group-hover:from-transparent md:inline">
+              <div className="hidden w-full items-center justify-center pt-2 font-bold text-blue-500/70 uppercase group-hover:flex">
                 <span>{isProject ? "Full case study" : "Read more"}</span>
                 <ChevronRightIcon className="h-7 w-5" />
               </div>
@@ -104,7 +104,7 @@ export default function LayoutCard({ data }: LayoutCard) {
                     </div>
                   </div>
                 ) : (
-                  <div className="text-md mt-2 text-justify font-semibold leading-tight">
+                  <div className="text-md mt-2 text-justify leading-tight font-semibold">
                     <HighlightSwitch
                       hit={data as BlogHit}
                       attribute="title"

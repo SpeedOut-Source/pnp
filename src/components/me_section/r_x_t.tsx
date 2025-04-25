@@ -41,16 +41,16 @@ export default function RXT({
         </p>
         <Menubar
           className={cn(
-            "flex !h-auto flex-wrap justify-start !border-none !bg-transparent !p-0",
+            "flex h-auto! flex-wrap justify-start border-none! bg-transparent! p-0!",
             classNameMenubar,
           )}
         >
           {tags.map(({ tag, exist, total }) => (
             <MenubarMenu key={tag}>
-              <MenubarTrigger className="!cursor-pointer !px-0 !py-0.5 capitalize data-[state=open]:!bg-transparent data-[state=open]:text-base-content hover:underline focus:!bg-transparent focus:!text-base-content">
+              <MenubarTrigger className="data-[state=open]:text-base-content focus:text-base-content! my-0! cursor-pointer! px-0! py-0! capitalize hover:underline focus:bg-transparent! data-[state=open]:bg-transparent!">
                 {tag}{" "}
                 {total > 1 ? (
-                  <span className="indicator-new ml-1 bg-base-100">
+                  <span className="indicator-new bg-base-100 my-0! ml-1! px-1! py-0!">
                     <span>{total}</span>
                   </span>
                 ) : (
@@ -61,12 +61,12 @@ export default function RXT({
 
               <MenubarContent
                 sideOffset={0}
-                className="!border-base-300 !bg-base-100 !text-base-content"
+                className="border-base-300! bg-base-100! text-base-content!"
               >
-                <MenubarItem disabled className="capitalize !text-base-content">
+                <MenubarItem disabled className="text-base-content! capitalize">
                   tag mentioned in
                 </MenubarItem>
-                <MenubarSeparator className="!bg-base-content/30" />
+                <MenubarSeparator className="bg-base-content/30!" />
                 {exist.map(({ type, total: itemTotal }) => (
                   <Link
                     key={`/${type}/page/tag/${tag}`}
@@ -74,7 +74,7 @@ export default function RXT({
                   >
                     <MenubarItem
                       key={type}
-                      className="flex !cursor-pointer justify-between capitalize focus:!bg-base-300 focus:!text-base-content"
+                      className="focus:bg-base-300! focus:text-base-content! flex cursor-pointer! justify-between capitalize"
                     >
                       <span>{type}</span>
                       <span className="indicator-new ml-1">

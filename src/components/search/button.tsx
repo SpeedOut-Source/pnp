@@ -46,7 +46,7 @@ export function SearchButton() {
           setOpen(e as unknown as MouseEvent);
         }}
       >
-        <div className="p-card flex w-full cursor-pointer items-center gap-3 overflow-visible rounded-full bg-transparent px-3 xl:rounded-xl xl:bg-base-300">
+        <div className="p-card xl:bg-base-300 w-full cursor-pointer flex-row items-center gap-3 overflow-visible rounded-full bg-transparent px-3 xl:rounded-xl">
           <MagnifyingGlassIcon className="h-5 w-5" />
           {actionKey && (
             <div className="ml-1 hidden items-center gap-1 xl:flex">

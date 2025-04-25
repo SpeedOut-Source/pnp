@@ -16,7 +16,7 @@ export default function ViewMore(props: ViewMore) {
   return (
     <div className="indicator mt-3">
       {counts && props.name && (
-        <span className="indicator-new">
+        <span className="indicator-item indicator-new">
           <span className="tooltip" data-tip={`${counts} ${props.name}`}>
             {counts}
           </span>

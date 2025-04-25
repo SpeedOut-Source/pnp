@@ -8,7 +8,7 @@ const LayoutCardCompany = dynamic(() => import("./layout_card"));
 export default function WorkFor(props: WorkForProps) {
   return (
     <div className="mx-auto h-fit w-full px-4 sm:mx-0 xl:max-w-2xl xl:px-0">
-      <div className="flex items-center gap-2 text-2xl normal-case text-slate-400">
+      <div className="flex items-center gap-2 text-2xl text-slate-400 normal-case">
         <BriefcaseIcon className="h-5 w-5" />
         <Link
           href="/company"

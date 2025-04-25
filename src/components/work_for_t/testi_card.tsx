@@ -17,7 +17,7 @@ export type Testimonial = {
 };
 export default function TestiCard(props: Testimonial) {
   return (
-    <div className="p-card group relative mx-0 h-fit w-full space-y-3 overflow-visible px-0 py-4 text-justify hover:bg-base-200">
+    <div className="p-card group hover:bg-base-200 relative mx-0 h-fit w-full space-y-3 overflow-visible px-0 py-4 text-justify">
       <div className="w-full px-3">
         <Link
           data-tip="Visit website"
@@ -26,7 +26,7 @@ export default function TestiCard(props: Testimonial) {
           className="tooltip flex w-full items-center gap-2 lg:items-start"
         >
           <div>
-            <div className="relative h-12 w-12 overflow-hidden rounded-full ring ring-base-300">
+            <div className="ring-base-300 relative h-12 w-12 overflow-hidden rounded-full ring-3">
               <Image
                 placeholder="blur"
                 blurDataURL={props.imgBlurData}

@@ -187,7 +187,7 @@ export default function DiscountBanner() {
 
   return (
     <div
-      className={`mb-2 flex justify-center overflow-hidden rounded-sm bg-base-100 transition-all duration-700 ease-in-out ${
+      className={`bg-base-100 mb-2 flex justify-center overflow-hidden rounded-sm transition-all duration-700 ease-in-out ${
         hasEntered ? "max-h-20 opacity-100" : "max-h-0 opacity-0"
       }`}
     >

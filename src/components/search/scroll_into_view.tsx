@@ -22,7 +22,7 @@ export default forwardRef(function ScrollIntoView<T>(
     >
       <div>
         {props.children}
-        <span className="badge indicator-item border-0 bg-base-200/40 text-xs text-base-content/50">
+        <span className="badge bg-base-200/40 text-base-content/50 border-0 text-xs">
           {props.data.length}
         </span>
       </div>

@@ -56,7 +56,7 @@ interface MDRender {
 
 export default function MDRender({ data, imgBlurdata }: MDRender) {
   return (
-    <div className="container prose prose-stone relative mx-auto max-w-3xl rounded-2xl bg-base-100/80 px-4 py-2 ring-1 ring-base-content/5 prose-headings:my-1 prose-a:my-1 prose-a:text-blue-600 prose-a:no-underline prose-pre:m-0 prose-pre:bg-transparent prose-pre:p-0 prose-li:my-0 prose-img:my-2 prose-img:inline-block prose-img:rounded-xl">
+    <div className="prose prose-stone bg-base-100/80 ring-base-content/5 prose-headings:my-1 prose-a:my-1 prose-a:text-blue-600 prose-a:no-underline prose-pre:m-0 prose-pre:bg-transparent prose-pre:p-0 prose-li:my-0 prose-img:my-2 prose-img:inline-block prose-img:rounded-xl relative container mx-auto max-w-3xl rounded-2xl px-4 py-2 ring-1">
       <ReactMarkdown
         components={{
           img: ({ ...props }) => {
@@ -136,14 +136,14 @@ export default function MDRender({ data, imgBlurdata }: MDRender) {
                   }}
                   copyText={codeChunk}
                   tooltipText="Copy code"
-                  className="tooltip-left absolute z-40 mr-2 mt-5"
+                  className="tooltip-left absolute z-40 mt-5 mr-2"
                 />
                 <span
                   style={{
                     bottom: 0,
                     right: 0,
                   }}
-                  className="absolute z-40 mb-5 mr-1 rounded-lg bg-base-content/40 p-1 text-xs uppercase text-base-300 backdrop-blur-sm"
+                  className="bg-base-content/40 text-base-300 absolute z-40 mr-1 mb-5 rounded-lg p-1 text-xs uppercase backdrop-blur-xs"
                 >
                   {language}
                 </span>

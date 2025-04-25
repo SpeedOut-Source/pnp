@@ -60,7 +60,7 @@ export default function PdfReader({ resumeUrl }: { resumeUrl: string }) {
                 setIsLoading(false);
                 return (
                   <div className="flex w-full justify-center">
-                    <div className="p-card mx-5 flex h-full w-fit flex-col gap-2 py-4 text-base-content sm:flex-row">
+                    <div className="p-card text-base-content mx-5 flex h-full w-fit flex-col gap-2 py-4 sm:flex-row">
                       <ExclamationCircleIcon className="h-5 w-5" />
                       Error: Unable to view PDF resume. Please download.
                     </div>

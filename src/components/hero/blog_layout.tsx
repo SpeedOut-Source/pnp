@@ -19,7 +19,7 @@ export default function BlogLayoutCard({ data }: BlogLayoutProps) {
     <ViewTransition name={transitionName}>
       <Link
         href={`/blogs/view/${data.fileName}`}
-        className="p-card group relative h-80 w-full cursor-pointer overflow-hidden px-0 text-justify ring ring-base-300 hover:shadow-xl hover:ring hover:ring-blue-200 xl:h-60"
+        className="p-card group ring-base-300 relative h-80 w-full cursor-pointer overflow-hidden px-0 text-justify ring-3 hover:shadow-xl hover:ring-3 hover:ring-blue-200 xl:h-60"
       >
         {data.imgUrl ? (
           <div>
@@ -35,7 +35,7 @@ export default function BlogLayoutCard({ data }: BlogLayoutProps) {
 
             <Image
               blurDataURL={data.imgBlurData ?? undefined}
-              placeholder={data.imgBlurData ? "blur" : undefined}
+              placeholder={data.imgBlurData ? "blur-sm" : undefined}
               loading="lazy"
               objectFit="cover"
               objectPosition="50% 0"
@@ -51,16 +51,16 @@ export default function BlogLayoutCard({ data }: BlogLayoutProps) {
           </div>
         )}
         <div className="mx-1 flex h-full w-full flex-col items-end justify-end">
-          <div className="relative mb-1 max-h-[60%] w-full overflow-hidden rounded-3xl bg-base-100 ring-2 ring-base-300/50 group-hover:max-h-full group-hover:shadow-xl md:bg-base-100/90 md:group-hover:bg-base-100/70 md:group-hover:backdrop-blur-sm xl:mb-0">
-            <div className="absolute bottom-0 hidden h-10 w-full bg-gradient-to-t from-base-100 group-hover:from-transparent md:inline">
-              <div className="hidden w-full items-center justify-center pt-2 font-bold uppercase text-blue-500/70 group-hover:flex">
+          <div className="bg-base-100 ring-base-300/50 md:bg-base-100/90 md:group-hover:bg-base-100/70 relative mb-1 max-h-[60%] w-full overflow-hidden rounded-3xl ring-2 group-hover:max-h-full group-hover:shadow-xl md:group-hover:backdrop-blur-xs xl:mb-0">
+            <div className="from-base-100 absolute bottom-0 hidden h-10 w-full bg-linear-to-t group-hover:from-transparent md:inline">
+              <div className="hidden w-full items-center justify-center pt-2 font-bold text-blue-500/70 uppercase group-hover:flex">
                 <span>Read more</span>
                 <ChevronRightIcon className="h-7 w-5" />
               </div>
             </div>
             <div className="w-full px-2 py-2">
               <div className="mx-2 mb-1 flex items-center justify-between text-sm xl:mx-0">
-                <div className="text-md mt-2 font-semibold leading-snug group-hover:text-wrap xl:truncate">
+                <div className="text-md mt-2 leading-snug font-semibold group-hover:text-wrap xl:truncate">
                   <span>{data.title}</span>
                 </div>
               </div>

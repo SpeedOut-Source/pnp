@@ -17,7 +17,7 @@ export default function CountAdd(props: CountAddProp) {
   return (
     <div className="indicator">
       {counts && props.name && (
-        <span className="indicator-new -mr-1 mt-1 bg-base-300/60">
+        <span className="indicator-item indicator-new bg-base-300/60 mt-1 -mr-1">
           <span
             className={clsx("tooltip", props.tooltipClass)}
             data-tip={`${counts} ${props.name}`}

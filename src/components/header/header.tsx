@@ -54,12 +54,12 @@ export default function Header() {
           ? "-translate-y-12"
           : "" +
               (bgChange
-                ? " shadow-2xl lg:mx-1 lg:rounded-xl lg:ring-1 lg:ring-base-300/40"
+                ? " lg:ring-base-300/40 shadow-2xl lg:mx-1 lg:rounded-xl lg:ring-1"
                 : ""),
         bgChange
-          ? "bg-gradient-to-r from-base-300/30 from-30% to-base-content/50 to-100%"
+          ? "from-base-300/30 to-base-content/50 bg-linear-to-r from-30% to-100%"
           : "",
-        "sticky top-0 z-50 min-h-6 transform-gpu bg-base-100/95 bg-no-repeat lg:top-1 lg:mb-2 lg:bg-transparent lg:backdrop-blur-xl",
+        "bg-base-100/95 sticky top-0 z-50 min-h-6 transform-gpu bg-no-repeat lg:top-1 lg:mb-2 lg:bg-transparent lg:backdrop-blur-xl",
       )}
     >
       <div
@@ -73,7 +73,7 @@ export default function Header() {
           <span className="tooltip tooltip-bottom" data-tip="Go home">
             <Link
               href="/"
-              className="btn btn-ghost !gap-0 px-2 text-xl font-bold normal-case tracking-wider"
+              className="btn btn-ghost gap-0! px-2 text-xl font-bold tracking-wider normal-case"
             >
               <Image
                 src={`${getPrefixRepo()}/images/logos/github-profile-dark${

@@ -119,7 +119,7 @@ export default function Testimonials(props: TestimonialsProps) {
       ref={ref}
       className="relative mx-auto h-fit w-full px-3 sm:mx-0 xl:px-0"
     >
-      <div className="flex items-center gap-2 text-2xl normal-case text-slate-400">
+      <div className="flex items-center gap-2 text-2xl text-slate-400 normal-case">
         <ChatBubbleLeftRightIcon className="h-5 w-5" />
         Testimonials
         {props.addUrl && (
@@ -200,7 +200,7 @@ export default function Testimonials(props: TestimonialsProps) {
               : "absolute"
           } ${transition ? "transition-opacity duration-300" : ""} ${
             expanded ? (showCollapseButton ? "visible" : "invisible") : ""
-          } inset-x-0 bottom-0 z-40 flex justify-center overflow-hidden rounded-3xl bg-gradient-to-t from-base-300 pb-8 pt-32`}
+          } from-base-300 inset-x-0 bottom-0 z-40 flex justify-center overflow-hidden rounded-3xl bg-linear-to-t pt-32 pb-8`}
         >
           <button
             onClick={() => setExpanded((x) => !x)}
@@ -208,7 +208,7 @@ export default function Testimonials(props: TestimonialsProps) {
               expanded ? (!showCollapseButton ? "translate-y-4" : "") : ""
             } ${
               !expanded || showCollapseButton ? "pointer-events-auto" : ""
-            } p-card transform-gpu ring ring-base-content/10`}
+            } p-card ring-base-content/10 transform-gpu ring`}
           >
             {expanded ? "Collapse" : "Show more..."}
           </button>

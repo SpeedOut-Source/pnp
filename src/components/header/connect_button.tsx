@@ -26,7 +26,7 @@ function ImageIcon({
   return (
     <div className="relative h-8 w-8">
       {isImageLoading && (
-        <div className="h-full w-full animate-pulse rounded-xl bg-base-content/80" />
+        <div className="bg-base-content/80 h-full w-full animate-pulse rounded-xl" />
       )}
       <Image
         className={isLight ? "opacity-80" : "invert-colors"}

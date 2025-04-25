@@ -19,7 +19,7 @@ export default function DownloadResume({
       }
       href={resumePdfUrl}
       download={true}
-      className="p-card cursor-pointer gap-2"
+      className="p-card cursor-pointer flex-row gap-2"
     >
       <ArrowDownTrayIcon className="m-1 h-5 w-5" />
       <span>Download resume</span>

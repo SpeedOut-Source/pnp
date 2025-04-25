@@ -13,7 +13,7 @@ export default function LayoutCardApp(props: App | AppHit) {
   const transitionName = toViewTransitionName(props.fileName, "app");
   return (
     <Link
-      className="p-card h-48 transform-gpu cursor-pointer flex-row items-center justify-start py-3 hover:-translate-y-1 hover:shadow-lg"
+      className="p-card h-48 transform-gpu cursor-pointer items-center justify-evenly py-3 hover:-translate-y-1 hover:shadow-lg"
       href={`/apps/view/${props.fileName}`}
     >
       <div className="relative mx-auto h-24 w-24 overflow-hidden rounded-3xl px-0 text-justify">
@@ -37,14 +37,14 @@ export default function LayoutCardApp(props: App | AppHit) {
         </ViewTransition>
       </div>
       <div className="mx-0 mt-1 h-fit w-full px-2 text-center tracking-wider">
-        <p className="mb-1 font-semibold leading-4">
+        <p className="mb-1 leading-4 font-semibold">
           <HighlightSwitch
             hit={props as AppHit}
             attribute="title"
             data={props.title}
           />
         </p>
-        <p className="text-xs text-base-content">
+        <p className="text-base-content text-xs">
           <HighlightSwitch
             hit={props as AppHit}
             attribute="category"
