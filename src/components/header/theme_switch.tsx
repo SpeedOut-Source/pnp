@@ -29,8 +29,9 @@ export default function ThemeSwitch() {
           await delay(130);
           handleToggle();
         }}
-        className={`${isLightLocal ? "swap-active" : ""
-          } btn btn-circle btn-ghost swap swap-rotate`}
+        className={`${
+          isLightLocal ? "swap-active" : ""
+        } btn btn-circle btn-ghost swap swap-rotate`}
       >
         <SunIcon className="swap-on h-6 w-6" />
         <MoonIcon className="swap-off h-6 w-6" />

@@ -2,8 +2,12 @@
 
 @import "tailwindcss";
 
+@config "../../tailwind.config.ts";
+
 @plugin "daisyui" {
-  themes: light, dark --prefersdark;
+  themes:
+    light,
+    dark --prefersdark;
 }
 
 @plugin "daisyui/theme" {
@@ -60,7 +64,7 @@
   --color-neutral-content: oklch(74.6477% 0.0216 264.435964);
   --color-info: oklch(72.06% 0.191 231.6);
   --color-info-content: oklch(0% 0 0);
-  --color-success: oklch(64.8% 0.150 160);
+  --color-success: oklch(64.8% 0.15 160);
   --color-success-content: oklch(0% 0 0);
   --color-warning: oklch(84.71% 0.199 83.87);
   --color-warning-content: oklch(0% 0 0);
@@ -76,7 +80,6 @@
   --noise: 0;
 }
 
-
 @plugin "@tailwindcss/typography";
 
 @plugin "tailwind-scrollbar" {
@@ -85,14 +88,13 @@
 
 @plugin "tailwindcss-animate";
 
-
 @layer components {
   .btn {
     @apply transition-transform duration-200 ease-out active:translate-y-0.5 active:scale-95;
   }
-  
+
   .p-card {
-    @apply btn-ghost btn flex flex-col cursor-default !gap-0 overflow-hidden rounded-3xl bg-base-200 hover:bg-base-content/20 font-normal normal-case leading-relaxed tracking-wider transition-transform duration-200 ease-out active:translate-y-0.5 active:scale-95;
+    @apply btn-ghost btn bg-base-200 hover:bg-base-content/20 flex cursor-default flex-col !gap-0 overflow-hidden rounded-3xl leading-relaxed font-normal tracking-wider normal-case transition-transform duration-200 ease-out active:translate-y-0.5 active:scale-95;
   }
 
   .errorSplash {
@@ -100,7 +102,7 @@
   }
 
   .indicator-new {
-    @apply badge border-0 bg-base-300/70 text-xs text-base-content backdrop-blur;
+    @apply badge bg-base-300/70 text-base-content border-0 text-xs backdrop-blur;
   }
 
   .scrollbar-style {
@@ -138,7 +140,6 @@ html {
 }
 
 @theme {
-
   /* Add Typography and other plugin support */
   --font-family-sans: ui-sans-serif, system, -apple-system, sans-serif;
   --font-family-mono: ui-monospace, monospace;
@@ -180,6 +181,3 @@ html {
     height: 0;
   }
 }
-
-
-@source "../../pnp-data/**.md";

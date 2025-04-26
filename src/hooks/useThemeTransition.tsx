@@ -9,7 +9,9 @@ export function useThemeTransition() {
   const isLight = useThemeStore((state) => state.isLight);
   const themeName = useThemeStore((state) => state.themeName);
 
-  const toggleThemeWithAnimation = async (buttonRef: React.RefObject<HTMLElement>) => {
+  const toggleThemeWithAnimation = async (
+    buttonRef: React.RefObject<HTMLElement>,
+  ) => {
     if (!document.startViewTransition || !buttonRef.current) {
       toggleTheme();
       return;
@@ -21,7 +23,7 @@ export function useThemeTransition() {
       const y = rect.top + rect.height / 2;
       const maxRadius = Math.hypot(
         Math.max(rect.left, window.innerWidth - rect.left),
-        Math.max(rect.top, window.innerHeight - rect.top)
+        Math.max(rect.top, window.innerHeight - rect.top),
       );
 
       document.getElementById("rainbow-ripple-svg")?.remove();
@@ -29,13 +31,23 @@ export function useThemeTransition() {
       const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
       svg.setAttribute("id", "rainbow-ripple-svg");
       Object.assign(svg.style, {
-        position: "fixed", top: "0", left: "0",
-        width: "100%", height: "100%",
-        pointerEvents: "none", zIndex: "2000"
+        position: "fixed",
+        top: "0",
+        left: "0",
+        width: "100%",
+        height: "100%",
+        pointerEvents: "none",
+        zIndex: "2000",
       });
 
-      const defs = document.createElementNS("http://www.w3.org/2000/svg", "defs");
-      const radialGradient = document.createElementNS("http://www.w3.org/2000/svg", "radialGradient");
+      const defs = document.createElementNS(
+        "http://www.w3.org/2000/svg",
+        "defs",
+      );
+      const radialGradient = document.createElementNS(
+        "http://www.w3.org/2000/svg",
+        "radialGradient",
+      );
       radialGradient.setAttribute("id", "rainbowGradient");
       radialGradient.setAttribute("r", "1");
 
@@ -60,18 +72,24 @@ export function useThemeTransition() {
         { offset: "85%", color: "#FFBB00", opacity: "0.5" },
         { offset: "90%", color: "#FFAA00", opacity: "0.6" },
         { offset: "95%", color: "#FF9900", opacity: "0.7" },
-        { offset: "100%", color: "#FF8800", opacity: "0.8" }
+        { offset: "100%", color: "#FF8800", opacity: "0.8" },
       ];
 
-      radialGradient.innerHTML = colorStops.map(stop =>
-        `<stop offset="${stop.offset}" stop-color="${stop.color}" stop-opacity="${stop.opacity}" />`
-      ).join('\n');
+      radialGradient.innerHTML = colorStops
+        .map(
+          (stop) =>
+            `<stop offset="${stop.offset}" stop-color="${stop.color}" stop-opacity="${stop.opacity}" />`,
+        )
+        .join("\n");
 
       defs.appendChild(radialGradient);
 
       svg.appendChild(defs);
 
-      const circle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+      const circle = document.createElementNS(
+        "http://www.w3.org/2000/svg",
+        "circle",
+      );
       circle.setAttribute("cx", String(x));
       circle.setAttribute("cy", String(y));
       circle.setAttribute("r", "0");
@@ -80,7 +98,7 @@ export function useThemeTransition() {
       circle.style.mixBlendMode = "screen";
       svg.appendChild(circle);
 
-      const styleElement = document.createElement('style');
+      const styleElement = document.createElement("style");
       styleElement.textContent = `
         ::view-transition-old(root) { z-index: var(--transition-z-index-old); }
         ::view-transition-new(root) { z-index: var(--transition-z-index-new); }
@@ -95,10 +113,12 @@ export function useThemeTransition() {
       await transition.ready;
 
       document.documentElement.style.setProperty(
-        "--transition-z-index-new", isLight ? "998" : "999"
+        "--transition-z-index-new",
+        isLight ? "998" : "999",
       );
       document.documentElement.style.setProperty(
-        "--transition-z-index-old", isLight ? "999" : "998"
+        "--transition-z-index-old",
+        isLight ? "999" : "998",
       );
 
       const duration = 800;
@@ -147,7 +167,9 @@ export function useThemeTransition() {
 
       document.documentElement.animate(generateKeyframes(), {
         ...animOptions,
-        pseudoElement: isLight ? "::view-transition-old(root)" : "::view-transition-new(root)",
+        pseudoElement: isLight
+          ? "::view-transition-old(root)"
+          : "::view-transition-new(root)",
       });
 
       const rippleAnimation = circle.animate(
@@ -156,7 +178,7 @@ export function useThemeTransition() {
           { r: `${maxRadius * 0.8}`, opacity: 0.3 },
           { r: `${maxRadius}`, opacity: 0 },
         ],
-        animOptions
+        animOptions,
       );
 
       rippleAnimation.onfinish = () => {
