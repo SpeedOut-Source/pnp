@@ -1,59 +1,16 @@
-/* Define the transition behavior for the root element */
-::view-transition-old(root),
+:root {
+  --transition-z-index-new: 999;
+  --transition-z-index-old: 998;
+}
+
+::view-transition-old(root) {
+  animation: none;
+  mix-blend-mode: normal;
+  z-index: var(--transition-z-index-old);
+}
+
 ::view-transition-new(root) {
-    animation: none;
-    mix-blend-mode: normal;
-}
-
-/* Dark -> Light transition */
-.dark::view-transition-old(root) {
-    z-index: 1;
-}
-
-.dark::view-transition-new(root) {
-    z-index: 999;
-}
-
-/* Light -> Dark transition */
-.winter::view-transition-old(root) {
-    z-index: 999;
-}
-
-.winter::view-transition-new(root) {
-    z-index: 1;
-}
-
-/* Particle animation */
-@keyframes particle-wave {
-    0% {
-        transform: scale(0.8) rotate(0deg);
-        opacity: 0.8;
-    }
-
-    50% {
-        opacity: 0.5;
-    }
-
-    100% {
-        transform: scale(1.2) rotate(360deg);
-        opacity: 0;
-    }
-}
-
-.theme-particle {
-    position: absolute;
-    background: radial-gradient(circle, rgba(255, 255, 255, 0.8) 0%, rgba(255, 255, 255, 0) 70%);
-    border-radius: 50%;
-    pointer-events: none;
-    z-index: 1000;
-    mix-blend-mode: overlay;
-    animation: particle-wave 2s ease-out forwards;
-}
-
-.dark .theme-particle {
-    background: radial-gradient(circle, rgba(64, 120, 255, 0.8) 0%, rgba(64, 120, 255, 0) 70%);
-}
-
-.winter .theme-particle {
-    background: radial-gradient(circle, rgba(255, 193, 7, 0.8) 0%, rgba(255, 193, 7, 0) 70%);
+  animation: none;
+  mix-blend-mode: normal;
+  z-index: var(--transition-z-index-new);
 }

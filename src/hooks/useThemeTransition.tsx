@@ -61,6 +61,26 @@ export function useThemeTransition() {
       // Wait for the transition to be ready
       await transition.ready;
 
+      if (isLight) {
+        document.documentElement.style.setProperty(
+          "--transition-z-index-new",
+          "998",
+        );
+        document.documentElement.style.setProperty(
+          "--transition-z-index-old",
+          "999",
+        );
+      } else {
+        document.documentElement.style.setProperty(
+          "--transition-z-index-old",
+          "998",
+        );
+        document.documentElement.style.setProperty(
+          "--transition-z-index-new",
+          "999",
+        );
+      }
+
       // Apply the circular reveal animation
       document.documentElement.animate(
         {
@@ -72,7 +92,10 @@ export function useThemeTransition() {
         {
           duration: 500,
           easing: "ease-in-out",
-          pseudoElement: "::view-transition-new(root)",
+          pseudoElement: isLight
+            ? "::view-transition-old(root)"
+            : "::view-transition-new(root)",
+          direction: isLight ? "reverse" : "normal",
         },
       );
     } catch (error) {
