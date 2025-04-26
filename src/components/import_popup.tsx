@@ -14,6 +14,7 @@ export default function ImportPopup() {
       <SearchDialog />
       <GoogleAnalytics trackPageViews={{ ignoreHashChange: true }} />
       <ThemeProvider />
+      <div id="rainbow-ripple-svg" />
     </>
   );
 }

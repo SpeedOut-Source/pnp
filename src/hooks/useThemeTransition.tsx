@@ -4,79 +4,170 @@ import React from "react";
 import { flushSync } from "react-dom";
 import { useThemeStore } from "~/app_state/theme_mode";
 
-/**
- * A hook that handles theme toggling with View Transitions API animation
- */
 export function useThemeTransition() {
   const toggleTheme = useThemeStore((state) => state.toggleTheme);
   const isLight = useThemeStore((state) => state.isLight);
   const themeName = useThemeStore((state) => state.themeName);
 
-  const toggleThemeWithAnimation = async (
-    buttonRef: React.RefObject<HTMLElement>
-  ) => {
+  const toggleThemeWithAnimation = async (buttonRef: React.RefObject<HTMLElement>) => {
     if (!document.startViewTransition || !buttonRef.current) {
       toggleTheme();
       return;
     }
 
     try {
-      const { left, top, width, height } = buttonRef.current.getBoundingClientRect();
-      const x = left + width / 2;
-      const y = top + height / 2;
+      const rect = buttonRef.current.getBoundingClientRect();
+      const x = rect.left + rect.width / 2;
+      const y = rect.top + rect.height / 2;
+      const maxRadius = Math.hypot(
+        Math.max(rect.left, window.innerWidth - rect.left),
+        Math.max(rect.top, window.innerHeight - rect.top)
+      );
+
+      document.getElementById("rainbow-ripple-svg")?.remove();
+
+      const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+      svg.setAttribute("id", "rainbow-ripple-svg");
+      Object.assign(svg.style, {
+        position: "fixed", top: "0", left: "0",
+        width: "100%", height: "100%",
+        pointerEvents: "none", zIndex: "2000"
+      });
+
+      const defs = document.createElementNS("http://www.w3.org/2000/svg", "defs");
+      const radialGradient = document.createElementNS("http://www.w3.org/2000/svg", "radialGradient");
+      radialGradient.setAttribute("id", "rainbowGradient");
+      radialGradient.setAttribute("r", "1");
+
+      const colorStops = [
+        { offset: "0%", color: "#E0FFFF", opacity: "0.9" },
+        { offset: "5%", color: "#BFFFFF", opacity: "0.85" },
+        { offset: "10%", color: "#9FFFFF", opacity: "0.8" },
+        { offset: "15%", color: "#80EEFF", opacity: "0.75" },
+        { offset: "20%", color: "#60DDFF", opacity: "0.6" },
+        { offset: "25%", color: "#40CCFF", opacity: "0.4" },
+        { offset: "30%", color: "#20BBFF", opacity: "0.2" },
+        { offset: "35%", color: "#00AAFF", opacity: "0.1" },
+        { offset: "40%", color: "#60DDFF", opacity: isLight ? "0.05" : "0.8" },
+        { offset: "45%", color: "#C0FFFF", opacity: isLight ? "0.03" : "0.6" },
+        { offset: "50%", color: "#FFFFFF", opacity: isLight ? "0.02" : "0.4" },
+        { offset: "55%", color: "#FFFFDD", opacity: isLight ? "0.03" : "0.3" },
+        { offset: "60%", color: "#FFFFAA", opacity: isLight ? "0.05" : "0.8" },
+        { offset: "65%", color: "#FFFF80", opacity: "0.1" },
+        { offset: "70%", color: "#FFEE60", opacity: "0.2" },
+        { offset: "75%", color: "#FFDD40", opacity: "0.3" },
+        { offset: "80%", color: "#FFCC20", opacity: "0.4" },
+        { offset: "85%", color: "#FFBB00", opacity: "0.5" },
+        { offset: "90%", color: "#FFAA00", opacity: "0.6" },
+        { offset: "95%", color: "#FF9900", opacity: "0.7" },
+        { offset: "100%", color: "#FF8800", opacity: "0.8" }
+      ];
+
+      radialGradient.innerHTML = colorStops.map(stop =>
+        `<stop offset="${stop.offset}" stop-color="${stop.color}" stop-opacity="${stop.opacity}" />`
+      ).join('\n');
+
+      defs.appendChild(radialGradient);
+
+      svg.appendChild(defs);
+
+      const circle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+      circle.setAttribute("cx", String(x));
+      circle.setAttribute("cy", String(y));
+      circle.setAttribute("r", "0");
+      circle.setAttribute("fill", "url(#rainbowGradient)");
+      circle.style.opacity = "0.7";
+      circle.style.mixBlendMode = "screen";
+      svg.appendChild(circle);
+
+      const styleElement = document.createElement('style');
+      styleElement.textContent = `
+        ::view-transition-old(root) { z-index: var(--transition-z-index-old); }
+        ::view-transition-new(root) { z-index: var(--transition-z-index-new); }
+      `;
+      document.head.appendChild(styleElement);
 
       const transition = document.startViewTransition(() => {
         flushSync(() => toggleTheme());
+        document.body.appendChild(svg);
       });
 
       await transition.ready;
 
-      const zNew = isLight ? "998" : "999";
-      const zOld = isLight ? "999" : "998";
+      document.documentElement.style.setProperty(
+        "--transition-z-index-new", isLight ? "998" : "999"
+      );
+      document.documentElement.style.setProperty(
+        "--transition-z-index-old", isLight ? "999" : "998"
+      );
 
-      document.documentElement.style.setProperty("--transition-z-index-new", zNew);
-      document.documentElement.style.setProperty("--transition-z-index-old", zOld);
+      const duration = 800;
+      const easing = "ease-in-out";
+      const blurEdgeRatio = Math.min(maxRadius * 0.15, 30);
 
-      const steps = 500;
-      const keyframes: Keyframe[] = Array.from({ length: steps + 1 }, (_, i) => {
-        const p = i / steps;
-        const eased = p < 0.5 ? 2 * p * p : -1 + (4 - 2 * p) * p;
-        const sinP = Math.sin(p * Math.PI);
-        const edge = eased * 100;
+      const generateKeyframes = () => {
+        const steps = 800;
+        const keyframes = [];
 
-        const stops = [
-          `white 0%`,
-          `white ${edge}%`,
-          `transparent ${edge + 15}%`,
-        ];
+        keyframes.push({
+          maskImage: `radial-gradient(circle at ${x}px ${y}px, white 0px, white 0px, transparent ${blurEdgeRatio}px)`,
+          easing: "ease-in-out",
+        });
 
-        return {
-          maskImage: `radial-gradient(circle at ${x}px ${y}px, ${stops.join(", ")})`,
-          backdropFilter: `blur(${sinP * 2}px)`,
-          filter: `hue-rotate(${p * 360}deg)`,
-          transform: `scale(${1 + sinP * 0.02})`,
-          easing: "ease-in-out"
-        };
-      });
+        for (let i = 1; i < steps; i++) {
+          const p = i / steps;
+          const eased = p < 0.5 ? 2 * p * p : -1 + (4 - 2 * p) * p;
+          const sinP = Math.sin(p * Math.PI);
+          const currentRadius = eased * maxRadius;
 
-      document.documentElement.animate(keyframes, {
-        duration: 800,
-        easing: "cubic-bezier(0.22, 0.84, 0.32, 0.95)",
-        pseudoElement: isLight
-          ? "::view-transition-old(root)"
-          : "::view-transition-new(root)",
+          keyframes.push({
+            maskImage: `radial-gradient(circle at ${x}px ${y}px, white 0px, white ${currentRadius}px, transparent ${currentRadius + blurEdgeRatio}px)`,
+            backdropFilter: `blur(${sinP * 2}px)`,
+            transform: `scale(${1 + sinP * 0.02})`,
+            easing: "ease-in-out",
+          });
+        }
+
+        keyframes.push({
+          maskImage: `radial-gradient(circle at ${x}px ${y}px, white 0px, white ${maxRadius}px, transparent ${maxRadius + blurEdgeRatio}px)`,
+          backdropFilter: `blur(0px)`,
+          transform: `scale(1)`,
+          easing: "ease-in-out",
+        });
+
+        return keyframes;
+      };
+
+      const animOptions: KeyframeAnimationOptions = {
+        duration,
+        easing,
         direction: isLight ? "reverse" : "normal",
         fill: "forwards",
+      };
+
+      document.documentElement.animate(generateKeyframes(), {
+        ...animOptions,
+        pseudoElement: isLight ? "::view-transition-old(root)" : "::view-transition-new(root)",
       });
+
+      const rippleAnimation = circle.animate(
+        [
+          { r: "0", opacity: 0.7 },
+          { r: `${maxRadius * 0.8}`, opacity: 0.3 },
+          { r: `${maxRadius}`, opacity: 0 },
+        ],
+        animOptions
+      );
+
+      rippleAnimation.onfinish = () => {
+        svg.remove();
+        styleElement.remove();
+      };
     } catch (error) {
       console.error("Error during theme transition:", error);
       toggleTheme();
     }
   };
 
-  return {
-    isLight,
-    themeName,
-    toggleThemeWithAnimation,
-  };
+  return { isLight, themeName, toggleThemeWithAnimation };
 }
