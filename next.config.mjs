@@ -4,6 +4,13 @@
  */
 await import("./src/env.mjs");
 import { env } from "./src/env.mjs";
+import withPWAInit from "@ducanh2912/next-pwa";
+
+const withPWA = withPWAInit({
+  dest: "public",
+});
+
+
 const PREFIX_REPO =
   process.env.NODE_ENV === "production" &&
     process.env.NEXT_PUBLIC_LOCALHOST_TEST !== "true"
@@ -60,4 +67,4 @@ const config = {
   },
 };
 
-export default config;
+export default withPWA(config);

@@ -47,3 +47,5 @@ yarn-error.log*
 
 # Data path
 pnp-data
+public/sw.js
+public/workbox-*.js

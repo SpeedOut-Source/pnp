@@ -1,4 +1,4 @@
-import { type Metadata } from "next";
+import { Viewport, type Metadata } from "next";
 import keyword_extractor from "keyword-extractor";
 import { env } from "../../env.mjs";
 import { type CardItem } from "~/app_function/utils/interfaces";
@@ -12,6 +12,10 @@ interface SEOProps {
   ogType?: OpenGraphType;
   itemView?: CardItem;
 }
+
+export const viewport: Viewport = {
+  themeColor: "#0069ff",
+};
 
 export function generateMetadataSEO({
   imgUrl: img,
@@ -34,9 +38,19 @@ export function generateMetadataSEO({
   const baseUrl = env.NEXT_PUBLIC_BASE_URL;
 
   const metadata: Metadata = {
+    applicationName: title,
+    manifest: "/manifest.json",
     title,
     description,
     metadataBase: new URL(baseUrl),
+    appleWebApp: {
+      capable: true,
+      statusBarStyle: "default",
+      title: title,
+    },
+    formatDetection: {
+      telephone: false,
+    },
     alternates: {
       canonical: baseUrl,
     },
