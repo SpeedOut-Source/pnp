@@ -2,6 +2,7 @@ import { Titillium_Web } from "next/font/google";
 import { env } from "../env.mjs";
 import aa from "search-insights";
 import "~/styles/globals.css";
+import { ThemeProvider } from "next-themes";
 
 const inter = Titillium_Web({ subsets: ["latin"], weight: "400" });
 
@@ -30,18 +31,20 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" data-theme="dark">
+    <html lang="en" data-theme="dark" suppressHydrationWarning>
       <body className="scrollbar-style relative isolate">
-        <DiscountBanner />
-        <GradientEffectTop />
-        <div className="flex h-screen flex-col justify-between">
-          <main className={inter.className}>
-            <Header />
-            {children}
-          </main>
-          <Footer />
-        </div>
-        <ImportPopup />
+        <ThemeProvider enableSystem={false} themes={["dark", "winter"]}>
+          <DiscountBanner />
+          <GradientEffectTop />
+          <div className="flex h-screen flex-col justify-between">
+            <main className={inter.className}>
+              <Header />
+              {children}
+            </main>
+            <Footer />
+          </div>
+          <ImportPopup />
+        </ThemeProvider>
       </body>
     </html>
   );
