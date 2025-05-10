@@ -37,6 +37,26 @@ export default function GetLogoListing({
           width={160}
         />
       );
+    case "firefox add-ons":
+      return (
+        <Image
+          className="rounded-md"
+          src={`https://github.com/kazcfz/Browser-Promotional-Badges/raw/refs/heads/main/Mozilla/Firefox/Get%20The%20Add-On.svg`}
+          alt={name}
+          height={10}
+          width={160}
+        />
+      );
+    case "opera add-ons":
+      return (
+        <Image
+          className="rounded-md"
+          src={`https://raw.githubusercontent.com/kazcfz/Browser-Promotional-Badges/refs/heads/main/Opera/Add-ons/addons_206x58_en%402x.png`}
+          alt={name}
+          height={10}
+          width={160}
+        />
+      );
     case "android":
       return (
         <Image
@@ -59,9 +79,8 @@ export default function GetLogoListing({
       return (
         <Image
           className=""
-          src={`${getPrefixRepo()}/images/listing/github-mark${
-            isLight ? "" : "-white"
-          }.svg`}
+          src={`${getPrefixRepo()}/images/listing/github-mark${isLight ? "" : "-white"
+            }.svg`}
           alt={name}
           height={10}
           width={50}
@@ -72,8 +91,7 @@ export default function GetLogoListing({
         <Image
           src={
             appLogo ??
-            `${getPrefixRepo()}/images/logos/github-profile-dark${
-              isLight ? "-light" : ""
+            `${getPrefixRepo()}/images/logos/github-profile-dark${isLight ? "-light" : ""
             }.png`
           }
           alt={name}
