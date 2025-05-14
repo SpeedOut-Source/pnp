@@ -33,7 +33,7 @@ export default function RootLayout({
   return (
     <html lang="en" data-theme="dark" suppressHydrationWarning>
       <body className="scrollbar-style relative isolate">
-        <ThemeProvider enableSystem={false} themes={["dark", "winter"]}>
+        <ThemeProvider enableSystem={false} themes={["dark", "winter"]} defaultTheme={"dark"}>
           <DiscountBanner />
           <GradientEffectTop />
           <div className="flex h-screen flex-col justify-between">
