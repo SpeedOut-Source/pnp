@@ -18,7 +18,6 @@ export default function Me(props: MeProps) {
           <Image
             loading="lazy"
             placeholder="blur"
-            // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
             blurDataURL={props.blurDataURL!}
             objectFit="cover"
             layout="fill"

@@ -1,24 +1,9 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { type Project } from "./interfaces";
 import tc from "thousands-counter";
 import { env } from "../../env.mjs";
 import urlJoin from "url-join";
 
-export function stringToReadableUrl(str: string, reverse?: boolean): string {
-  if (reverse) {
-    // Convert readable URL back to original string
-    return str.split("-").filter(Boolean).join(" ");
-  } else {
-    // Convert input string to readable URL
-    return str
-      .toLowerCase()
-      .replace(/\s+/g, "-")
-      .split("-")
-      .filter(Boolean)
-      .join("-");
-  }
-}
-
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function isPro(object: any): object is Project {
   return "whatText" in object;
 }
@@ -31,7 +16,6 @@ export function toTitleCase(str: string): string {
 }
 
 export function showCountHuman(count: number): number {
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-return, @typescript-eslint/no-unsafe-call
   return tc(count, { digits: 2, uppercase: false });
 }
 

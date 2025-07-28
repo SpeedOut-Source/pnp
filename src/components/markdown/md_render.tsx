@@ -1,11 +1,5 @@
-/* eslint-disable @next/next/no-img-element */
-/* eslint-disable jsx-a11y/alt-text */
-/* eslint-disable @typescript-eslint/ban-ts-comment */
-/* eslint-disable @typescript-eslint/no-explicit-any */
-// @ts-nocheck
-
 import dynamic from "next/dynamic";
-import { type ReactMarkdownOptions } from "react-markdown/lib/react-markdown";
+import { type Options } from "react-markdown";
 import rehypeRaw from "rehype-raw";
 import remarkGfm from "remark-gfm";
 import { headingTree } from "~/app_function/remark/headings";
@@ -28,7 +22,9 @@ import CopyToClipboardButton from "../copy_to_clipboard_button";
 import Image from "next/image";
 import { type ImgBlurData } from "~/app_function/utils/interfaces";
 import Skeleton from "../skeleton";
+import { type Element } from "hast";
 
+// Register syntax highlighter languages
 SyntaxHighlighter.registerLanguage("tsx", tsx);
 SyntaxHighlighter.registerLanguage("typescript", typescript);
 SyntaxHighlighter.registerLanguage("scss", scss);
@@ -40,21 +36,20 @@ SyntaxHighlighter.registerLanguage("python", python);
 SyntaxHighlighter.registerLanguage("sql", sql);
 SyntaxHighlighter.registerLanguage("dart", dart);
 
-const ReactMarkdown = dynamic<ReactMarkdownOptions>(
-  () =>
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-return,@typescript-eslint/no-unsafe-member-access
-    import("react-markdown").then((e: any) => e.default),
+// Dynamic import for ReactMarkdown with proper typing
+const ReactMarkdown = dynamic<Options>(
+  () => import("react-markdown").then((mod) => mod.default),
   {
     loading: () => <Skeleton count={3} />,
   },
 );
 
-interface MDRender {
+interface MDRenderProps {
   data: string;
   imgBlurdata?: ImgBlurData;
 }
 
-export default function MDRender({ data, imgBlurdata }: MDRender) {
+export default function MDRender({ data, imgBlurdata }: MDRenderProps) {
   return (
     <div className="prose prose-stone bg-base-100/80 ring-base-content/5 prose-headings:my-1 prose-a:my-1 prose-a:text-blue-600 prose-a:no-underline prose-pre:m-0 prose-pre:bg-transparent prose-pre:p-0 prose-li:my-0 prose-img:my-2 prose-img:inline-block prose-img:rounded-xl relative container mx-auto max-w-3xl rounded-2xl px-4 py-2 ring-1">
       <ReactMarkdown
@@ -62,27 +57,29 @@ export default function MDRender({ data, imgBlurdata }: MDRender) {
           img: ({ ...props }) => {
             if (!props.src) return <></>;
 
-            if (!imgBlurdata) return <img {...props} />;
-
-            const blurDataURL = imgBlurdata.hasOwnProperty(props.src)
-              ? imgBlurdata[props.src]
+            const blurDataURL = imgBlurdata
+              ? imgBlurdata.hasOwnProperty(props.src as string)
+                ? imgBlurdata[props.src as string]
+                : undefined
               : undefined;
 
             return (
               <Image
                 {...props}
+                src={props.src as string}
+                alt={props.alt || ""}
                 blurDataURL={blurDataURL ? blurDataURL.base64 : undefined}
                 placeholder={blurDataURL ? "blur" : "empty"}
                 width={
                   props.width
-                    ? parseFloat(props.width)
+                    ? parseFloat(String(props.width))
                     : blurDataURL
                       ? blurDataURL.width
                       : 0
                 }
                 height={
                   props.height
-                    ? parseFloat(props.height)
+                    ? parseFloat(String(props.height))
                     : blurDataURL
                       ? blurDataURL.height
                       : 0
@@ -94,39 +91,63 @@ export default function MDRender({ data, imgBlurdata }: MDRender) {
           },
           a: ({ children, ...props }) => {
             if (props.href?.includes("http")) {
-              props.target = "_blank";
-              props.rel = "noopener noreferrer";
-              props.className = "hover:underline break-all";
+              return (
+                <a
+                  {...props}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="break-all hover:underline"
+                >
+                  {children}
+                </a>
+              );
             }
             return <a {...props}>{children}</a>;
           },
-          code({ inline, className, ...props }) {
+          code: ({ className, children, ...props }) => {
             const hasLang = /language-(\w+)/.exec(className ?? "");
-            return !inline && hasLang ? (
-              <SyntaxHighlighter
-                style={oneDark}
-                language={hasLang[1]}
-                PreTag="div"
-                className="scrollbar-style mockup-code"
-                showLineNumbers={true}
-                useInlineStyles={true}
-              >
-                {String(props.children).replace(/\n$/, "")}
-              </SyntaxHighlighter>
-            ) : (
-              <code className={`${className} break-all`} {...props} />
+
+            if (hasLang) {
+              return (
+                <SyntaxHighlighter
+                  style={oneDark}
+                  language={hasLang[1]}
+                  PreTag="div"
+                  className="scrollbar-style mockup-code"
+                  showLineNumbers={true}
+                  useInlineStyles={true}
+                >
+                  {String(children).replace(/\n$/, "")}
+                </SyntaxHighlighter>
+              );
+            }
+
+            return (
+              <code className={`${className ?? ""} break-all`} {...props}>
+                {children}
+              </code>
             );
           },
-          pre: (pre) => {
-            // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-            const codeChunk = (pre as any).node.children[0].children[0]
-              .value as string;
+          pre: ({ node, children, ...props }) => {
+            // Type-safe access to node properties
+            const codeElement = node?.children?.[0] as Element | undefined;
+            const codeTextNode = codeElement?.children?.[0];
 
-            // eslint-disable-next-line @typescript-eslint/no-unsafe-call,@typescript-eslint/no-unsafe-member-access
-            const language = (pre as any).children[0]?.props.className.replace(
-              /language-/g,
-              "",
-            ) as string;
+            const codeChunk =
+              codeTextNode && "value" in codeTextNode
+                ? String(codeTextNode.value)
+                : "";
+
+            // Get language from the code element's className
+            const codeProps = Array.isArray(children) ? children[0] : children;
+
+            const language =
+              codeProps &&
+              typeof codeProps === "object" &&
+              "props" in codeProps &&
+              codeProps.props?.className
+                ? String(codeProps.props.className).replace(/language-/g, "")
+                : "text";
 
             return (
               <div className="relative overflow-x-hidden">
@@ -147,7 +168,7 @@ export default function MDRender({ data, imgBlurdata }: MDRender) {
                 >
                   {language}
                 </span>
-                <pre {...pre}></pre>
+                <pre {...props}>{children}</pre>
               </div>
             );
           },

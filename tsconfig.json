@@ -1,9 +1,12 @@
 {
   "compilerOptions": {
-    "lib": ["dom", "dom.iterable", "esnext"],
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
     "allowJs": true,
     "checkJs": true,
-    "skipLibCheck": true,
     "strict": true,
     "forceConsistentCasingInFileNames": true,
     "noEmit": true,
@@ -17,11 +20,22 @@
     "noUncheckedIndexedAccess": true,
     "baseUrl": ".",
     "paths": {
-      "~/*": ["./src/*"]
+      "~/*": [
+        "./src/*"
+      ]
     },
     "target": "es2022",
     "moduleDetection": "force",
-    "plugins": [{ "name": "next" }]
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ],
+    "skipLibCheck": true,
+    "types": [
+      "react",
+      "node"
+    ]
   },
   "include": [
     "next-env.d.ts",
@@ -33,13 +47,18 @@
     ".next/types/**/*.ts",
     "**/*.js"
   ],
-  "exclude": ["src/components/markdown/md_render.tsx","node_modules"],
+  "exclude": [
+    "node_modules",
+    "out",
+    ".next",
+    "public",
+    "dist"
+  ],
   "ts-node": {
     "compilerOptions": {
       // compilerOptions specified here will override those declared below,
       // but *only* in ts-node.  Useful if you want ts-node and tsc to use
       // different options with a single tsconfig.json.
-
       "module": "CommonJS",
       "isolatedModules": false
     }

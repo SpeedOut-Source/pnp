@@ -3,6 +3,7 @@ import { type generateStaticParamsType } from "./page/[no]/page";
 import { toTitleCase } from "~/app_function/utils/utils";
 import { env } from "~/env.mjs";
 import { generateMetadataSEO } from "~/app_function/seo/seo";
+import React from "react";
 
 export async function generateMetadata({ params }: generateStaticParamsType) {
   const { category } = await params;

@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Highlight, type HighlightHitParams } from "./Highlight";
+import { JSX } from "react";
 
 export type HighlightHitParamsWithData<THit> = HighlightHitParams<THit> & {
   data: string;

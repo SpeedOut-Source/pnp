@@ -35,7 +35,7 @@ export default function BlogLayoutCard({ data }: BlogLayoutProps) {
 
             <Image
               blurDataURL={data.imgBlurData ?? undefined}
-              placeholder={data.imgBlurData ? "blur-sm" : undefined}
+              placeholder={data.imgBlurData ? "blur" : undefined}
               loading="lazy"
               objectFit="cover"
               objectPosition="50% 0"

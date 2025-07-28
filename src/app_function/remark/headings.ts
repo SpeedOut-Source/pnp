@@ -1,7 +1,7 @@
 import { toString } from "mdast-util-to-string";
 import { visit } from "unist-util-visit";
-import type { Root } from "remark-parse/lib";
 import type { VFile } from "vfile";
+import { Root } from "hast";
 
 export type TransformNodeOutput = {
   value: string;

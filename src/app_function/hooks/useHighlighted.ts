@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 
 export function useHighlighted(id: string) {
-  const observer = useRef<IntersectionObserver>();
+  const observer = useRef<IntersectionObserver | null>(null);
   const [activeId, setActiveId] = useState("");
 
   useEffect(() => {

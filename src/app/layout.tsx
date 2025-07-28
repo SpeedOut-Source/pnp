@@ -14,6 +14,7 @@ aa("init", {
 
 import "~/styles/globals.css";
 import dynamic from "next/dynamic";
+import React from "react";
 
 const Header = dynamic(() => import("~/components/header/header"));
 const Footer = dynamic(() => import("~/components/footer/footer"));
@@ -33,7 +34,11 @@ export default function RootLayout({
   return (
     <html lang="en" data-theme="dark" suppressHydrationWarning>
       <body className="scrollbar-style relative isolate">
-        <ThemeProvider enableSystem={false} themes={["dark", "winter"]} defaultTheme={"dark"}>
+        <ThemeProvider
+          enableSystem={false}
+          themes={["dark", "winter"]}
+          defaultTheme={"dark"}
+        >
           <DiscountBanner />
           <GradientEffectTop />
           <div className="flex h-screen flex-col justify-between">

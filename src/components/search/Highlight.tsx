@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { parseAlgoliaHitHighlight } from "@algolia/autocomplete-preset-algolia";
-import { createElement, Fragment } from "react";
+import { createElement, Fragment, JSX } from "react";
 
 export type HighlightHitParams<THit> = {
   /**

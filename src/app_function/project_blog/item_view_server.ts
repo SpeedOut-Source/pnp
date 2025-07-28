@@ -8,7 +8,7 @@ import matter from "gray-matter";
 import { type App, type Card, type CardData } from "../utils/interfaces";
 import { RingBuffer } from "../utils/ring_buffer";
 import { remark } from "remark";
-import { type TransformNodeOutput, headingTree } from "../remark/headings";
+import { headingTree, type TransformNodeOutput } from "../remark/headings";
 import { type ProjectBlogViewProps } from "~/components/view/project_blog_view";
 import { join } from "path";
 import { env } from "~/env.mjs";
@@ -77,8 +77,7 @@ export async function getStaticPropsItemView({
 
     if (type === "apps") {
       const images = (itemView as App).imgs;
-      const imgBlurdata = await addBlurList(images);
-      (itemView as App).imgsBlurData = imgBlurdata;
+      (itemView as App).imgsBlurData = await addBlurList(images);
     }
 
     const processedContentTOC = await remark()

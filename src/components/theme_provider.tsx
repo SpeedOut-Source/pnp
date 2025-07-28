@@ -10,6 +10,6 @@ export default function ThemeProvider() {
 
   useEffect(() => {
     setTheme(themeName);
-  }, [themeName]);
+  }, [setTheme, themeName]);
   return <></>;
 }

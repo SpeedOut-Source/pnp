@@ -48,10 +48,8 @@ const config = {
   webpack: (config, { isServer }) => {
     if (isServer) {
       // Fix react-pdf referencing canvas in SSR
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
       config.resolve.alias.canvas = false;
     }
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
     config.resolve.alias.encoding = false;
     // eslint-disable-next-line @typescript-eslint/no-unsafe-return
     return config;
@@ -61,9 +59,8 @@ const config = {
       canvas: "./empty-module.ts",
     },
   },
-  typescript: {
-    // Ignore TypeScript errors from node_modules
-    ignoreBuildErrors: true,
+  eslint: {
+    dirs: ['src'],
   },
 };
 

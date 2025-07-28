@@ -44,32 +44,36 @@ export async function generateMetadata({ params }: generateStaticParamsType) {
   const cat = category.toString();
 
   switch (category) {
-    case "projects":
+    case "projects": {
       const { whatText, result, company, app } = itemView as Project;
       title = `${whatText}`;
       description = `${result} | ${toTitleCase(cat)} | ${
         company.name
       } | ${app.name}`;
       break;
-    case "blogs":
+    }
+    case "blogs": {
       const m = itemView as Blog;
       title = m.title;
       description = `${m.desc} | ${toTitleCase(cat)} | ${
         env.NEXT_PUBLIC_PERSON_NAME
       }`;
       break;
-    case "apps":
+    }
+    case "apps": {
       const { title: t, category, platforms } = itemView as App;
       title = t;
       description = `${category} | ${toTitleCase(category)} | ${platforms
         .map((x) => x.name)
         .join(" | ")} | ${env.NEXT_PUBLIC_PERSON_NAME}`;
       break;
-    case "company":
+    }
+    case "company": {
       const o = itemView as Company;
       title = o.title;
       description = `${title} | ${toTitleCase(cat)}`;
       break;
+    }
   }
 
   return generateMetadataSEO({

@@ -1,7 +1,7 @@
 "use client";
 
 import DocumentDuplicateIcon from "@heroicons/react/24/outline/DocumentDuplicateIcon";
-import { useState } from "react";
+import React, { useState } from "react";
 import ClipboardCopy from "../ClipboardCopy";
 import { delay } from "../sapage/src/components/app/helper";
 import Link from "next/link";
@@ -38,7 +38,6 @@ export default function ContactItem(props: ContactItemProps) {
       >
         <ClipboardCopy
           text={props.copyUrl ? props.url : props.text}
-          // eslint-disable-next-line @typescript-eslint/no-misused-promises
           onCopy={async () => {
             setCopyTip("Copied");
             await delay(500);

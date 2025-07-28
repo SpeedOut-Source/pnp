@@ -149,15 +149,6 @@ export async function getTesti(): Promise<TestimonialsProps> {
   }
 }
 
-export async function getTechs(): Promise<RXTProps> {
-  try {
-    const dataExpertise = (await getData("home/expertise.json")).toString();
-    return JSON.parse(dataExpertise) as RXTProps;
-  } catch {
-    return { techs: [] };
-  }
-}
-
 export async function getTags() {
   try {
     const data = (await getData("db/tags/configs.json")).toString();
@@ -170,22 +161,26 @@ export async function getTags() {
 export async function getCard(type: Card, tag?: string) {
   let allData: CardData;
   switch (type) {
-    case "projects":
+    case "projects": {
       const projects = (await getProjects(tag)).projects;
       allData = await addBlur(projects, projects.length);
       break;
-    case "blogs":
+    }
+    case "blogs": {
       const blogs = (await getBlogs(tag)).blogs;
       allData = await addBlur(blogs, blogs.length);
       break;
-    case "apps":
+    }
+    case "apps": {
       const apps = (await getApps(tag)).apps;
       allData = await addBlur(apps, apps.length);
       break;
-    case "company":
+    }
+    case "company": {
       const company = (await getCompany(tag)).company;
       allData = await addBlur(company, company.length);
       break;
+    }
   }
   return allData;
 }
@@ -207,7 +202,6 @@ export async function addBlur<T>(data: T[], limit = 3) {
   for (let index = 0; index < limit; index++) {
     const element = data[index];
     if (!element) continue;
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
     const imgBlurDataRaw = await getBlurData(
       (element as unknown as { imgUrl: string }).imgUrl,
       false,

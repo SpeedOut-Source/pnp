@@ -1,6 +1,7 @@
 import { type Card } from "~/app_function/utils/interfaces";
 import { getTagConfigs } from "~/app_function/utils/utils-server";
 import { env } from "~/env.mjs";
+import React from "react";
 
 export type generateStaticParamsType = {
   params: Promise<{ category: Card }>;
