@@ -113,9 +113,17 @@ export default function MDRender({ data, imgBlurdata }: MDRenderProps) {
                   style={oneDark}
                   language={hasLang[1]}
                   PreTag="div"
-                  className="scrollbar-style mockup-code"
+                  className="scrollbar-style !mockup-code !rounded-lg !bg-base-200 !border-none !text-base-content"
                   showLineNumbers={true}
                   useInlineStyles={true}
+                  codeTagProps={{
+                    style: {
+                      border: "none",
+                      padding: "0 !important",
+                      margin: "0 !important",
+                      textShadow: "none",
+                    }
+                  }}
                 >
                   {String(children).replace(/\n$/, "")}
                 </SyntaxHighlighter>
@@ -168,7 +176,7 @@ export default function MDRender({ data, imgBlurdata }: MDRenderProps) {
                 >
                   {language}
                 </span>
-                <pre {...props}>{children}</pre>
+                <pre {...props} className="!p-0">{children}</pre>
               </div>
             );
           },

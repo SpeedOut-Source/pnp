@@ -70,7 +70,7 @@ export default function Header() {
         )}
       >
         <div className="flex items-center gap-2">
-          <span className="tooltip tooltip-bottom" data-tip="Go home">
+          <span className="tooltip tooltip-bottom" data-tip="Home page">
             <Link
               href="/"
               className="btn btn-ghost gap-0! px-2 text-xl font-bold tracking-wider normal-case"

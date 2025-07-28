@@ -94,7 +94,7 @@
   }
 
   .p-card {
-    @apply btn-ghost btn bg-base-200 hover:bg-base-content/20 flex cursor-default flex-col !gap-0 overflow-hidden rounded-3xl leading-relaxed font-normal tracking-wider normal-case transition-transform duration-200 ease-out active:translate-y-0.5 active:scale-95;
+    @apply btn focus:ring-2 m-1 hover:bg-base-content/20 flex cursor-default flex-col !gap-0 overflow-hidden rounded-3xl leading-relaxed font-normal tracking-wider normal-case transition-transform duration-200 ease-out active:translate-y-0.5 active:scale-95;
   }
 
   .errorSplash {
