@@ -113,7 +113,7 @@ export default function MDRender({ data, imgBlurdata }: MDRenderProps) {
                   style={oneDark}
                   language={hasLang[1]}
                   PreTag="div"
-                  className="scrollbar-style !mockup-code !rounded-lg !bg-base-200 !border-none !text-base-content"
+                  className="scrollbar-style !mockup-code !bg-base-200 !text-base-content !rounded-lg !border-none"
                   showLineNumbers={true}
                   useInlineStyles={true}
                   codeTagProps={{
@@ -122,7 +122,7 @@ export default function MDRender({ data, imgBlurdata }: MDRenderProps) {
                       padding: "0 !important",
                       margin: "0 !important",
                       textShadow: "none",
-                    }
+                    },
                   }}
                 >
                   {String(children).replace(/\n$/, "")}
@@ -176,7 +176,9 @@ export default function MDRender({ data, imgBlurdata }: MDRenderProps) {
                 >
                   {language}
                 </span>
-                <pre {...props} className="!p-0">{children}</pre>
+                <pre {...props} className="!p-0">
+                  {children}
+                </pre>
               </div>
             );
           },
