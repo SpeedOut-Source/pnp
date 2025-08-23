@@ -21,6 +21,7 @@ const PREFIX_REPO =
 const config = {
   experimental: {
     viewTransition: true,
+    optimizeRouterScrolling: true,
   },
   output: "export",
   reactStrictMode: true,

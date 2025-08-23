@@ -32,7 +32,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" data-theme="dark" suppressHydrationWarning>
+    <html className="scroll-smooth" lang="en" data-scroll-behavior="smooth" data-theme="dark" suppressHydrationWarning>
       <body className="scrollbar-style relative isolate">
         <ThemeProvider
           enableSystem={false}
