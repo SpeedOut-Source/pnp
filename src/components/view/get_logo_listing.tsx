@@ -66,6 +66,15 @@ export default function GetLogoListing({
           width={200}
         />
       );
+    case "izzyondroid":
+      return (
+        <Image
+          src="https://gitlab.com/IzzyOnDroid/repo/-/raw/master/assets/IzzyOnDroidButtonGreyBorder_nofont.png"
+          alt={name}
+          height={10}
+          width={160}
+        />
+      );
     case "google colab":
       return (
         <Image
@@ -79,9 +88,8 @@ export default function GetLogoListing({
       return (
         <Image
           className=""
-          src={`${getPrefixRepo()}/images/listing/github-mark${
-            isLight ? "" : "-white"
-          }.svg`}
+          src={`${getPrefixRepo()}/images/listing/github-mark${isLight ? "" : "-white"
+            }.svg`}
           alt={name}
           height={10}
           width={50}
@@ -92,8 +100,7 @@ export default function GetLogoListing({
         <Image
           src={
             appLogo ??
-            `${getPrefixRepo()}/images/logos/github-profile-dark${
-              isLight ? "-light" : ""
+            `${getPrefixRepo()}/images/logos/github-profile-dark${isLight ? "-light" : ""
             }.png`
           }
           alt={name}
