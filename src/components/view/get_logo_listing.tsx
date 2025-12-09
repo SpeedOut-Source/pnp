@@ -75,6 +75,15 @@ export default function GetLogoListing({
           width={160}
         />
       );
+    case "f-droid":
+      return (
+        <Image
+          src="https://fdroid.gitlab.io/artwork/badge/get-it-on.png"
+          alt={name}
+          height={10}
+          width={160}
+        />
+      );
     case "google colab":
       return (
         <Image
