@@ -7,7 +7,7 @@ import {
   MenubarTrigger,
 } from "~/components/ui/menubar";
 import Link from "next/link";
-import { unstable_ViewTransition as ViewTransition } from "react";
+import { ViewTransition } from "react";
 
 import { WrenchScrewdriverIcon } from "@heroicons/react/24/outline";
 import { type TotalTagsType } from "~/app_function/utils/utils-server";

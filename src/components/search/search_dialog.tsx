@@ -1,6 +1,6 @@
 "use client";
 
-import { Dialog, Transition } from "@headlessui/react";
+import { Dialog, DialogPanel, TransitionChild } from "@headlessui/react";
 import { Fragment, useCallback, useEffect, useState } from "react";
 import { useSearchModeStore } from "~/app_state/search_open";
 import AutoComplete from "./search";
@@ -27,48 +27,52 @@ export default function SearchDialog() {
   }, [searchModeStore]);
 
   return (
-    <Transition appear show={isOpen} as={Fragment}>
-      <Dialog as="div" className="relative z-50" onClose={closeModal}>
-        <Transition.Child
-          as={Fragment}
-          enter="ease-out duration-300"
-          enterFrom="opacity-0"
-          enterTo="opacity-100"
-          leave="ease-in duration-200"
-          leaveFrom="opacity-100"
-          leaveTo="opacity-0"
-        >
-          <div className="fixed inset-0 bg-black/50" />
-        </Transition.Child>
+    <Dialog
+      open={isOpen}
+      as="div"
+      className="relative z-50"
+      onClose={closeModal}
+      transition
+    >
+      <TransitionChild
+        as={Fragment}
+        enter="ease-out duration-300"
+        enterFrom="opacity-0"
+        enterTo="opacity-100"
+        leave="ease-in duration-200"
+        leaveFrom="opacity-100"
+        leaveTo="opacity-0"
+      >
+        <div className="fixed inset-0 bg-black/50" />
+      </TransitionChild>
 
-        <div className="fixed top-0 flex w-full justify-center">
-          <div className="mb-2 flex h-screen w-full items-center justify-center text-center md:p-4">
-            <Transition.Child
-              as={Fragment}
-              enter="ease-out duration-300"
-              enterFrom="opacity-0 scale-95"
-              enterTo="opacity-100 scale-100"
-              leave="ease-in duration-200"
-              leaveFrom="opacity-100 scale-100"
-              leaveTo="opacity-0 scale-95"
-            >
-              <Dialog.Panel className="bg-base-300 relative h-full w-full transform pb-2 text-left align-middle transition-all md:rounded-2xl md:shadow-xl lg:max-w-6xl">
-                <div className="absolute flex w-full justify-end p-2">
-                  <button
-                    onClick={closeModal}
-                    className="btn btn-ghost m-0 h-fit min-h-fit p-0"
-                  >
-                    <kbd className="kbd kbd-xs">ESC</kbd>
-                  </button>
-                </div>
-                <div className="h-full w-full pt-9">
-                  <AutoComplete />
-                </div>
-              </Dialog.Panel>
-            </Transition.Child>
-          </div>
+      <div className="fixed top-0 flex w-full justify-center">
+        <div className="mb-2 flex h-screen w-full items-center justify-center text-center md:p-4">
+          <TransitionChild
+            as={Fragment}
+            enter="ease-out duration-300"
+            enterFrom="opacity-0 scale-95"
+            enterTo="opacity-100 scale-100"
+            leave="ease-in duration-200"
+            leaveFrom="opacity-100 scale-100"
+            leaveTo="opacity-0 scale-95"
+          >
+            <DialogPanel className="bg-base-300 relative h-full w-full transform pb-2 text-left align-middle transition-all md:rounded-2xl md:shadow-xl lg:max-w-6xl">
+              <div className="absolute flex w-full justify-end p-2">
+                <button
+                  onClick={closeModal}
+                  className="btn btn-ghost m-0 h-fit min-h-fit p-0"
+                >
+                  <kbd className="kbd kbd-xs">ESC</kbd>
+                </button>
+              </div>
+              <div className="h-full w-full pt-9">
+                <AutoComplete />
+              </div>
+            </DialogPanel>
+          </TransitionChild>
         </div>
-      </Dialog>
-    </Transition>
+      </div>
+    </Dialog>
   );
 }

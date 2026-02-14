@@ -8,9 +8,12 @@ export const generateMetadata = async () => {
   });
 };
 
+import { NotFoundRedirect } from "~/components/seo/not-found-redirect";
+
 export default function Custom404() {
   return (
     <>
+      <NotFoundRedirect />
       <main className="errorSplash container mx-auto">
         <div>
           404 <span>|</span> This page is not found

@@ -4,21 +4,22 @@ import PhotoIcon from "@heroicons/react/24/outline/PhotoIcon";
 import dynamic from "next/dynamic";
 import ThumTime from "../thum_time";
 import { toViewTransitionName } from "~/app_function/utils/utils";
-import { unstable_ViewTransition as ViewTransition } from "react";
+import { ViewTransition } from "react";
 
 const Link = dynamic(() => import("next/link"));
 const Image = dynamic(() => import("next/legacy/image"));
 
 interface BlogLayoutProps {
   data: Blog;
+  isSearch?: boolean;
 }
 
-export default function BlogLayoutCard({ data }: BlogLayoutProps) {
-  const transitionName = toViewTransitionName(data.fileName, "blog");
+export default function BlogLayoutCard({ data, isSearch }: BlogLayoutProps) {
+  const transitionName = toViewTransitionName(data.fileName, "blog", isSearch);
   return (
     <ViewTransition name={transitionName}>
       <Link
-        href={`/blogs/view/${data.fileName}`}
+        href={`/blogs/${data.fileName.slice(0, -3)}`}
         className="p-card group ring-base-300 relative h-80 w-full cursor-pointer overflow-hidden px-0 text-justify ring-3 hover:shadow-xl hover:ring-3 hover:ring-blue-200 xl:h-60"
       >
         {data.imgUrl ? (

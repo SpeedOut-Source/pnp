@@ -4,17 +4,23 @@ import dynamic from "next/dynamic";
 import { type AppHit } from "~/app_function/types/HitTypes";
 import { HighlightSwitch } from "../search/highlight_switch";
 import { toViewTransitionName } from "~/app_function/utils/utils";
-import { unstable_ViewTransition as ViewTransition } from "react";
+import { ViewTransition } from "react";
 
 const Link = dynamic(() => import("next/link"));
 const Image = dynamic(() => import("next/legacy/image"));
 
-export default function LayoutCardApp(props: App | AppHit) {
-  const transitionName = toViewTransitionName(props.fileName, "app");
+export default function LayoutCardApp(
+  props: (App | AppHit) & { isSearch?: boolean },
+) {
+  const transitionName = toViewTransitionName(
+    props.fileName,
+    "app",
+    props.isSearch,
+  );
   return (
     <Link
       className="p-card h-48 transform-gpu cursor-pointer items-center justify-evenly py-3 hover:-translate-y-1 hover:shadow-lg"
-      href={`/apps/view/${props.fileName}`}
+      href={`/apps/${props.fileName.slice(0, -3)}`}
     >
       <div className="relative mx-auto h-24 w-24 overflow-hidden rounded-3xl px-0 text-justify">
         <ViewTransition name={transitionName}>

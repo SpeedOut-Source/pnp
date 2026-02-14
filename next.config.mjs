@@ -2,6 +2,9 @@
  * Run `build` or `dev` with `SKIP_ENV_VALIDATION` to skip env validation. This is especially useful
  * for Docker builds.
  */
+import { createRequire } from "module";
+const require = createRequire(import.meta.url);
+
 await import("./src/env.mjs");
 import { env } from "./src/env.mjs";
 import withPWAInit from "@ducanh2912/next-pwa";
@@ -21,16 +24,16 @@ const PREFIX_REPO =
 const config = {
   experimental: {
     viewTransition: true,
-    optimizeRouterScrolling: true,
+    adapterPath: require.resolve("./build/adapter.cjs")
   },
   output: "export",
   reactStrictMode: true,
   images: {
     unoptimized: true,
-    domains: [
-      "avatars.githubusercontent.com",
-      "user-images.githubusercontent.com",
-      "camo.githubusercontent.com",
+    remotePatterns: [
+      { hostname: "avatars.githubusercontent.com" },
+      { hostname: "user-images.githubusercontent.com" },
+      { hostname: "camo.githubusercontent.com" },
     ],
   },
 
@@ -59,9 +62,6 @@ const config = {
     resolveAlias: {
       canvas: "./empty-module.ts",
     },
-  },
-  eslint: {
-    dirs: ['src'],
   },
 };
 

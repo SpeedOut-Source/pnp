@@ -17,11 +17,12 @@ export async function getStaticPathItemView(type: Card) {
   const allData: CardData = await getCard(type);
 
   const paths = allData.map((x) => {
+    const fileName = x.fileName.slice(0, -3);
     return {
       file_name:
         env.NODE_ENV === "development"
-          ? encodeURIComponent(x.fileName)
-          : x.fileName,
+          ? encodeURIComponent(fileName)
+          : fileName,
       category: type,
     };
   });

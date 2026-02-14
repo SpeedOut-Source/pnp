@@ -60,7 +60,11 @@ export function getPrefixRepo() {
     : "";
 }
 
-export function toViewTransitionName(str: string, prefix?: string): string {
+export function toViewTransitionName(
+  str: string,
+  prefix?: string,
+  isSearch?: boolean,
+): string {
   const cleanStr = str
     .trim()
     .toLowerCase()
@@ -68,5 +72,9 @@ export function toViewTransitionName(str: string, prefix?: string): string {
     .replace(/\s+/g, "-")
     .replace(/-+/g, "-");
 
-  return prefix ? `${prefix}-${cleanStr}` : cleanStr;
+  let finalStr = prefix ? `${prefix}-${cleanStr}` : cleanStr;
+  if (isSearch) {
+    finalStr += "-search";
+  }
+  return finalStr;
 }

@@ -1,6 +1,6 @@
 import ChevronRightIcon from "@heroicons/react/24/outline/ChevronRightIcon";
 import { isPro, toViewTransitionName } from "~/app_function/utils/utils";
-import { unstable_ViewTransition as ViewTransition } from "react";
+import { ViewTransition } from "react";
 import {
   type Project,
   type CardItem,
@@ -17,18 +17,20 @@ const Image = dynamic(() => import("next/legacy/image"));
 
 interface LayoutCard {
   data: CardItem;
+  isSearch?: boolean;
 }
 
-export default function LayoutCard({ data }: LayoutCard) {
+export default function LayoutCard({ data, isSearch }: LayoutCard) {
   const isProject = isPro(data);
   const transitionName = toViewTransitionName(
     (data as Project | Blog).fileName,
     isProject ? "project" : "blog",
+    isSearch,
   );
   return (
     <ViewTransition name={transitionName}>
       <Link
-        href={`/${isProject ? "projects" : "blogs"}/view/${data.fileName}`}
+        href={`/${isProject ? "projects" : "blogs"}/${data.fileName.slice(0, -3)}`}
         className="p-card group ring-base-300 relative h-80 w-full cursor-pointer overflow-hidden px-0 text-justify ring-3 hover:shadow-xl hover:ring-3 hover:ring-blue-200"
       >
         {data.imgUrl ? (

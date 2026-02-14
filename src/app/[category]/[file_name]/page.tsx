@@ -27,7 +27,7 @@ type generateStaticParamsType = {
 export async function generateMetadata({ params }: generateStaticParamsType) {
   const { category, file_name } = await params;
 
-  const decodedPath = decodeURIComponent(decodeURIComponent(file_name));
+  const decodedPath = decodeURIComponent(decodeURIComponent(file_name + ".md"));
 
   const allData = await getCard(category);
   const currentProjectIndex = allData.findIndex(
@@ -95,7 +95,10 @@ export async function generateStaticParams({
 export default async function View({ params }: ViewType) {
   const { file_name, category } = await params;
 
-  const data = await getStaticPropsItemView({ file_name, type: category });
+  const data = await getStaticPropsItemView({
+    file_name: file_name + ".md",
+    type: category,
+  });
 
   if (data == "-1") {
     return notFound();

@@ -15,7 +15,7 @@
     "moduleResolution": "Bundler",
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "jsx": "preserve",
+    "jsx": "react-jsx",
     "incremental": true,
     "noUncheckedIndexedAccess": true,
     "baseUrl": ".",
@@ -45,7 +45,10 @@
     "**/*.mjs",
     "src/app_function/utils/find_link_plugin.js",
     ".next/types/**/*.ts",
-    "**/*.js"
+    "**/*.js",
+    ".next/dev/types/**/*.ts",
+    ".next\\dev/types/**/*.ts",
+    ".next\\dev/types/**/*.ts"
   ],
   "exclude": [
     "node_modules",

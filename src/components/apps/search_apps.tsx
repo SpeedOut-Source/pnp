@@ -20,7 +20,7 @@ export default function SearchApps(props: SearchAppsProps) {
         Apps
       </p>
       <div className="py-3">
-        <Layout {...props} />
+        <Layout {...props} isSearch={true} />
       </div>
     </div>
   );

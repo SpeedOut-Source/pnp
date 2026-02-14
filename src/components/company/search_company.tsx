@@ -20,7 +20,7 @@ export default function SearchCompany(props: SearchCompanyProps) {
       </div>
       <div className="mx-auto w-full justify-center gap-2 space-y-2 py-2 sm:grid sm:grid-cols-3 sm:space-y-0 md:mx-2 md:grid-cols-5 md:gap-4">
         {props.data.map((x) => (
-          <LayoutCardCompany {...x} key={x.objectID} />
+          <LayoutCardCompany {...x} key={x.objectID} isSearch={true} />
         ))}
       </div>
     </div>

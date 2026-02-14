@@ -1,4 +1,6 @@
-import { unstable_ViewTransition as ViewTransition } from "react";
+"use client";
+
+import { ViewTransition } from "react";
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/solid";
 import dynamic from "next/dynamic";
 import Loading from "~/components/markdown/loading";
@@ -49,6 +51,7 @@ export function ProjectBlogView(props: ProjectBlogViewProps) {
   let shareTxt: string;
   let project: Project | undefined = undefined;
   let transitionName = "";
+  let transitionNameSearch = "";
 
   switch (props.type) {
     case "projects":
@@ -56,21 +59,29 @@ export function ProjectBlogView(props: ProjectBlogViewProps) {
       shareTxt = `${itemView.whatText} ${itemView.result}`;
       project = itemView;
       transitionName = toViewTransitionName(itemView.fileName, "project");
+      transitionNameSearch = toViewTransitionName(
+        itemView.fileName,
+        "project",
+        true,
+      );
       break;
     case "blogs":
       const b = props.itemView as Blog;
       shareTxt = b.desc;
       transitionName = toViewTransitionName(b.fileName, "blog");
+      transitionNameSearch = toViewTransitionName(b.fileName, "blog", true);
       break;
     case "apps":
       const a = props.itemView as App;
       shareTxt = a.title;
       transitionName = toViewTransitionName(a.fileName, "app");
+      transitionNameSearch = toViewTransitionName(a.fileName, "app", true);
       break;
     case "company":
       const c = props.itemView as Company;
       shareTxt = c.title;
       transitionName = toViewTransitionName(c.fileName, "company");
+      transitionNameSearch = toViewTransitionName(c.fileName, "company", true);
       break;
   }
 
@@ -99,15 +110,17 @@ export function ProjectBlogView(props: ProjectBlogViewProps) {
               {props.type === "apps" && (
                 <div className="container mx-auto mb-4 max-w-3xl space-y-4 px-2">
                   <div className="flex w-full flex-col items-center justify-center">
-                    <ViewTransition name={transitionName}>
-                      <Image
-                        src={props.itemView.imgUrl}
-                        alt={(props.itemView as App).title}
-                        width={100}
-                        height={100}
-                        blurDataURL={(props.itemView as App).imgBlurData}
-                        placeholder="blur"
-                      />
+                    <ViewTransition name={transitionNameSearch}>
+                      <ViewTransition name={transitionName}>
+                        <Image
+                          src={props.itemView.imgUrl}
+                          alt={(props.itemView as App).title}
+                          width={100}
+                          height={100}
+                          blurDataURL={(props.itemView as App).imgBlurData}
+                          placeholder="blur"
+                        />
+                      </ViewTransition>
                     </ViewTransition>
                     <p className="text-center text-4xl font-semibold tracking-wider">
                       {(props.itemView as App).title}
@@ -214,7 +227,7 @@ export function ProjectBlogView(props: ProjectBlogViewProps) {
                   <div className="h-fit w-full">
                     <div className="mb-2 flex items-center text-2xl text-slate-400 normal-case">
                       <Link
-                        href={`/${props.type}/view/${props.previous.fileName}`}
+                        href={`/${props.type}/${props.previous.fileName.slice(0, -3)}`}
                         className="link-hover link flex items-center"
                       >
                         <ChevronLeftIcon className="h-6 w-6" />
@@ -230,7 +243,7 @@ export function ProjectBlogView(props: ProjectBlogViewProps) {
                   <div className="h-fit w-full">
                     <div className="mb-2 flex items-center justify-end text-2xl text-slate-400 normal-case">
                       <Link
-                        href={`/${props.type}/view/${props.next.fileName}`}
+                        href={`/${props.type}/${props.next.fileName.slice(0, -3)}`}
                         className="link-hover link flex items-center"
                       >
                         Next <ChevronRightIcon className="h-6 w-6" />

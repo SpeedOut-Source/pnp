@@ -6,6 +6,7 @@ const LayoutCard = dynamic(() => import("./layout_card"));
 interface Layout {
   searchObject?: boolean;
   data: App[];
+  isSearch?: boolean;
 }
 
 export default function Layout(props: Layout) {
@@ -15,7 +16,7 @@ export default function Layout(props: Layout) {
   return (
     <div className="xs:grid-cols-2 mx-auto grid gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 xl:justify-center">
       {props.data.map((x) => (
-        <LayoutCard {...x} key={x.date} />
+        <LayoutCard {...x} key={x.date} isSearch={props.isSearch} />
       ))}
     </div>
   );

@@ -97,8 +97,9 @@ export default function GetLogoListing({
       return (
         <Image
           className=""
-          src={`${getPrefixRepo()}/images/listing/github-mark${isLight ? "" : "-white"
-            }.svg`}
+          src={`${getPrefixRepo()}/images/listing/github-mark${
+            isLight ? "" : "-white"
+          }.svg`}
           alt={name}
           height={10}
           width={50}
@@ -109,7 +110,8 @@ export default function GetLogoListing({
         <Image
           src={
             appLogo ??
-            `${getPrefixRepo()}/images/logos/github-profile-dark${isLight ? "-light" : ""
+            `${getPrefixRepo()}/images/logos/github-profile-dark${
+              isLight ? "-light" : ""
             }.png`
           }
           alt={name}

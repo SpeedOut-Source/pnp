@@ -16,7 +16,7 @@ export default function SearchBlogs(props: SearchBlogsProps) {
         Blogs
       </p>
       <div className="py-3">
-        <ProjectBlogLayout {...props} />
+        <ProjectBlogLayout {...props} isSearch={true} />
       </div>
     </div>
   );

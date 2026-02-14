@@ -1,4 +1,4 @@
-import { unstable_ViewTransition as ViewTransition } from "react";
+import { ViewTransition } from "react";
 import { type Company } from "~/app_function/utils/interfaces";
 import dynamic from "next/dynamic";
 import { type CompanyHit } from "~/app_function/types/HitTypes";
@@ -9,13 +9,17 @@ import { toViewTransitionName } from "~/app_function/utils/utils";
 const Link = dynamic(() => import("next/link"));
 const Image = dynamic(() => import("next/legacy/image"));
 
-export default function LayoutCardCompany(x: Company) {
-  const transitionName = toViewTransitionName(x.fileName, "company");
+export default function LayoutCardCompany(x: Company & { isSearch?: boolean }) {
+  const transitionName = toViewTransitionName(
+    x.fileName,
+    "company",
+    x.isSearch,
+  );
 
   return (
     <span className="tooltip w-full" data-tip="More details">
       <Link
-        href={`/company/view/${x.fileName}`}
+        href={`/company/${x.fileName.slice(0, -3)}`}
         className="p-card flex h-full w-full cursor-pointer flex-col py-4"
       >
         <div className="relative mx-auto mb-2 h-10 w-10 overflow-hidden">

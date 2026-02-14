@@ -21,7 +21,7 @@ export default function WorkFor(props: WorkForProps) {
 
       <div className="mx-auto w-full justify-center gap-2 space-y-2 py-2 sm:grid sm:grid-cols-2 sm:space-y-0 xl:mx-2 xl:grid-cols-3 xl:gap-4">
         {props.data.map((x) => (
-          <LayoutCardCompany {...x} key={x.fileName} />
+          <LayoutCardCompany {...x} key={x.fileName.slice(0, -3)} />
         ))}
       </div>
     </div>
