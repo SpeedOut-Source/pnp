@@ -24,7 +24,7 @@ const PREFIX_REPO =
 const config = {
   experimental: {
     viewTransition: true,
-    adapterPath: require.resolve("./build/adapter.cjs")
+    adapterPath: require.resolve("./scripts/adapter.cjs")
   },
   output: "export",
   reactStrictMode: true,
