@@ -3,6 +3,7 @@
 import dynamic from "next/dynamic";
 import { GoogleAnalytics } from "nextjs-google-analytics";
 import ThemeProvider from "./theme_provider";
+import { Toaster } from "react-hot-toast";
 
 const SearchDialog = dynamic(() => import("./search/search_dialog"));
 const ProgressBar = dynamic(() => import("./progress_bar"));
@@ -15,6 +16,7 @@ export default function ImportPopup() {
       <GoogleAnalytics trackPageViews={{ ignoreHashChange: true }} />
       <ThemeProvider />
       <div id="rainbow-ripple-svg" />
+      <Toaster />
     </>
   );
 }
