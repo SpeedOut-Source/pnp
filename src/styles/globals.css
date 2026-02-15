@@ -8,6 +8,7 @@
   themes:
     light,
     dark --prefersdark;
+  logs: false;
 }
 
 @plugin "daisyui/theme" {

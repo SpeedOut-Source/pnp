@@ -27,7 +27,7 @@ export const NotFoundRedirect = () => {
     if (newPath.endsWith("/view")) {
       newPath = newPath.slice(0, -5);
       shouldRedirect = true;
-    }else if (newPath.endsWith("/view/")) {
+    } else if (newPath.endsWith("/view/")) {
       newPath = newPath.slice(0, -6);
       shouldRedirect = true;
     }
