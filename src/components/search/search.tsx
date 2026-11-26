@@ -7,6 +7,7 @@ import { getAlgoliaResults } from "@algolia/autocomplete-preset-algolia";
 import { liteClient } from "algoliasearch/lite";
 import React, {
   type BaseSyntheticEvent,
+  useCallback,
   useEffect,
   useMemo,
   useRef,
@@ -125,7 +126,14 @@ export default function Autocomplete(
       }),
     [props],
   );
-  const inputRef = useRef<HTMLInputElement>(null);
+  const inputRef = useRef<HTMLInputElement | null>(null);
+  const [inputElement, setInputElement] = useState<HTMLInputElement | null>(
+    null,
+  );
+  const setInputNode = useCallback((node: HTMLInputElement | null) => {
+    inputRef.current = node;
+    setInputElement(node);
+  }, []);
   const formRef = useRef<HTMLFormElement>(null);
   const panelRef = useRef<HTMLDivElement>(null);
   const appsRef = useRef<HTMLSpanElement>(null);
@@ -183,7 +191,7 @@ export default function Autocomplete(
       <form
         ref={formRef}
         className="mb-2 flex w-full items-center gap-2 px-6"
-        {...autocomplete.getFormProps({ inputElement: inputRef.current })}
+        {...autocomplete.getFormProps({ inputElement })}
       >
         <button
           className={clsx(
@@ -204,9 +212,9 @@ export default function Autocomplete(
         </button>
         <input
           className="input w-full"
-          ref={inputRef}
+          ref={setInputNode}
           {...autocomplete.getInputProps({
-            inputElement: inputRef.current,
+            inputElement,
           })}
           placeholder="Search for apps, blogs, projects etc"
         />

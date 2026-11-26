@@ -1,7 +1,7 @@
 "use client";
 
 import { Dialog, DialogPanel, TransitionChild } from "@headlessui/react";
-import { Fragment, useCallback, useEffect, useState } from "react";
+import { Fragment, useCallback, useEffect } from "react";
 import { useSearchModeStore } from "~/app_state/search_open";
 import AutoComplete from "./search";
 import { usePathname } from "next/navigation";
@@ -9,17 +9,12 @@ import { usePathname } from "next/navigation";
 export default function SearchDialog() {
   const searchModeStore = useSearchModeStore();
   const pathname = usePathname();
-  const [isOpen, setIsOpen] = useState(searchModeStore.isOpen);
+  const isOpen = searchModeStore.isOpen;
 
   useEffect(() => {
-    setIsOpen(searchModeStore.isOpen);
-  }, [searchModeStore.isOpen]);
-
-  useEffect(() => {
-    if (isOpen) {
-      searchModeStore.setIsOpen(false);
+    if (useSearchModeStore.getState().isOpen) {
+      useSearchModeStore.getState().setIsOpen(false);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pathname]);
 
   const closeModal = useCallback(() => {

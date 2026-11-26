@@ -1,7 +1,7 @@
 "use client";
 
 import dynamic from "next/dynamic";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useSyncExternalStore } from "react";
 import Image from "next/image";
 import { useThemeStore } from "~/app_state/theme_mode";
 import { SearchButton } from "../search/button";
@@ -17,16 +17,21 @@ const ConnectSection = dynamic(() => import("./connect_section"));
 const Links = dynamic(() => import("./links"));
 const Link = dynamic(() => import("next/link"));
 
+const emptySubscribe = () => () => {};
+
 export default function Header() {
   const { isLight } = useThemeStore();
 
   const [bgChange, setBgChange] = useState(false);
-  const [loaded, setLoaded] = useState(false);
+  const loaded = useSyncExternalStore(
+    emptySubscribe,
+    () => true,
+    () => false,
+  );
   const completion = useReadingProgress();
   const scrollDirection = useScrollDirection();
 
   useEffect(() => {
-    setLoaded(true);
     const handleScroll = () => {
       const sY = window.scrollY >= 16;
       if (sY) {

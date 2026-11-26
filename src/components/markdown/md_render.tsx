@@ -113,14 +113,18 @@ export default function MDRender({ data, imgBlurdata }: MDRenderProps) {
                   style={oneDark}
                   language={hasLang[1]}
                   PreTag="div"
-                  className="scrollbar-style !mockup-code !bg-base-200 !text-base-content !rounded-lg !border-none"
+                  className="scrollbar-style mockup-code rounded-lg! border-none!"
                   showLineNumbers={true}
                   useInlineStyles={true}
                   codeTagProps={{
                     style: {
+                      background: "transparent",
                       border: "none",
-                      padding: "0 !important",
-                      margin: "0 !important",
+                      borderRadius: 0,
+                      padding: 0,
+                      margin: 0,
+                      color: "inherit",
+                      fontWeight: "inherit",
                       textShadow: "none",
                     },
                   }}
@@ -165,7 +169,7 @@ export default function MDRender({ data, imgBlurdata }: MDRenderProps) {
                   }}
                   copyText={codeChunk}
                   tooltipText="Copy code"
-                  className="tooltip-left absolute z-40 mt-5 mr-2"
+                  className="tooltip-left text-neutral-content absolute z-40 mt-5 mr-2"
                 />
                 <span
                   style={{

@@ -1,6 +1,13 @@
 // declaring module will allow typescript to import the module
 declare module "thousands-counter" {
-  // typing module default export as `any` will allow you to access its members without compiler warning
-  var ts: any;
-  export default ts;
+  interface ThousandsCounterOptions {
+    digits?: number;
+    uppercase?: boolean;
+  }
+
+  const tc: (
+    count: number,
+    options?: ThousandsCounterOptions,
+  ) => string | number;
+  export default tc;
 }

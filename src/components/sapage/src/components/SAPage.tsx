@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { delay } from "./app/helper";
 import BugAntIcon from "@heroicons/react/24/solid/BugAntIcon";
 import { type SAPageProps } from "./app/interfaces";
@@ -13,16 +13,16 @@ const DevPlate = dynamic(() => import("./Dev_plate"));
 const SAPage = (props: SAPageProps) => {
   const [mainDev, setMainDev] = useState(false);
   const [clIsOpen, setCLIsopen] = useState(false);
-  let tap = 0;
+  const tapRef = useRef(0);
 
   async function tapToOpen() {
-    if (tap >= 5 && !mainDev) {
+    if (tapRef.current >= 5 && !mainDev) {
       setMainDev(true);
       await delay(5000);
-      tap = 0;
+      tapRef.current = 0;
       setMainDev(false);
     }
-    tap++;
+    tapRef.current++;
   }
 
   return (

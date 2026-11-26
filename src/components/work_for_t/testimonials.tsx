@@ -32,32 +32,36 @@ export default function Testimonials(props: TestimonialsProps) {
   }>({ l1: undefined, l2: undefined, l3: undefined });
 
   useEffect(() => {
-    const shuffleList = shuffle(props.testis);
-    const l1: tt[] = [];
-    const l2: tt[] = [];
-    const l3: tt[] = [];
+    const timer = setTimeout(() => {
+      const shuffleList = shuffle(props.testis);
+      const l1: tt[] = [];
+      const l2: tt[] = [];
+      const l3: tt[] = [];
 
-    for (let index = 0; index < shuffleList.length; index++) {
-      switch (index % 3) {
-        case 0:
-          l1.push(shuffleList[index]);
-          break;
-        case 1:
-          l2.push(shuffleList[index]);
-          break;
-        case 2:
-          l3.push(shuffleList[index]);
-          break;
-        default:
-          break;
+      for (let index = 0; index < shuffleList.length; index++) {
+        switch (index % 3) {
+          case 0:
+            l1.push(shuffleList[index]);
+            break;
+          case 1:
+            l2.push(shuffleList[index]);
+            break;
+          case 2:
+            l3.push(shuffleList[index]);
+            break;
+          default:
+            break;
+        }
       }
-    }
 
-    setThreeListTestimonial({
-      l1,
-      l2,
-      l3,
-    });
+      setThreeListTestimonial({
+        l1,
+        l2,
+        l3,
+      });
+    }, 0);
+
+    return () => clearTimeout(timer);
   }, [props.testis]);
 
   const ref = useRef<HTMLDivElement | null>(null);

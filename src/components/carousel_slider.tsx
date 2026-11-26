@@ -35,12 +35,20 @@ export default function CarouselSlider({
       return;
     }
 
-    setCount(api.scrollSnapList().length);
-    setCurrent(api.selectedScrollSnap() + 1);
-
-    api.on("select", () => {
+    const updateCarouselState = () => {
+      setCount(api.scrollSnapList().length);
       setCurrent(api.selectedScrollSnap() + 1);
-    });
+    };
+
+    const frameId = requestAnimationFrame(updateCarouselState);
+    api.on("reInit", updateCarouselState);
+    api.on("select", updateCarouselState);
+
+    return () => {
+      cancelAnimationFrame(frameId);
+      api.off("reInit", updateCarouselState);
+      api.off("select", updateCarouselState);
+    };
   }, [api]);
 
   return (

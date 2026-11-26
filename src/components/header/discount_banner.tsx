@@ -53,35 +53,39 @@ export default function DiscountBanner() {
 
   // Parse config from environment variable on mount
   useEffect(() => {
-    try {
-      if (discountEnvConfig) {
-        const parsedConfig = JSON.parse(discountEnvConfig) as DiscountConfig;
-        setConfig(parsedConfig);
+    const timer = setTimeout(() => {
+      try {
+        if (discountEnvConfig) {
+          const parsedConfig = JSON.parse(discountEnvConfig) as DiscountConfig;
+          setConfig(parsedConfig);
 
-        // Set a random emoji when banner first appears
-        setCurrentEmoji(getRandomEmoji());
+          // Set a random emoji when banner first appears
+          setCurrentEmoji(getRandomEmoji());
 
-        // Check if the offer has expired
-        const now = Date.now();
-        if (parsedConfig.expiryTime > now) {
-          setIsVisible(true);
+          // Check if the offer has expired
+          const now = Date.now();
+          if (parsedConfig.expiryTime > now) {
+            setIsVisible(true);
 
-          // Set a random countdown duration between 1-5 hours to create urgency
-          const randomHours = Math.floor(Math.random() * 5) + 1; // Random number between 1-5
-          const randomMinutes = Math.floor(Math.random() * 60);
-          const randomSeconds = Math.floor(Math.random() * 60);
+            // Set a random countdown duration between 1-5 hours to create urgency
+            const randomHours = Math.floor(Math.random() * 5) + 1; // Random number between 1-5
+            const randomMinutes = Math.floor(Math.random() * 60);
+            const randomSeconds = Math.floor(Math.random() * 60);
 
-          setHours(randomHours);
-          setMinutes(randomMinutes);
-          setSeconds(randomSeconds);
-        } else {
-          setIsVisible(false);
+            setHours(randomHours);
+            setMinutes(randomMinutes);
+            setSeconds(randomSeconds);
+          } else {
+            setIsVisible(false);
+          }
         }
+      } catch (error) {
+        console.error("Error parsing discount banner config:", error);
+        setIsVisible(false);
       }
-    } catch (error) {
-      console.error("Error parsing discount banner config:", error);
-      setIsVisible(false);
-    }
+    }, 0);
+
+    return () => clearTimeout(timer);
   }, [discountEnvConfig]);
 
   // Trigger entrance animation after a short delay

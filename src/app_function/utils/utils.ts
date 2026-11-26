@@ -15,7 +15,7 @@ export function toTitleCase(str: string): string {
   );
 }
 
-export function showCountHuman(count: number): number {
+export function showCountHuman(count: number): string | number {
   return tc(count, { digits: 2, uppercase: false });
 }
 

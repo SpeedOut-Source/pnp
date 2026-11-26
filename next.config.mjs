@@ -22,10 +22,7 @@ const PREFIX_REPO =
 
 /** @type {import("next").NextConfig} */
 const config = {
-  experimental: {
-    viewTransition: true,
-    adapterPath: require.resolve("./scripts/adapter.cjs")
-  },
+  adapterPath: require.resolve("./scripts/adapter.cjs"),
   output: "export",
   reactStrictMode: true,
   images: {
@@ -55,7 +52,6 @@ const config = {
       config.resolve.alias.canvas = false;
     }
     config.resolve.alias.encoding = false;
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-return
     return config;
   },
   turbopack: {

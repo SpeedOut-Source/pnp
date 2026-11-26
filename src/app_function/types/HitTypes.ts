@@ -19,8 +19,4 @@ export type CompanyHit = WithAutocompleteAnalytics<Hit<Company>>;
 export type TestimonialHit = WithAutocompleteAnalytics<Hit<Testimonial>>;
 
 export type AllHit =
-  | BlogHit
-  | AppHit
-  | ProjectHit
-  | CompanyHit
-  | TestimonialHit;
+  BlogHit | AppHit | ProjectHit | CompanyHit | TestimonialHit;

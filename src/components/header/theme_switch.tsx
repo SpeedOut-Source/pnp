@@ -1,21 +1,18 @@
 import SunIcon from "@heroicons/react/24/outline/SunIcon";
 import MoonIcon from "@heroicons/react/24/outline/MoonIcon";
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { useThemeTransition } from "~/hooks/useThemeTransition";
 import { delay } from "../sapage/src/components/app/helper";
 
 export default function ThemeSwitch() {
   const buttonRef = useRef<HTMLButtonElement>(null);
   const { isLight, toggleThemeWithAnimation } = useThemeTransition();
-  const [isLightLocal, setIsLightLocal] = useState(isLight);
+  const [pendingIsLight, setPendingIsLight] = useState<boolean | null>(null);
+  const isLightLocal = pendingIsLight ?? isLight;
 
   const handleToggle = async () => {
     await toggleThemeWithAnimation(buttonRef as React.RefObject<HTMLElement>);
   };
-
-  useEffect(() => {
-    setIsLightLocal(isLight);
-  }, [isLight]);
 
   return (
     <div
@@ -25,9 +22,13 @@ export default function ThemeSwitch() {
       <button
         ref={buttonRef}
         onClick={async () => {
-          setIsLightLocal((x) => !x);
+          setPendingIsLight(!isLight);
           await delay(130);
-          handleToggle();
+          try {
+            await handleToggle();
+          } finally {
+            setPendingIsLight(null);
+          }
         }}
         className={`${
           isLightLocal ? "swap-active" : ""

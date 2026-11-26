@@ -2,7 +2,6 @@
 
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/solid";
 import dynamic from "next/dynamic";
-import { useEffect, useState } from "react";
 import { type Card, type CardData } from "~/app_function/utils/interfaces";
 import { toTitleCase } from "~/app_function/utils/utils";
 import { type TagsListType } from "~/app_function/utils/utils-server";
@@ -30,15 +29,9 @@ export interface AllDataProps {
 export function AllDataShowPage(props: AllDataProps) {
   const pageName: string = toTitleCase(props.type);
 
-  const [leftDisable, setLeftDisable] = useState(false);
-  const [rightDisable, setRightDisable] = useState(false);
-
-  useEffect(() => {
-    setLeftDisable(props.pageInfo.no <= 1);
-    setRightDisable(
-      props.pageInfo.size * props.pageInfo.no >= props.pageInfo.total,
-    );
-  }, [props]);
+  const leftDisable = props.pageInfo.no <= 1;
+  const rightDisable =
+    props.pageInfo.size * props.pageInfo.no >= props.pageInfo.total;
 
   return (
     <>
