@@ -2,12 +2,40 @@
  * Run `build` or `dev` with `SKIP_ENV_VALIDATION` to skip env validation. This is especially useful
  * for Docker builds.
  */
+import fs from "fs";
+import path from "path";
 import { createRequire } from "module";
 const require = createRequire(import.meta.url);
 
 await import("./src/env.mjs");
 import { env } from "./src/env.mjs";
 import withPWAInit from "@ducanh2912/next-pwa";
+
+/**
+ * Resolve the common ancestor of the project directory and `DATA_PATH`.
+ * Required by Next.js 16.4+ Turbopack when `pnp-data` is symlinked or located
+ * outside the app directory (such as in CI builds).
+ */
+function resolveTurbopackRoot() {
+  const projectReal = fs.realpathSync(process.cwd());
+  if (!fs.existsSync(env.DATA_PATH)) {
+    return projectReal;
+  }
+
+  const dataReal = fs.realpathSync(env.DATA_PATH);
+  let ancestor = projectReal;
+  while (true) {
+    const rel = path.relative(ancestor, dataReal);
+    if (rel === "" || (!rel.startsWith("..") && !path.isAbsolute(rel))) {
+      return ancestor;
+    }
+    const parent = path.dirname(ancestor);
+    if (parent === ancestor) {
+      return projectReal;
+    }
+    ancestor = parent;
+  }
+}
 
 const withPWA = withPWAInit({
   dest: "public",
@@ -55,6 +83,7 @@ const config = {
     return config;
   },
   turbopack: {
+    root: resolveTurbopackRoot(),
     resolveAlias: {
       canvas: "./empty-module.ts",
     },
